@@ -1,6 +1,7 @@
 import { defineConfig } from "sanity"
 import { structureTool } from "sanity/structure"
 import { visionTool } from "@sanity/vision"
+import { unsplashAssetSource } from "@sanity/asset-source-unsplash"
 import { schemaTypes } from "./sanity/schemas"
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "40eftycz"
@@ -15,7 +16,7 @@ export default defineConfig({
 
   basePath: "/studio",
 
-  plugins: [structureTool(), visionTool()],
+  plugins: [structureTool(), visionTool(), unsplashAssetSource()],
 
   schema: {
     types: schemaTypes,
