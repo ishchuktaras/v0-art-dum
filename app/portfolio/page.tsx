@@ -20,7 +20,7 @@ const projects = [
     location: "Třebíč",
     year: "2024",
     description: "Kompletní rekonstrukce bytového jádra včetně nových rozvodů, obkladů a sanity.",
-    imageUrl: "/modern-bathroom-renovation.png",
+    imageUrl: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&h=600&fit=crop",
   },
   {
     id: 2,
@@ -29,7 +29,7 @@ const projects = [
     location: "Jaroměřice nad Rokytnou",
     year: "2023",
     description: "Novostavba rodinného domu ze zdícího systému Porotherm.",
-    imageUrl: "/modern-family-house-construction.jpg",
+    imageUrl: "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=800&h=600&fit=crop",
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const projects = [
     location: "Třebíč",
     year: "2024",
     description: "Kontaktní zateplovací systém ETICS s finální silikátovou omítkou.",
-    imageUrl: "/house-facade-insulation.jpg",
+    imageUrl: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=800&h=600&fit=crop",
   },
   {
     id: 4,
@@ -47,7 +47,7 @@ const projects = [
     location: "Náměšť nad Oslavou",
     year: "2023",
     description: "Modernizace koupelny s novými obklady, podlahovým topením a sprchovým koutem.",
-    imageUrl: "/luxury-bathroom-renovation.png",
+    imageUrl: "https://images.unsplash.com/photo-1620626011761-996317b8d101?w=800&h=600&fit=crop",
   },
   {
     id: 5,
@@ -56,7 +56,7 @@ const projects = [
     location: "Třebíč",
     year: "2024",
     description: "Přístavba dvojgaráže s automatickými vraty a propojením s domem.",
-    imageUrl: "/modern-garage-construction.jpg",
+    imageUrl: "https://images.unsplash.com/photo-1590674899484-d5640e854abe?w=800&h=600&fit=crop",
   },
   {
     id: 6,
@@ -65,7 +65,7 @@ const projects = [
     location: "Třebíč centrum",
     year: "2023",
     description: "Přestavba obchodního prostoru na moderní kavárnu.",
-    imageUrl: "/modern-cafe-interior.png",
+    imageUrl: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&h=600&fit=crop",
   },
 ]
 
