@@ -3,12 +3,15 @@ import { structureTool } from "sanity/structure"
 import { visionTool } from "@sanity/vision"
 import { schemaTypes } from "./sanity/schemas"
 
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "40eftycz"
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production"
+
 export default defineConfig({
   name: "art-dum",
   title: "ART DUM Stavební firma",
 
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+  projectId,
+  dataset,
 
   basePath: "/studio",
 
