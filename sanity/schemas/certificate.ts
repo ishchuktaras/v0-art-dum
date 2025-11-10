@@ -1,7 +1,7 @@
 import { defineField, defineType } from "sanity"
 import { Award } from "lucide-react"
 
-export const certificateSchema = defineType({
+export default defineType({
   name: "certificate",
   title: "Certifikáty",
   type: "document",

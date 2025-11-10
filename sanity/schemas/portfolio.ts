@@ -1,7 +1,7 @@
 import { defineField, defineType } from "sanity"
 import { ImageIcon } from "lucide-react"
 
-export const portfolioSchema = defineType({
+export default defineType({
   name: "portfolio",
   title: "Portfolio",
   type: "document",

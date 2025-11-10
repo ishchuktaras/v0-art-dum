@@ -1,7 +1,7 @@
 import { defineField, defineType } from "sanity"
 import { Info } from "lucide-react"
 
-export const aboutSchema = defineType({
+export default defineType({
   name: "about",
   title: "O nás",
   type: "document",

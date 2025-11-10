@@ -1,7 +1,7 @@
 import { defineField, defineType } from "sanity"
 import { Wrench } from "lucide-react"
 
-export const serviceSchema = defineType({
+export default defineType({
   name: "service",
   title: "Služby",
   type: "document",

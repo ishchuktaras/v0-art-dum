@@ -1,7 +1,7 @@
 import { defineField, defineType } from "sanity"
 import { FileText } from "lucide-react"
 
-export const blogSchema = defineType({
+export default defineType({
   name: "blog",
   title: "Blog / Aktuality",
   type: "document",
