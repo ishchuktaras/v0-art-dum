@@ -1,0 +1,265 @@
+import { Header } from "@/components/ui/header"
+import { Footer } from "@/components/ui/footer"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Label } from "@/components/ui/label"
+
+export const metadata = {
+  title: "Kontakt | ART DUM",
+  description: "Kontaktujte nás pro nezávaznou cenovou nabídku. Telefon, email, adresa. ART DUM stavební firma Třebíč.",
+}
+
+export default function ContactPage() {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Header />
+
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="bg-primary-dark text-primary-foreground py-16 md:py-24">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl">
+              <h1 className="text-4xl md:text-5xl font-black mb-6">Kontaktujte nás</h1>
+              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                Máte dotaz nebo chcete nezávaznou cenovou nabídku? Rádi si s vámi promluvíme o vašem projektu.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Form & Info */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Contact Form */}
+              <div className="lg:col-span-2">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-2xl">Poptávkový formulář</CardTitle>
+                    <CardDescription>Vyplňte formulář a my se vám ozveme do 24 hodin</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form className="space-y-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="name">Jméno a příjmení *</Label>
+                          <Input id="name" placeholder="Jan Novák" required />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="phone">Telefon *</Label>
+                          <Input id="phone" type="tel" placeholder="+420 xxx xxx xxx" required />
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email *</Label>
+                        <Input id="email" type="email" placeholder="vas@email.cz" required />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="service">Typ služby</Label>
+                        <select
+                          id="service"
+                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                        >
+                          <option value="">Vyberte službu...</option>
+                          <option value="rekonstrukce">Rekonstrukce</option>
+                          <option value="stavba">Stavba na klíč</option>
+                          <option value="zednicke">Zednické práce</option>
+                          <option value="zatepleni">Zateplení</option>
+                          <option value="opravy">Opravy a údržba</option>
+                          <option value="komercni">Komerční prostory</option>
+                          <option value="jine">Jiné</option>
+                        </select>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="message">Zpráva *</Label>
+                        <Textarea
+                          id="message"
+                          placeholder="Popište váš projekt... Co potřebujete realizovat? Jaký je odhadovaný termín?"
+                          rows={6}
+                          required
+                        />
+                      </div>
+
+                      <div className="flex items-start space-x-2">
+                        <input type="checkbox" id="gdpr" className="mt-1" required />
+                        <Label htmlFor="gdpr" className="text-sm text-muted-foreground font-normal leading-relaxed">
+                          Souhlasím se zpracováním osobních údajů pro účely zaslání cenové nabídky v souladu s{" "}
+                          <a href="/gdpr" className="text-gold hover:underline">
+                            GDPR
+                          </a>
+                          .
+                        </Label>
+                      </div>
+
+                      <Button
+                        type="submit"
+                        size="lg"
+                        className="w-full md:w-auto bg-gold text-primary-dark hover:bg-gold/90 font-bold"
+                      >
+                        Odeslat poptávku
+                      </Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Contact Info */}
+              <div className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Kontaktní údaje</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex items-start space-x-3">
+                      <div className="w-10 h-10 bg-gold rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg
+                          className="w-5 h-5 text-primary-dark"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                          />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-semibold mb-1">Telefon</p>
+                        <a href="tel:+420774335592" className="text-muted-foreground hover:text-gold transition-colors">
+                          +420 774 335 592
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start space-x-3">
+                      <div className="w-10 h-10 bg-gold rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg
+                          className="w-5 h-5 text-primary-dark"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                          />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-semibold mb-1">Email</p>
+                        <a
+                          href="mailto:firma@artdum.cz"
+                          className="text-muted-foreground hover:text-gold transition-colors"
+                        >
+                          firma@artdum.cz
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start space-x-3">
+                      <div className="w-10 h-10 bg-gold rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg
+                          className="w-5 h-5 text-primary-dark"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-semibold mb-1">Adresa</p>
+                        <p className="text-muted-foreground">
+                          Karlovo nám 44/33
+                          <br />
+                          674 01 Třebíč
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start space-x-3">
+                      <div className="w-10 h-10 bg-gold rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg
+                          className="w-5 h-5 text-primary-dark"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-semibold mb-1">Pracovní doba</p>
+                        <p className="text-muted-foreground">
+                          Po–Pá: 7:00 – 17:00
+                          <br />
+                          So: 8:00 – 12:00
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>IČO</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">22401261</p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Map Section */}
+        <section className="py-16 bg-muted">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold mb-8 text-center">Kde nás najdete</h2>
+            <div className="aspect-video w-full max-w-4xl mx-auto bg-gray-200 rounded-lg overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2611.7!2d15.8815!3d49.2141!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDnCsDEyJzUwLjgiTiAxNcKwNTInNTMuNCJF!5e0!3m2!1scs!2scz!4v1234567890"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Mapa ART DUM"
+              />
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  )
+}
