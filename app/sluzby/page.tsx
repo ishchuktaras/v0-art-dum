@@ -3,6 +3,9 @@ import { Footer } from "@/components/ui/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
+import { sanityFetch } from "@/sanity/lib/fetch"
+import { SERVICES_QUERY } from "@/sanity/lib/queries"
+import { urlFor } from "@/sanity/lib/image"
 
 export const metadata = {
   title: "Naše služby | ART DUM",
@@ -10,10 +13,10 @@ export const metadata = {
     "Komplexní stavební služby - rekonstrukce, stavby na klíč, zednické práce a další. 23 let zkušeností v regionu Třebíč.",
 }
 
-const services = [
+const fallbackServices = [
   {
     title: "Rekonstrukce bytů a domů",
-    description:
+    shortDescription:
       "Kompletní rekonstrukce bytových i rodinných domů od A do Z. Zaměřujeme se na kvalitu, dodržování termínů a minimalizaci nepříjemností pro klienta.",
     features: [
       "Bourací práce",
@@ -23,20 +26,11 @@ const services = [
       "Malířské práce",
       "Pokládka podlah",
     ],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-        />
-      </svg>
-    ),
+    icon: "home",
   },
   {
     title: "Stavby na klíč",
-    description:
+    shortDescription:
       "Realizace kompletních stavebních projektů od základů po finální úpravy. Zajistíme vše potřebné včetně koordinace subdodavatelů.",
     features: [
       "Výstavba rodinných domů",
@@ -46,20 +40,11 @@ const services = [
       "Zahradní domky",
       "Projekt a koordinace",
     ],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-        />
-      </svg>
-    ),
+    icon: "building",
   },
   {
     title: "Zednické práce",
-    description:
+    shortDescription:
       "Profesionální zednické práce všeho druhu. Přesnost, čistota práce a dodržování technologických postupů.",
     features: [
       "Zdění cihelných konstrukcí",
@@ -69,20 +54,12 @@ const services = [
       "Obklady a dlažby",
       "Opravy fasád",
     ],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-        />
-      </svg>
-    ),
+    icon: "brick",
   },
   {
     title: "Zateplení budov",
-    description: "Komplexní zateplení fasád kontaktním zateplovacím systémem pro úsporu energií a komfort bydlení.",
+    shortDescription:
+      "Komplexní zateplení fasád kontaktním zateplovacím systémem pro úsporu energií a komfort bydlení.",
     features: [
       "ETICS systémy",
       "Minerální vata i polystyren",
@@ -91,20 +68,11 @@ const services = [
       "Fasádní omítky",
       "Kompletní dokumentace",
     ],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-        />
-      </svg>
-    ),
+    icon: "shield",
   },
   {
     title: "Opravy a údržba",
-    description: "Rychlé a kvalitní řešení stavebních problémů. Jsme tu pro vás i při menších opravách.",
+    shortDescription: "Rychlé a kvalitní řešení stavebních problémů. Jsme tu pro vás i při menších opravách.",
     features: [
       "Opravy prasklin",
       "Výměna oken a dveří",
@@ -113,21 +81,11 @@ const services = [
       "Úpravy teras a balkonů",
       "Havarijní servis",
     ],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-        />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    ),
+    icon: "wrench",
   },
   {
     title: "Komerční prostory",
-    description:
+    shortDescription:
       "Rekonstrukce a výstavba komerčních prostor - obchody, kanceláře, restaurace. Rychlá realizace dle vašich požadavků.",
     features: [
       "Obchodní prostory",
@@ -137,20 +95,20 @@ const services = [
       "Čisté pokoje",
       "Minimalizace prostojů",
     ],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-        />
-      </svg>
-    ),
+    icon: "store",
   },
 ]
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  // Fetch services from Sanity
+  const sanityServices = await sanityFetch<any[]>({
+    query: SERVICES_QUERY,
+    tags: ["service"],
+  })
+
+  // Use Sanity services if available, otherwise use fallback
+  const services = sanityServices && sanityServices.length > 0 ? sanityServices : fallbackServices
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -173,32 +131,47 @@ export default function ServicesPage() {
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {services.map((service, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
+              {services.map((service: any, index: number) => (
+                <Card key={service._id || index} className="hover:shadow-lg transition-shadow">
                   <CardHeader>
+                    {service.image && (
+                      <img
+                        src={urlFor(service.image).width(400).height(250).url() || "/placeholder.svg"}
+                        alt={service.image.alt || service.title}
+                        className="w-full h-48 object-cover rounded-lg mb-4"
+                      />
+                    )}
                     <div className="w-16 h-16 bg-gold rounded-lg flex items-center justify-center mb-4 text-primary-dark">
-                      {service.icon}
+                      {/* Render icons based on service.icon */}
+                      {service.icon && (
+                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={`M${service.icon}`} />
+                        </svg>
+                      )}
                     </div>
                     <CardTitle className="text-2xl mb-2">{service.title}</CardTitle>
-                    <CardDescription className="text-base">{service.description}</CardDescription>
+                    <CardDescription className="text-base">{service.shortDescription}</CardDescription>
+                    {service.price && <p className="text-gold font-semibold mt-3">{service.price}</p>}
                   </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start">
-                          <svg
-                            className="w-5 h-5 text-gold mr-2 flex-shrink-0 mt-0.5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                          <span className="text-sm">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
+                  {service.features && service.features.length > 0 && (
+                    <CardContent>
+                      <ul className="space-y-2">
+                        {service.features.map((feature: string, idx: number) => (
+                          <li key={idx} className="flex items-start">
+                            <svg
+                              className="w-5 h-5 text-gold mr-2 flex-shrink-0 mt-0.5"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span className="text-sm">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  )}
                 </Card>
               ))}
             </div>

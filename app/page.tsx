@@ -2,8 +2,30 @@ import { Header } from "@/components/ui/header"
 import { Footer } from "@/components/ui/footer"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { sanityFetch } from "@/sanity/lib/fetch"
+import { HOMEPAGE_QUERY, SERVICES_QUERY } from "@/sanity/lib/queries"
+import { urlFor } from "@/sanity/lib/image"
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Fetch homepage and services data from Sanity
+  const homepage = await sanityFetch<any>({
+    query: HOMEPAGE_QUERY,
+    tags: ["homepage"],
+  })
+
+  const services = await sanityFetch<any[]>({
+    query: SERVICES_QUERY,
+    tags: ["service"],
+  })
+
+  // Use fallback data if Sanity data is not available
+  const heroHeading = homepage?.heroHeading || "Profesionální stavební práce s 23 lety zkušeností"
+  const heroSubheading =
+    homepage?.heroSubheading ||
+    "Rekonstrukce, stavby na klíč a opravy v regionu Třebíč a okolí. Kvalita, rychlost a férová cena."
+  const ctaText = homepage?.ctaButtonText || "Nezávazná poptávka"
+  const yearsExperience = homepage?.statYearsExperience || 23
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -14,15 +36,15 @@ export default function HomePage() {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl">
               <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight">
-                Profesionální stavební práce s <span className="text-gold">23 lety zkušeností</span>
+                {heroHeading.split("23 lety zkušeností")[0]}
+                <span className="text-gold">{yearsExperience} lety zkušeností</span>
+                {heroHeading.split("23 lety zkušeností")[1]}
               </h1>
-              <p className="text-lg md:text-xl mb-8 text-muted-foreground leading-relaxed">
-                Rekonstrukce, stavby na klíč a opravy v regionu Třebíč a okolí. Kvalita, rychlost a férová cena.
-              </p>
+              <p className="text-lg md:text-xl mb-8 text-muted-foreground leading-relaxed">{heroSubheading}</p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/kontakt">
                   <Button size="lg" className="bg-gold text-primary-dark hover:bg-gold/90 font-bold">
-                    Nezávazná poptávka
+                    {ctaText}
                   </Button>
                 </Link>
                 <Link href="/portfolio">
@@ -93,14 +115,33 @@ export default function HomePage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Placeholder pro služby - budou načteny ze Sanity */}
-              <div className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
-                <h3 className="text-xl font-bold mb-3">Rekonstrukce</h3>
-                <p className="text-muted-foreground mb-4">Kompletní rekonstrukce bytů, domů a komerčních prostor</p>
-                <Link href="/sluzby" className="text-gold font-semibold hover:underline">
-                  Zjistit více →
-                </Link>
-              </div>
+              {services && services.length > 0 ? (
+                services.slice(0, 6).map((service: any) => (
+                  <div key={service._id} className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
+                    {service.image && (
+                      <img
+                        src={urlFor(service.image).width(400).height(250).url() || "/placeholder.svg"}
+                        alt={service.image.alt || service.title}
+                        className="w-full h-48 object-cover rounded-lg mb-4"
+                      />
+                    )}
+                    <h3 className="text-xl font-bold mb-3">{service.title}</h3>
+                    <p className="text-muted-foreground mb-4">{service.shortDescription}</p>
+                    {service.price && <p className="text-gold font-semibold mb-3">{service.price}</p>}
+                    <Link href="/sluzby" className="text-gold font-semibold hover:underline">
+                      Zjistit více →
+                    </Link>
+                  </div>
+                ))
+              ) : (
+                <div className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
+                  <h3 className="text-xl font-bold mb-3">Rekonstrukce</h3>
+                  <p className="text-muted-foreground mb-4">Kompletní rekonstrukce bytů, domů a komerčních prostor</p>
+                  <Link href="/sluzby" className="text-gold font-semibold hover:underline">
+                    Zjistit více →
+                  </Link>
+                </div>
+              )}
             </div>
 
             <div className="text-center mt-8">
@@ -122,7 +163,7 @@ export default function HomePage() {
             </p>
             <Link href="/kontakt">
               <Button size="lg" className="bg-gold text-primary-dark hover:bg-gold/90 font-bold">
-                Nezávazná poptávka
+                {ctaText}
               </Button>
             </Link>
           </div>
