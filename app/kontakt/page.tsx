@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
+import { submitInquiry } from "./actions"
 
 export const metadata = {
   title: "Kontakt | ART DUM",
@@ -41,27 +42,28 @@ export default function ContactPage() {
                     <CardDescription>Vyplňte formulář a my se vám ozveme do 24 hodin</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <form className="space-y-6">
+                    <form action={submitInquiry} className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <Label htmlFor="name">Jméno a příjmení *</Label>
-                          <Input id="name" placeholder="Jan Novák" required />
+                          <Input id="name" name="name" placeholder="Jan Novák" required />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="phone">Telefon *</Label>
-                          <Input id="phone" type="tel" placeholder="+420 xxx xxx xxx" required />
+                          <Input id="phone" name="phone" type="tel" placeholder="+420 xxx xxx xxx" required />
                         </div>
                       </div>
 
                       <div className="space-y-2">
                         <Label htmlFor="email">Email *</Label>
-                        <Input id="email" type="email" placeholder="vas@email.cz" required />
+                        <Input id="email" name="email" type="email" placeholder="vas@email.cz" required />
                       </div>
 
                       <div className="space-y-2">
                         <Label htmlFor="service">Typ služby</Label>
                         <select
                           id="service"
+                          name="service"
                           className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                         >
                           <option value="">Vyberte službu...</option>
@@ -79,6 +81,7 @@ export default function ContactPage() {
                         <Label htmlFor="message">Zpráva *</Label>
                         <Textarea
                           id="message"
+                          name="message"
                           placeholder="Popište váš projekt... Co potřebujete realizovat? Jaký je odhadovaný termín?"
                           rows={6}
                           required
@@ -86,7 +89,7 @@ export default function ContactPage() {
                       </div>
 
                       <div className="flex items-start space-x-2">
-                        <input type="checkbox" id="gdpr" className="mt-1" required />
+                        <input type="checkbox" id="gdpr" name="gdpr" className="mt-1" required />
                         <Label htmlFor="gdpr" className="text-sm text-muted-foreground font-normal leading-relaxed">
                           Souhlasím se zpracováním osobních údajů pro účely zaslání cenové nabídky v souladu s{" "}
                           <a href="/gdpr" className="text-gold hover:underline">
