@@ -3,7 +3,7 @@ import { Header } from "@/components/ui/header"
 import { Footer } from "@/components/ui/footer"
 import { Button } from "@/components/ui/button"
 
-export default function NotFound() {
+export default function Forbidden() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -11,19 +11,20 @@ export default function NotFound() {
       <main className="flex-1 flex items-center justify-center bg-gradient-to-b from-primary-dark to-primary-dark/90">
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="max-w-3xl mx-auto text-center">
-            {/* 404 Number */}
+            {/* 403 Number */}
             <div className="mb-8">
-              <h1 className="text-9xl md:text-[12rem] font-black text-gold leading-none mb-4">404</h1>
+              <h1 className="text-9xl md:text-[12rem] font-black text-gold leading-none mb-4">403</h1>
               <div className="w-32 h-1 bg-gold mx-auto" />
             </div>
 
             {/* Message */}
-            <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">Stránka nebyla nalezena</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">Přístup odepřen</h2>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed">
-              Omlouváme se, ale stránka, kterou hledáte, neexistuje nebo byla přesunuta.
+              Omlouváme se, ale nemáte oprávnění k přístupu na tuto stránku. Pro přístup k této oblasti kontaktujte
+              administrátora.
             </p>
 
-            {/* Construction Icon */}
+            {/* Lock Icon */}
             <div className="mb-8">
               <svg
                 className="w-24 h-24 mx-auto text-gold opacity-50"
@@ -35,7 +36,7 @@ export default function NotFound() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={1.5}
-                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                 />
               </svg>
             </div>

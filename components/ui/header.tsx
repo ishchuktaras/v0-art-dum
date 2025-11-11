@@ -52,7 +52,9 @@ export function Header() {
             Blog
           </Link>
           <Link href="/kontakt">
-            <Button className="bg-gold text-primary-dark hover:bg-gold/90 font-semibold">Nezávazná poptávka</Button>
+            <Button size="lg" className="bg-gold text-primary-dark hover:bg-gold/90 font-bold px-6">
+              Nezávazná poptávka
+            </Button>
           </Link>
         </nav>
 
