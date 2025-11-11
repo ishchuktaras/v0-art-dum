@@ -64,17 +64,17 @@ export default function NotFound() {
 
             {/* Quick Links */}
             <div className="mt-12 pt-8 border-t border-gold/20">
-              <p className="text-muted-foreground mb-4">Nebo navštivte některou z našich sekcí:</p>
-              <div className="flex flex-wrap justify-center gap-4 text-sm">
-                <Link href="/sluzby" className="text-gold hover:text-gold/80 transition-colors font-semibold">
+              <p className="text-muted-foreground mb-6 text-base md:text-lg">Nebo navštivte některou z našich sekcí:</p>
+              <div className="flex flex-wrap justify-center gap-6 text-base md:text-lg">
+                <Link href="/sluzby" className="text-gold hover:text-gold/80 transition-colors font-bold">
                   Naše služby
                 </Link>
-                <span className="text-muted-foreground">•</span>
-                <Link href="/portfolio" className="text-gold hover:text-gold/80 transition-colors font-semibold">
+                <span className="text-gold/50">•</span>
+                <Link href="/portfolio" className="text-gold hover:text-gold/80 transition-colors font-bold">
                   Portfolio
                 </Link>
-                <span className="text-muted-foreground">•</span>
-                <Link href="/o-nas" className="text-gold hover:text-gold/80 transition-colors font-semibold">
+                <span className="text-gold/50">•</span>
+                <Link href="/o-nas" className="text-gold hover:text-gold/80 transition-colors font-bold">
                   O nás
                 </Link>
               </div>

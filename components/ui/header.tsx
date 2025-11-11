@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-primary-dark backdrop-blur supports-[backdrop-filter]:bg-primary-dark/95">
+    <header className="sticky top-0 z-50 w-full border-b bg-primary-dark backdrop-blur supports-backdrop-filter:bg-primary-dark/95">
       <div className="container mx-auto flex h-20 items-center justify-between px-4">
         <Link href="/" className="flex items-center space-x-2">
           <Image
@@ -52,7 +52,9 @@ export function Header() {
             Blog
           </Link>
           <Link href="/kontakt">
-            <Button className="bg-gold text-primary-dark hover:bg-gold/90 font-semibold">Nezávazná poptávka</Button>
+            <Button size="lg" className="bg-gold text-primary-dark hover:bg-gold/90 font-bold px-6">
+              Nezávazná poptávka
+            </Button>
           </Link>
         </nav>
 
