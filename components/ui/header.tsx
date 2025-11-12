@@ -97,19 +97,15 @@ export function Header() {
             mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
           }`}
         >
-          {/* Overlay s gradientem */}
-          <div
-            className="absolute inset-0 bg-gradient-to-br from-primary-dark via-[#1a2942] to-primary-dark"
-            onClick={() => setMobileMenuOpen(false)}
-          />
+          <div className="absolute inset-0 bg-primary-dark" onClick={() => setMobileMenuOpen(false)} />
 
-          {/* Dekorativní prvky */}
-          <div className="absolute top-20 right-10 w-32 h-32 bg-gold/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 left-10 w-40 h-40 bg-gold/5 rounded-full blur-3xl" />
+          {/* Dekorativní prvky - přidána nižší z-index pro vrstvení */}
+          <div className="absolute top-20 right-10 w-32 h-32 bg-gold/10 rounded-full blur-3xl z-10" />
+          <div className="absolute bottom-20 left-10 w-40 h-40 bg-gold/5 rounded-full blur-3xl z-10" />
 
-          {/* Navigační menu */}
+          {/* Navigační menu - zvýšen z-index pro viditelnost nad pozadím */}
           <nav
-            className={`relative flex flex-col h-full pt-28 pb-10 px-8 transition-transform duration-500 ease-out ${
+            className={`relative z-20 flex flex-col h-full pt-28 pb-10 px-8 transition-transform duration-500 ease-out ${
               mobileMenuOpen ? "translate-y-0" : "-translate-y-10"
             }`}
           >
