@@ -6,10 +6,10 @@ export function Footer() {
 
   return (
     <footer className="bg-primary-dark text-primary-foreground">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="container mx-auto px-4 py-8 md:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {/* Logo a popis */}
-          <div className="col-span-1 md:col-span-2">
+          <div className="col-span-1 sm:col-span-2">
             <Image
               src="/logo.jpg"
               alt="ART DUM logo"
@@ -85,10 +85,12 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/10 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-muted-foreground">© {currentYear} ART DUM. Všechna práva vyhrazena.</p>
-          <div className="flex space-x-4 mt-4 md:mt-0">
-            <Link href="/gdpr" className="text-sm text-muted-foreground hover:text-gold transition-colors">
+        <div className="border-t border-primary-foreground/10 mt-6 md:mt-8 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs md:text-sm text-muted-foreground text-center md:text-left">
+            © {currentYear} ART DUM. Všechna práva vyhrazena.
+          </p>
+          <div className="flex space-x-4">
+            <Link href="/gdpr" className="text-xs md:text-sm text-muted-foreground hover:text-gold transition-colors">
               Ochrana osobních údajů
             </Link>
           </div>

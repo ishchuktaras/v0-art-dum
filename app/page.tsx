@@ -32,23 +32,29 @@ export default async function HomePage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-primary-dark text-primary-foreground py-20 md:py-32">
+        <section className="relative bg-primary-dark text-primary-foreground py-12 sm:py-16 md:py-20 lg:py-32">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl">
-              <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 leading-tight">
                 {heroHeading.split("23 lety zkušeností")[0]}
                 <span className="text-gold">{yearsExperience} lety zkušeností</span>
                 {heroHeading.split("23 lety zkušeností")[1]}
               </h1>
-              <p className="text-lg md:text-xl mb-8 text-muted-foreground leading-relaxed">{heroSubheading}</p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/kontakt">
-                  <Button size="lg" className="bg-gold text-primary-dark hover:bg-gold/90 font-bold">
+              <p className="text-base sm:text-lg md:text-xl mb-6 md:mb-8 text-muted-foreground leading-relaxed">
+                {heroSubheading}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
+                <Link href="/kontakt" className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full sm:w-auto bg-gold text-primary-dark hover:bg-gold/90 font-bold">
                     {ctaText}
                   </Button>
                 </Link>
-                <Link href="/portfolio">
-                  <Button size="lg" variant="outline" className="border-gold text-gold hover:bg-gold/10 bg-transparent">
+                <Link href="/portfolio" className="w-full sm:w-auto">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="w-full sm:w-auto border-gold text-gold hover:bg-gold/10 bg-transparent"
+                  >
                     Naše práce
                   </Button>
                 </Link>
@@ -58,9 +64,9 @@ export default async function HomePage() {
         </section>
 
         {/* USP Section */}
-        <section className="py-16 bg-muted">
+        <section className="py-12 md:py-16 bg-muted">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               <div className="text-center">
                 <div className="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg className="w-8 h-8 text-primary-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -105,16 +111,16 @@ export default async function HomePage() {
         </section>
 
         {/* Services Preview */}
-        <section className="py-16">
+        <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Naše služby</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <div className="text-center mb-8 md:mb-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">Naše služby</h2>
+              <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
                 Komplexní stavební služby pro vaše projekty
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {services && services.length > 0 ? (
                 services.slice(0, 6).map((service: any) => (
                   <div key={service._id} className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
@@ -144,9 +150,9 @@ export default async function HomePage() {
               )}
             </div>
 
-            <div className="text-center mt-8">
+            <div className="text-center mt-6 md:mt-8">
               <Link href="/sluzby">
-                <Button variant="outline" size="lg">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto bg-transparent">
                   Zobrazit všechny služby
                 </Button>
               </Link>
@@ -155,14 +161,14 @@ export default async function HomePage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-primary-dark text-primary-foreground">
+        <section className="py-12 md:py-16 bg-primary-dark text-primary-foreground">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Máte projekt? Kontaktujte nás!</h2>
-            <p className="text-lg mb-8 text-muted-foreground max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">Máte projekt? Kontaktujte nás!</h2>
+            <p className="text-base md:text-lg mb-6 md:mb-8 text-muted-foreground max-w-2xl mx-auto px-4">
               Rádi vám připravíme cenovou nabídku na míru
             </p>
             <Link href="/kontakt">
-              <Button size="lg" className="bg-gold text-primary-dark hover:bg-gold/90 font-bold">
+              <Button size="lg" className="w-full sm:w-auto bg-gold text-primary-dark hover:bg-gold/90 font-bold">
                 {ctaText}
               </Button>
             </Link>
