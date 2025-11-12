@@ -12,10 +12,10 @@ export function Footer() {
           <div className="col-span-1 sm:col-span-2">
             <Image
               src="/logo.jpg"
-              alt="ART DUM logo"
-              width={180}
-              height={60}
-              className="h-auto w-auto max-h-[60px] mb-4"
+              alt="ART DUM - Stavební firma"
+              width={200}
+              height={150}
+              className="h-auto w-auto max-h-[70px] md:max-h-[80px] mb-4"
             />
             <p className="text-sm text-muted-foreground mb-4">
               Profesionální stavební služby s 23 lety zkušeností v regionu Třebíč a okolí.

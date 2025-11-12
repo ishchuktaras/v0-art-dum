@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
+import { Home, Building2, Wrench, Briefcase, Star, BookOpen, Phone } from "lucide-react"
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -28,12 +29,12 @@ export function Header() {
   }, [mobileMenuOpen])
 
   const navLinks = [
-    { href: "/", label: "Domů" },
-    { href: "/o-nas", label: "O nás" },
-    { href: "/sluzby", label: "Služby" },
-    { href: "/portfolio", label: "Portfolio" },
-    { href: "/hodnoceni", label: "Hodnocení" },
-    { href: "/blog", label: "Blog" },
+    { href: "/", label: "Domů", icon: Home },
+    { href: "/o-nas", label: "O nás", icon: Building2 },
+    { href: "/sluzby", label: "Služby", icon: Wrench },
+    { href: "/portfolio", label: "Portfolio", icon: Briefcase },
+    { href: "/hodnoceni", label: "Hodnocení", icon: Star },
+    { href: "/blog", label: "Blog", icon: BookOpen },
   ]
 
   return (
@@ -43,10 +44,10 @@ export function Header() {
         <Link href="/" className="flex items-center space-x-2 z-50">
           <Image
             src="/logo.jpg"
-            alt="ART DUM logo"
-            width={140}
-            height={47}
-            className="h-auto w-auto max-h-[40px] md:max-h-[60px]"
+            alt="ART DUM - Stavební firma"
+            width={160}
+            height={120}
+            className="h-auto w-auto max-h-[50px] md:max-h-[70px]"
             priority
           />
         </Link>
@@ -71,46 +72,111 @@ export function Header() {
           </Link>
         </nav>
 
-        {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden text-primary-foreground z-50 p-2"
+          className="lg:hidden relative text-primary-foreground z-50 p-2 w-10 h-10 flex flex-col items-center justify-center gap-1.5 group"
           aria-label="Toggle menu"
         >
-          {mobileMenuOpen ? (
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          ) : (
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          )}
+          <span
+            className={`w-6 h-0.5 bg-gold transition-all duration-300 ${
+              mobileMenuOpen ? "rotate-45 translate-y-2" : ""
+            }`}
+          />
+          <span
+            className={`w-6 h-0.5 bg-gold transition-all duration-300 ${mobileMenuOpen ? "opacity-0" : "opacity-100"}`}
+          />
+          <span
+            className={`w-6 h-0.5 bg-gold transition-all duration-300 ${
+              mobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
+            }`}
+          />
         </button>
 
-        {/* Mobile Menu */}
         <div
-          className={`fixed inset-0 bg-primary-dark z-40 lg:hidden transition-transform duration-300 ease-in-out ${
-            mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          className={`fixed inset-0 z-40 lg:hidden transition-all duration-500 ease-out ${
+            mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
           }`}
         >
-          <nav className="flex flex-col items-center justify-center h-full space-y-8 px-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-2xl font-bold transition-colors ${
-                  pathname === link.href ? "text-gold" : "text-primary-foreground hover:text-gold"
-                }`}
-              >
-                {link.label}
+          {/* Overlay s gradientem */}
+          <div
+            className="absolute inset-0 bg-gradient-to-br from-primary-dark via-[#1a2942] to-primary-dark"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+
+          {/* Dekorativní prvky */}
+          <div className="absolute top-20 right-10 w-32 h-32 bg-gold/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 left-10 w-40 h-40 bg-gold/5 rounded-full blur-3xl" />
+
+          {/* Navigační menu */}
+          <nav
+            className={`relative flex flex-col h-full pt-28 pb-10 px-8 transition-transform duration-500 ease-out ${
+              mobileMenuOpen ? "translate-y-0" : "-translate-y-10"
+            }`}
+          >
+            {/* Navigační odkazy s ikonami */}
+            <div className="flex-1 flex flex-col justify-center space-y-2 max-w-md mx-auto w-full">
+              {navLinks.map((link, index) => {
+                const Icon = link.icon
+                const isActive = pathname === link.href
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`group flex items-center gap-4 py-4 px-6 rounded-xl transition-all duration-300 transform ${
+                      isActive
+                        ? "bg-gold/20 text-gold translate-x-2"
+                        : "text-primary-foreground hover:bg-gold/10 hover:text-gold hover:translate-x-2"
+                    }`}
+                    style={{
+                      transitionDelay: mobileMenuOpen ? `${index * 50}ms` : "0ms",
+                    }}
+                  >
+                    <Icon
+                      className={`w-6 h-6 transition-transform duration-300 ${
+                        isActive ? "scale-110" : "group-hover:scale-110"
+                      }`}
+                    />
+                    <span className="text-xl font-bold">{link.label}</span>
+                    {isActive && <div className="ml-auto w-2 h-2 rounded-full bg-gold animate-pulse" />}
+                  </Link>
+                )
+              })}
+            </div>
+
+            {/* CTA tlačítko */}
+            <div
+              className={`max-w-md mx-auto w-full transition-all duration-500 ${
+                mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+              style={{ transitionDelay: mobileMenuOpen ? "300ms" : "0ms" }}
+            >
+              <Link href="/kontakt" className="block">
+                <Button
+                  size="lg"
+                  className="w-full bg-gold text-primary-dark hover:bg-gold/90 font-bold py-6 text-lg shadow-lg shadow-gold/20 flex items-center justify-center gap-3"
+                >
+                  <Phone className="w-5 h-5" />
+                  Nezávazná poptávka
+                </Button>
               </Link>
-            ))}
-            <Link href="/kontakt" className="w-full max-w-xs">
-              <Button size="lg" className="w-full bg-gold text-primary-dark hover:bg-gold/90 font-bold">
-                Nezávazná poptávka
-              </Button>
-            </Link>
+
+              {/* Kontaktní informace */}
+              <div className="mt-6 text-center space-y-2">
+                <p className="text-primary-foreground/60 text-sm">Máte dotaz?</p>
+                <a
+                  href="tel:+420774335592"
+                  className="block text-gold font-semibold hover:text-gold/80 transition-colors"
+                >
+                  +420 774 335 592
+                </a>
+                <a
+                  href="mailto:firma@artdum.cz"
+                  className="block text-primary-foreground/80 text-sm hover:text-gold transition-colors"
+                >
+                  firma@artdum.cz
+                </a>
+              </div>
+            </div>
           </nav>
         </div>
       </div>
