@@ -204,7 +204,7 @@ export default async function ServicesPage() {
                         {service.features.map((feature: string, idx: number) => (
                           <li key={idx} className="flex items-start">
                             <svg
-                              className="w-5 h-5 text-gold mr-2 flex-shrink-0 mt-0.5"
+                              className="w-5 h-5 text-gold mr-2 shrink-0 mt-0.5"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"

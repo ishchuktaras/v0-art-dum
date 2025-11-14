@@ -77,7 +77,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           />
         ) : null}
 
-        <div className="absolute inset-0 bg-gradient-to-t from-primary to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-primary to-transparent" />
 
         <div className="absolute bottom-0 left-0 right-0 pb-12">
           <div className="container mx-auto px-4">

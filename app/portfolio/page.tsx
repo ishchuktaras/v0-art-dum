@@ -9,6 +9,16 @@ import { PORTFOLIO_QUERY } from "@/sanity/lib/queries"
 import { urlFor } from "@/sanity/lib/image"
 import type { Metadata } from "next"
 
+interface PortfolioProject {
+  _id: string
+  title: string
+  shortDescription: string
+  category: string
+  location?: string
+  year?: number
+  imagesAfter?: any[]
+}
+
 export const metadata: Metadata = {
   title: "Portfolio stavebních prací | Rekonstrukce Třebíč | ART DUM",
   description:
@@ -38,9 +48,9 @@ export const metadata: Metadata = {
   },
 }
 
-async function getPortfolioProjects() {
+async function getPortfolioProjects(): Promise<PortfolioProject[]> {
   try {
-    const projects = await sanityFetch({
+    const projects = await sanityFetch<PortfolioProject[]>({
       query: PORTFOLIO_QUERY,
       tags: ["portfolio"],
     })
@@ -65,8 +75,10 @@ const categoryLabels: Record<string, string> = {
 export default async function PortfolioPage() {
   const projects = await getPortfolioProjects()
 
-  const uniqueCategories = Array.from(new Set(projects.map((p: any) => p.category).filter(Boolean)))
-  const categories = ["Všechny projekty", ...uniqueCategories.map((cat: string) => categoryLabels[cat] || cat)]
+  const uniqueCategories = Array.from(
+    new Set(projects.map((p) => p.category).filter(Boolean))
+  )
+  const categories = ["Všechny projekty", ...uniqueCategories.map((cat) => categoryLabels[cat] || cat)]
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -131,7 +143,7 @@ export default async function PortfolioPage() {
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {projects.map((project: any) => {
+                {projects.map((project) => {
                   const imageUrl = project.imagesAfter?.[0]
                     ? urlFor(project.imagesAfter[0])?.width(800).height(600).url()
                     : "/placeholder.svg?height=600&width=800"
