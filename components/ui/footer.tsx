@@ -89,9 +89,17 @@ export function Footer() {
           <p className="text-xs md:text-sm text-muted-foreground text-center md:text-left">
             © {currentYear} ART DUM. Všechna práva vyhrazena.
           </p>
-          <div className="flex space-x-4">
+          <div className="flex flex-wrap justify-center md:justify-end gap-3 md:gap-4">
             <Link href="/gdpr" className="text-xs md:text-sm text-muted-foreground hover:text-gold transition-colors">
               Ochrana osobních údajů
+            </Link>
+            <span className="text-muted-foreground">•</span>
+            <Link href="/obchodni-podminky" className="text-xs md:text-sm text-muted-foreground hover:text-gold transition-colors">
+              Obchodní podmínky
+            </Link>
+            <span className="text-muted-foreground">•</span>
+            <Link href="/pravni-ustanoveni" className="text-xs md:text-sm text-muted-foreground hover:text-gold transition-colors">
+              Právní ustanovení
             </Link>
           </div>
         </div>
