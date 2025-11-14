@@ -1,50 +1,51 @@
-# Oprava RLS pro kontaktní formulář
+-- Fix RLS policies for inquiries table to allow public submissions
 
-## Problém
-Kontaktní formulář na `/kontakt` zobrazuje chybu:
-\`\`\`
-new row violates row-level security policy for table "inquiries"
-\`\`\`
+-- Drop existing policies
+drop policy if exists "inquiries_select_admin" on public.inquiries;
+drop policy if exists "inquiries_insert_public" on public.inquiries;
+drop policy if exists "inquiries_update_admin" on public.inquiries;
+drop policy if exists "inquiries_delete_admin" on public.inquiries;
 
-## Příčina
-Row Level Security (RLS) policies na tabulce `inquiries` blokovaly vkládání dat z veřejného formuláře. Původní policy nepřidala explicitně `to anon`, což je potřeba pro nepřihlášené uživatele.
+-- Recreate policies with correct permissions
 
-## Řešení
+-- Allow anonymous users to INSERT inquiries (contact form submissions)
+create policy "inquiries_insert_public"
+  on public.inquiries for insert
+  to anon, authenticated
+  with check (true);
 
-### 1. Spusťte SQL skript v Supabase
-1. Přihlaste se do Supabase Dashboard
-2. Otevřete SQL Editor
-3. Zkopírujte a spusťte obsah souboru `scripts/002_fix_inquiries_rls.sql`
-4. Klikněte na "Run"
+-- Only admins and owners can SELECT inquiries
+create policy "inquiries_select_admin"
+  on public.inquiries for select
+  to authenticated
+  using (
+    exists (
+      select 1 from public.profiles
+      where profiles.id = auth.uid()
+      and profiles.role in ('admin', 'owner')
+    )
+  );
 
-### 2. Ověřte policies
-V Supabase Dashboard:
-1. Jděte do "Authentication" → "Policies"
-2. Najděte tabulku `inquiries`
-3. Měli byste vidět tyto policies:
-   - `inquiries_insert_public` - pro INSERT, role: anon, authenticated
-   - `inquiries_select_admin` - pro SELECT, pouze admin/owner
-   - `inquiries_update_admin` - pro UPDATE, pouze admin/owner
-   - `inquiries_delete_admin` - pro DELETE, pouze admin/owner
+-- Only admins and owners can UPDATE inquiries
+create policy "inquiries_update_admin"
+  on public.inquiries for update
+  to authenticated
+  using (
+    exists (
+      select 1 from public.profiles
+      where profiles.id = auth.uid()
+      and profiles.role in ('admin', 'owner')
+    )
+  );
 
-### 3. Test kontaktního formuláře
-1. Otevřete https://art-dum.vercel.app/kontakt
-2. Vyplňte formulář
-3. Klikněte "Odeslat poptávku"
-4. Měla by se zobrazit zelená zpráva o úspěchu
-
-### 4. Ověřte data v Supabase
-1. V Supabase Dashboard otevřete "Table Editor"
-2. Vyberte tabulku `inquiries`
-3. Měli byste vidět nový záznam z formuláře
-
-## Bezpečnost
-- ✅ Anonymní uživatelé mohou POUZE vkládat data (INSERT)
-- ✅ Anonymní uživatelé NEMOHOU číst, upravovat nebo mazat data
-- ✅ Pouze admini a owneři mohou spravovat poptávky v admin panelu
-- ✅ RLS je aktivní a chrání citlivá data
-
-## Poznámky
-- Policy `to anon` je klíčová pro povolení veřejných submissionů
-- Policy `to authenticated` pokrývá přihlášené uživatele
-- Obě role jsou potřeba pro správnou funkcionalitu
+-- Only admins and owners can DELETE inquiries
+create policy "inquiries_delete_admin"
+  on public.inquiries for delete
+  to authenticated
+  using (
+    exists (
+      select 1 from public.profiles
+      where profiles.id = auth.uid()
+      and profiles.role in ('admin', 'owner')
+    )
+  );
