@@ -37,7 +37,7 @@ SANITY_API_TOKEN=skeQf6fH5yGllw2UXLGy...
 
 # Email
 CONTACT_EMAIL=firma@artdum.cz
-NEXT_PUBLIC_RESEND_API_KEY=re_KCUSnq3r...
+RESEND_API_KEY=re_KCUSnq3r...
 \`\`\`
 
 ### 3. Restartovat dev server
@@ -76,8 +76,18 @@ Environment proměnné v production se nastavují v Vercel dashboard:
 2. Přidejte všechny `NEXT_PUBLIC_*` proměnné
 3. Redeploy projektu
 
-## Security Note
+## Security Best Practices
 
+**NEXT_PUBLIC_ Prefix:**
+- Pouze pro non-sensitive hodnoty které mohou být v browseru
+- Příklady: Supabase URL, Sanity Project ID, API versions
+
+**Server-Only Variables (BEZ NEXT_PUBLIC_):**
+- **NIKDY** nepoužívejte `NEXT_PUBLIC_` prefix pro API klíče, tokeny nebo secrets
+- Příklady: `RESEND_API_KEY`, `SANITY_API_TOKEN`, database credentials
+- Tyto jsou dostupné pouze v server komponentách a API routes
+
+**Security Note:**
 - `.env.local` je v `.gitignore` a NIKDY se necommituje do git
 - Všechny `NEXT_PUBLIC_*` proměnné jsou viditelné v browseru
-- Citlivé klíče (jako `SANITY_API_TOKEN` bez `NEXT_PUBLIC_`) jsou dostupné pouze na serveru
+- Citlivé klíče bez `NEXT_PUBLIC_` jsou dostupné pouze na serveru
