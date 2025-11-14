@@ -1,3 +1,5 @@
+"use client"
+
 import { Header } from "@/components/ui/header"
 import { Footer } from "@/components/ui/footer"
 import { Button } from "@/components/ui/button"
@@ -6,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { submitInquiry } from "./actions"
+import { useState } from "react"
 
 export const metadata = {
   title: "Kontakt | ART DUM",
@@ -13,6 +16,40 @@ export const metadata = {
 }
 
 export default function ContactPage() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
+
+  async function handleSubmit(formData: FormData) {
+    setIsSubmitting(true)
+    setMessage(null)
+
+    try {
+      const result = await submitInquiry(formData)
+
+      if (result.success) {
+        setMessage({
+          type: "success",
+          text: "Děkujeme! Vaše poptávka byla úspěšně odeslána. Ozveme se vám do 24 hodin.",
+        })
+        // Reset form
+        const form = document.querySelector("form") as HTMLFormElement
+        form?.reset()
+      } else {
+        setMessage({
+          type: "error",
+          text: result.error || "Nastala chyba při odesílání. Zkuste to prosím znovu nebo nás kontaktujte telefonicky.",
+        })
+      }
+    } catch (error) {
+      setMessage({
+        type: "error",
+        text: "Nastala chyba při odesílání. Zkuste to prosím znovu nebo nás kontaktujte telefonicky.",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -42,7 +79,19 @@ export default function ContactPage() {
                     <CardDescription>Vyplňte formulář a my se vám ozveme do 24 hodin</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <form action={submitInquiry} className="space-y-6">
+                    {message && (
+                      <div
+                        className={`mb-6 p-4 rounded-lg ${
+                          message.type === "success"
+                            ? "bg-green-50 border border-green-200 text-green-800"
+                            : "bg-red-50 border border-red-200 text-red-800"
+                        }`}
+                      >
+                        <p className="font-medium">{message.text}</p>
+                      </div>
+                    )}
+
+                    <form action={handleSubmit} className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <Label htmlFor="name">Jméno a příjmení *</Label>
@@ -102,9 +151,10 @@ export default function ContactPage() {
                       <Button
                         type="submit"
                         size="lg"
-                        className="w-full md:w-auto bg-gold text-primary-dark hover:bg-gold/90 font-bold"
+                        disabled={isSubmitting}
+                        className="w-full md:w-auto bg-gold text-primary-dark hover:bg-gold/90 font-bold disabled:opacity-50"
                       >
-                        Odeslat poptávku
+                        {isSubmitting ? "Odesílám..." : "Odeslat poptávku"}
                       </Button>
                     </form>
                   </CardContent>
