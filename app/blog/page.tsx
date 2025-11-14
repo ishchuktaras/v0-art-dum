@@ -98,7 +98,7 @@ export default async function BlogPage() {
                     <div className="relative h-48 w-full">
                       {post.featuredImage ? (
                         <Image
-                          src={urlFor(post.featuredImage).width(600).height(400).url() || "/placeholder.svg"}
+                          src={urlFor(post.featuredImage)?.width(600).height(400).url() || "/placeholder.svg"}
                           alt={post.featuredImage.alt || post.title}
                           fill
                           className="object-cover"

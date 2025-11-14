@@ -171,7 +171,7 @@ export default async function AboutPage() {
                   {member.photo && (
                     <div className="relative h-64 w-full">
                       <Image
-                        src={urlFor(member.photo).width(400).height(400).url() || "/placeholder.svg"}
+                        src={urlFor(member.photo)?.width(400).height(400).url() || "/placeholder.svg"}
                         alt={member.name}
                         fill
                         className="object-cover"
@@ -227,7 +227,7 @@ export default async function AboutPage() {
                   {cert.image && (
                     <div className="relative h-64 w-full bg-white p-4">
                       <Image
-                        src={urlFor(cert.image).width(400).height(400).url() || "/placeholder.svg"}
+                        src={urlFor(cert.image)?.width(400).height(400).url() || "/placeholder.svg"}
                         alt={cert.image.alt || cert.title}
                         fill
                         className="object-contain"

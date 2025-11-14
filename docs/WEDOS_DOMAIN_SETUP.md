@@ -180,4 +180,4 @@ Po připojení domény můžete aktivovat Vercel Analytics pro sledování náv�
 **Stav:** Po dokončení těchto kroků bude váš web dostupný na https://artdum.cz s automatickým SSL certifikátem a bez nutnosti spravovat server.
 \`\`\`
 
-```tsx file="" isHidden
+\`\`\`tsx file="" isHidden

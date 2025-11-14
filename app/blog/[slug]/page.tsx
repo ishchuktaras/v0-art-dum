@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       <div className="relative h-[400px] w-full bg-primary">
         {post.featuredImage ? (
           <Image
-            src={urlFor(post.featuredImage).width(1920).height(800).url() || "/placeholder.svg"}
+            src={urlFor(post.featuredImage)?.width(1920).height(800).url() || "/placeholder.svg"}
             alt={post.featuredImage.alt || post.title}
             fill
             className="object-cover opacity-30"
@@ -137,7 +137,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                   image: ({ value }) => (
                     <figure className="my-8">
                       <Image
-                        src={urlFor(value).width(1200).height(800).url() || "/placeholder.svg"}
+                        src={urlFor(value)?.width(1200).height(800).url() || "/placeholder.svg"}
                         alt={value.alt || "Obrázek článku"}
                         width={1200}
                         height={800}

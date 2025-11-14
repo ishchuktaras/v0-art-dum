@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ART DUM - Stavební firma Třebíč | 23 let zkušeností",
     description:
-      "Profesionální stavební služby v Třebíči a okolí. Rekonstrukce, stavby na klíč, zateplení. Férová cena a kvalita.",
+      "Profesionální stavební služby v Třebíči a okolí. Rekonstrukce, stavby na klíč a opravy. Férová cena a kvalita.",
     url: "https://artdum.cz",
     siteName: "ART DUM",
     locale: "cs_CZ",
@@ -187,7 +187,7 @@ export default async function HomePage() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
                 </div>
@@ -239,7 +239,7 @@ export default async function HomePage() {
                   <div key={service._id} className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
                     {service.image && (
                       <img
-                        src={urlFor(service.image).width(400).height(250).url() || "/placeholder.svg"}
+                        src={urlFor(service.image)?.width(400).height(250).url() || "/placeholder.svg"}
                         alt={service.image.alt || service.title}
                         className="w-full h-48 object-cover rounded-lg mb-4"
                       />

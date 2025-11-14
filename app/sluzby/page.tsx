@@ -181,7 +181,7 @@ export default async function ServicesPage() {
                   <CardHeader>
                     {service.image && (
                       <img
-                        src={urlFor(service.image).width(400).height(250).url() || "/placeholder.svg"}
+                        src={urlFor(service.image)?.width(400).height(250).url() || "/placeholder.svg"}
                         alt={service.image.alt || service.title}
                         className="w-full h-48 object-cover rounded-lg mb-4"
                       />
