@@ -97,7 +97,7 @@ export function Header() {
             mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
           }`}
         >
-          <div className="absolute inset-0 bg-primary-dark" onClick={() => setMobileMenuOpen(false)} />
+          <div className="absolute inset-0 bg-white" onClick={() => setMobileMenuOpen(false)} />
 
           {/* Dekorativní prvky - přidána nižší z-index pro vrstvení */}
           <div className="absolute top-20 right-10 w-32 h-32 bg-gold/10 rounded-full blur-3xl z-10" />
@@ -121,7 +121,7 @@ export function Header() {
                     className={`group flex items-center gap-4 py-4 px-6 rounded-xl transition-all duration-300 transform ${
                       isActive
                         ? "bg-gold/20 text-gold translate-x-2"
-                        : "text-primary-foreground hover:bg-gold/10 hover:text-gold hover:translate-x-2"
+                        : "text-foreground hover:bg-gold/10 hover:text-gold hover:translate-x-2"
                     }`}
                     style={{
                       transitionDelay: mobileMenuOpen ? `${index * 50}ms` : "0ms",
@@ -156,9 +156,8 @@ export function Header() {
                 </Button>
               </Link>
 
-              {/* Kontaktní informace */}
               <div className="mt-6 text-center space-y-2">
-                <p className="text-primary-foreground/60 text-sm">Máte dotaz?</p>
+                <p className="text-muted-foreground text-sm">Máte dotaz?</p>
                 <a
                   href="tel:+420774335592"
                   className="block text-gold font-semibold hover:text-gold/80 transition-colors"
@@ -167,7 +166,7 @@ export function Header() {
                 </a>
                 <a
                   href="mailto:firma@artdum.cz"
-                  className="block text-primary-foreground/80 text-sm hover:text-gold transition-colors"
+                  className="block text-foreground/80 text-sm hover:text-gold transition-colors"
                 >
                   firma@artdum.cz
                 </a>
