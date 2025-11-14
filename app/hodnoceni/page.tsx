@@ -71,7 +71,7 @@ export default async function HodnoceniPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -216,6 +216,6 @@ export default async function HodnoceniPage() {
           </div>
         </div>
       </section>
-    </div>
+    </>
   )
 }

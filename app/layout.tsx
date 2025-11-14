@@ -3,6 +3,8 @@ import type { Metadata, Viewport } from "next"
 
 import "./globals.css"
 import { CookieConsent } from "@/components/cookie-consent"
+import { Header } from "@/components/ui/header"
+import { Footer } from "@/components/ui/footer"
 
 import { Inter, Inter as V0_Font_Inter, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
 
@@ -46,7 +48,11 @@ export default function RootLayout({
   return (
     <html lang="cs" className={inter.variable}>
       <body className="font-sans antialiased">
-        {children}
+        <Header />
+        <main className="flex-1">
+          {children}
+        </main>
+        <Footer />
         <CookieConsent />
       </body>
     </html>
