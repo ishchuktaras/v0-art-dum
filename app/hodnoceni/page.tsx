@@ -1,14 +1,29 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Star, Building2, ExternalLink, Send, Eye } from "lucide-react"
+import { Star, Building2, ExternalLink, Send, Eye } from 'lucide-react'
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { REVIEWS_QUERY } from "@/sanity/lib/queries"
 import { Button } from "@/components/ui/button"
 
 export const metadata: Metadata = {
-  title: "Hodnocení | ART DUM - Recenze spokojených zákazníků",
+  title: "Hodnocení a recenze | Reference spokojených zákazníků | ART DUM",
   description:
-    "Přečtěte si, jak hodnotí naše stavební služby spokojení klienti z Třebíče a okolí. Reference, recenze a hodnocení kvality naší práce.",
+    "Přečtěte si hodnocení a recenze spokojených klientů stavební firmy ART DUM z Třebíče. Reference z Firmy.cz, Google. 5★ průměrné hodnocení. 100% spokojených zákazníků.",
+  keywords: [
+    "hodnocení ART DUM",
+    "recenze stavební firma",
+    "reference Třebíč",
+    "Firmy.cz hodnocení",
+    "spokojení zákazníci",
+  ],
+  openGraph: {
+    title: "Hodnocení a recenze | ART DUM",
+    description: "5★ průměrné hodnocení od našich spokojených klientů z Třebíče a okolí.",
+    url: "https://artdum.cz/hodnoceni",
+  },
+  alternates: {
+    canonical: "https://artdum.cz/hodnoceni",
+  },
 }
 
 interface Review {
@@ -24,12 +39,44 @@ interface Review {
 export default async function HodnoceniPage() {
   const reviews = await sanityFetch<Review[]>({ query: REVIEWS_QUERY })
 
-  // Calculate average rating
   const averageRating =
     reviews.length > 0 ? reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length : 0
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "ART DUM",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: averageRating.toFixed(1),
+      reviewCount: reviews.length,
+      bestRating: "5",
+      worstRating: "1",
+    },
+    review: reviews.slice(0, 10).map((review) => ({
+      "@type": "Review",
+      author: {
+        "@type": "Person",
+        name: review.customerName,
+      },
+      datePublished: review.date,
+      reviewBody: review.reviewText,
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: review.rating,
+        bestRating: "5",
+        worstRating: "1",
+      },
+    })),
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Hero Section */}
       <section className="relative py-20 md:py-32">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />

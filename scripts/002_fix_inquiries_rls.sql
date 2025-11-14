@@ -4,6 +4,7 @@
 drop policy if exists "inquiries_select_admin" on public.inquiries;
 drop policy if exists "inquiries_insert_public" on public.inquiries;
 drop policy if exists "inquiries_update_admin" on public.inquiries;
+drop policy if exists "inquiries_delete_admin" on public.inquiries;
 
 -- Recreate policies with correct permissions
 

@@ -7,11 +7,35 @@ import Image from "next/image"
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { PORTFOLIO_QUERY } from "@/sanity/lib/queries"
 import { urlFor } from "@/sanity/lib/image"
+import type { Metadata } from "next"
 
-export const metadata = {
-  title: "Portfolio | ART DUM",
+export const metadata: Metadata = {
+  title: "Portfolio stavebních prací | Rekonstrukce Třebíč | ART DUM",
   description:
-    "Podívejte se na naše realizované projekty. Fotografie před a po rekonstrukci. 23 let zkušeností ve stavebnictví.",
+    "Prohlédněte si naše realizované stavební projekty v Třebíči a okolí. Fotografie před a po rekonstrukci bytů, domů, zateplení. 150+ úspěšných projektů.",
+  keywords: [
+    "portfolio stavební firma",
+    "rekonstrukce fotografie",
+    "před a po",
+    "reference stavby Třebíč",
+    "realizované projekty",
+  ],
+  openGraph: {
+    title: "Portfolio stavebních prací | ART DUM",
+    description: "150+ realizovaných projektů. Fotografie před a po rekonstrukci bytů a domů v Třebíči.",
+    url: "https://artdum.cz/portfolio",
+    images: [
+      {
+        url: "https://artdum.cz/og-portfolio.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Portfolio ART DUM",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "https://artdum.cz/portfolio",
+  },
 }
 
 async function getPortfolioProjects() {
@@ -44,8 +68,25 @@ export default async function PortfolioPage() {
   const uniqueCategories = Array.from(new Set(projects.map((p: any) => p.category).filter(Boolean)))
   const categories = ["Všechny projekty", ...uniqueCategories.map((cat: string) => categoryLabels[cat] || cat)]
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    name: "Portfolio stavebních prací ART DUM",
+    description: "Realizované stavební projekty v Třebíči a okolí",
+    provider: {
+      "@type": "GeneralContractor",
+      name: "ART DUM",
+      url: "https://artdum.cz",
+    },
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      
       <Header />
 
       <main className="flex-1">

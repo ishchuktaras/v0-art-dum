@@ -5,6 +5,61 @@ import Link from "next/link"
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { HOMEPAGE_QUERY, SERVICES_QUERY } from "@/sanity/lib/queries"
 import { urlFor } from "@/sanity/lib/image"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "ART DUM - Stavební firma Třebíč | 23 let zkušeností | Rekonstrukce a stavby na klíč",
+  description:
+    "Profesionální stavební služby v Třebíči a okolí. Rekonstrukce bytů a domů, stavby na klíč, zateplení, opravy. 23 let zkušeností. Férová cena, kvalita, rychlost. ☎ +420 774 335 592",
+  keywords: [
+    "stavební firma Třebíč",
+    "rekonstrukce Třebíč",
+    "stavba na klíč Třebíč",
+    "zateplení Třebíč",
+    "zednické práce Třebíč",
+    "stavební práce Vysočina",
+    "rekonstrukce bytů",
+    "opravy domů",
+    "ART DUM",
+  ],
+  authors: [{ name: "ART DUM", url: "https://artdum.cz" }],
+  openGraph: {
+    title: "ART DUM - Stavební firma Třebíč | 23 let zkušeností",
+    description:
+      "Profesionální stavební služby v Třebíči a okolí. Rekonstrukce, stavby na klíč, zateplení. Férová cena a kvalita.",
+    url: "https://artdum.cz",
+    siteName: "ART DUM",
+    locale: "cs_CZ",
+    type: "website",
+    images: [
+      {
+        url: "https://artdum.cz/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "ART DUM - Stavební firma Třebíč",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ART DUM - Stavební firma Třebíč",
+    description: "23 let zkušeností ve stavebnictví. Rekonstrukce, stavby na klíč, opravy.",
+  },
+  alternates: {
+    canonical: "https://artdum.cz",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+}
 
 export default async function HomePage() {
   // Fetch homepage and services data from Sanity
@@ -26,8 +81,66 @@ export default async function HomePage() {
   const ctaText = homepage?.ctaButtonText || "Nezávazná poptávka"
   const yearsExperience = homepage?.statYearsExperience || 23
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "GeneralContractor",
+    name: "ART DUM",
+    image: "https://artdum.cz/logo.png",
+    "@id": "https://artdum.cz",
+    url: "https://artdum.cz",
+    telephone: "+420774335592",
+    email: "firma@artdum.cz",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Karlovo nám 44/33",
+      addressLocality: "Třebíč",
+      postalCode: "674 01",
+      addressCountry: "CZ",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 49.2151,
+      longitude: 15.8819,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "07:00",
+        closes: "17:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Saturday",
+        opens: "08:00",
+        closes: "12:00",
+      },
+    ],
+    sameAs: ["https://www.facebook.com/artdum"],
+    areaServed: {
+      "@type": "GeoCircle",
+      geoMidpoint: {
+        "@type": "GeoCoordinates",
+        latitude: 49.2151,
+        longitude: 15.8819,
+      },
+      geoRadius: "50000",
+    },
+    priceRange: "$$",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "5",
+      reviewCount: "47",
+    },
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      
       <Header />
 
       <main className="flex-1">

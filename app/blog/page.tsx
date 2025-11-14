@@ -1,9 +1,10 @@
-import { Calendar, Tag, User } from "lucide-react"
+import { Calendar, Tag, User } from 'lucide-react'
 import Image from "next/image"
 import Link from "next/link"
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { BLOG_POSTS_QUERY } from "@/sanity/lib/queries"
 import { urlFor } from "@/sanity/lib/image"
+import type { Metadata } from "next"
 
 interface BlogPost {
   _id: string
@@ -23,9 +24,26 @@ const categoryLabels: Record<string, string> = {
   materialy: "Materiály",
 }
 
-export const metadata = {
-  title: "Blog & Aktuality | ART DUM",
-  description: "Novinky, tipy a rady ze světa stavebnictví a rekonstrukcí od profesionálů z ART DUM.",
+export const metadata: Metadata = {
+  title: "Blog & Aktuality ze stavebnictví | Tipy a rady | ART DUM Třebíč",
+  description:
+    "Novinky, tipy a rady ze světa stavebnictví a rekonstrukcí od profesionálů. Praktické návody, trendy, materiály. Blog stavební firmy ART DUM.",
+  keywords: [
+    "blog stavebnictví",
+    "tipy rekonstrukce",
+    "stavební rady",
+    "novinky stavby",
+    "materiály",
+    "trendy stavebnictví",
+  ],
+  openGraph: {
+    title: "Blog & Aktuality | ART DUM",
+    description: "Tipy, rady a novinky ze světa stavebnictví a rekonstrukcí",
+    url: "https://artdum.cz/blog",
+  },
+  alternates: {
+    canonical: "https://artdum.cz/blog",
+  },
 }
 
 export default async function BlogPage() {
@@ -33,8 +51,29 @@ export default async function BlogPage() {
     query: BLOG_POSTS_QUERY,
   })
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "ART DUM Blog",
+    description: "Blog o stavebnictví, rekonstrukcích a stavebních pracích",
+    url: "https://artdum.cz/blog",
+    publisher: {
+      "@type": "Organization",
+      name: "ART DUM",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://artdum.cz/logo.png",
+      },
+    },
+  }
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Hero Section */}
       <section className="bg-primary text-white py-20">
         <div className="container mx-auto px-4">

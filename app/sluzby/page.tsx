@@ -6,11 +6,29 @@ import Link from "next/link"
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { SERVICES_QUERY } from "@/sanity/lib/queries"
 import { urlFor } from "@/sanity/lib/image"
+import type { Metadata } from "next"
 
-export const metadata = {
-  title: "Naše služby | ART DUM",
+export const metadata: Metadata = {
+  title: "Stavební služby Třebíč | Rekonstrukce, Stavby na klíč, Zateplení | ART DUM",
   description:
-    "Komplexní stavební služby - rekonstrukce, stavby na klíč, zednické práce a další. 23 let zkušeností v regionu Třebíč.",
+    "Kompletní stavební služby v Třebíči a okolí: rekonstrukce bytů a domů, stavby na klíč, zednické práce, zateplení, opravy, komerční prostory. 23 let zkušeností. ☎ +420 774 335 592",
+  keywords: [
+    "stavební služby Třebíč",
+    "rekonstrukce bytů Třebíč",
+    "stavby na klíč",
+    "zednické práce",
+    "zateplení budov",
+    "opravy domů",
+    "komerční prostory",
+  ],
+  openGraph: {
+    title: "Stavební služby Třebíč | ART DUM",
+    description: "Kompletní stavební služby: rekonstrukce, stavby na klíč, zateplení, opravy. 23 let zkušeností.",
+    url: "https://artdum.cz/sluzby",
+  },
+  alternates: {
+    canonical: "https://artdum.cz/sluzby",
+  },
 }
 
 const fallbackServices = [
@@ -100,17 +118,44 @@ const fallbackServices = [
 ]
 
 export default async function ServicesPage() {
-  // Fetch services from Sanity
   const sanityServices = await sanityFetch<any[]>({
     query: SERVICES_QUERY,
     tags: ["service"],
   })
 
-  // Use Sanity services if available, otherwise use fallback
   const services = sanityServices && sanityServices.length > 0 ? sanityServices : fallbackServices
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: services.map((service: any, index: number) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Service",
+        name: service.title,
+        description: service.shortDescription,
+        provider: {
+          "@type": "GeneralContractor",
+          name: "ART DUM",
+          telephone: "+420774335592",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Třebíč",
+            addressCountry: "CZ",
+          },
+        },
+      },
+    })),
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      
       <Header />
 
       <main className="flex-1">

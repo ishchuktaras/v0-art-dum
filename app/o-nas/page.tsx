@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { Award, Users, Target, CheckCircle2 } from "lucide-react"
+import { Award, Users, Target, CheckCircle2 } from 'lucide-react'
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { ABOUT_QUERY, CERTIFICATES_QUERY } from "@/sanity/lib/queries"
 import { urlFor } from "@/sanity/lib/image"
@@ -9,9 +9,25 @@ import { Button } from "@/components/ui/button"
 import { PortableText } from "next-sanity"
 
 export const metadata: Metadata = {
-  title: "O nás | ART DUM - Profesionální stavební firma Třebíč",
+  title: "O nás | 23 let zkušeností ve stavebnictví | ART DUM Třebíč",
   description:
-    "Poznejte tým ART DUM. 23 let zkušeností ve stavebnictví v regionu Třebíč. Kvalifikovaní odborníci s certifikáty a nostrifikací vzdělání.",
+    "Poznejte tým stavební firmy ART DUM. 23 let zkušeností v Třebíči a okolí. Kvalifikovaní odborníci s certifikáty, nostrifikací vzdělání. Férová cena, rychlost, kvalita.",
+  keywords: [
+    "o firmě ART DUM",
+    "tým stavební firmy",
+    "zkušenosti stavby",
+    "certifikáty stavební",
+    "kvalifikace",
+    "Třebíč stavební firma",
+  ],
+  openGraph: {
+    title: "O nás | ART DUM Třebíč",
+    description: "23 let zkušeností ve stavebnictví. Poznejte náš tým a naše hodnoty.",
+    url: "https://artdum.cz/o-nas",
+  },
+  alternates: {
+    canonical: "https://artdum.cz/o-nas",
+  },
 }
 
 export default async function AboutPage() {
@@ -48,8 +64,33 @@ export default async function AboutPage() {
 
   const about = aboutData || defaultAbout
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    mainEntity: {
+      "@type": "GeneralContractor",
+      name: "ART DUM",
+      foundingDate: "2001",
+      description: "Profesionální stavební firma s 23 lety zkušeností v regionu Třebíč",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Karlovo nám 44/33",
+        addressLocality: "Třebíč",
+        postalCode: "674 01",
+        addressCountry: "CZ",
+      },
+      telephone: "+420774335592",
+      email: "firma@artdum.cz",
+    },
+  }
+
   return (
     <div className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Hero Section */}
       <section className="bg-navy text-white py-20">
         <div className="container mx-auto px-4">
