@@ -1,9 +1,9 @@
-import { Calendar, User, ArrowLeft, Tag } from "lucide-react"
+import { Calendar, User, ArrowLeft, Tag } from 'lucide-react'
 import Image from "next/image"
 import Link from "next/link"
-import { notFound } from "next/navigation"
+import { notFound } from 'next/navigation'
 import { PortableText } from "next-sanity"
-import { sanityFetch } from "@/sanity/lib/fetch"
+import { sanityFetch, sanityFetchStatic } from "@/sanity/lib/fetch"
 import { BLOG_POST_BY_SLUG_QUERY, BLOG_POSTS_QUERY } from "@/sanity/lib/queries"
 import { urlFor } from "@/sanity/lib/image"
 
@@ -27,7 +27,7 @@ const categoryLabels: Record<string, string> = {
 }
 
 export async function generateStaticParams() {
-  const posts = await sanityFetch<BlogPost[]>({
+  const posts = await sanityFetchStatic<BlogPost[]>({
     query: BLOG_POSTS_QUERY,
   })
 
@@ -37,7 +37,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = await sanityFetch<BlogPost>({
+  const post = await sanityFetchStatic<BlogPost>({
     query: BLOG_POST_BY_SLUG_QUERY,
     params: { slug: params.slug },
   })
