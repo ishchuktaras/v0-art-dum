@@ -23,23 +23,29 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
-    const supabase = createClient()
     setIsLoading(true)
     setError(null)
     setSuccess(null)
 
     try {
+      const supabase = createClient()
+      console.log("[v0] Attempting login for:", email)
+      
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
-        options: {
-          emailRedirectTo: process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || `${window.location.origin}/admin`,
-        },
       })
-      if (error) throw error
+      
+      if (error) {
+        console.error("[v0] Login error:", error)
+        throw error
+      }
+      
+      console.log("[v0] Login successful, redirecting to /admin")
       router.push("/admin")
       router.refresh()
     } catch (error: unknown) {
+      console.error("[v0] Login failed:", error)
       setError(error instanceof Error ? error.message : "Nastala chyba při přihlášení")
     } finally {
       setIsLoading(false)
@@ -48,23 +54,34 @@ export default function LoginPage() {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
-    const supabase = createClient()
     setIsLoading(true)
     setError(null)
     setSuccess(null)
 
     try {
-      const { error } = await supabase.auth.signUp({
+      const supabase = createClient()
+      console.log("[v0] Attempting sign up for:", email)
+      
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          emailRedirectTo: process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || `${window.location.origin}/admin`,
+          emailRedirectTo: `${window.location.origin}/admin`,
         },
       })
-      if (error) throw error
-      setSuccess("Registrace úspěšná! Zkontrolujte email pro potvrzení. Nyní můžete pokračovat přihlášením.")
+      
+      if (error) {
+        console.error("[v0] Sign up error:", error)
+        throw error
+      }
+      
+      console.log("[v0] Sign up successful:", data)
+      setSuccess("✓ Registrace úspěšná! Zkontrolujte email pro potvrzení účtu.")
       setIsSignUp(false)
+      setEmail("")
+      setPassword("")
     } catch (error: unknown) {
+      console.error("[v0] Sign up failed:", error)
       setError(error instanceof Error ? error.message : "Nastala chyba při registraci")
     } finally {
       setIsLoading(false)
@@ -99,6 +116,17 @@ export default function LoginPage() {
             <CardContent>
               <form onSubmit={isSignUp ? handleSignUp : handleLogin}>
                 <div className="flex flex-col gap-6">
+                  {error && (
+                    <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600 border border-red-200">
+                      {error}
+                    </div>
+                  )}
+                  {success && (
+                    <div className="rounded-lg bg-green-50 p-3 text-sm text-green-600 border border-green-200">
+                      {success}
+                    </div>
+                  )}
+                  
                   <div className="grid gap-2">
                     <Label htmlFor="email">Email</Label>
                     <Input
@@ -124,8 +152,7 @@ export default function LoginPage() {
                       <p className="text-xs text-muted-foreground">Heslo musí mít minimálně 6 znaků</p>
                     )}
                   </div>
-                  {error && <p className="text-sm text-red-500">{error}</p>}
-                  {success && <p className="text-sm text-green-600">{success}</p>}
+                  
                   <Button
                     type="submit"
                     className="w-full font-bold"
