@@ -67,7 +67,7 @@ export default function ObchodniPodminkyPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-4">6. Cena a platební podmínky</h6>
+            <h2 className="text-2xl font-bold mb-4">6. Cena a platební podmínky</h2>
             <p>Cena díla je stanovena:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li>V písemné cenové nabídce schválené objednatelem</li>
