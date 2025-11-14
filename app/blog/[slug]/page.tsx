@@ -1,22 +1,25 @@
-import { Calendar, User, ArrowLeft, Tag } from 'lucide-react'
-import Image from "next/image"
-import Link from "next/link"
-import { notFound } from 'next/navigation'
-import { PortableText } from "next-sanity"
-import { sanityFetch, sanityFetchStatic } from "@/sanity/lib/fetch"
-import { BLOG_POST_BY_SLUG_QUERY, BLOG_POSTS_QUERY } from "@/sanity/lib/queries"
-import { urlFor } from "@/sanity/lib/image"
+import { Calendar, User, ArrowLeft, Tag } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { PortableText } from "next-sanity";
+import { sanityFetch, sanityFetchStatic } from "@/sanity/lib/fetch";
+import {
+  BLOG_POST_BY_SLUG_QUERY,
+  BLOG_POSTS_QUERY,
+} from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
 
 interface BlogPost {
-  _id: string
-  title: string
-  slug: { current: string }
-  excerpt: string
-  content: any[]
-  featuredImage: any
-  category?: string
-  author?: string
-  publishedAt: string
+  _id: string;
+  title: string;
+  slug: { current: string };
+  excerpt: string;
+  content: any[];
+  featuredImage: any;
+  category?: string;
+  author?: string;
+  publishedAt: string;
 }
 
 const categoryLabels: Record<string, string> = {
@@ -24,44 +27,52 @@ const categoryLabels: Record<string, string> = {
   "tipy-a-rady": "Tipy a rady",
   realizace: "Realizace",
   materialy: "Materiály",
-}
+};
 
 export async function generateStaticParams() {
   const posts = await sanityFetchStatic<BlogPost[]>({
     query: BLOG_POSTS_QUERY,
-  })
+  });
 
   return posts.map((post) => ({
     slug: post.slug.current,
-  }))
+  }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const post = await sanityFetchStatic<BlogPost>({
     query: BLOG_POST_BY_SLUG_QUERY,
     params: { slug: params.slug },
-  })
+  });
 
   if (!post) {
     return {
       title: "Článek nenalezen | ART DUM",
-    }
+    };
   }
 
   return {
     title: `${post.title} | ART DUM Blog`,
     description: post.excerpt,
-  }
+  };
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+export default async function BlogPostPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const post = await sanityFetch<BlogPost>({
     query: BLOG_POST_BY_SLUG_QUERY,
     params: { slug: params.slug },
-  })
+  });
 
   if (!post) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -70,7 +81,10 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       <div className="relative h-[400px] w-full bg-primary">
         {post.featuredImage ? (
           <Image
-            src={urlFor(post.featuredImage)?.width(1920).height(800).url() || "/placeholder.svg"}
+            src={
+              urlFor(post.featuredImage)?.width(1920).height(800).url() ||
+              "/placeholder.svg"
+            }
             alt={post.featuredImage.alt || post.title}
             fill
             className="object-cover opacity-30"
@@ -98,12 +112,16 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               </div>
             )}
 
-            <h1 className="text-4xl md:text-5xl font-black text-white mb-4 max-w-4xl">{post.title}</h1>
+            <h1 className="text-4xl md:text-5xl font-black text-white mb-4 max-w-4xl">
+              {post.title}
+            </h1>
 
             <div className="flex items-center gap-6 text-white/90">
               <div className="flex items-center gap-2">
                 <User className="w-5 h-5" />
-                <span className="font-semibold">{post.author || "ART DUM"}</span>
+                <span className="font-semibold">
+                  {post.author || "ART DUM"}
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="w-5 h-5" />
@@ -137,14 +155,19 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                   image: ({ value }) => (
                     <figure className="my-8">
                       <Image
-                        src={urlFor(value)?.width(1200).height(800).url() || "/placeholder.svg"}
+                        src={
+                          urlFor(value)?.width(1200).height(800).url() ||
+                          "/placeholder.svg"
+                        }
                         alt={value.alt || "Obrázek článku"}
                         width={1200}
                         height={800}
                         className="rounded-lg"
                       />
                       {value.caption && (
-                        <figcaption className="text-center text-sm text-gray-600 mt-2">{value.caption}</figcaption>
+                        <figcaption className="text-center text-sm text-gray-600 mt-2">
+                          {value.caption}
+                        </figcaption>
                       )}
                     </figure>
                   ),
@@ -159,7 +182,9 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       <section className="bg-primary text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-black mb-4">Zaujal vás tento článek?</h2>
-          <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">Kontaktujte nás pro konzultaci vašeho projektu</p>
+          <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+            Kontaktujte nás pro konzultaci vašeho projektu
+          </p>
           <Link
             href="/kontakt"
             className="inline-block bg-accent hover:bg-accent/90 text-white font-bold py-4 px-8 rounded-lg transition-colors duration-300"
@@ -169,5 +194,5 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         </div>
       </section>
     </main>
-  )
+  );
 }
