@@ -100,7 +100,7 @@ export function Header() {
           />
 
           {/* Dekorativní gradient overlay */}
-          <div className="absolute inset-0 bg-lanier-to-br from-gold/5 via-transparent to-gold/5 pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-br from-gold/5 via-transparent to-gold/5 pointer-events-none" />
 
           <nav className="relative z-10 flex flex-col h-full pt-24 pb-8 px-6 overflow-y-auto">
             {/* Navigační odkazy */}

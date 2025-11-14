@@ -68,7 +68,7 @@ export default async function BlogPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <main className="min-h-screen bg-linear-to-b from-gray-50 to-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -104,7 +104,7 @@ export default async function BlogPage() {
                           className="object-cover"
                         />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                        <div className="w-full h-full bg-linear-to-br from-primary to-accent flex items-center justify-center">
                           <span className="text-white text-6xl font-black opacity-20">ART DUM</span>
                         </div>
                       )}
