@@ -8,15 +8,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter } from 'next/navigation'
 import { useState } from "react"
-import { Building2 } from "lucide-react"
+import { Building2 } from 'lucide-react'
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [isSignUp, setIsSignUp] = useState(false)
   const router = useRouter()
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -24,6 +26,7 @@ export default function LoginPage() {
     const supabase = createClient()
     setIsLoading(true)
     setError(null)
+    setSuccess(null)
 
     try {
       const { error } = await supabase.auth.signInWithPassword({
@@ -38,6 +41,31 @@ export default function LoginPage() {
       router.refresh()
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "Nastala chyba při přihlášení")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const supabase = createClient()
+    setIsLoading(true)
+    setError(null)
+    setSuccess(null)
+
+    try {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || `${window.location.origin}/admin`,
+        },
+      })
+      if (error) throw error
+      setSuccess("Registrace úspěšná! Zkontrolujte email pro potvrzení. Nyní můžete pokračovat přihlášením.")
+      setIsSignUp(false)
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : "Nastala chyba při registraci")
     } finally {
       setIsLoading(false)
     }
@@ -59,11 +87,17 @@ export default function LoginPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-2xl font-black">Přihlášení</CardTitle>
-              <CardDescription>Zadejte email a heslo pro přístup do administrace</CardDescription>
+              <CardTitle className="text-2xl font-black">
+                {isSignUp ? "Registrace" : "Přihlášení"}
+              </CardTitle>
+              <CardDescription>
+                {isSignUp
+                  ? "Vytvořte si účet pro přístup do administrace"
+                  : "Zadejte email a heslo pro přístup do administrace"}
+              </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleLogin}>
+              <form onSubmit={isSignUp ? handleSignUp : handleLogin}>
                 <div className="flex flex-col gap-6">
                   <div className="grid gap-2">
                     <Label htmlFor="email">Email</Label>
@@ -82,11 +116,16 @@ export default function LoginPage() {
                       id="password"
                       type="password"
                       required
+                      minLength={6}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                     />
+                    {isSignUp && (
+                      <p className="text-xs text-muted-foreground">Heslo musí mít minimálně 6 znaků</p>
+                    )}
                   </div>
                   {error && <p className="text-sm text-red-500">{error}</p>}
+                  {success && <p className="text-sm text-green-600">{success}</p>}
                   <Button
                     type="submit"
                     className="w-full font-bold"
@@ -96,10 +135,23 @@ export default function LoginPage() {
                       color: "var(--primary)",
                     }}
                   >
-                    {isLoading ? "Přihlašuji..." : "Přihlásit se"}
+                    {isLoading ? (isSignUp ? "Registruji..." : "Přihlašuji...") : isSignUp ? "Registrovat se" : "Přihlásit se"}
                   </Button>
                 </div>
                 <div className="mt-4 text-center text-sm">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsSignUp(!isSignUp)
+                      setError(null)
+                      setSuccess(null)
+                    }}
+                    className="underline underline-offset-4 hover:text-primary"
+                  >
+                    {isSignUp ? "Již máte účet? Přihlaste se" : "Nemáte účet? Zaregistrujte se"}
+                  </button>
+                </div>
+                <div className="mt-2 text-center text-sm">
                   <Link href="/" className="underline underline-offset-4">
                     Zpět na hlavní stránku
                   </Link>
