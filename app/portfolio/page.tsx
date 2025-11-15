@@ -239,7 +239,7 @@ export default async function PortfolioPage() {
         </section>
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

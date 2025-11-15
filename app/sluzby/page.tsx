@@ -282,7 +282,7 @@ export default async function ServicesPage() {
         </section>
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

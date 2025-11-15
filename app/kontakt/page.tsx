@@ -53,7 +53,7 @@ export default function ContactPage() {
       
       
       <ContactFormClient />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

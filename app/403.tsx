@@ -84,7 +84,7 @@ export default function Forbidden() {
         </div>
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }
