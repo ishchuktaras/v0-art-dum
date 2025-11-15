@@ -1,9 +1,9 @@
-import { redirect } from "next/navigation"
+import { redirect } from 'next/navigation'
 import { createClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { ArrowLeft, TrendingUp, TrendingDown, DollarSign, Users, Calendar, Target, AlertCircle } from "lucide-react"
+import { ArrowLeft, TrendingUp, TrendingDown, DollarSign, Users, Calendar, Target, AlertCircle } from 'lucide-react'
 
 export default async function AnalyticsPage() {
   const supabase = await createClient()
@@ -75,18 +75,19 @@ export default async function AnalyticsPage() {
   const avgProjectValue = completedProjects > 0 ? (totalRevenue / completedProjects).toFixed(0) : 0
 
   // Service type breakdown
-  const serviceBreakdown =
-    allInquiries?.reduce(
-      (acc, inquiry) => {
-        const type = inquiry.service_type || "nespecifikováno"
-        acc[type] = (acc[type] || 0) + 1
-        return acc
-      },
-      {} as Record<string, number>,
-    ) || {}
+  const serviceBreakdown = allInquiries
+    ? allInquiries.reduce(
+        (acc, inquiry) => {
+          const type = inquiry.service_type || "nespecifikováno"
+          acc[type] = (acc[type] || 0) + 1
+          return acc
+        },
+        {} as Record<string, number>,
+      )
+    : {}
 
   const topServices = Object.entries(serviceBreakdown)
-    .sort(([, a], [, b]) => b - a)
+    .sort(([, a], [, b]) => (b as number) - (a as number))
     .slice(0, 5)
 
   // Response time analysis
@@ -239,7 +240,7 @@ export default async function AnalyticsPage() {
                       <span className="text-sm font-medium text-muted-foreground">{index + 1}.</span>
                       <span className="text-sm capitalize">{service}</span>
                     </div>
-                    <span className="font-bold">{count}</span>
+                    <span className="font-bold">{count as number}</span>
                   </div>
                 ))}
               </div>
@@ -322,13 +323,13 @@ export default async function AnalyticsPage() {
               </div>
             )}
 
-            {allInquiries?.filter((i) => i.status === "new").length > 5 && (
+            {allInquiries && allInquiries.filter((i) => i.status === "new").length > 5 && (
               <div className="flex items-start gap-3 p-4 bg-red-50 rounded-lg">
                 <AlertCircle className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
                 <div>
                   <p className="font-semibold text-red-900">Nevyřízené poptávky</p>
                   <p className="text-sm text-red-700">
-                    Máte {allInquiries?.filter((i) => i.status === "new").length} nevyřízených poptávek. Prioritizujte
+                    Máte {allInquiries.filter((i) => i.status === "new").length} nevyřízených poptávek. Prioritizujte
                     jejich zpracování pro lepší konverzi.
                   </p>
                 </div>

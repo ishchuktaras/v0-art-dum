@@ -1,9 +1,9 @@
-import { redirect } from "next/navigation"
+import { redirect } from 'next/navigation'
 import { createClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { MessageSquare, FolderKanban, TrendingUp, CheckCircle2 } from "lucide-react"
+import { MessageSquare, FolderKanban, TrendingUp, CheckCircle2 } from 'lucide-react'
 
 export default async function AdminDashboard() {
   const supabase = await createClient()
@@ -114,8 +114,8 @@ export default async function AdminDashboard() {
 
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card className="hover:shadow-lg transition-shadow cursor-pointer" asChild>
-            <Link href="/admin/inquiries">
+          <Link href="/admin/inquiries">
+            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <MessageSquare className="h-5 w-5 text-gold" />
@@ -126,11 +126,11 @@ export default async function AdminDashboard() {
               <CardContent>
                 <Button className="w-full bg-gold text-primary hover:bg-gold/90">Zobrazit poptávky</Button>
               </CardContent>
-            </Link>
-          </Card>
+            </Card>
+          </Link>
 
-          <Card className="hover:shadow-lg transition-shadow cursor-pointer" asChild>
-            <Link href="/admin/projects">
+          <Link href="/admin/projects">
+            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <FolderKanban className="h-5 w-5 text-primary" />
@@ -143,11 +143,11 @@ export default async function AdminDashboard() {
                   Zobrazit projekty
                 </Button>
               </CardContent>
-            </Link>
-          </Card>
+            </Card>
+          </Link>
 
-          <Card className="hover:shadow-lg transition-shadow cursor-pointer" asChild>
-            <Link href="/admin/analytics">
+          <Link href="/admin/analytics">
+            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <TrendingUp className="h-5 w-5 text-primary" />
@@ -160,8 +160,8 @@ export default async function AdminDashboard() {
                   Zobrazit statistiky
                 </Button>
               </CardContent>
-            </Link>
-          </Card>
+            </Card>
+          </Link>
         </div>
 
         {/* Recent Inquiries */}
