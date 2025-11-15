@@ -1,12 +1,20 @@
-import { redirect } from "next/navigation"
+import { redirect } from 'next/navigation'
 import { createClient } from "@/lib/supabase/server"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Label } from "@/components/ui/label"
 import Link from "next/link"
-import { ArrowLeft, Filter, Search } from "lucide-react"
+import { ArrowLeft, Mail, Phone, Calendar, User, MessageSquare, FileText, FolderPlus } from 'lucide-react'
 
-export default async function InquiriesPage() {
+interface InquiryDetailPageProps {
+  params: Promise<{ id: string }>
+}
+
+export default async function InquiryDetailPage({ params }: InquiryDetailPageProps) {
+  const { id } = await params
   const supabase = await createClient()
 
   const {
@@ -22,7 +30,11 @@ export default async function InquiriesPage() {
     redirect("/403")
   }
 
-  const { data: inquiries } = await supabase.from("inquiries").select("*").order("created_at", { ascending: false })
+  const { data: inquiry } = await supabase.from("inquiries").select("*").eq("id", id).single()
+
+  if (!inquiry) {
+    redirect("/404")
+  }
 
   const statusColors = {
     new: "bg-gold text-primary",
@@ -56,107 +68,224 @@ export default async function InquiriesPage() {
     <div className="min-h-screen bg-muted">
       <header className="border-b bg-background">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button asChild variant="ghost" size="sm">
-                <Link href="/admin">
-                  <ArrowLeft className="h-4 w-4 mr-2" />
-                  Zpět
-                </Link>
-              </Button>
-              <div>
-                <h1 className="text-2xl font-black">Poptávky</h1>
-                <p className="text-sm text-muted-foreground">Správa příchozích poptávek</p>
-              </div>
-            </div>
-            <div className="flex gap-2">
-              <Button variant="outline" size="sm">
-                <Filter className="h-4 w-4 mr-2" />
-                Filtrovat
-              </Button>
-              <Button variant="outline" size="sm">
-                <Search className="h-4 w-4 mr-2" />
-                Hledat
-              </Button>
+          <div className="flex items-center gap-4">
+            <Button asChild variant="ghost" size="sm">
+              <Link href="/admin/inquiries">
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Zpět na poptávky
+              </Link>
+            </Button>
+            <div>
+              <h1 className="text-2xl font-black">Detail poptávky</h1>
+              <p className="text-sm text-muted-foreground">Úplné informace o poptávce</p>
             </div>
           </div>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        <div className="grid gap-4">
-          {inquiries && inquiries.length > 0 ? (
-            inquiries.map((inquiry) => (
-              <Card key={inquiry.id} className="hover:shadow-md transition-shadow">
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-3">
-                        <h3 className="text-lg font-bold">{inquiry.name}</h3>
-                        <Badge className={statusColors[inquiry.status as keyof typeof statusColors]}>
-                          {statusLabels[inquiry.status as keyof typeof statusLabels]}
-                        </Badge>
-                        {inquiry.priority && inquiry.priority !== "normal" && (
-                          <Badge
-                            variant="outline"
-                            className={priorityColors[inquiry.priority as keyof typeof priorityColors]}
-                          >
-                            {priorityLabels[inquiry.priority as keyof typeof priorityLabels]}
-                          </Badge>
-                        )}
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
-                        <div>
-                          <p className="text-sm text-muted-foreground">Email</p>
-                          <p className="font-medium">{inquiry.email}</p>
-                        </div>
-                        {inquiry.phone && (
-                          <div>
-                            <p className="text-sm text-muted-foreground">Telefon</p>
-                            <p className="font-medium">{inquiry.phone}</p>
-                          </div>
-                        )}
-                        {inquiry.service_type && (
-                          <div>
-                            <p className="text-sm text-muted-foreground">Typ služby</p>
-                            <p className="font-medium capitalize">{inquiry.service_type}</p>
-                          </div>
-                        )}
-                        <div>
-                          <p className="text-sm text-muted-foreground">Datum vytvoření</p>
-                          <p className="font-medium">
-                            {new Date(inquiry.created_at).toLocaleDateString("cs-CZ", {
-                              day: "numeric",
-                              month: "long",
-                              year: "numeric",
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            })}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="mb-4">
-                        <p className="text-sm text-muted-foreground mb-1">Zpráva</p>
-                        <p className="text-sm line-clamp-3">{inquiry.message}</p>
-                      </div>
-                    </div>
-
-                    <Button asChild size="sm" className="ml-4">
-                      <Link href={`/admin/inquiries/${inquiry.id}`}>Detail</Link>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))
-          ) : (
+        <div className="grid gap-6 lg:grid-cols-3">
+          {/* Main Content */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Contact Information */}
             <Card>
-              <CardContent className="p-12 text-center">
-                <p className="text-muted-foreground">Zatím žádné poptávky</p>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <User className="h-5 w-5" />
+                  Kontaktní informace
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <div className="flex items-center gap-2 text-muted-foreground mb-1">
+                    <User className="h-4 w-4" />
+                    <Label>Jméno</Label>
+                  </div>
+                  <p className="font-medium text-lg">{inquiry.name}</p>
+                </div>
+
+                <div>
+                  <div className="flex items-center gap-2 text-muted-foreground mb-1">
+                    <Mail className="h-4 w-4" />
+                    <Label>Email</Label>
+                  </div>
+                  <a href={`mailto:${inquiry.email}`} className="font-medium text-lg text-gold hover:underline">
+                    {inquiry.email}
+                  </a>
+                </div>
+
+                {inquiry.phone && (
+                  <div>
+                    <div className="flex items-center gap-2 text-muted-foreground mb-1">
+                      <Phone className="h-4 w-4" />
+                      <Label>Telefon</Label>
+                    </div>
+                    <a href={`tel:${inquiry.phone}`} className="font-medium text-lg text-gold hover:underline">
+                      {inquiry.phone}
+                    </a>
+                  </div>
+                )}
+
+                {inquiry.service_type && (
+                  <div>
+                    <div className="flex items-center gap-2 text-muted-foreground mb-1">
+                      <FileText className="h-4 w-4" />
+                      <Label>Typ služby</Label>
+                    </div>
+                    <p className="font-medium text-lg capitalize">{inquiry.service_type}</p>
+                  </div>
+                )}
+
+                <div>
+                  <div className="flex items-center gap-2 text-muted-foreground mb-1">
+                    <Calendar className="h-4 w-4" />
+                    <Label>Datum vytvoření</Label>
+                  </div>
+                  <p className="font-medium">
+                    {new Date(inquiry.created_at).toLocaleDateString("cs-CZ", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </p>
+                </div>
               </CardContent>
             </Card>
-          )}
+
+            {/* Message */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <MessageSquare className="h-5 w-5" />
+                  Zpráva
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm leading-relaxed whitespace-pre-wrap">{inquiry.message}</p>
+              </CardContent>
+            </Card>
+
+            {/* Notes */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Interní poznámky</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form action="/api/inquiries/update" method="POST">
+                  <input type="hidden" name="id" value={inquiry.id} />
+                  <Textarea
+                    name="notes"
+                    placeholder="Přidejte interní poznámky k této poptávce..."
+                    defaultValue={inquiry.notes || ""}
+                    rows={6}
+                    className="mb-4"
+                  />
+                  <Button type="submit">Uložit poznámky</Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Sidebar */}
+          <div className="space-y-6">
+            {/* Status & Priority */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Stav a priorita</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <form action="/api/inquiries/update" method="POST">
+                  <input type="hidden" name="id" value={inquiry.id} />
+                  <div>
+                    <Label htmlFor="status">Stav</Label>
+                    <Select name="status" defaultValue={inquiry.status}>
+                      <SelectTrigger className="mt-2">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="new">Nová</SelectItem>
+                        <SelectItem value="in_progress">Zpracovává se</SelectItem>
+                        <SelectItem value="completed">Dokončeno</SelectItem>
+                        <SelectItem value="rejected">Odmítnuto</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="mt-4">
+                    <Label htmlFor="priority">Priorita</Label>
+                    <Select name="priority" defaultValue={inquiry.priority || "normal"}>
+                      <SelectTrigger className="mt-2">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="low">Nízká</SelectItem>
+                        <SelectItem value="normal">Normální</SelectItem>
+                        <SelectItem value="high">Vysoká</SelectItem>
+                        <SelectItem value="urgent">Urgentní</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <Button type="submit" className="w-full mt-4">
+                    Uložit změny
+                  </Button>
+                </form>
+
+                {inquiry.source && (
+                  <div className="pt-4 border-t">
+                    <Label>Zdroj</Label>
+                    <p className="text-sm mt-1 capitalize">{inquiry.source}</p>
+                  </div>
+                )}
+
+                {inquiry.updated_at && inquiry.updated_at !== inquiry.created_at && (
+                  <div>
+                    <Label>Poslední aktualizace</Label>
+                    <p className="text-sm mt-1">
+                      {new Date(inquiry.updated_at).toLocaleDateString("cs-CZ", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Quick Actions */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Rychlé akce</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <Button asChild variant="outline" className="w-full justify-start">
+                  <a href={`mailto:${inquiry.email}`}>
+                    <Mail className="h-4 w-4 mr-2" />
+                    Odpovědět emailem
+                  </a>
+                </Button>
+                {inquiry.phone && (
+                  <Button asChild variant="outline" className="w-full justify-start">
+                    <a href={`tel:${inquiry.phone}`}>
+                      <Phone className="h-4 w-4 mr-2" />
+                      Zavolat
+                    </a>
+                  </Button>
+                )}
+                <Button asChild variant="outline" className="w-full justify-start">
+                  <a href="/studio/structure/project" target="_blank" rel="noopener noreferrer">
+                    <FolderPlus className="h-4 w-4 mr-2" />
+                    Vytvořit projekt
+                  </a>
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </main>
     </div>
