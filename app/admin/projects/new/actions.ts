@@ -2,7 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server"
 import { revalidatePath } from "next/cache"
-import { redirect } from "next/navigation"
+import { redirect } from 'next/navigation'
 
 export async function createProject(formData: FormData) {
   const supabase = await createClient()
@@ -25,7 +25,6 @@ export async function createProject(formData: FormData) {
   const { error } = await supabase.from("projects").insert(project)
 
   if (error) {
-    console.error("[v0] Error creating project:", error)
     return { success: false, error: error.message }
   }
 

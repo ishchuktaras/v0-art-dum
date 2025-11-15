@@ -6,7 +6,6 @@ export async function updateSession(request: NextRequest) {
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
   if (!supabaseUrl || !supabaseAnonKey) {
-    console.warn("[v0] Supabase env variables not found in middleware, skipping auth check")
     return NextResponse.next({
       request,
     })
@@ -36,14 +35,12 @@ export async function updateSession(request: NextRequest) {
       data: { user },
     } = await supabase.auth.getUser()
 
-    // Redirect to login if user is not authenticated and trying to access protected routes
     if (!user && (request.nextUrl.pathname.startsWith("/admin") || request.nextUrl.pathname.startsWith("/dashboard"))) {
       const url = request.nextUrl.clone()
       url.pathname = "/auth/login"
       return NextResponse.redirect(url)
     }
   } catch (error) {
-    console.error("[v0] Error checking user auth in middleware:", error)
   }
 
   return supabaseResponse

@@ -39,7 +39,6 @@ function LoginForm() {
 
     try {
       const supabase = createClient()
-      console.log("[v0] Attempting login for:", email)
       
       const { error } = await supabase.auth.signInWithPassword({
         email,
@@ -47,15 +46,12 @@ function LoginForm() {
       })
       
       if (error) {
-        console.error("[v0] Login error:", error)
         throw error
       }
       
-      console.log("[v0] Login successful, redirecting to /admin")
       router.push("/admin")
       router.refresh()
     } catch (error: unknown) {
-      console.error("[v0] Login failed:", error)
       setError(error instanceof Error ? error.message : "Nastala chyba při přihlášení")
     } finally {
       setIsLoading(false)
@@ -70,7 +66,6 @@ function LoginForm() {
 
     try {
       const supabase = createClient()
-      console.log("[v0] Attempting sign up for:", email)
       
       const { data, error } = await supabase.auth.signUp({
         email,
@@ -81,17 +76,14 @@ function LoginForm() {
       })
       
       if (error) {
-        console.error("[v0] Sign up error:", error)
         throw error
       }
       
-      console.log("[v0] Sign up successful:", data)
       setSuccess("✓ Registrace úspěšná! Zkontrolujte email pro potvrzení účtu.")
       setIsSignUp(false)
       setEmail("")
       setPassword("")
     } catch (error: unknown) {
-      console.error("[v0] Sign up failed:", error)
       setError(error instanceof Error ? error.message : "Nastala chyba při registraci")
     } finally {
       setIsLoading(false)
