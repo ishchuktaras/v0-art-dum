@@ -300,7 +300,7 @@ export default async function AnalyticsPage() {
           <CardContent className="space-y-4">
             {Number(inquiriesGrowth) > 10 && (
               <div className="flex items-start gap-3 p-4 bg-green-50 rounded-lg">
-                <TrendingUp className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                <TrendingUp className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
                 <div>
                   <p className="font-semibold text-green-900">Rostoucí zájem</p>
                   <p className="text-sm text-green-700">
@@ -312,7 +312,7 @@ export default async function AnalyticsPage() {
 
             {Number(conversionRate) < 30 && totalInquiries > 10 && (
               <div className="flex items-start gap-3 p-4 bg-orange-50 rounded-lg">
-                <AlertCircle className="h-5 w-5 text-orange-600 flex-shrink-0 mt-0.5" />
+                <AlertCircle className="h-5 w-5 text-orange-600 shrink-0 mt-0.5" />
                 <div>
                   <p className="font-semibold text-orange-900">Nízká konverze</p>
                   <p className="text-sm text-orange-700">
@@ -324,7 +324,7 @@ export default async function AnalyticsPage() {
 
             {allInquiries?.filter((i) => i.status === "new").length > 5 && (
               <div className="flex items-start gap-3 p-4 bg-red-50 rounded-lg">
-                <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+                <AlertCircle className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
                 <div>
                   <p className="font-semibold text-red-900">Nevyřízené poptávky</p>
                   <p className="text-sm text-red-700">
@@ -337,7 +337,7 @@ export default async function AnalyticsPage() {
 
             {Number(conversionRate) >= 50 && (
               <div className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg">
-                <Target className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <Target className="h-5 w-5 text-blue-600 shrink-0 mt-0.5" />
                 <div>
                   <p className="font-semibold text-blue-900">Výborná konverze</p>
                   <p className="text-sm text-blue-700">
