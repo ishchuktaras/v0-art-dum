@@ -99,7 +99,7 @@ export default async function PortfolioPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <Header />
+      {/* <Header /> */}
 
       <main className="flex-1">
         {/* Hero Section */}

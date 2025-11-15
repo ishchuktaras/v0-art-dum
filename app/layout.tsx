@@ -48,11 +48,11 @@ export default function RootLayout({
   return (
     <html lang="cs" className={inter.variable}>
       <body className="font-sans antialiased">
-        {/* <Header /> */}
+        <Header />
         <main className="flex-1">
           {children}
         </main>
-        {/* <Footer /> */}
+        <Footer />
         <CookieConsent />
       </body>
     </html>

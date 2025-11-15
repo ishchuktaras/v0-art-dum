@@ -13,9 +13,9 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      {/* <Header /> */}
 
-      <main className="flex-1 flex items-center justify-center bg-gradient-to-b from-primary-dark to-primary-dark/90">
+      <main className="flex-1 flex items-center justify-center bg-linear-to-b from-primary-dark to-primary-dark/90">
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="max-w-3xl mx-auto text-center">
             {/* 500 Number */}

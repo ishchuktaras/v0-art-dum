@@ -51,7 +51,7 @@ export default function ContactPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <Header />
+      
       <ContactFormClient />
       <Footer />
     </div>

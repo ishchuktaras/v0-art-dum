@@ -141,7 +141,7 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <Header />
+      {/* <Header /> */}
 
       <main className="flex-1">
         {/* Hero Section */}
