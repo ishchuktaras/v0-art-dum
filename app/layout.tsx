@@ -48,11 +48,7 @@ export default function RootLayout({
   return (
     <html lang="cs" className={inter.variable}>
       <body className="font-sans antialiased">
-        <Header />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        {children}
         <CookieConsent />
       </body>
     </html>
