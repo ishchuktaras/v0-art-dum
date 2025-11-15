@@ -6,7 +6,6 @@ export async function GET(request: Request) {
   const code = requestUrl.searchParams.get('code')
   const origin = requestUrl.origin
 
-
   if (code) {
     const supabase = await createClient()
     
@@ -15,6 +14,25 @@ export async function GET(request: Request) {
       
       if (error) {
         return NextResponse.redirect(`${origin}/auth/login?error=Chyba při potvrzení emailu`)
+      }
+
+      const { data: { user } } = await supabase.auth.getUser()
+
+      if (user) {
+        const { data: existingProfile } = await supabase
+          .from('profiles')
+          .select('id')
+          .eq('id', user.id)
+          .single()
+
+        if (!existingProfile) {
+          await supabase.from('profiles').insert({
+            id: user.id,
+            email: user.email,
+            role: 'user', // Default role, admin can change later
+            full_name: user.user_metadata?.full_name || null
+          })
+        }
       }
 
       return NextResponse.redirect(`${origin}/admin`)
