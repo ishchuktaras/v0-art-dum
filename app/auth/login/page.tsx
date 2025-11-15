@@ -1,7 +1,8 @@
 "use client"
 
 import type React from "react"
-
+import { useEffect } from "react"
+import { useSearchParams } from 'next/navigation'
 import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -20,6 +21,14 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [isSignUp, setIsSignUp] = useState(false)
   const router = useRouter()
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    const errorFromUrl = searchParams.get('error')
+    if (errorFromUrl) {
+      setError(errorFromUrl)
+    }
+  }, [searchParams])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -66,7 +75,7 @@ export default function LoginPage() {
         email,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/admin`,
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
         },
       })
       
