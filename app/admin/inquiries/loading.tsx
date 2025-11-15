@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export default function InquiryDetailLoading() {
   return (
@@ -6,10 +7,10 @@ export default function InquiryDetailLoading() {
       <header className="border-b bg-background">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center gap-4">
-            <div className="h-9 w-24 animate-pulse rounded-md bg-muted" />
+            <Skeleton className="h-9 w-24" />
             <div>
-              <div className="h-8 w-48 mb-2 animate-pulse rounded-md bg-muted" />
-              <div className="h-4 w-64 animate-pulse rounded-md bg-muted" />
+              <Skeleton className="h-8 w-48 mb-2" />
+              <Skeleton className="h-4 w-64" />
             </div>
           </div>
         </div>
@@ -20,21 +21,21 @@ export default function InquiryDetailLoading() {
           <div className="lg:col-span-2 space-y-6">
             <Card>
               <CardHeader>
-                <div className="h-6 w-48 animate-pulse rounded-md bg-muted" />
+                <Skeleton className="h-6 w-48" />
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="h-20 w-full animate-pulse rounded-md bg-muted" />
-                <div className="h-20 w-full animate-pulse rounded-md bg-muted" />
-                <div className="h-20 w-full animate-pulse rounded-md bg-muted" />
+                <Skeleton className="h-20 w-full" />
+                <Skeleton className="h-20 w-full" />
+                <Skeleton className="h-20 w-full" />
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <div className="h-6 w-32 animate-pulse rounded-md bg-muted" />
+                <Skeleton className="h-6 w-32" />
               </CardHeader>
               <CardContent>
-                <div className="h-32 w-full animate-pulse rounded-md bg-muted" />
+                <Skeleton className="h-32 w-full" />
               </CardContent>
             </Card>
           </div>
@@ -42,11 +43,11 @@ export default function InquiryDetailLoading() {
           <div className="space-y-6">
             <Card>
               <CardHeader>
-                <div className="h-6 w-40 animate-pulse rounded-md bg-muted" />
+                <Skeleton className="h-6 w-40" />
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="h-12 w-full animate-pulse rounded-md bg-muted" />
-                <div className="h-12 w-full animate-pulse rounded-md bg-muted" />
+                <Skeleton className="h-12 w-full" />
+                <Skeleton className="h-12 w-full" />
               </CardContent>
             </Card>
           </div>
