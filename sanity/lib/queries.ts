@@ -28,7 +28,7 @@ export const SERVICES_QUERY = groq`*[_type == "service" && (!defined(isActive) |
 }`
 
 // Portfolio
-export const PORTFOLIO_QUERY = groq`*[_type == "portfolio" && isActive == true] | order(year desc) {
+export const PORTFOLIO_QUERY = groq`*[_type == "portfolio"] | order(year desc) {
   _id,
   title,
   slug,
@@ -40,7 +40,7 @@ export const PORTFOLIO_QUERY = groq`*[_type == "portfolio" && isActive == true] 
   isFeatured
 }`
 
-export const FEATURED_PORTFOLIO_QUERY = groq`*[_type == "portfolio" && isActive == true && isFeatured == true] | order(order asc) [0...6] {
+export const FEATURED_PORTFOLIO_QUERY = groq`*[_type == "portfolio" && isFeatured == true] | order(order asc) [0...6] {
   _id,
   title,
   slug,
@@ -109,7 +109,7 @@ export const ABOUT_QUERY = groq`*[_type == "about"][0] {
 }`
 
 // Certificates
-export const CERTIFICATES_QUERY = groq`*[_type == "certificate" && isActive == true] | order(order asc) {
+export const CERTIFICATES_QUERY = groq`*[_type == "certificate"] | order(order asc) {
   _id,
   title,
   issuer,
@@ -117,6 +117,17 @@ export const CERTIFICATES_QUERY = groq`*[_type == "certificate" && isActive == t
   description,
   image,
   category
+}`
+
+// Contact Info
+export const CONTACT_INFO_QUERY = groq`*[_type == "contactInfo"][0] {
+  _id,
+  phone,
+  email,
+  address,
+  ico,
+  openingHours,
+  socialLinks
 }`
 
 // Reviews

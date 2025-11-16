@@ -1,7 +1,15 @@
-import { Header } from "@/components/ui/header"
-import { Footer } from "@/components/ui/footer"
 import { ContactFormClient } from "./contact-form-client"
 import type { Metadata } from "next"
+import { sanityFetch } from "@/sanity/lib/fetch"
+import { CONTACT_INFO_QUERY } from "@/sanity/lib/queries"
+
+interface ContactInfo {
+  _id: string
+  phone?: string
+  email?: string
+  address?: string
+  ico?: string
+}
 
 export const metadata: Metadata = {
   title: "Kontakt | Nezávazná poptávka | ART DUM Třebíč | ☎ +420 774 335 592",
@@ -24,18 +32,33 @@ export const metadata: Metadata = {
   },
 }
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  let contactInfo: ContactInfo | null = null
+  try {
+    contactInfo = await sanityFetch<ContactInfo>({
+      query: CONTACT_INFO_QUERY,
+      tags: ["contactInfo"],
+    })
+  } catch (error) {
+    console.error("[v0] Error fetching contact info:", error)
+  }
+
+  const phone = contactInfo?.phone || "+420774335592"
+  const email = contactInfo?.email || "firma@artdum.cz"
+  const address = contactInfo?.address || "Karlovo nám 44/33, Třebíč"
+  const ico = contactInfo?.ico || "22401261"
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
     mainEntity: {
       "@type": "GeneralContractor",
       name: "ART DUM",
-      telephone: "+420774335592",
-      email: "firma@artdum.cz",
+      telephone: phone.replace(/\s/g, ''),
+      email: email,
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Karlovo nám 44/33",
+        streetAddress: address.split(',')[0] || "Karlovo nám 44/33",
         addressLocality: "Třebíč",
         postalCode: "674 01",
         addressCountry: "CZ",
@@ -53,7 +76,6 @@ export default function ContactPage() {
       
       
       <ContactFormClient />
-      {/* <Footer /> */}
     </div>
   )
 }
