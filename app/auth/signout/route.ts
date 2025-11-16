@@ -8,7 +8,6 @@ export async function POST(request: NextRequest) {
   const { error } = await supabase.auth.signOut()
 
   if (error) {
-    console.error("[v0] Signout error:", error)
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
 
