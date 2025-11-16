@@ -74,10 +74,10 @@ export default async function HomePage() {
   })
 
   // Use fallback data if Sanity data is not available
-  const heroHeading = homepage?.heroHeading || "Profesionální stavební práce s 23 lety zkušeností"
+  const heroHeading = homepage?.heroHeading || "Profesionální stavební práce v Třebíči a okolí"
   const heroSubheading =
     homepage?.heroSubheading ||
-    "Rekonstrukce, stavby na klíč a opravy v regionu Třebíč a okolí. Kvalita, rychlost a férová cena."
+    "23 let zkušeností, stovky spokojených klientů. Specializujeme se na rekonstrukce bytů, domů a zateplení fasád."
   const ctaText = homepage?.ctaButtonText || "Nezávazná poptávka"
   const yearsExperience = homepage?.statYearsExperience || 23
 
@@ -107,7 +107,7 @@ export default async function HomePage() {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         opens: "07:00",
-        closes: "17:00",
+        closes: "18:00",
       },
       {
         "@type": "OpeningHoursSpecification",
@@ -149,9 +149,9 @@ export default async function HomePage() {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 leading-tight">
-                {heroHeading.split("23 lety zkušeností")[0]}
-                <span className="text-gold">{yearsExperience} lety zkušeností</span>
-                {heroHeading.split("23 lety zkušeností")[1]}
+                Profesionální stavební práce v Třebíči a okolí
+                <br />
+                <span className="text-gold">{yearsExperience} let zkušeností</span>
               </h1>
               <p className="text-base sm:text-lg md:text-xl mb-6 md:mb-8 text-muted-foreground leading-relaxed">
                 {heroSubheading}
