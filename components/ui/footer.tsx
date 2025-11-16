@@ -60,6 +60,11 @@ export function Footer() {
                   Blog
                 </Link>
               </li>
+              <li>
+                <Link href="/faq" className="hover:text-primary-gold transition-colors">
+                  FAQ
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -114,6 +119,20 @@ export function Footer() {
                 Právní ustanovení
               </Link>
             </div>
+          </div>
+          
+          <div className="mt-6 pt-6 border-t border-white/10">
+            <p className="text-xs text-white/50">
+              Web vytvořil{' '}
+              <a 
+                href="https://webnamiru.site" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-primary-gold/70 hover:text-primary-gold transition-colors"
+              >
+                Taras Ishchuk, OSVČ - webnamiru.site
+              </a>
+            </p>
           </div>
         </div>
       </div>
