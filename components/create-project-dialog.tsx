@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { FileText } from 'lucide-react'
-import { useToast } from "@/hooks/use-toast"
+import { toast } from "sonner"
 
 interface CreateProjectDialogProps {
   inquiryId: string
@@ -28,7 +28,6 @@ export function CreateProjectDialog({ inquiryId, clientName, inquiryMessage }: C
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const router = useRouter()
-  const { toast } = useToast()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -56,8 +55,7 @@ export function CreateProjectDialog({ inquiryId, clientName, inquiryMessage }: C
 
       const result = await response.json()
 
-      toast({
-        title: "Projekt vytvořen",
+      toast.success("Projekt vytvořen", {
         description: "Projekt byl úspěšně vytvořen a poptávka byla označena jako probíhající.",
       })
 
@@ -65,10 +63,8 @@ export function CreateProjectDialog({ inquiryId, clientName, inquiryMessage }: C
       router.push(`/admin/projects/${result.project.id}`)
       router.refresh()
     } catch (error) {
-      toast({
-        title: "Chyba",
+      toast.error("Chyba", {
         description: "Nepodařilo se vytvořit projekt. Zkuste to prosím znovu.",
-        variant: "destructive",
       })
     } finally {
       setLoading(false)
