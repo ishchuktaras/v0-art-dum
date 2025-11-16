@@ -5,6 +5,7 @@ import "./globals.css"
 import { CookieConsent } from "@/components/cookie-consent"
 import { ConditionalLayout } from "@/components/conditional-layout"
 import { Toaster } from "@/components/ui/sonner"
+import { Analytics } from '@vercel/analytics/react'
 
 import { Inter, Inter as V0_Font_Inter, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
 
@@ -51,6 +52,7 @@ export default function RootLayout({
         <ConditionalLayout>{children}</ConditionalLayout>
         <CookieConsent />
         <Toaster />
+        <Analytics />
       </body>
     </html>
   )
