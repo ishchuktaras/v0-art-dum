@@ -43,7 +43,7 @@ export function CreateProjectDialog({ inquiryId, clientName, inquiryMessage }: C
     }
 
     try {
-      const response = await fetch("/api/projects/create", {
+      const response = await fetch("/admin/projects/create", { // Opravena cesta na správný API endpoint
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
