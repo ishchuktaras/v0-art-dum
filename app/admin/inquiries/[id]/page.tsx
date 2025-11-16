@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import { ArrowLeft, Mail, Phone, Calendar, User, MessageSquare, FileText } from 'lucide-react'
+import { CreateProjectDialog } from "@/components/create-project-dialog"
 
 interface InquiryDetailPageProps {
   params: Promise<{ id: string }>
@@ -263,9 +264,11 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
                     </a>
                   </Button>
                 )}
-                <Button variant="outline" className="w-full justify-start">
-                  Vytvořit projekt
-                </Button>
+                <CreateProjectDialog
+                  inquiryId={inquiry.id}
+                  clientName={inquiry.name}
+                  inquiryMessage={inquiry.message}
+                />
               </CardContent>
             </Card>
           </div>
