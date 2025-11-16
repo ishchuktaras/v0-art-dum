@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 
-export async function POST() {
+export async function POST(request: NextRequest) {
   const supabase = await createClient()
 
   // Sign out from Supabase
@@ -12,6 +12,8 @@ export async function POST() {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
 
+  const origin = new URL(request.url).origin
+  
   // Redirect to login page
-  return NextResponse.redirect(new URL("/auth/login", process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"))
+  return NextResponse.redirect(new URL("/auth/login", origin))
 }
