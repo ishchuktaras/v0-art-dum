@@ -39,10 +39,10 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-[100] w-full border-b border-white/10 bg-primary-dark/95 backdrop-blur-md supports-backdrop-filter:bg-primary-dark/90">
+      <header className="sticky top-0 z-100 w-full border-b border-white/10 backdrop-blur-md" style={{ backgroundColor: 'rgba(11, 25, 47, 0.95)' }}>
         <div className="container mx-auto flex h-16 md:h-20 items-center justify-between px-4 md:px-6">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 relative z-[110]">
+          <Link href="/" className="flex items-center space-x-2 relative z-110">
             <Image
               src="/logo.jpg"
               alt="ART DUM - Stavební firma"
@@ -60,9 +60,12 @@ export function Header() {
                 href={link.href}
                 className={`text-sm xl:text-base font-bold px-3 xl:px-4 py-2 rounded-lg transition-all duration-200 ${
                   pathname === link.href
-                    ? "text-gold bg-gold/10 shadow-sm"
-                    : "text-white/90 hover:text-gold hover:bg-white/10"
+                    ? "bg-gold/10 shadow-sm" 
+                    : "hover:bg-white/10"
                 }`}
+                style={{ 
+                  color: pathname === link.href ? '#D4AF37' : '#ffffff'
+                }}
               >
                 {link.label}
               </Link>
@@ -79,7 +82,7 @@ export function Header() {
 
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden relative z-[110] p-2 rounded-lg hover:bg-white/10 transition-colors duration-200"
+            className="lg:hidden relative z-110 p-2 rounded-lg hover:bg-white/10 transition-colors duration-200"
             aria-label={mobileMenuOpen ? "Zavřít menu" : "Otevřít menu"}
             aria-expanded={mobileMenuOpen}
           >
@@ -93,7 +96,7 @@ export function Header() {
       </header>
 
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-[90] lg:hidden">
+        <div className="fixed inset-0 z-90 lg:hidden">
           <div 
             className="absolute inset-0 bg-primary-dark"
             onClick={() => setMobileMenuOpen(false)}
