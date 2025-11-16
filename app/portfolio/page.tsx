@@ -16,7 +16,13 @@ interface PortfolioProject {
   category: string
   location?: string
   year?: number
-  imagesAfter?: any[]
+  mainImage?: {
+    asset?: {
+      _id: string
+      url: string
+    }
+    alt?: string
+  }
 }
 
 export const metadata: Metadata = {
@@ -150,16 +156,14 @@ export default async function PortfolioPage() {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {projects.map((project) => {
-                  const imageUrl = project.imagesAfter?.[0]
-                    ? urlFor(project.imagesAfter[0])?.width(800).height(600).url()
-                    : "/placeholder.svg?height=600&width=800"
+                  const imageUrl = project.mainImage?.asset?.url || "/placeholder.svg?height=600&width=800"
 
                   return (
                     <Card key={project._id} className="overflow-hidden hover:shadow-xl transition-shadow group">
                       <div className="relative h-64 overflow-hidden">
                         <Image
                           src={imageUrl || "/placeholder.svg"}
-                          alt={project.title}
+                          alt={project.mainImage?.alt || project.title}
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-300"
                         />
