@@ -15,7 +15,7 @@ export const HOMEPAGE_QUERY = groq`*[_type == "homepage"][0]{
 }`
 
 // Services
-export const SERVICES_QUERY = groq`*[_type == "service" && isActive == true] | order(order asc) {
+export const SERVICES_QUERY = groq`*[_type == "service" && (!defined(isActive) || isActive == true)] | order(order asc) {
   _id,
   title,
   slug,
@@ -23,19 +23,8 @@ export const SERVICES_QUERY = groq`*[_type == "service" && isActive == true] | o
   icon,
   image,
   price,
+  features,
   order
-}`
-
-export const SERVICE_BY_SLUG_QUERY = groq`*[_type == "service" && slug.current == $slug][0] {
-  _id,
-  title,
-  slug,
-  shortDescription,
-  fullDescription,
-  icon,
-  image,
-  price,
-  features
 }`
 
 // Portfolio
