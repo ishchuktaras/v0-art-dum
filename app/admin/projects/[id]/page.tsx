@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { ArrowLeft, Mail, Phone, Calendar, DollarSign, User, FileText, Edit } from 'lucide-react'
+import { EditProjectDialog } from "@/components/edit-project-dialog"
 
 export default async function ProjectDetailPage({
   params,
@@ -85,10 +86,7 @@ export default async function ProjectDetailPage({
                 </p>
               </div>
             </div>
-            <Button size="sm" className="bg-gold text-primary hover:bg-gold/90">
-              <Edit className="h-4 w-4 mr-2" />
-              Upravit projekt
-            </Button>
+            <EditProjectDialog project={project} />
           </div>
         </div>
       </header>
