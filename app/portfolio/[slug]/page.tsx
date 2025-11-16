@@ -6,7 +6,6 @@ import Image from "next/image"
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { PORTFOLIO_BY_SLUG_QUERY, PORTFOLIO_QUERY } from "@/sanity/lib/queries"
 import { urlFor } from "@/sanity/lib/image"
-import { PortableText } from "@portabletext/react"
 import type { Metadata } from "next"
 import { notFound } from 'next/navigation'
 
@@ -33,7 +32,7 @@ interface PortfolioProject {
   location?: string
   year?: number
   shortDescription: string
-  fullDescription?: any[]
+  fullDescription?: string
   imagesBefore?: PortfolioImage[]
   imagesAfter?: PortfolioImage[]
   services?: Service[]
@@ -113,7 +112,7 @@ export default async function PortfolioDetailPage({
     <div className="min-h-screen flex flex-col">
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden">
+        <section className="relative bg-lanier-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden">
           <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
           <div className="container mx-auto px-4 relative z-10">
             <Link
@@ -213,15 +212,11 @@ export default async function PortfolioDetailPage({
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl font-black mb-6">O projektu</h2>
-              {project.fullDescription ? (
-                <div className="prose prose-lg max-w-none">
-                  <PortableText value={project.fullDescription} />
-                </div>
-              ) : (
-                <p className="text-lg leading-relaxed text-muted-foreground">
-                  {project.shortDescription}
+              <div className="prose prose-lg max-w-none">
+                <p className="text-lg leading-relaxed text-foreground whitespace-pre-line">
+                  {project.fullDescription || project.shortDescription}
                 </p>
-              )}
+              </div>
             </div>
           </div>
         </section>
@@ -324,7 +319,7 @@ export default async function PortfolioDetailPage({
         )}
 
         {/* CTA Section */}
-        <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 overflow-hidden">
+        <section className="relative bg-lanier-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 overflow-hidden">
           <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
           <div className="container mx-auto px-4 text-center relative z-10">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6">
