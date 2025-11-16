@@ -12,6 +12,9 @@ import type { Metadata } from "next"
 interface PortfolioProject {
   _id: string
   title: string
+  slug: {
+    current: string
+  }
   shortDescription: string
   category: string
   location?: string
@@ -108,7 +111,7 @@ export default async function PortfolioPage() {
       {/* <Header /> */}
 
       <main className="flex-1">
-        <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden">
+        <section className="relative bg-lanier-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden">
           <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
@@ -159,49 +162,51 @@ export default async function PortfolioPage() {
                   const imageUrl = project.mainImage?.asset?.url || "/placeholder.svg?height=600&width=800"
 
                   return (
-                    <Card key={project._id} className="overflow-hidden hover:shadow-xl transition-shadow group">
-                      <div className="relative h-64 overflow-hidden">
-                        <Image
-                          src={imageUrl || "/placeholder.svg"}
-                          alt={project.mainImage?.alt || project.title}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <div className="absolute top-4 right-4">
-                          <span className="bg-gold text-primary-dark text-xs font-bold px-3 py-1 rounded-full">
-                            {categoryLabels[project.category] || project.category}
-                          </span>
-                        </div>
-                      </div>
-                      <CardContent className="p-6">
-                        <h3 className="text-xl font-bold mb-2 group-hover:text-gold transition-colors">
-                          {project.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground mb-4">{project.shortDescription}</p>
-                        <div className="flex items-center justify-between text-sm">
-                          {project.location && (
-                            <span className="flex items-center text-muted-foreground">
-                              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                                />
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                                />
-                              </svg>
-                              {project.location}
+                    <Link key={project._id} href={`/portfolio/${project.slug?.current}`}>
+                      <Card className="overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer">
+                        <div className="relative h-64 overflow-hidden">
+                          <Image
+                            src={imageUrl || "/placeholder.svg"}
+                            alt={project.mainImage?.alt || project.title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                          <div className="absolute top-4 right-4">
+                            <span className="bg-gold text-primary-dark text-xs font-bold px-3 py-1 rounded-full">
+                              {categoryLabels[project.category] || project.category}
                             </span>
-                          )}
-                          {project.year && <span className="text-muted-foreground">{project.year}</span>}
+                          </div>
                         </div>
-                      </CardContent>
-                    </Card>
+                        <CardContent className="p-6">
+                          <h3 className="text-xl font-bold mb-2 group-hover:text-gold transition-colors">
+                            {project.title}
+                          </h3>
+                          <p className="text-sm text-muted-foreground mb-4">{project.shortDescription}</p>
+                          <div className="flex items-center justify-between text-sm">
+                            {project.location && (
+                              <span className="flex items-center text-muted-foreground">
+                                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                  />
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                  />
+                                </svg>
+                                {project.location}
+                              </span>
+                            )}
+                            {project.year && <span className="text-muted-foreground">{project.year}</span>}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
                   )
                 })}
               </div>
@@ -233,7 +238,7 @@ export default async function PortfolioPage() {
           </div>
         </section>
 
-        <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 overflow-hidden">
+        <section className="relative bg-lanier-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 overflow-hidden">
           <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
           <div className="container mx-auto px-4 text-center relative z-10">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6">Chcete podobný projekt?</h2>
