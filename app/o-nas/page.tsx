@@ -38,7 +38,7 @@ export default async function AboutPage() {
 
   // Fallback data pokud v Sanity nejsou data
   const defaultAbout = {
-    heroHeading: "O naší firmě",
+    heroHeading: "O firmě ART DUM",
     heroSubheading: "Jsme profesionální stavební firma s dlouholetými zkušenostmi v regionu Třebíč a okolí.",
     experience: "23 let zkušeností",
     story: null,
@@ -98,18 +98,14 @@ export default async function AboutPage() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-gold/10 text-gold px-4 py-2 rounded-full text-sm font-semibold mb-6 animate-fade-in">
               <Sparkles className="w-4 h-4" />
-              <span>Spolehlivá stavební firma s 23 lety zkušeností</span>
+              <span>Profesionální stavební řešení od roku 2001</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-black mb-6 bg-linear-to-r from-white to-white/80 bg-clip-text text-transparent leading-tight">
-              {about.heroHeading}
+              O firmě ART DUM
             </h1>
-            <p className="text-xl text-white/80 leading-relaxed mb-8">{about.heroSubheading}</p>
-            {about.experience && (
-              <div className="inline-flex items-center gap-3 bg-gold text-navy px-8 py-4 rounded-xl font-bold text-lg shadow-2xl shadow-gold/20 hover:scale-105 transition-transform">
-                <Award className="w-6 h-6" />
-                <span>{about.experience}</span>
-              </div>
-            )}
+            <p className="text-xl text-white/80 leading-relaxed mb-8">
+              Jsme specialisté na rekonstrukce bytů, domů a zateplení fasád v Třebíči a okolí. Firma vedená Olenem Kostyshynem s mateřskou firmou 23 let na trhu.
+            </p>
           </div>
         </div>
       </section>
@@ -166,7 +162,11 @@ export default async function AboutPage() {
                       <h3 className="text-2xl font-bold text-navy mb-4 group-hover:text-gold transition-colors">
                         {item.title}
                       </h3>
-                      <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                      <p className="text-gray-600 leading-relaxed">
+                        {index === 0 && "Naše práce se podléhá odbornému kvalitou certifikáty a diplomy. Používáme ověřené postupy a materiály, zbytečně obyčejům zasejí dlouhodobou životnost díla."}
+                        {index === 1 && "Respektujeme váš čas. Díky efektivní koordinaci všech řemesel a 23 letům praxe dodržíme domluevné termíny, také zajišťujeme dokončování termíny, doda cíleme dokončení práce."}
+                        {index === 2 && "Nabízíme férové a transparentní ceny. Připravíme jasný rozpočet bez skrytých poplatků. Propracuneme plány rozpočty dostupnými ekosm prácí bez ukrytých podaků."}
+                      </p>
                     </div>
                   </div>
                 )
