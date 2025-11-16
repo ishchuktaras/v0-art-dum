@@ -51,9 +51,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>; // params je Promise v Next.js 16
 }) {
-  const { slug } = params;
+  const { slug } = await params; // await params
   
   try {
     const post = await sanityFetchStatic<BlogPost>({
@@ -82,9 +82,9 @@ export async function generateMetadata({
 export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>; // params je Promise v Next.js 16
 }) {
-  const { slug } = params;
+  const { slug } = await params; // await params
   
   try {
     const post = await sanityFetch<BlogPost>({
