@@ -5,6 +5,7 @@ import { sanityFetch } from "@/sanity/lib/fetch"
 import { BLOG_POSTS_QUERY } from "@/sanity/lib/queries"
 import { urlFor } from "@/sanity/lib/image"
 import type { Metadata } from "next"
+import { Button } from "@/components/ui/button"
 
 interface BlogPost {
   _id: string
@@ -68,19 +69,25 @@ export default async function BlogPage() {
   }
 
   return (
-    <main className="min-h-screen bg-linear-to-b from-gray-50 to-white">
+    <main className="min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Hero Section */}
-      <section className="bg-primary text-white py-20">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-black text-center mb-4">Blog & Aktuality</h1>
-          <p className="text-xl text-center text-gray-200 max-w-2xl mx-auto">
-            Novinky, tipy a rady ze světa stavebnictví a rekonstrukcí
-          </p>
+      <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 bg-gold/10 text-gold px-4 py-2 rounded-full text-sm font-semibold mb-6">
+              <Tag className="w-4 h-4" />
+              <span>Tipy, rady a novinky</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">Blog & Aktuality</h1>
+            <p className="text-xl md:text-2xl text-white/80 leading-relaxed">
+              Novinky, tipy a rady ze světa stavebnictví a rekonstrukcí
+            </p>
+          </div>
         </div>
       </section>
 
@@ -104,7 +111,7 @@ export default async function BlogPage() {
                           className="object-cover"
                         />
                       ) : (
-                        <div className="w-full h-full bg-linear-to-br from-primary to-accent flex items-center justify-center">
+                        <div className="w-full h-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
                           <span className="text-white text-6xl font-black opacity-20">ART DUM</span>
                         </div>
                       )}
@@ -163,16 +170,18 @@ export default async function BlogPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-primary text-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-black mb-4">Máte dotaz nebo chcete konzultaci?</h2>
-          <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">Rádi vám poradíme s vaším projektem</p>
-          <Link
-            href="/kontakt"
-            className="inline-block bg-accent hover:bg-accent/90 text-white font-bold py-4 px-8 rounded-lg transition-colors duration-300"
-          >
-            Kontaktujte nás
+      <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6">Máte dotaz nebo chcete konzultaci?</h2>
+          <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">Rádi vám poradíme s vaším projektem</p>
+          <Link href="/kontakt">
+            <Button size="lg" className="group bg-gold text-primary-dark hover:bg-gold/90 font-bold text-lg px-8 py-6 h-auto shadow-2xl shadow-gold/20 hover:scale-105 transition-all">
+              <span>Kontaktujte nás</span>
+              <svg className="w-5 h-5 ml-2 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
+            </Button>
           </Link>
         </div>
       </section>

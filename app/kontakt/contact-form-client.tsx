@@ -46,12 +46,18 @@ export function ContactFormClient() {
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="bg-primary-dark text-primary-foreground py-16 md:py-24">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl">
-              <h1 className="text-4xl md:text-5xl font-black mb-6">Kontaktujte nás</h1>
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+        <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden">
+          <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="inline-flex items-center gap-2 bg-gold/10 text-gold px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span>Odpovíme do 24 hodin</span>
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">Kontaktujte nás</h1>
+              <p className="text-xl md:text-2xl text-white/80 leading-relaxed">
                 Máte dotaz nebo chcete nezávaznou cenovou nabídku? Rádi si s vámi promluvíme o vašem projektu.
               </p>
             </div>
@@ -59,15 +65,15 @@ export function ContactFormClient() {
         </section>
 
         {/* Contact Form & Info */}
-        <section className="py-16">
+        <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Contact Form */}
               <div className="lg:col-span-2">
-                <Card>
+                <Card className="border-2 border-gray-100 shadow-xl">
                   <CardHeader>
-                    <CardTitle className="text-2xl">Poptávkový formulář</CardTitle>
-                    <CardDescription>Vyplňte formulář a my se vám ozveme do 24 hodin</CardDescription>
+                    <CardTitle className="text-3xl font-black text-navy">Poptávkový formulář</CardTitle>
+                    <CardDescription className="text-lg">Vyplňte formulář a my se vám ozveme do 24 hodin</CardDescription>
                   </CardHeader>
                   <CardContent>
                     {message && (
@@ -152,17 +158,16 @@ export function ContactFormClient() {
                 </Card>
               </div>
 
-              {/* Contact Info */}
               <div className="space-y-6">
-                <Card>
+                <Card className="border-2 border-gray-100 shadow-xl">
                   <CardHeader>
-                    <CardTitle>Kontaktní údaje</CardTitle>
+                    <CardTitle className="text-2xl font-black text-navy">Kontaktní údaje</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-start space-x-3">
-                      <div className="w-10 h-10 bg-gold rounded-lg flex items-center justify-center flex-shrink-0">
+                  <CardContent className="space-y-6">
+                    <div className="flex items-start space-x-4 group">
+                      <div className="w-12 h-12 bg-gradient-to-br from-gold to-gold/80 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-gold/20 group-hover:scale-110 transition-transform">
                         <svg
-                          className="w-5 h-5 text-primary-dark"
+                          className="w-6 h-6 text-white"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -176,17 +181,17 @@ export function ContactFormClient() {
                         </svg>
                       </div>
                       <div>
-                        <p className="font-semibold mb-1">Telefon</p>
-                        <a href="tel:+420774335592" className="text-muted-foreground hover:text-gold transition-colors">
+                        <p className="font-bold text-navy mb-1">Telefon</p>
+                        <a href="tel:+420774335592" className="text-gray-600 hover:text-gold transition-colors font-semibold">
                           +420 774 335 592
                         </a>
                       </div>
                     </div>
 
-                    <div className="flex items-start space-x-3">
-                      <div className="w-10 h-10 bg-gold rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="flex items-start space-x-4 group">
+                      <div className="w-12 h-12 bg-gradient-to-br from-gold to-gold/80 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-gold/20 group-hover:scale-110 transition-transform">
                         <svg
-                          className="w-5 h-5 text-primary-dark"
+                          className="w-6 h-6 text-white"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -200,20 +205,20 @@ export function ContactFormClient() {
                         </svg>
                       </div>
                       <div>
-                        <p className="font-semibold mb-1">Email</p>
+                        <p className="font-bold text-navy mb-1">Email</p>
                         <a
                           href="mailto:firma@artdum.cz"
-                          className="text-muted-foreground hover:text-gold transition-colors"
+                          className="text-gray-600 hover:text-gold transition-colors font-semibold"
                         >
                           firma@artdum.cz
                         </a>
                       </div>
                     </div>
 
-                    <div className="flex items-start space-x-3">
-                      <div className="w-10 h-10 bg-gold rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="flex items-start space-x-4 group">
+                      <div className="w-12 h-12 bg-gradient-to-br from-gold to-gold/80 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-gold/20 group-hover:scale-110 transition-transform">
                         <svg
-                          className="w-5 h-5 text-primary-dark"
+                          className="w-6 h-6 text-white"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -233,8 +238,8 @@ export function ContactFormClient() {
                         </svg>
                       </div>
                       <div>
-                        <p className="font-semibold mb-1">Adresa</p>
-                        <p className="text-muted-foreground">
+                        <p className="font-bold text-navy mb-1">Adresa</p>
+                        <p className="text-gray-600 font-semibold">
                           Karlovo nám 44/33
                           <br />
                           674 01 Třebíč
@@ -242,10 +247,10 @@ export function ContactFormClient() {
                       </div>
                     </div>
 
-                    <div className="flex items-start space-x-3">
-                      <div className="w-10 h-10 bg-gold rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="flex items-start space-x-4 group">
+                      <div className="w-12 h-12 bg-gradient-to-br from-gold to-gold/80 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-gold/20 group-hover:scale-110 transition-transform">
                         <svg
-                          className="w-5 h-5 text-primary-dark"
+                          className="w-6 h-6 text-white"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -259,8 +264,8 @@ export function ContactFormClient() {
                         </svg>
                       </div>
                       <div>
-                        <p className="font-semibold mb-1">Pracovní doba</p>
-                        <p className="text-muted-foreground">
+                        <p className="font-bold text-navy mb-1">Pracovní doba</p>
+                        <p className="text-gray-600 font-semibold">
                           Po–Pá: 7:00 – 17:00
                           <br />
                           So: 8:00 – 12:00
@@ -270,12 +275,12 @@ export function ContactFormClient() {
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="border-2 border-gold/20 shadow-xl bg-gradient-to-br from-gold/5 to-transparent">
                   <CardHeader>
-                    <CardTitle>IČO</CardTitle>
+                    <CardTitle className="text-xl font-black text-navy">IČO</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground">22401261</p>
+                    <p className="text-gray-700 font-bold text-lg">22401261</p>
                   </CardContent>
                 </Card>
               </div>
@@ -284,10 +289,10 @@ export function ContactFormClient() {
         </section>
 
         {/* Map Section */}
-        <section className="py-16 bg-muted">
+        <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-8 text-center">Kde nás najdete</h2>
-            <div className="aspect-video w-full max-w-4xl mx-auto bg-gray-200 rounded-lg overflow-hidden">
+            <h2 className="text-4xl font-black text-navy mb-12 text-center">Kde nás najdete</h2>
+            <div className="aspect-video w-full max-w-5xl mx-auto bg-gray-200 rounded-2xl overflow-hidden shadow-2xl border-2 border-gray-100">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2611.7!2d15.8815!3d49.2141!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDnCsDEyJzUwLjgiTiAxNcKwNTInNTMuNCJF!5e0!3m2!1scs!2scz!4v1234567890"
                 width="100%"

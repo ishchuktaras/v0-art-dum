@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   keywords: [
     "hodnocení ART DUM",
     "recenze stavební firma",
-    "reference Třebíč",
+    "reference Třebíče",
     "Firmy.cz hodnocení",
     "spokojení zákazníci",
   ],
@@ -77,31 +77,34 @@ export default async function HodnoceniPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Hero Section */}
-      <section className="relative py-20 md:py-32">
-        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
-        <div className="container mx-auto px-4 relative">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground mb-6">
-              Co říkají naši <span className="text-primary">zákazníci</span>
+      <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 bg-gold/10 text-gold px-4 py-2 rounded-full text-sm font-semibold mb-6">
+              <Star className="w-4 h-4 fill-gold" />
+              <span>100% spokojených zákazníků</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
+              Co říkají naši <span className="text-gold">zákazníci</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8">
+            <p className="text-xl md:text-2xl text-white/80 mb-8 leading-relaxed">
               Přečtěte si, jak hodnotí naše služby klienti z celého kraje Vysočina
             </p>
             {reviews.length > 0 && (
-              <div className="flex items-center justify-center gap-4">
+              <div className="flex items-center justify-center gap-4 text-xl">
                 <div className="flex gap-1">
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className={`w-6 h-6 ${
-                        i < Math.round(averageRating) ? "fill-primary text-primary" : "text-muted-foreground"
+                      className={`w-8 h-8 ${
+                        i < Math.round(averageRating) ? "fill-gold text-gold" : "text-white/30"
                       }`}
                     />
                   ))}
                 </div>
-                <p className="text-lg font-semibold">{averageRating.toFixed(1)} / 5.0</p>
-                <p className="text-muted-foreground">({reviews.length} hodnocení)</p>
+                <p className="text-2xl font-black text-gold">{averageRating.toFixed(1)}</p>
+                <p className="text-white/70">({reviews.length} hodnocení)</p>
               </div>
             )}
           </div>
@@ -191,25 +194,25 @@ export default async function HodnoceniPage() {
         </section>
       )}
 
-      {/* CTA Section */}
-      <section className="py-16 bg-primary/5">
-        <div className="container mx-auto px-4">
+      <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">Staňte se naším dalším spokojeným zákazníkem</h2>
-            <p className="text-lg text-muted-foreground mb-8">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 leading-tight">Staňte se naším dalším spokojeným zákazníkem</h2>
+            <p className="text-xl text-white/80 mb-10 leading-relaxed">
               Přidejte se k desítkám spokojených klientů, kteří nám důvěřují se svými stavebními projekty
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/kontakt">
-                <Button size="lg" className="w-full sm:w-auto">
+                <Button size="lg" className="group w-full sm:w-auto bg-gold text-primary-dark hover:bg-gold/90 font-bold text-lg px-8 py-6 h-auto shadow-2xl shadow-gold/20 hover:scale-105 transition-all">
                   <Send className="mr-2 h-5 w-5" />
-                  Nezávazná poptávka
+                  <span>Nezávazná poptávka</span>
                 </Button>
               </Link>
               <Link href="/portfolio">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto bg-transparent">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto border-2 border-white/20 text-white hover:bg-white hover:text-navy bg-white/5 backdrop-blur-sm font-semibold text-lg px-8 py-6 h-auto hover:scale-105 transition-all">
                   <Eye className="mr-2 h-5 w-5" />
-                  Prohlédnout portfolio
+                  <span>Prohlédnout portfolio</span>
                 </Button>
               </Link>
             </div>
