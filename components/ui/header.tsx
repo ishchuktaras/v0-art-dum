@@ -127,14 +127,15 @@ export function Header() {
                     }}
                   >
                     <div
-                      className={`p-2 rounded-lg transition-all duration-300 ${
-                        isActive ? "bg-gold/20" : "bg-white/5 group-hover:bg-white/10"
+                      className={`p-2.5 rounded-lg transition-all duration-300 ${
+                        isActive ? "bg-gold/30" : "bg-white/10 group-hover:bg-white/20"
                       }`}
                     >
                       <Icon
                         className={`w-5 h-5 transition-transform duration-300 ${
-                          isActive ? "scale-110" : "group-hover:scale-110"
+                          isActive ? "scale-110 text-gold" : "group-hover:scale-110 text-white"
                         }`}
+                        strokeWidth={2.5}
                       />
                     </div>
                     <span className="text-lg font-bold flex-1">{link.label}</span>

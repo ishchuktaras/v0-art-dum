@@ -157,8 +157,6 @@ export default async function HomePage() {
               </div>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
                 Profesionální stavební práce v Třebíči a okolí
-                <br />
-                <span className="text-gold">{yearsExperience} let zkušeností</span>
               </h1>
               <p className="text-lg sm:text-xl md:text-2xl mb-8 text-white/80 leading-relaxed">
                 {heroSubheading}

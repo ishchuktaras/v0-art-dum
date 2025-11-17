@@ -156,8 +156,8 @@ export default async function AboutPage() {
                   >
                     <div className="absolute inset-0 bg-linear-to-br from-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
                     <div className="relative">
-                      <div className="w-16 h-16 bg-linear-to-br from-gold to-gold/80 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-gold/20 group-hover:scale-110 transition-transform">
-                        <IconComponent className="w-8 h-8 text-white" />
+                      <div className="w-20 h-20 bg-linear-to-br from-gold via-gold/90 to-gold/80 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-gold/30 group-hover:scale-110 group-hover:shadow-2xl group-hover:shadow-gold/40 transition-all duration-300">
+                        <IconComponent className="w-10 h-10 text-white" strokeWidth={2.5} />
                       </div>
                       <h3 className="text-2xl font-bold text-navy mb-4 group-hover:text-gold transition-colors">
                         {item.title}

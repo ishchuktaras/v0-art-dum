@@ -19,11 +19,12 @@ export function Footer() {
           <div className="space-y-4">
             <Link href="/" className="inline-block">
               <Image
-                src="/logo.png"
+                src="/logo.jpg"
                 alt="ART DUM Logo"
-                width={120}
-                height={60}
-                className="h-12 w-auto"
+                width={160}
+                height={80}
+                className="h-14 w-auto"
+                priority
               />
             </Link>
             <p className="text-sm text-white/70">
@@ -128,7 +129,7 @@ export function Footer() {
                 href="https://webnamiru.site" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-primary-gold/70 hover:text-primary-gold transition-colors"
+                className="text-gold/70 hover:text-gold transition-colors font-medium"
               >
                 Taras Ishchuk, OSVČ - webnamiru.site
               </a>
