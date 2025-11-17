@@ -3,27 +3,27 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Vylepšené barevné schéma pro lepší kontrast a čitelnost v obou režimech */
+/* Kompletně přepracované barevné schéma pro optimální kontrast v obou režimech */
 :root {
-  /* Light Mode - Optimalizované barvy */
+  /* Light Mode - Vylepšené pro maximální čitelnost */
   --background: #ffffff;
-  --foreground: #1a1d2e;
+  --foreground: #0B192F;
   --card: #ffffff;
-  --card-foreground: #1a1d2e;
+  --card-foreground: #0B192F;
   --popover: #ffffff;
-  --popover-foreground: #1a1d2e;
+  --popover-foreground: #0B192F;
   
   /* Primary - Tmavě modrá (brand) */
   --primary: #0B192F;
   --primary-foreground: #ffffff;
   
-  /* Secondary - Světle šedá */
-  --secondary: #f4f6f8;
-  --secondary-foreground: #1a1d2e;
+  /* Secondary - Světle šedá s dobrým kontrastem */
+  --secondary: #f8fafc;
+  --secondary-foreground: #0B192F;
   
-  /* Muted - Světle šedá s dobrým kontrastem */
-  --muted: #f1f3f5;
-  --muted-foreground: #64748b;
+  /* Muted - Střední šedá */
+  --muted: #f1f5f9;
+  --muted-foreground: #475569;
   
   /* Accent - Zlatá (brand) */
   --accent: #D4AF37;
@@ -33,7 +33,7 @@
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
   
-  /* Border a Input - Jemné šedé */
+  /* Border a Input */
   --border: #e2e8f0;
   --input: #e2e8f0;
   --ring: #D4AF37;
@@ -49,7 +49,7 @@
   
   /* Sidebar */
   --sidebar: #f8fafc;
-  --sidebar-foreground: #1a1d2e;
+  --sidebar-foreground: #0B192F;
   --sidebar-primary: #0B192F;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #D4AF37;
@@ -64,43 +64,48 @@
   --shadow-spread: -2px;
   --shadow-opacity: 0.15;
   --shadow-color: #D4AF37;
+  
+  /* Přidání custom CSS proměnných pro gradienty */
+  --hero-gradient-from: #0b192f;
+  --hero-gradient-via: #0f2342;
+  --hero-gradient-to: #0b192f;
 }
 
 .dark {
-  /* Dark Mode - Vylepšené barvy s lepším kontrastem */
-  --background: #0f1419;
-  --foreground: #e5e7eb;
-  --card: #1a1f2e;
-  --card-foreground: #e5e7eb;
-  --popover: #1a1f2e;
-  --popover-foreground: #e5e7eb;
+  /* Dark Mode - Optimalizované pro maximální čitelnost */
+  --background: #0B192F;
+  --foreground: #f1f5f9;
+  --card: #1e293b;
+  --card-foreground: #f1f5f9;
+  --popover: #1e293b;
+  --popover-foreground: #f1f5f9;
   
-  /* Primary - Světlejší modrá pro lepší viditelnost */
-  --primary: #2563eb;
-  --primary-foreground: #ffffff;
+  /* Primary - Zlatá v dark mode pro lepší viditelnost */
+  --primary: #D4AF37;
+  --primary-foreground: #0B192F;
   
-  /* Secondary - Tmavší šedá s dobrým kontrastem */
-  --secondary: #1e293b;
-  --secondary-foreground: #e5e7eb;
+  /* Secondary - Tmavší šedá */
+  --secondary: #334155;
+  --secondary-foreground: #f1f5f9;
   
   /* Muted - Střední šedá */
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
+  --muted: #334155;
+  --muted-foreground: #cbd5e1;
   
-  /* Accent - Zlatá zachována pro brand identitu */
+  /* Accent - Zlatá zachována */
   --accent: #D4AF37;
-  --accent-foreground: #0f1419;
+  --accent-foreground: #0B192F;
   
   /* Destructive */
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
   
-  /* Border a Input - Střední šedé */
-  --border: #334155;
-  --input: #334155;
+  /* Border a Input - Světlejší pro lepší viditelnost */
+  --border: #475569;
+  --input: #475569;
   --ring: #D4AF37;
   
-  /* Chart colors - světlejší pro dark mode */
+  /* Chart colors - světlejší varianty */
   --chart-1: #34d399;
   --chart-2: #60a5fa;
   --chart-3: #fbbf24;
@@ -108,28 +113,33 @@
   --chart-5: #94a3b8;
   
   /* Sidebar */
-  --sidebar: #0a0e17;
-  --sidebar-foreground: #e5e7eb;
-  --sidebar-primary: #2563eb;
-  --sidebar-primary-foreground: #ffffff;
+  --sidebar: #0f172a;
+  --sidebar-foreground: #f1f5f9;
+  --sidebar-primary: #D4AF37;
+  --sidebar-primary-foreground: #0B192F;
   --sidebar-accent: #D4AF37;
-  --sidebar-accent-foreground: #0f1419;
-  --sidebar-border: #334155;
+  --sidebar-accent-foreground: #0B192F;
+  --sidebar-border: #475569;
   --sidebar-ring: #D4AF37;
   
-  /* Shadow - Subtilní shadow pro dark mode */
+  /* Shadow - Subtilní pro dark mode */
   --shadow-x: 0px;
   --shadow-y: 4px;
   --shadow-blur: 20px;
   --shadow-spread: 0px;
-  --shadow-opacity: 0.4;
+  --shadow-opacity: 0.5;
   --shadow-color: #000000;
+  
+  /* Dark mode gradient barvy */
+  --hero-gradient-from: #030712;
+  --hero-gradient-via: #0B192F;
+  --hero-gradient-to: #030712;
 }
 
 @theme inline {
   --font-sans: 'Inter', 'Inter Fallback';
 
-  /* Design Tokens - ART DUM Brand Colors */
+  /* Design Tokens */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -203,34 +213,30 @@
   }
 }
 
-/* Custom utility classes */
+/* Oprava hero gradient utility třídy - používáme CSS proměnné místo arbitrary hodnot v @apply */
 @layer utilities {
-  .text-primary-dark {
-    color: var(--color-primary);
+  .text-navy {
+    color: #0B192F;
   }
-
-  .bg-primary-dark {
-    background-color: var(--color-primary);
+  
+  .bg-navy {
+    background-color: #0B192F;
   }
 
   .text-gold {
-    color: var(--color-accent);
+    color: #D4AF37;
   }
 
   .bg-gold {
-    background-color: var(--color-accent);
+    background-color: #D4AF37;
   }
   
-  /* Přidány utility třídy pro lepší práci s tématy */
-  .text-accent {
-    color: var(--color-accent);
+  .border-gold {
+    border-color: #D4AF37;
   }
   
-  .bg-accent {
-    background-color: var(--color-accent);
-  }
-  
-  .border-accent {
-    border-color: var(--color-accent);
+  /* Hero gradient pozadí které funguje v obou režimech */
+  .bg-hero {
+    background: linear-gradient(to bottom right, var(--hero-gradient-from), var(--hero-gradient-via), var(--hero-gradient-to));
   }
 }

@@ -92,7 +92,7 @@ export default async function AboutPage() {
       />
 
       {/* Hero Section */}
-      <section className="relative bg-linear-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-24 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-24 overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
@@ -100,7 +100,7 @@ export default async function AboutPage() {
               <Sparkles className="w-4 h-4" />
               <span>Profesionální stavební řešení od roku 2001</span>
             </div>
-            <h1 className="text-5xl md:text-6xl font-black mb-6 bg-linear-to-r from-white to-white/80 bg-clip-text text-transparent leading-tight">
+            <h1 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent leading-tight">
               O firmě ART DUM
             </h1>
             <p className="text-xl text-white/80 leading-relaxed mb-8">
@@ -333,7 +333,7 @@ export default async function AboutPage() {
       )}
 
       {/* CTA Section */}
-      <section className="relative bg-linear-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="max-w-3xl mx-auto">

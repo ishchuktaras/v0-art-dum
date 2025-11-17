@@ -145,7 +145,7 @@ export default async function HomePage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden">
+        <section className="relative bg-hero text-white py-20 md:py-32 overflow-hidden">
           <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto">
@@ -166,7 +166,7 @@ export default async function HomePage() {
                   <Button size="lg" className="group w-full sm:w-auto bg-gold text-primary-dark hover:bg-gold/90 font-bold text-lg px-8 py-6 h-auto shadow-2xl shadow-gold/20 hover:scale-105 transition-all">
                     <span>{ctaText}</span>
                     <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                     </svg>
                   </Button>
                 </Link>
@@ -185,18 +185,18 @@ export default async function HomePage() {
         </section>
 
         {/* USP Section */}
-        <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
+        <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-black text-navy mb-4">Proč zvolit ART DUM</h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">Naše hodnoty a přístup k práci</p>
+              <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">Proč zvolit ART DUM</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Naše hodnoty a přístup k práci</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              <div className="group relative bg-white p-8 rounded-2xl border-2 border-gray-100 hover:border-gold/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-                <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
+              <div className="group relative bg-card p-8 rounded-2xl border-2 border-border hover:border-accent/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
                 <div className="relative">
-                  <div className="w-16 h-16 bg-gradient-to-br from-gold to-gold/80 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-gold/20 group-hover:scale-110 transition-transform">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-accent/20 group-hover:scale-110 transition-transform">
+                    <svg className="w-8 h-8 text-white dark:text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -205,29 +205,29 @@ export default async function HomePage() {
                       />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-navy mb-4 text-center group-hover:text-gold transition-colors">Férová cena</h3>
-                  <p className="text-gray-600 text-center leading-relaxed">Transparentní kalkulace bez skrytých poplatků</p>
+                  <h3 className="text-2xl font-bold text-foreground mb-4 text-center group-hover:text-accent transition-colors">Férová cena</h3>
+                  <p className="text-muted-foreground text-center leading-relaxed">Transparentní kalkulace bez skrytých poplatků</p>
                 </div>
               </div>
 
-              <div className="group relative bg-white p-8 rounded-2xl border-2 border-gray-100 hover:border-gold/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-                <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
+              <div className="group relative bg-card p-8 rounded-2xl border-2 border-border hover:border-accent/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
                 <div className="relative">
-                  <div className="w-16 h-16 bg-gradient-to-br from-gold to-gold/80 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-gold/20 group-hover:scale-110 transition-transform">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-accent/20 group-hover:scale-110 transition-transform">
+                    <svg className="w-8 h-8 text-white dark:text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-navy mb-4 text-center group-hover:text-gold transition-colors">Rychlost</h3>
-                  <p className="text-gray-600 text-center leading-relaxed">Dodržování termínů a efektivní realizace</p>
+                  <h3 className="text-2xl font-bold text-foreground mb-4 text-center group-hover:text-accent transition-colors">Rychlost</h3>
+                  <p className="text-muted-foreground text-center leading-relaxed">Dodržování termínů a efektivní realizace</p>
                 </div>
               </div>
 
-              <div className="group relative bg-white p-8 rounded-2xl border-2 border-gray-100 hover:border-gold/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-                <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
+              <div className="group relative bg-card p-8 rounded-2xl border-2 border-border hover:border-accent/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
                 <div className="relative">
-                  <div className="w-16 h-16 bg-gradient-to-br from-gold to-gold/80 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-gold/20 group-hover:scale-110 transition-transform">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-accent/20 group-hover:scale-110 transition-transform">
+                    <svg className="w-8 h-8 text-white dark:text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -236,8 +236,8 @@ export default async function HomePage() {
                       />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-navy mb-4 text-center group-hover:text-gold transition-colors">Kvalita</h3>
-                  <p className="text-gray-600 text-center leading-relaxed">Precizní práce a dlouhá záruka</p>
+                  <h3 className="text-2xl font-bold text-foreground mb-4 text-center group-hover:text-accent transition-colors">Kvalita</h3>
+                  <p className="text-muted-foreground text-center leading-relaxed">Precizní práce a dlouhá záruka</p>
                 </div>
               </div>
             </div>
@@ -245,10 +245,10 @@ export default async function HomePage() {
         </section>
 
         {/* Services Preview */}
-        <section className="py-12 md:py-16">
+        <section className="py-12 md:py-16 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-8 md:mb-12">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">Naše služby</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4 text-foreground">Naše služby</h2>
               <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
                 Komplexní stavební služby pro vaše projekty
               </p>
@@ -257,7 +257,7 @@ export default async function HomePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {services && services.length > 0 ? (
                 services.slice(0, 6).map((service: any) => (
-                  <div key={service._id} className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
+                  <div key={service._id} className="border border-border rounded-lg p-6 hover:shadow-lg transition-shadow bg-card">
                     {service.image && (
                       <img
                         src={urlFor(service.image)?.width(400).height(250).url() || "/placeholder.svg"}
@@ -265,19 +265,19 @@ export default async function HomePage() {
                         className="w-full h-48 object-cover rounded-lg mb-4"
                       />
                     )}
-                    <h3 className="text-xl font-bold mb-3">{service.title}</h3>
+                    <h3 className="text-xl font-bold mb-3 text-card-foreground">{service.title}</h3>
                     <p className="text-muted-foreground mb-4">{service.shortDescription}</p>
-                    {service.price && <p className="text-gold font-semibold mb-3">{service.price}</p>}
-                    <Link href="/sluzby" className="text-gold font-semibold hover:underline">
+                    {service.price && <p className="text-accent font-semibold mb-3">{service.price}</p>}
+                    <Link href="/sluzby" className="text-accent font-semibold hover:underline">
                       Zjistit více →
                     </Link>
                   </div>
                 ))
               ) : (
-                <div className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
-                  <h3 className="text-xl font-bold mb-3">Rekonstrukce</h3>
+                <div className="border border-border rounded-lg p-6 hover:shadow-lg transition-shadow bg-card">
+                  <h3 className="text-xl font-bold mb-3 text-card-foreground">Rekonstrukce</h3>
                   <p className="text-muted-foreground mb-4">Kompletní rekonstrukce bytů, domů a komerčních prostor</p>
-                  <Link href="/sluzby" className="text-gold font-semibold hover:underline">
+                  <Link href="/sluzby" className="text-accent font-semibold hover:underline">
                     Zjistit více →
                   </Link>
                 </div>
@@ -286,7 +286,7 @@ export default async function HomePage() {
 
             <div className="text-center mt-6 md:mt-8">
               <Link href="/sluzby">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto bg-transparent">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto">
                   Zobrazit všechny služby
                 </Button>
               </Link>
@@ -295,7 +295,7 @@ export default async function HomePage() {
         </section>
 
         {/* CTA Section */}
-        <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-16 md:py-24 overflow-hidden">
+        <section className="relative bg-hero text-white py-16 md:py-24 overflow-hidden">
           <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
           <div className="container mx-auto px-4 text-center relative z-10">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-6 leading-tight">Máte projekt? Kontaktujte nás!</h2>

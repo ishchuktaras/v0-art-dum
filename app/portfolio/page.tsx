@@ -111,7 +111,8 @@ export default async function PortfolioPage() {
       {/* <Header /> */}
 
       <main className="flex-1">
-        <section className="relative bg-linear-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-16 md:py-24 overflow-hidden">
+        {/* Hero Section */}
+        <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-16 md:py-24 overflow-hidden">
           <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
@@ -214,30 +215,31 @@ export default async function PortfolioPage() {
         </section>
 
         {/* Stats Section */}
-        <section className="py-16 bg-linear-to-b from-gray-50 to-white">
+        <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center max-w-5xl mx-auto">
               <div className="group">
-                <div className="text-5xl md:text-6xl font-black bg-linear-to-br from-gold to-gold/70 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">150+</div>
+                <div className="text-5xl md:text-6xl font-black bg-gradient-to-br from-gold to-gold/70 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">150+</div>
                 <p className="text-sm md:text-base font-semibold text-gray-700">realizovaných projektů</p>
               </div>
               <div className="group">
-                <div className="text-5xl md:text-6xl font-black bg-linear-to-br from-gold to-gold/70 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">23</div>
+                <div className="text-5xl md:text-6xl font-black bg-gradient-to-br from-gold to-gold/70 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">23</div>
                 <p className="text-sm md:text-base font-semibold text-gray-700">let na trhu</p>
               </div>
               <div className="group">
-                <div className="text-5xl md:text-6xl font-black bg-linear-to-br from-gold to-gold/70 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">100%</div>
+                <div className="text-5xl md:text-6xl font-black bg-gradient-to-br from-gold to-gold/70 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">100%</div>
                 <p className="text-sm md:text-base font-semibold text-gray-700">spokojených klientů</p>
               </div>
               <div className="group">
-                <div className="text-5xl md:text-6xl font-black bg-linear-to-br from-gold to-gold/70 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">5★</div>
+                <div className="text-5xl md:text-6xl font-black bg-gradient-to-br from-gold to-gold/70 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">5★</div>
                 <p className="text-sm md:text-base font-semibold text-gray-700">průměrné hodnocení</p>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="relative bg-linear-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-16 overflow-hidden">
+        {/* CTA Section */}
+        <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-16 overflow-hidden">
           <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
           <div className="container mx-auto px-4 text-center relative z-10">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6">Chcete podobný projekt?</h2>

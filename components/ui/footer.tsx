@@ -12,7 +12,7 @@ export function Footer() {
   const ico = 'IČO: 22401261'
 
   return (
-    <footer className="border-t bg-[#0b192f] text-white/80">
+    <footer className="border-t border-border bg-navy dark:bg-background text-white dark:text-foreground">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           {/* Logo a popis */}
@@ -27,42 +27,42 @@ export function Footer() {
                 priority
               />
             </Link>
-            <p className="text-sm text-white/70">
+            <p className="text-sm text-white/70 dark:text-muted-foreground">
               Profesionální stavební služby s 23 lety zkušeností v regionu Třebíč a okolí.
             </p>
           </div>
 
           {/* Rychlé odkazy */}
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-white">Rychlé odkazy</h3>
+            <h3 className="mb-4 text-lg font-semibold">Rychlé odkazy</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/o-nas" className="hover:text-primary-gold transition-colors">
+                <Link href="/o-nas" className="text-white/80 dark:text-muted-foreground hover:text-accent transition-colors">
                   O nás
                 </Link>
               </li>
               <li>
-                <Link href="/sluzby" className="hover:text-primary-gold transition-colors">
+                <Link href="/sluzby" className="text-white/80 dark:text-muted-foreground hover:text-accent transition-colors">
                   Služby
                 </Link>
               </li>
               <li>
-                <Link href="/portfolio" className="hover:text-primary-gold transition-colors">
+                <Link href="/portfolio" className="text-white/80 dark:text-muted-foreground hover:text-accent transition-colors">
                   Portfolio
                 </Link>
               </li>
               <li>
-                <Link href="/hodnoceni" className="hover:text-primary-gold transition-colors">
+                <Link href="/hodnoceni" className="text-white/80 dark:text-muted-foreground hover:text-accent transition-colors">
                   Hodnocení
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-primary-gold transition-colors">
+                <Link href="/blog" className="text-white/80 dark:text-muted-foreground hover:text-accent transition-colors">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="hover:text-primary-gold transition-colors">
+                <Link href="/faq" className="text-white/80 dark:text-muted-foreground hover:text-accent transition-colors">
                   FAQ
                 </Link>
               </li>
@@ -71,32 +71,32 @@ export function Footer() {
 
           {/* Kontakt */}
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-white">Kontakt</h3>
+            <h3 className="mb-4 text-lg font-semibold">Kontakt</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href={`tel:${phone}`} className="hover:text-primary-gold transition-colors">
+                <a href={`tel:${phone}`} className="text-white/80 dark:text-muted-foreground hover:text-accent transition-colors">
                   {phone}
                 </a>
               </li>
               <li>
-                <a href={`mailto:${email}`} className="hover:text-primary-gold transition-colors">
+                <a href={`mailto:${email}`} className="text-white/80 dark:text-muted-foreground hover:text-accent transition-colors">
                   {email}
                 </a>
               </li>
-              <li className="text-white/70">{address}</li>
-              <li className="text-white/70">{ico}</li>
+              <li className="text-white/70 dark:text-muted-foreground">{address}</li>
+              <li className="text-white/70 dark:text-muted-foreground">{ico}</li>
             </ul>
           </div>
 
           {/* Sociální sítě */}
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-white">Sledujte nás</h3>
+            <h3 className="mb-4 text-lg font-semibold">Sledujte nás</h3>
             <div className="flex gap-4">
               <a
                 href="https://facebook.com/artdum"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-primary-gold transition-colors"
+                className="text-white/80 dark:text-muted-foreground hover:text-accent transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook className="h-6 w-6" />
@@ -106,30 +106,30 @@ export function Footer() {
         </div>
 
         {/* Spodní řádek */}
-        <div className="mt-8 border-t border-white/10 pt-8 text-center text-sm text-white/60">
+        <div className="mt-8 border-t border-white/10 dark:border-border pt-8 text-center text-sm text-white/60 dark:text-muted-foreground">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <p>© 2025 ART DUM. Všechna práva vyhrazena.</p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/ochrana-osobnich-udaju" className="hover:text-white transition-colors">
+              <Link href="/ochrana-osobnich-udaju" className="hover:text-accent transition-colors">
                 Ochrana osobních údajů
               </Link>
-              <Link href="/obchodni-podminky" className="hover:text-white transition-colors">
+              <Link href="/obchodni-podminky" className="hover:text-accent transition-colors">
                 Obchodní podmínky
               </Link>
-              <Link href="/pravni-ustanoveni" className="hover:text-white transition-colors">
+              <Link href="/pravni-ustanoveni" className="hover:text-accent transition-colors">
                 Právní ustanovení
               </Link>
             </div>
           </div>
           
-          <div className="mt-6 pt-6 border-t border-white/10">
-            <p className="text-xs text-white/50">
+          <div className="mt-6 pt-6 border-t border-white/10 dark:border-border">
+            <p className="text-xs text-white/50 dark:text-muted-foreground">
               Web vytvořil{' '}
               <a 
                 href="https://webnamiru.site" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gold/70 hover:text-gold transition-colors font-medium"
+                className="text-accent/70 hover:text-accent transition-colors font-medium"
               >
                 Taras Ishchuk, OSVČ - webnamiru.site
               </a>
