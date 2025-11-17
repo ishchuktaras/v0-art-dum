@@ -6,6 +6,7 @@ import { CookieConsent } from "@/components/cookie-consent"
 import { ConditionalLayout } from "@/components/conditional-layout"
 import { Toaster } from "@/components/ui/sonner"
 import { Analytics } from '@vercel/analytics/react'
+import { WhatsAppButton } from '@/components/whatsapp-button'
 
 import { Inter, Inter as V0_Font_Inter, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
 
@@ -53,6 +54,7 @@ export default function RootLayout({
         <CookieConsent />
         <Toaster />
         <Analytics />
+        <WhatsAppButton />
       </body>
     </html>
   )

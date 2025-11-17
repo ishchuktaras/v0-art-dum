@@ -256,25 +256,47 @@ export default async function AboutPage() {
                 <div className="p-2 bg-gold/10 rounded-lg">
                   <Award className="w-8 h-8 text-gold" />
                 </div>
-                <h2 className="text-4xl font-black text-navy">Naše certifikáty</h2>
+                <h2 className="text-4xl font-black text-navy">Naše certifikáty a dokumenty</h2>
               </div>
-              <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-6">
                 Osvědčení o kvalifikaci a odbornosti
               </p>
+              <div className="max-w-3xl mx-auto bg-amber-50 border-2 border-amber-200 rounded-xl p-6 mb-8">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 bg-amber-500 rounded-lg flex items-center justify-center">
+                    <Shield className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="text-left">
+                    <h3 className="font-bold text-navy mb-2">Upozornění k citlivým údajům</h3>
+                    <p className="text-sm text-gray-700 leading-relaxed">
+                      Z důvodu ochrany osobních a citlivých údajů v souladu s legislativou zde zobrazujeme pouze ukázkové verze dokumentů s popisem. 
+                      <strong className="text-navy"> Originální dokumenty včetně nostrifikací a certifikátů rádi předložíme při osobním jednání s našimi zákazníky a obchodními partnery.</strong> Pro více informací nás neváhejte kontaktovat.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {certificates.map((cert: any) => (
                 <div
                   key={cert._id}
-                  className="group bg-linear-to-br from-gray-50 to-white rounded-2xl overflow-hidden border-2 border-gray-100 hover:border-gold/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+                  className="group bg-linear-to-br from-gray-50 to-white rounded-2xl overflow-hidden border-2 border-gray-100 hover:border-gold/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 relative"
                 >
+                  <div className="absolute top-4 right-4 z-10 bg-amber-500/90 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                    UKÁZKA
+                  </div>
                   {cert.image && (
                     <div className="relative h-72 w-full bg-white p-6 border-b-2 border-gray-100">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-gray-300 text-6xl font-black opacity-10 rotate-[-25deg] select-none pointer-events-none">
+                          UKÁZKOVÝ<br/>OBRÁZEK
+                        </div>
+                      </div>
                       <Image
                         src={urlFor(cert.image)?.width(400).height(400).url() || "/placeholder.svg"}
                         alt={cert.image.alt || cert.title}
                         fill
-                        className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                        className="object-contain p-4 group-hover:scale-105 transition-transform duration-500 opacity-40"
                       />
                     </div>
                   )}
@@ -297,8 +319,11 @@ export default async function AboutPage() {
                       </p>
                     )}
                     {cert.description && (
-                      <p className="text-gray-600 text-sm leading-relaxed">{cert.description}</p>
+                      <p className="text-gray-600 text-sm leading-relaxed mb-4">{cert.description}</p>
                     )}
+                    <p className="text-xs text-amber-600 font-semibold bg-amber-50 px-3 py-2 rounded-lg border border-amber-200">
+                      ✓ Originál k nahlédnutí při osobním jednání
+                    </p>
                   </div>
                 </div>
               ))}
