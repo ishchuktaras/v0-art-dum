@@ -3,134 +3,133 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Vylepšené barevné schéma pro lepší kontrast a čitelnost v obou režimech */
 :root {
-  --background: #fdfdfd;
-  --foreground: #000000;
-  --card: #fdfdfd;
-  --card-foreground: #000000;
-  --popover: #fcfcfc;
-  --popover-foreground: #000000;
+  /* Light Mode - Optimalizované barvy */
+  --background: #ffffff;
+  --foreground: #1a1d2e;
+  --card: #ffffff;
+  --card-foreground: #1a1d2e;
+  --popover: #ffffff;
+  --popover-foreground: #1a1d2e;
+  
+  /* Primary - Tmavě modrá (brand) */
   --primary: #0B192F;
-  --primary-foreground: #eceef0;
-  --secondary: #edf0f4;
-  --secondary-foreground: #080808;
-  --muted: #f5f5f5;
-  --muted-foreground: #525252;
+  --primary-foreground: #ffffff;
+  
+  /* Secondary - Světle šedá */
+  --secondary: #f4f6f8;
+  --secondary-foreground: #1a1d2e;
+  
+  /* Muted - Světle šedá s dobrým kontrastem */
+  --muted: #f1f3f5;
+  --muted-foreground: #64748b;
+  
+  /* Accent - Zlatá (brand) */
   --accent: #D4AF37;
-  --accent-foreground: #1e69dc;
-  --destructive: #e54b4f;
+  --accent-foreground: #0B192F;
+  
+  /* Destructive */
+  --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --border: #e7e7ee;
-  --input: #ebebeb;
-  --ring: #000000;
-  --chart-1: #4ac885;
-  --chart-2: #7033ff;
-  --chart-3: #fd822b;
-  --chart-4: #3276e4;
-  --chart-5: #747474;
+  
+  /* Border a Input - Jemné šedé */
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #D4AF37;
+  
+  /* Chart colors */
+  --chart-1: #10b981;
+  --chart-2: #3b82f6;
+  --chart-3: #f59e0b;
+  --chart-4: #8b5cf6;
+  --chart-5: #64748b;
+  
   --radius: 1rem;
-  --sidebar: #f5f8fb;
-  --sidebar-foreground: #000000;
+  
+  /* Sidebar */
+  --sidebar: #f8fafc;
+  --sidebar-foreground: #1a1d2e;
   --sidebar-primary: #0B192F;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #D4AF37;
-  --sidebar-accent-foreground: #000000;
-  --sidebar-border: #ebebeb;
-  --sidebar-ring: #000000;
+  --sidebar-accent-foreground: #0B192F;
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: #D4AF37;
+  
+  /* Shadow - Zlatý glow pro light mode */
   --shadow-x: 0px;
   --shadow-y: 4px;
-  --shadow-blur: 12px;
-  --shadow-spread: -1px;
-  --shadow-opacity: 0.8;
+  --shadow-blur: 16px;
+  --shadow-spread: -2px;
+  --shadow-opacity: 0.15;
   --shadow-color: #D4AF37;
 }
 
 .dark {
-  --background: #1a1b1e;
-  --foreground: #f0f0f0;
-  --card: #222327;
-  --card-foreground: #f0f0f0;
-  --popover: #222327;
-  --popover-foreground: #f0f0f0;
-  --primary: #8c5cff;
+  /* Dark Mode - Vylepšené barvy s lepším kontrastem */
+  --background: #0f1419;
+  --foreground: #e5e7eb;
+  --card: #1a1f2e;
+  --card-foreground: #e5e7eb;
+  --popover: #1a1f2e;
+  --popover-foreground: #e5e7eb;
+  
+  /* Primary - Světlejší modrá pro lepší viditelnost */
+  --primary: #2563eb;
   --primary-foreground: #ffffff;
-  --secondary: #2a2c33;
-  --secondary-foreground: #f0f0f0;
-  --muted: #2a2c33;
-  --muted-foreground: #a0a0a0;
-  --accent: #1e293b;
-  --accent-foreground: #79c0ff;
-  --destructive: #f87171;
+  
+  /* Secondary - Tmavší šedá s dobrým kontrastem */
+  --secondary: #1e293b;
+  --secondary-foreground: #e5e7eb;
+  
+  /* Muted - Střední šedá */
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  
+  /* Accent - Zlatá zachována pro brand identitu */
+  --accent: #D4AF37;
+  --accent-foreground: #0f1419;
+  
+  /* Destructive */
+  --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #33353a;
-  --input: #33353a;
-  --ring: #8c5cff;
-  --chart-1: #4ade80;
-  --chart-2: #8c5cff;
-  --chart-3: #fca5a5;
-  --chart-4: #5993f4;
-  --chart-5: #a0a0a0;
-  --sidebar: #161618;
-  --sidebar-foreground: #f0f0f0;
-  --sidebar-primary: #8c5cff;
+  
+  /* Border a Input - Střední šedé */
+  --border: #334155;
+  --input: #334155;
+  --ring: #D4AF37;
+  
+  /* Chart colors - světlejší pro dark mode */
+  --chart-1: #34d399;
+  --chart-2: #60a5fa;
+  --chart-3: #fbbf24;
+  --chart-4: #a78bfa;
+  --chart-5: #94a3b8;
+  
+  /* Sidebar */
+  --sidebar: #0a0e17;
+  --sidebar-foreground: #e5e7eb;
+  --sidebar-primary: #2563eb;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #2a2c33;
-  --sidebar-accent-foreground: #8c5cff;
-  --sidebar-border: #33353a;
-  --sidebar-ring: #8c5cff;
+  --sidebar-accent: #D4AF37;
+  --sidebar-accent-foreground: #0f1419;
+  --sidebar-border: #334155;
+  --sidebar-ring: #D4AF37;
+  
+  /* Shadow - Subtilní shadow pro dark mode */
   --shadow-x: 0px;
-  --shadow-y: 2px;
-  --shadow-blur: 3px;
+  --shadow-y: 4px;
+  --shadow-blur: 20px;
   --shadow-spread: 0px;
-  --shadow-opacity: 0.2;
+  --shadow-opacity: 0.4;
   --shadow-color: #000000;
 }
 
 @theme inline {
-  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --font-sans: 'Inter', 'Inter Fallback';
 
-  /* Design Tokens - ART DUM Color Palette */
-  /* Primary - Tmavě modrá */
-  --color-primary: #0b192f;
-  --color-primary-foreground: #ffffff;
-
-  /* Accent - Zlatá */
-  --color-accent: #d4af37;
-  --color-accent-foreground: #0b192f;
-
-  /* Background */
-  --color-background: #ffffff;
-  --color-foreground: #333333;
-
-  /* Muted backgrounds */
-  --color-muted: #f4f7f6;
-  --color-muted-foreground: #666666;
-
-  /* Secondary muted */
-  --color-secondary: #eceef0;
-  --color-secondary-foreground: #333333;
-
-  /* Card */
-  --color-card: #ffffff;
-  --color-card-foreground: #333333;
-
-  /* Border */
-  --color-border: #e5e7eb;
-
-  /* Input */
-  --color-input: #e5e7eb;
-
-  /* Ring (focus) */
-  --color-ring: #d4af37;
-
-  /* Destructive */
-  --color-destructive: #ef4444;
-  --color-destructive-foreground: #ffffff;
-
-  /* Radius */
-  --radius: 0.5rem;
-
+  /* Design Tokens - ART DUM Brand Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -169,7 +168,8 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
   --font-serif: 'Source Serif 4', 'Source Serif 4 Fallback';
-  /* computed shadow variables below - do not modify */
+  
+  /* Computed shadow variables */
   --shadow-2xs: var(--shadow-x) var(--shadow-y) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent);
   --shadow-xs: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--shadow-spread) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent);
   --shadow-sm: var(--shadow-x) var(--shadow-y) calc(var(--shadow-blur) * 1.5) var(--shadow-spread) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent);
@@ -191,15 +191,10 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition-colors duration-300;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     @apply text-balance;
   }
 
@@ -224,5 +219,18 @@
 
   .bg-gold {
     background-color: var(--color-accent);
+  }
+  
+  /* Přidány utility třídy pro lepší práci s tématy */
+  .text-accent {
+    color: var(--color-accent);
+  }
+  
+  .bg-accent {
+    background-color: var(--color-accent);
+  }
+  
+  .border-accent {
+    border-color: var(--color-accent);
   }
 }
