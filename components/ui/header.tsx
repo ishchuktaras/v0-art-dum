@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { useState, useEffect } from "react"
 import { usePathname } from 'next/navigation'
 import { Home, Building2, Wrench, Briefcase, Star, BookOpen, Phone, Menu, X } from 'lucide-react'
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -70,6 +71,7 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+            <ThemeToggle />
             <Link href="/kontakt" className="ml-2">
               <Button
                 size="lg"
@@ -80,18 +82,21 @@ export function Header() {
             </Link>
           </nav>
 
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden relative z-110 p-2 rounded-lg hover:bg-white/10 transition-colors duration-200"
-            aria-label={mobileMenuOpen ? "Zavřít menu" : "Otevřít menu"}
-            aria-expanded={mobileMenuOpen}
-          >
-            {mobileMenuOpen ? (
-              <X className="w-7 h-7 text-gold" strokeWidth={2.5} />
-            ) : (
-              <Menu className="w-7 h-7 text-gold" strokeWidth={2.5} />
-            )}
-          </button>
+          <div className="lg:hidden flex items-center gap-2 relative z-110">
+            <ThemeToggle />
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-lg hover:bg-white/10 transition-colors duration-200"
+              aria-label={mobileMenuOpen ? "Zavřít menu" : "Otevřít menu"}
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? (
+                <X className="w-7 h-7 text-gold" strokeWidth={2.5} />
+              ) : (
+                <Menu className="w-7 h-7 text-gold" strokeWidth={2.5} />
+              )}
+            </button>
+          </div>
         </div>
       </header>
 

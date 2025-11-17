@@ -7,6 +7,7 @@ import { ConditionalLayout } from "@/components/conditional-layout"
 import { Toaster } from "@/components/ui/sonner"
 import { Analytics } from '@vercel/analytics/react'
 import { WhatsAppButton } from '@/components/whatsapp-button'
+import { ThemeProvider } from '@/components/theme-provider'
 
 import { Inter, Inter as V0_Font_Inter, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
 
@@ -48,13 +49,20 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="cs" className={inter.variable}>
+    <html lang="cs" className={inter.variable} suppressHydrationWarning>
       <body className="font-sans antialiased">
-        <ConditionalLayout>{children}</ConditionalLayout>
-        <CookieConsent />
-        <Toaster />
-        <Analytics />
-        <WhatsAppButton />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ConditionalLayout>{children}</ConditionalLayout>
+          <CookieConsent />
+          <Toaster />
+          <Analytics />
+          <WhatsAppButton />
+        </ThemeProvider>
       </body>
     </html>
   )
