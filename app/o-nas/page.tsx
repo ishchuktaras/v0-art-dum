@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { Award, Users, Target, CheckCircle2, Sparkles, TrendingUp, Shield } from 'lucide-react'
+import { Award, Users, Target, CheckCircle2, Sparkles, TrendingUp, Shield, DollarSign, Zap, Star, Clock, BadgeCheck, Hammer, Wrench } from 'lucide-react'
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { ABOUT_QUERY, CERTIFICATES_QUERY } from "@/sanity/lib/queries"
 import { urlFor } from "@/sanity/lib/image"
@@ -146,8 +146,21 @@ export default async function AboutPage() {
             </div>
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {about.usp.map((item: any, index: number) => {
-                const icons = [Shield, TrendingUp, Sparkles]
-                const IconComponent = icons[index % icons.length]
+                const iconMap: Record<string, any> = {
+                  DollarSign: DollarSign,
+                  Zap: Zap,
+                  Star: Star,
+                  Shield: Shield,
+                  TrendingUp: TrendingUp,
+                  Sparkles: Sparkles,
+                  Clock: Clock,
+                  BadgeCheck: BadgeCheck,
+                  Hammer: Hammer,
+                  Wrench: Wrench,
+                }
+                
+                const iconName = item.icon || ['DollarSign', 'Zap', 'Star'][index % 3]
+                const IconComponent = iconMap[iconName] || Shield
                 
                 return (
                   <div
@@ -163,9 +176,7 @@ export default async function AboutPage() {
                         {item.title}
                       </h3>
                       <p className="text-gray-600 leading-relaxed">
-                        {index === 0 && "Naše práce se podléhá odbornému kvalitou certifikáty a diplomy. Používáme ověřené postupy a materiály, zbytečně obyčejům zasejí dlouhodobou životnost díla."}
-                        {index === 1 && "Respektujeme váš čas. Díky efektivní koordinaci všech řemesel a 23 letům praxe dodržíme domluevné termíny, také zajišťujeme dokončování termíny, doda cíleme dokončení práce."}
-                        {index === 2 && "Nabízíme férové a transparentní ceny. Připravíme jasný rozpočet bez skrytých poplatků. Propracuneme plány rozpočty dostupnými ekosm prácí bez ukrytých podaků."}
+                        {item.description}
                       </p>
                     </div>
                   </div>
