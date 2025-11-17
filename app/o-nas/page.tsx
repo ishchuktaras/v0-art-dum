@@ -112,16 +112,16 @@ export default async function AboutPage() {
 
       {/* Story Section */}
       {about.story && (
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-gray-900">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
                 <div className="p-2 bg-gold/10 rounded-lg">
                   <Users className="w-8 h-8 text-gold" />
                 </div>
-                <h2 className="text-4xl font-black text-navy">Náš příběh</h2>
+                <h2 className="text-4xl font-black text-navy dark:text-white">Náš příběh</h2>
               </div>
-              <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+              <div className="prose prose-lg max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
                 <PortableText value={about.story} />
               </div>
             </div>
@@ -131,16 +131,16 @@ export default async function AboutPage() {
 
       {/* USP Section */}
       {about.usp && about.usp.length > 0 && (
-        <section className="py-20 bg-linear-to-b from-gray-50 to-white">
+        <section className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <div className="p-2 bg-gold/10 rounded-lg">
                   <Target className="w-8 h-8 text-gold" />
                 </div>
-                <h2 className="text-4xl font-black text-navy">Proč zvolit ART DUM</h2>
+                <h2 className="text-4xl font-black text-navy dark:text-white">Proč zvolit ART DUM</h2>
               </div>
-              <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
                 Naše hodnoty a přístup k práci
               </p>
             </div>
@@ -165,17 +165,17 @@ export default async function AboutPage() {
                 return (
                   <div
                     key={index}
-                    className="group relative bg-white p-8 rounded-2xl border-2 border-gray-100 hover:border-gold/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+                    className="group relative bg-white dark:bg-gray-800 p-8 rounded-2xl border-2 border-gray-100 dark:border-gray-700 hover:border-gold/50 dark:hover:border-gold/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
                   >
-                    <div className="absolute inset-0 bg-linear-to-br from-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent dark:from-gold/10 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
                     <div className="relative">
-                      <div className="w-20 h-20 bg-linear-to-br from-gold via-gold/90 to-gold/80 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-gold/30 group-hover:scale-110 group-hover:shadow-2xl group-hover:shadow-gold/40 transition-all duration-300">
+                      <div className="w-20 h-20 bg-gradient-to-br from-gold via-gold/90 to-gold/80 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-gold/30 group-hover:scale-110 group-hover:shadow-2xl group-hover:shadow-gold/40 transition-all duration-300">
                         <IconComponent className="w-10 h-10 text-white" strokeWidth={2.5} />
                       </div>
-                      <h3 className="text-2xl font-bold text-navy mb-4 group-hover:text-gold transition-colors">
+                      <h3 className="text-2xl font-bold text-navy dark:text-white mb-4 group-hover:text-gold dark:group-hover:text-gold transition-colors">
                         {item.title}
                       </h3>
-                      <p className="text-gray-600 leading-relaxed">
+                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                         {item.description}
                       </p>
                     </div>
@@ -189,21 +189,21 @@ export default async function AboutPage() {
 
       {/* Team Section */}
       {about.teamMembers && about.teamMembers.length > 0 && (
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-gray-900">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <div className="p-2 bg-gold/10 rounded-lg">
                   <Users className="w-8 h-8 text-gold" />
                 </div>
-                <h2 className="text-4xl font-black text-navy">Náš tým</h2>
+                <h2 className="text-4xl font-black text-navy dark:text-white">Náš tým</h2>
               </div>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {about.teamMembers.map((member: any, index: number) => (
                 <div
                   key={index}
-                  className="group bg-gray-50 rounded-2xl overflow-hidden border-2 border-gray-100 hover:border-gold/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+                  className="group bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden border-2 border-gray-100 dark:border-gray-700 hover:border-gold/50 dark:hover:border-gold/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
                 >
                   {member.photo && (
                     <div className="relative h-64 w-full overflow-hidden">
@@ -217,9 +217,9 @@ export default async function AboutPage() {
                     </div>
                   )}
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-navy mb-2">{member.name}</h3>
+                    <h3 className="text-xl font-bold text-navy dark:text-white mb-2">{member.name}</h3>
                     <p className="text-gold font-semibold mb-3">{member.position}</p>
-                    <p className="text-gray-600 leading-relaxed">{member.bio}</p>
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{member.bio}</p>
                   </div>
                 </div>
               ))}
@@ -230,16 +230,16 @@ export default async function AboutPage() {
 
       {/* Qualifications Section */}
       {about.qualifications && (
-        <section className="py-20 bg-gray-50">
+        <section className="py-20 bg-gray-50 dark:bg-gray-900">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <div className="flex items-center gap-3 mb-8">
                 <div className="p-2 bg-gold/10 rounded-lg">
                   <Award className="w-8 h-8 text-gold" />
                 </div>
-                <h2 className="text-4xl font-black text-navy">Kvalifikace a certifikace</h2>
+                <h2 className="text-4xl font-black text-navy dark:text-white">Kvalifikace a certifikace</h2>
               </div>
-              <div className="prose prose-lg max-w-none text-gray-700 bg-white p-10 rounded-2xl border-2 border-gray-100 shadow-xl leading-relaxed">
+              <div className="prose prose-lg max-w-none text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-10 rounded-2xl border-2 border-gray-100 dark:border-gray-700 shadow-xl leading-relaxed">
                 <PortableText value={about.qualifications} />
               </div>
             </div>
@@ -249,28 +249,28 @@ export default async function AboutPage() {
 
       {/* Certificates Section */}
       {certificates && certificates.length > 0 && (
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-gray-900">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <div className="p-2 bg-gold/10 rounded-lg">
                   <Award className="w-8 h-8 text-gold" />
                 </div>
-                <h2 className="text-4xl font-black text-navy">Naše certifikáty a dokumenty</h2>
+                <h2 className="text-4xl font-black text-navy dark:text-white">Naše certifikáty a dokumenty</h2>
               </div>
-              <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-6">
+              <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto mb-6">
                 Osvědčení o kvalifikaci a odbornosti
               </p>
-              <div className="max-w-3xl mx-auto bg-amber-50 border-2 border-amber-200 rounded-xl p-6 mb-8">
+              <div className="max-w-3xl mx-auto bg-amber-50 border-2 border-amber-200 dark:border-amber-600 rounded-xl p-6 mb-8">
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 bg-amber-500 rounded-lg flex items-center justify-center">
+                  <div className="flex-shrink-0 w-10 h-10 bg-amber-500 dark:bg-amber-600 rounded-lg flex items-center justify-center">
                     <Shield className="w-5 h-5 text-white" />
                   </div>
                   <div className="text-left">
-                    <h3 className="font-bold text-navy mb-2">Upozornění k citlivým údajům</h3>
-                    <p className="text-sm text-gray-700 leading-relaxed">
+                    <h3 className="font-bold text-navy dark:text-white mb-2">Upozornění k citlivým údajům</h3>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
                       Z důvodu ochrany osobních a citlivých údajů v souladu s legislativou zde zobrazujeme pouze ukázkové verze dokumentů s popisem. 
-                      <strong className="text-navy"> Originální dokumenty včetně nostrifikací a certifikátů rádi předložíme při osobním jednání s našimi zákazníky a obchodními partnery.</strong> Pro více informací nás neváhejte kontaktovat.
+                      <strong className="text-navy dark:text-white"> Originální dokumenty včetně nostrifikací a certifikátů rádi předložíme při osobním jednání s našimi zákazníky a obchodními partnery.</strong> Pro více informací nás neváhejte kontaktovat.
                     </p>
                   </div>
                 </div>
@@ -280,13 +280,13 @@ export default async function AboutPage() {
               {certificates.map((cert: any) => (
                 <div
                   key={cert._id}
-                  className="group bg-linear-to-br from-gray-50 to-white rounded-2xl overflow-hidden border-2 border-gray-100 hover:border-gold/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 relative"
+                  className="group bg-linear-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-2xl overflow-hidden border-2 border-gray-100 dark:border-gray-700 hover:border-gold/50 dark:hover:border-gold/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 relative"
                 >
-                  <div className="absolute top-4 right-4 z-10 bg-amber-500/90 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                  <div className="absolute top-4 right-4 z-10 bg-amber-500/90 dark:bg-amber-600/90 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
                     UKÁZKA
                   </div>
                   {cert.image && (
-                    <div className="relative h-72 w-full bg-white p-6 border-b-2 border-gray-100">
+                    <div className="relative h-72 w-full bg-white dark:bg-gray-800 p-6 border-b-2 border-gray-100 dark:border-gray-700">
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-gray-300 text-6xl font-black opacity-10 rotate-[-25deg] select-none pointer-events-none">
                           UKÁZKOVÝ<br/>OBRÁZEK
@@ -301,7 +301,7 @@ export default async function AboutPage() {
                     </div>
                   )}
                   <div className="p-6">
-                    <h3 className="text-lg font-bold text-navy mb-2 group-hover:text-gold transition-colors">
+                    <h3 className="text-lg font-bold text-navy dark:text-white mb-2 group-hover:text-gold dark:group-hover:text-gold transition-colors">
                       {cert.title}
                     </h3>
                     {cert.issuer && (
@@ -311,7 +311,7 @@ export default async function AboutPage() {
                       </div>
                     )}
                     {cert.issueDate && (
-                      <p className="text-sm text-gray-500 mb-3">
+                      <p className="text-sm text-gray-500 dark:text-gray-300 mb-3">
                         {new Date(cert.issueDate).toLocaleDateString("cs-CZ", {
                           year: "numeric",
                           month: "long",
@@ -319,9 +319,9 @@ export default async function AboutPage() {
                       </p>
                     )}
                     {cert.description && (
-                      <p className="text-gray-600 text-sm leading-relaxed mb-4">{cert.description}</p>
+                      <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">{cert.description}</p>
                     )}
-                    <p className="text-xs text-amber-600 font-semibold bg-amber-50 px-3 py-2 rounded-lg border border-amber-200">
+                    <p className="text-xs text-amber-600 dark:text-amber-400 font-semibold bg-amber-50 dark:bg-amber-600 px-3 py-2 rounded-lg border border-amber-200 dark:border-amber-400">
                       ✓ Originál k nahlédnutí při osobním jednání
                     </p>
                   </div>
