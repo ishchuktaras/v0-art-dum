@@ -11,7 +11,7 @@ import { PortableText } from "next-sanity"
 export const metadata: Metadata = {
   title: "O nás | 23 let zkušeností ve stavebnictví | ART DUM Třebíč",
   description:
-    "Poznejte tým stavební firmy ART DUM. 23 let zkušeností v Třebíči a okolí. Kvalifikovaní odborníci s certifikáty, nostrifikací vzdělání. Férová cena, rychlost, kvalita.",
+    "Stavební firma ART DUM s 23 lety zkušeností v Třebíči a okolí. Specialisté na rekonstrukce bytů, domů a zateplení fasád. Kvalifikovaní odborníci s nostrifikací vzdělání a certifikáty.",
   keywords: [
     "o firmě ART DUM",
     "tým stavební firmy",
@@ -39,24 +39,24 @@ export default async function AboutPage() {
   // Fallback data pokud v Sanity nejsou data
   const defaultAbout = {
     heroHeading: "O firmě ART DUM",
-    heroSubheading: "Jsme profesionální stavební firma s dlouholetými zkušenostmi v regionu Třebíč a okolí.",
+    heroSubheading: "Profesionální stavební služby s 23 lety zkušeností",
     experience: "23 let zkušeností",
     story: null,
     teamMembers: [],
     usp: [
       {
-        title: "Přijatelná cena",
-        description: "Transparentní cenové kalkulace bez skrytých poplatků",
+        title: "Férová cena",
+        description: "Transparentní kalkulace bez skrytých poplatků",
         icon: "DollarSign",
       },
       {
         title: "Rychlost",
-        description: "Dodržování termínů a efektivní realizace projektů",
+        description: "Dodržování termínů a efektivní realizace",
         icon: "Zap",
       },
       {
         title: "Kvalita",
-        description: "Profesionální provedení s důrazem na detail",
+        description: "Precizní práce a dlouhá záruka",
         icon: "Star",
       },
     ],
@@ -98,13 +98,14 @@ export default async function AboutPage() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-gold/10 text-gold px-4 py-2 rounded-full text-sm font-semibold mb-6 animate-fade-in">
               <Sparkles className="w-4 h-4" />
-              <span>Profesionální stavební řešení od roku 2001</span>
+              <span>Profesionální stavební řešení s 23 lety zkušeností</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent leading-tight">
               O firmě ART DUM
             </h1>
             <p className="text-xl text-white/80 leading-relaxed mb-8">
-              Jsme specialisté na rekonstrukce bytů, domů a zateplení fasád v Třebíči a okolí. Firma vedená Olenem Kostyshynem s mateřskou firmou 23 let na trhu.
+              Jsme specialisté na rekonstrukce bytů, domů a zateplení fasád v Třebíči a okolí (kraj Vysočina). 
+              Firma vedená Olenem Kulishem s mateřskou firmou 23 let na trhu přináší zkušenosti, kvalitu a spolehlivost.
             </p>
           </div>
         </div>
@@ -165,7 +166,7 @@ export default async function AboutPage() {
                 return (
                   <div
                     key={index}
-                    className="group relative bg-white dark:bg-gray-800 p-8 rounded-2xl border-2 border-gray-100 dark:border-gray-700 hover:border-gold/50 dark:hover:border-gold/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+                    className="group relative bg-card dark:bg-gray-800 p-8 rounded-2xl border-2 border-border dark:border-gray-700 hover:border-gold/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent dark:from-gold/10 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
                     <div className="relative">
@@ -237,9 +238,23 @@ export default async function AboutPage() {
                 <div className="p-2 bg-gold/10 rounded-lg">
                   <Award className="w-8 h-8 text-gold" />
                 </div>
-                <h2 className="text-4xl font-black text-navy dark:text-white">Kvalifikace a certifikace</h2>
+                <h2 className="text-4xl font-black text-navy dark:text-white">Kvalifikace a nostrifikace</h2>
               </div>
               <div className="prose prose-lg max-w-none text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 p-10 rounded-2xl border-2 border-gray-100 dark:border-gray-700 shadow-xl leading-relaxed">
+                <p className="text-lg leading-relaxed">
+                  <strong>Oleh Kulish</strong>, majitel a jednatel firmy ART DUM, disponuje nostrifikovaným vzděláním 
+                  z oboru <strong>kvalifikovaný pracovník stavebních prací</strong> (č. AK: 21981987, vydané Střední 
+                  odborné technické učiliště č. 12, město Mižhirja, Ukrajina, 2003).
+                </p>
+                <p className="text-lg leading-relaxed mt-4">
+                  Vzděl ání bylo <strong>nostrifikováno Krajským úřadem kraje Vysočina</strong> dne 15. 10. 2024 
+                  s platností v České republice. Nostrifikace potvrzuje rovnocennost zahraničního vzdělání 
+                  s českým systémem a umožňuje výkon kvalifikované stavební činnosti v souladu s českými předpisy.
+                </p>
+                <p className="text-lg leading-relaxed mt-4">
+                  Kombinace <strong>23 let praktických zkušeností</strong> s oficiálně uznanou kvalifikací 
+                  je zárukou profesionality a odbornosti našich služeb.
+                </p>
                 <PortableText value={about.qualifications} />
               </div>
             </div>

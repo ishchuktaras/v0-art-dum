@@ -29,28 +29,20 @@ interface PortfolioProject {
 }
 
 export const metadata: Metadata = {
-  title: "Portfolio stavebních prací | Rekonstrukce Třebíč | ART DUM",
+  title: "Portfolio | Realizované projekty | ART DUM Třebíč",
   description:
-    "Prohlédněte si naše realizované stavební projekty v Třebíči a okolí. Fotografie před a po rekonstrukci bytů, domů, zateplení. 150+ úspěšných projektů.",
+    "Fotografie našich dokončených projektů v Třebíči a okolí. Rekonstrukce bytů a domů, zateplení fasád, stavby na klíč. 23 let zkušeností.",
   keywords: [
-    "portfolio stavební firma",
-    "rekonstrukce fotografie",
-    "před a po",
-    "reference stavby Třebíč",
+    "portfolio stavby Třebíč",
+    "fotografie rekonstrukcí",
+    "reference ART DUM",
     "realizované projekty",
+    "před a po rekonstrukci",
   ],
   openGraph: {
-    title: "Portfolio stavebních prací | ART DUM",
-    description: "150+ realizovaných projektů. Fotografie před a po rekonstrukci bytů a domů v Třebíči.",
+    title: "Portfolio realizovaných projektů | ART DUM",
+    description: "Prohlédněte si naše dokončené stavební projekty v Třebíči a okolí.",
     url: "https://artdum.cz/portfolio",
-    images: [
-      {
-        url: "https://artdum.cz/og-portfolio.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Portfolio ART DUM",
-      },
-    ],
   },
   alternates: {
     canonical: "https://artdum.cz/portfolio",
@@ -120,11 +112,11 @@ export default async function PortfolioPage() {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <span>150+ realizovaných projektů</span>
+                <span>23 let zkušeností</span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">Portfolio našich prací</h1>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">Naše realizace</h1>
               <p className="text-xl md:text-2xl text-white/80 leading-relaxed">
-                Podívejte se na ukázky našich realizovaných projektů. Fotografie před a po rekonstrukci mluví za vše.
+                Jsme hrdí na každý dokončený projekt. Každá stavba je pro nás výzvou a reference našeho řemeslného umu.
               </p>
             </div>
           </div>
@@ -219,20 +211,20 @@ export default async function PortfolioPage() {
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center max-w-5xl mx-auto">
               <div className="group">
-                <div className="text-5xl md:text-6xl font-black bg-gradient-to-br from-gold to-gold/70 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">150+</div>
-                <p className="text-sm md:text-base font-semibold text-gray-700">realizovaných projektů</p>
+                <div className="text-5xl md:text-6xl font-black bg-gradient-to-br from-gold to-gold/70 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">23</div>
+                <p className="text-sm md:text-base font-semibold text-gray-700 dark:text-gray-300">let zkušeností</p>
               </div>
               <div className="group">
-                <div className="text-5xl md:text-6xl font-black bg-gradient-to-br from-gold to-gold/70 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">23</div>
-                <p className="text-sm md:text-base font-semibold text-gray-700">let na trhu</p>
+                <div className="text-5xl md:text-6xl font-black bg-gradient-to-br from-gold to-gold/70 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">150+</div>
+                <p className="text-sm md:text-base font-semibold text-gray-700 dark:text-gray-300">dokončených projektů</p>
               </div>
               <div className="group">
                 <div className="text-5xl md:text-6xl font-black bg-gradient-to-br from-gold to-gold/70 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">100%</div>
-                <p className="text-sm md:text-base font-semibold text-gray-700">spokojených klientů</p>
+                <p className="text-sm md:text-base font-semibold text-gray-700 dark:text-gray-300">spokojených klientů</p>
               </div>
               <div className="group">
-                <div className="text-5xl md:text-6xl font-black bg-gradient-to-br from-gold to-gold/70 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">5★</div>
-                <p className="text-sm md:text-base font-semibold text-gray-700">průměrné hodnocení</p>
+                <div className="text-5xl md:text-6xl font-black bg-gradient-to-br from-gold to-gold/70 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">24h</div>
+                <p className="text-sm md:text-base font-semibold text-gray-700 dark:text-gray-300">reakce na poptávku</p>
               </div>
             </div>
           </div>
