@@ -156,7 +156,7 @@ export default async function ServicesPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      {/* <Header /> */}
+      <Header />
 
       <main className="flex-1">
         <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden">
@@ -178,15 +178,15 @@ export default async function ServicesPage() {
           </div>
         </section>
 
-        <section className="py-20">
+        <section className="py-20 bg-background text-foreground">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {services.map((service: any, index: number) => (
-                <Card key={service._id || index} className="group relative overflow-hidden border-2 border-gray-100 hover:border-gold/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-                  <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <Card key={service._id || index} className="group relative overflow-hidden border-2 border-border bg-card text-card-foreground hover:border-accent/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   <CardHeader className="relative">
                     {service.image && (
-                      <div className="relative w-full h-48 rounded-lg overflow-hidden mb-4">
+                      <div className="relative w-full h-48 rounded-lg overflow-hidden mb-4 bg-muted">
                         <img
                           src={urlFor(service.image)?.width(400).height(250).url() || "/placeholder.svg"}
                           alt={service.image.alt || service.title}
@@ -194,14 +194,14 @@ export default async function ServicesPage() {
                         />
                       </div>
                     )}
-                    <div className="w-16 h-16 bg-gradient-to-br from-gold to-gold/80 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-gold/20 group-hover:scale-110 transition-transform">
-                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-accent/20 group-hover:scale-110 transition-transform">
+                      <svg className="w-8 h-8 text-accent-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={`M${service.icon}`} />
                       </svg>
                     </div>
-                    <CardTitle className="text-2xl mb-2 group-hover:text-gold transition-colors">{service.title}</CardTitle>
-                    <CardDescription className="text-base leading-relaxed">{service.shortDescription}</CardDescription>
-                    {service.price && <p className="text-gold font-semibold mt-3">{service.price}</p>}
+                    <CardTitle className="text-2xl mb-2 group-hover:text-accent transition-colors">{service.title}</CardTitle>
+                    <CardDescription className="text-base leading-relaxed text-muted-foreground">{service.shortDescription}</CardDescription>
+                    {service.price && <p className="text-accent font-semibold mt-3">{service.price}</p>}
                   </CardHeader>
                   {service.features && service.features.length > 0 && (
                     <CardContent className="relative">
@@ -209,14 +209,14 @@ export default async function ServicesPage() {
                         {service.features.map((feature: string, idx: number) => (
                           <li key={idx} className="flex items-start">
                             <svg
-                              className="w-5 h-5 text-gold mr-2 shrink-0 mt-0.5"
+                              className="w-5 h-5 text-accent mr-2 shrink-0 mt-0.5"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
                             >
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                             </svg>
-                            <span className="text-sm text-gray-600">{feature}</span>
+                            <span className="text-sm text-muted-foreground">{feature}</span>
                           </li>
                         ))}
                       </ul>
@@ -229,35 +229,35 @@ export default async function ServicesPage() {
         </section>
 
         {/* Why Choose Us */}
-        <section className="py-16 bg-muted">
+        <section className="py-16 bg-muted/50">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Proč si vybrat nás?</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Proč si vybrat nás?</h2>
               <p className="text-lg text-muted-foreground">Našim klientům nabízíme mnohem víc než jen kvalitní práci</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="text-center">
-                <div className="text-4xl font-black text-gold mb-2">23+</div>
-                <p className="font-semibold mb-1">let zkušeností</p>
+              <div className="text-center p-6 rounded-xl bg-card shadow-sm border border-border">
+                <div className="text-4xl font-black text-accent mb-2">23+</div>
+                <p className="font-semibold mb-1 text-foreground">let zkušeností</p>
                 <p className="text-sm text-muted-foreground">Ve stavebnictví</p>
               </div>
 
-              <div className="text-center">
-                <div className="text-4xl font-black text-gold mb-2">100%</div>
-                <p className="font-semibold mb-1">spokojených klientů</p>
+              <div className="text-center p-6 rounded-xl bg-card shadow-sm border border-border">
+                <div className="text-4xl font-black text-accent mb-2">100%</div>
+                <p className="font-semibold mb-1 text-foreground">spokojených klientů</p>
                 <p className="text-sm text-muted-foreground">Vraťte se k nám</p>
               </div>
 
-              <div className="text-center">
-                <div className="text-4xl font-black text-gold mb-2">5★</div>
-                <p className="font-semibold mb-1">hodnocení</p>
+              <div className="text-center p-6 rounded-xl bg-card shadow-sm border border-border">
+                <div className="text-4xl font-black text-accent mb-2">5★</div>
+                <p className="font-semibold mb-1 text-foreground">hodnocení</p>
                 <p className="text-sm text-muted-foreground">Na Firmy.cz</p>
               </div>
 
-              <div className="text-center">
-                <div className="text-4xl font-black text-gold mb-2">24/7</div>
-                <p className="font-semibold mb-1">dostupnost</p>
+              <div className="text-center p-6 rounded-xl bg-card shadow-sm border border-border">
+                <div className="text-4xl font-black text-accent mb-2">24/7</div>
+                <p className="font-semibold mb-1 text-foreground">dostupnost</p>
                 <p className="text-sm text-muted-foreground">Pro havarijní případy</p>
               </div>
             </div>
@@ -290,7 +290,7 @@ export default async function ServicesPage() {
         </section>
       </main>
 
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }

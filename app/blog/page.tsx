@@ -92,17 +92,17 @@ export default async function BlogPage() {
       </section>
 
       {/* Blog Posts */}
-      <section className="py-16">
+      <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           {posts && posts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {posts.map((post) => (
                 <article
                   key={post._id}
-                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                  className="bg-card text-card-foreground rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-border"
                 >
                   <Link href={`/blog/${post.slug.current}`}>
-                    <div className="relative h-48 w-full">
+                    <div className="relative h-48 w-full bg-muted">
                       {post.featuredImage ? (
                         <Image
                           src={urlFor(post.featuredImage)?.width(600).height(400).url() || "/placeholder.svg"}
@@ -129,14 +129,14 @@ export default async function BlogPage() {
                     )}
 
                     <Link href={`/blog/${post.slug.current}`}>
-                      <h2 className="text-xl font-bold text-primary mb-3 hover:text-accent transition-colors">
+                      <h2 className="text-xl font-bold text-foreground mb-3 hover:text-accent transition-colors">
                         {post.title}
                       </h2>
                     </Link>
 
-                    <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
+                    <p className="text-muted-foreground mb-4 line-clamp-3">{post.excerpt}</p>
 
-                    <div className="flex items-center justify-between text-sm text-gray-500 pt-4 border-t border-gray-100">
+                    <div className="flex items-center justify-between text-sm text-muted-foreground pt-4 border-t border-border">
                       <div className="flex items-center gap-1">
                         <User className="w-4 h-4" />
                         <span>{post.author || "ART DUM"}</span>
@@ -161,8 +161,8 @@ export default async function BlogPage() {
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent/10 mb-4">
                 <Tag className="w-8 h-8 text-accent" />
               </div>
-              <h2 className="text-2xl font-bold text-primary mb-2">Zatím zde nejsou žádné články</h2>
-              <p className="text-gray-600 max-w-md mx-auto">
+              <h2 className="text-2xl font-bold text-foreground mb-2">Zatím zde nejsou žádné články</h2>
+              <p className="text-muted-foreground max-w-md mx-auto">
                 Brzy zde najdete zajímavé články, tipy a aktuality ze světa stavebnictví.
               </p>
             </div>

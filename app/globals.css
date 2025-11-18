@@ -7,7 +7,7 @@
 :root {
   /* Light Mode - Vylepšené pro maximální čitelnost */
   --background: #ffffff;
-  --foreground: #0B192F;
+  --foreground: #0B192F; /* Tmavě modrá pro text na bílém pozadí */
   --card: #ffffff;
   --card-foreground: #0B192F;
   --popover: #ffffff;
@@ -73,9 +73,9 @@
 
 .dark {
   /* Dark Mode - Optimalizované pro maximální čitelnost */
-  --background: #0B192F;
-  --foreground: #f1f5f9;
-  --card: #1e293b;
+  --background: #0B192F; /* Tmavě modrá pro pozadí */
+  --foreground: #f1f5f9; /* Světlá pro text */
+  --card: #1e293b; /* Tmavší modrá pro karty */
   --card-foreground: #f1f5f9;
   --popover: #1e293b;
   --popover-foreground: #f1f5f9;
