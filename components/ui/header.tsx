@@ -5,7 +5,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { useState, useEffect } from "react"
 import { usePathname } from 'next/navigation'
-import { Home, Building2, Wrench, Briefcase, Star, BookOpen, Phone, Menu, X } from 'lucide-react'
+import { Home, Building2, Wrench, DollarSign, Briefcase, Star, BookOpen, Phone, Menu, X } from 'lucide-react'
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export function Header() {
@@ -33,6 +33,7 @@ export function Header() {
     { href: "/", label: "Domů", icon: Home },
     { href: "/o-nas", label: "O nás", icon: Building2 },
     { href: "/sluzby", label: "Služby", icon: Wrench },
+    { href: "/cenik", label: "Ceník", icon: DollarSign },
     { href: "/portfolio", label: "Portfolio", icon: Briefcase },
     { href: "/hodnoceni", label: "Hodnocení", icon: Star },
     { href: "/blog", label: "Blog", icon: BookOpen },
