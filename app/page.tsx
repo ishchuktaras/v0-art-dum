@@ -145,7 +145,7 @@ export default async function HomePage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-hero text-white py-20 md:py-32 overflow-hidden">
+        <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden">
           <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto">
@@ -185,7 +185,7 @@ export default async function HomePage() {
         </section>
 
         {/* USP Section */}
-        <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
+        <section className="py-16 md:py-24 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">Proč zvolit ART DUM</h2>
@@ -245,7 +245,7 @@ export default async function HomePage() {
         </section>
 
         {/* Services Preview */}
-        <section className="py-12 md:py-16 bg-background">
+        <section className="py-12 md:py-16 bg-muted/50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-8 md:mb-12">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4 text-foreground">Naše služby</h2>
@@ -295,7 +295,7 @@ export default async function HomePage() {
         </section>
 
         {/* CTA Section */}
-        <section className="relative bg-hero text-white py-16 md:py-24 overflow-hidden">
+        <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-16 md:py-24 overflow-hidden">
           <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
           <div className="container mx-auto px-4 text-center relative z-10">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-6 leading-tight">Máte projekt? Kontaktujte nás!</h2>

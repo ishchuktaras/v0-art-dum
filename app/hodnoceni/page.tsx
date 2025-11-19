@@ -111,8 +111,7 @@ export default async function HodnoceniPage() {
         </div>
       </section>
 
-      {/* Firmy.cz Widget Section */}
-      <section className="py-16 bg-card/50">
+      <section className="py-16 bg-muted/50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="bg-card border border-border rounded-lg p-8 shadow-lg">
@@ -147,9 +146,8 @@ export default async function HodnoceniPage() {
         </div>
       </section>
 
-      {/* Internal Reviews from Sanity */}
       {reviews.length > 0 && (
-        <section className="py-16">
+        <section className="py-16 bg-background">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12">Další reference</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">

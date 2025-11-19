@@ -140,7 +140,7 @@ export default async function PortfolioPage() {
         </section>
 
         {/* Projects Grid */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-background">
           <div className="container mx-auto px-4">
             {projects.length === 0 ? (
               <div className="text-center py-12">
@@ -207,7 +207,7 @@ export default async function PortfolioPage() {
         </section>
 
         {/* Stats Section */}
-        <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
+        <section className="py-16 bg-muted/50">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center max-w-5xl mx-auto">
               <div className="group">
