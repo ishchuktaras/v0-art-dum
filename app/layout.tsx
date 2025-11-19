@@ -6,6 +6,7 @@ import { CookieConsent } from "@/components/cookie-consent"
 import { ConditionalLayout } from "@/components/conditional-layout"
 import { Toaster } from "@/components/ui/sonner"
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { WhatsAppButton } from '@/components/whatsapp-button'
 import { ThemeProvider } from '@/components/theme-provider'
 
@@ -61,6 +62,7 @@ export default function RootLayout({
           <CookieConsent />
           <Toaster />
           <Analytics />
+          <SpeedInsights />
           <WhatsAppButton />
         </ThemeProvider>
       </body>
