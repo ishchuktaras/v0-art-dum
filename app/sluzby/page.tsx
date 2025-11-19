@@ -7,21 +7,24 @@ import { urlFor } from "@/sanity/lib/image"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Stavební služby Třebíč | Rekonstrukce, Stavby na klíč, Zateplení | ART DUM",
+  title: "Stavební služby Třebíč | Kompletní stavební práce na klíč | ART DUM",
   description:
-    "Kompletní stavební služby v Třebíči a okolí: rekonstrukce bytů a domů, stavby na klíč, zednické práce, zateplení, opravy, komerční prostory. 23 let zkušeností. ☎ +420 774 335 592",
+    "Kompletní stavební a řemeslné práce na klíč v Třebíči. Pracujeme s ekologickými materiály KEIM a dekorativními stěrkami. Zateplení, střechy, fasády, podlahy, svářečské práce. ☎ +420 774 335 592",
   keywords: [
-    "stavební služby Třebíč",
-    "rekonstrukce bytů Třebíč",
-    "stavby na klíč",
+    "stavební práce Třebíč",
     "zednické práce",
-    "zateplení budov",
-    "opravy domů",
-    "komerční prostory",
+    "zateplení Třebíč",
+    "střechy Třebíč",
+    "podlahy",
+    "fasády",
+    "svářečské práce",
+    "KEIM materiály",
+    "dekorativní stěrky",
+    "demolice eternitu",
   ],
   openGraph: {
     title: "Stavební služby Třebíč | ART DUM",
-    description: "Kompletní stavební služby: rekonstrukce, stavby na klíč, zateplení, opravy. 23 let zkušeností.",
+    description: "Kompletní stavební a řemeslné práce na klíč. Ekologické materiály KEIM, dekorativní stěrky. 23 let zkušeností.",
     url: "https://artdum.cz/sluzby",
   },
   alternates: {
@@ -31,88 +34,164 @@ export const metadata: Metadata = {
 
 const fallbackServices = [
   {
-    title: "Rekonstrukce bytů a domů",
+    title: "Zednické a stavební práce",
     shortDescription:
-      "Kompletní rekonstrukce od A do Z včetně bourání, nových rozvodů, SDK konstrukcí, obkladů a malování. Důraz na kvalitu a dodržení termínů.",
+      "Kompletní zednické služby od oklepání staré omítky až po finální úpravy. Pracujeme s ekologickými materiály KEIM a dekorativními stěrkami renomovaných evropských značek.",
     features: [
-      "Bourací a demoliční práce",
-      "Elektroinstalace a rozvody vody",
-      "Sádrokartonové konstrukce",
-      "Obklady a dlažby",
-      "Malířské a natěračské práce",
-      "Pokládka podlahových krytin",
+      "Oklepání a odstranění staré omítky",
+      "Ruční omítky (sádrová, jádrová, Rotband)",
+      "Ekologické omítky KEIM",
+      "Dekorativní stěrky",
+      "Stěrkování a příprava povrchů",
+      "Malování interiérů a exteriérů",
+      "Montáž elektroinstalace",
+      "Montáž sanitárních rozvodů včetně kanalizace",
     ],
+    price: "Dle domluvy",
+    icon: "hammer",
+  },
+  {
+    title: "Podlahy",
+    shortDescription:
+      "Kompletní pokládka všech typů podlah včetně montáže podlahového topení a přípravy podkladu. Od samonivelačních podlah až po keramiku a dřevo.",
+    features: [
+      "Montáž podlahového topení",
+      "Betonový potěr pro podlahové topení",
+      "Samonivelační podlahy",
+      "Laminátová podlaha",
+      "Vinylová podlaha",
+      "Keramická dlažba",
+      "Dřevěná podlaha",
+      "Linoleová podlaha",
+    ],
+    price: "Od 500 Kč/m²",
+    icon: "square",
+  },
+  {
+    title: "Stropy",
+    shortDescription:
+      "Montáž sádrokartonových konstrukcí a různé druhy omítek na stropy. Precizní provedení s důrazem na kvalitu povrchu.",
+    features: [
+      "Sádrokartonové konstrukce",
+      "Různé druhy omítek na stropy",
+      "Podhledy",
+      "Zvuková izolace stropů",
+    ],
+    price: "Od 600 Kč/m²",
+    icon: "layers",
+  },
+  {
+    title: "Montážní práce",
+    shortDescription:
+      "Komplexní montážní služby - dveře, okna, parapety a elektroinstalace. Zajistíme precizní instalaci s garancí kvality.",
+    features: [
+      "Montáž dveří",
+      "Montáž oken",
+      "Montáž parapetů/podvěkoníků (PVC, dřevo, kámen, MDF, hliník)",
+      "Kompletní elektroinstalace",
+    ],
+    price: "Dle domluvy",
+    icon: "wrench",
+  },
+  {
+    title: "Zemní práce",
+    shortDescription:
+      "Výkopy pro drenáž, pokládka zámkové dlažby, montáž obrubníků a plotů. Práce ručně i mechanizací.",
+    features: [
+      "Výkopy pro drenáž (ručně i mechanizací)",
+      "Montáž obrubníků",
+      "Pokládka zámkové dlažby",
+      "Montáž plotů jakékoli složitosti",
+    ],
+    price: "Od 800 Kč/m²",
+    icon: "mountain",
+  },
+  {
+    title: "Fasády a zateplení",
+    shortDescription:
+      "Zateplení fasád polystyrenem nebo minerální vatou včetně povrchových úprav a dekorativních omítek.",
+    features: [
+      "Zateplení fasády polystyrenem",
+      "Zateplení fasády minerální vatou",
+      "Povrchové úpravy",
+      "Dekorativní omítky",
+    ],
+    price: "Od 1 200 Kč/m²",
     icon: "home",
   },
   {
-    title: "Stavby a přístavby na klíč",
+    title: "Střechy",
     shortDescription:
-      "Výstavba rodinných domů, garáží, pergol a přístaveb. Zajistíme kompletní realizaci včetně projektové dokumentace a komunikace s úřady.",
+      "Montáž střech z pálené tašky i plechových střech jakékoli složitosti. Kompletní realizace včetně krovu.",
     features: [
-      "Rodinné domy na klíč",
-      "Přístavby a nástavby",
-      "Garáže a carporty",
-      "Pergoly a zahradní domky",
-      "Projektová dokumentace",
-      "Koordinace subdodavatelů",
+      "Montáž střech z pálené tašky",
+      "Montáž plechových střech jakékoli složitosti",
+      "Výstavba krovu",
+      "Střešní izolace",
     ],
-    icon: "building",
+    price: "Dle domluvy",
+    icon: "triangle",
   },
   {
-    title: "Zateplení fasád",
+    title: "Zahradní úpravy",
     shortDescription:
-      "Kontaktní zateplovací systémy (ETICS) pro snížení nákladů na vytápění. Minerální vlna i polystyren. Kompletní realizace včetně lešení.",
+      "Zakládání trávníků a výsadba okrasných stromů pro kompletní zahradní úpravy.",
     features: [
-      "ETICS systémy",
-      "Minerální vata a polystyren",
-      "Zateplení soklů",
-      "Fasádní omítky a nátěry",
-      "Sanace vlhkého zdiva",
-      "Dotační podpora",
+      "Zakládání trávníků",
+      "Výsadba okrasných stromů",
+      "Terénní úpravy",
     ],
-    icon: "shield",
+    price: "Od 300 Kč/m²",
+    icon: "trees",
   },
   {
-    title: "Zednické práce",
+    title: "Komíny",
     shortDescription:
-      "Profesionální zednické služby - zdění, omítky, betonáže, obklady. Precizní provedení s důrazem na čistotu staveniště.",
+      "Montáž sendvičových i keramických komínových systémů s garancí bezpečnosti a funkčnosti.",
     features: [
-      "Zdění z cihel a tvárnic",
-      "Vnitřní a vnější omítky",
-      "Betonové konstrukce",
-      "Obklady a dlažby",
-      "Opravy fasád",
-      "Zateplení příček",
+      "Montáž sendvičových komínových systémů",
+      "Montáž keramických komínových systémů",
     ],
-    icon: "brick",
+    price: "Dle domluvy",
+    icon: "flame",
   },
   {
-    title: "Střechy a klempířské práce",
+    title: "Základy",
     shortDescription:
-      "Kompletní střešní systémy, opravy střech, klempířské prvky. Od krovu přes izolace až po krytinu a žlaby.",
+      "Obložení základů dekorativním nebo štípaným kamenem pro elegantní a odolný vzhled.",
     features: [
-      "Výstavba krovů",
-      "Pokládka střešní krytiny",
-      "Střešní okna a světlíky",
-      "Klempířské prvky",
-      "Opravy a rekonstrukce střech",
-      "Okapové systémy",
+      "Obložení základů dekorativním kamenem",
+      "Obložení základů štípaným kamenem",
     ],
-    icon: "roof",
+    price: "Od 1 500 Kč/m²",
+    icon: "box",
   },
   {
-    title: "Komerční prostory",
+    title: "Další služby",
     shortDescription:
-      "Rekonstrukce obchodů, restaurací, kanceláří a výstavních prostor. Rychlá realizace s minimalizací prostojů provozu.",
+      "Montáž okapů, demolice objektů a profesionální demontáž eternitu s ekologickou likvidací.",
     features: [
-      "Obchody a showroomy",
-      "Restaurace a kavárny",
-      "Kanceláře",
-      "Výstavní prostory",
-      "Hygienické zázemí",
-      "Práce mimo provozní dobu",
+      "Montáž okapů a žlabů",
+      "Demontáž příček",
+      "Kompletní demolice objektů",
+      "Profesionální demontáž eternitu (azbestu)",
+      "Ekologická likvidace eternitu",
     ],
-    icon: "store",
+    price: "Dle domluvy",
+    icon: "more-horizontal",
+  },
+  {
+    title: "Svářečské práce",
+    shortDescription:
+      "Profesionální svářečské práce MIG/MAG a MMA. Výroba a montáž ocelových konstrukcí, bran, plotů a výztuží.",
+    features: [
+      "MIG/MAG svařování (ocelové konstrukce, brány, ploty, výztuže)",
+      "MMA svařování (silné materiály, konstrukční díly, opravy)",
+      "Výroba kovových konstrukcí",
+      "Montáž kovových konstrukcí",
+    ],
+    price: "Dle domluvy",
+    icon: "zap",
   },
 ]
 
@@ -161,14 +240,16 @@ export default async function ServicesPage() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-gold/10 text-gold px-4 py-2 rounded-full text-sm font-semibold mb-6">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
               </svg>
-              <span>Kompletní stavební řešení</span>
+              <span>Ekologické materiály KEIM</span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">Naše služby</h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
+              Kompletní stavební a řemeslné práce – vše na klíč
+            </h1>
             <p className="text-xl md:text-2xl text-white/80 leading-relaxed">
-              Poskytujeme komplexní stavební služby s důrazem na kvalitu, přesnost a spokojenost zákazníka. S 23 lety
-              zkušeností víme, jak na to.
+              Pracujeme s ekologickými materiály KEIM a s dekorativními stěrkami renomovaných evropských značek. 
+              Realizujeme zakázky ve starém i moderním designu dle přání zákazníka.
             </p>
           </div>
         </div>

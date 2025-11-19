@@ -1,6 +1,6 @@
 # Implementace obsahu do Sanity CMS
 
-Tento dokument obsahuje kompletní postup pro naplnění obsahu do Sanity Studio podle dodané specifikace.
+Tento dokument obsahuje kompletní postup pro naplnění obsahu do Sanity Studio podle dodané specifikace a textů od objednatele.
 
 ## Přístup do Sanity Studia
 
@@ -32,89 +32,179 @@ Tento dokument obsahuje kompletní postup pro naplnění obsahu do Sanity Studio
 
 ---
 
-## 2. Služby (Services)
+## 2. Služby (Services) - KOMPLETNÍ TEXTY OD OBJEDNATELE
 
 **Navigace v CMS:** Služby → Vytvořit nový dokument (pro každou službu)
 
-### Služba 1: Kompletní rekonstrukce bytů
+### Služba 1: Zednické a stavební práce
 
 | Pole | Hodnota |
 |------|---------|
-| **Název služby** | `Kompletní rekonstrukce bytů` |
-| **URL adresa (slug)** | Generovat automaticky (`kompletni-rekonstrukce-bytu`) |
-| **Krátký popis** | `Zajistíme kompletní rekonstrukci vašeho bytu od A do Z. Včetně projektu, koordinace řemesel a finálních úprav.` |
-| **Detailní popis** | (Rich text editor) Rozšířený text o službě, použité materiály, postup prací |
-| **Ikona služby** | `Home` |
-| **Obrázek služby** | Nahrát reprezentativní obrázek |
-| **Alternativní text** | `Rekonstrukce bytu - ART DUM` |
+| **Název služby** | `Zednické a stavební práce` |
+| **URL adresa (slug)** | `zednicke-a-stavebni-prace` |
+| **Krátký popis** | `Kompletní zednické služby od oklepání staré omítky až po finální úpravy. Pracujeme s ekologickými materiály KEIM a dekorativními stěrkami renomovaných evropských značek.` |
+| **Detailní popis** | (Rich text) Provádíme všechny druhy zednických prací s důrazem na kvalitu provedení a ekologické materiály. Specializujeme se na práci s dekorativními stěrkami pro moderní i historické stavby. |
+| **Ikona služby** | `Hammer` |
 | **Cenové rozmezí** | `Dle domluvy` |
-| **Klíčové vlastnosti** | <ul><li>Bourání a stavební práce</li><li>Elektroinstalace</li><li>Rozvody vody</li><li>SDK konstrukce</li><li>Podlahy a obklady</li></ul> |
+| **Klíčové vlastnosti** | <ul><li>Oklepání a odstranění staré omítky</li><li>Ruční omítky (sádrová, jádrová, Rotband)</li><li>Ekologické omítky KEIM</li><li>Dekorativní stěrky</li><li>Stěrkování a příprava povrchů</li><li>Malování interiérů a exteriérů</li><li>Montáž elektroinstalace</li><li>Montáž sanitárních rozvodů včetně kanalizace</li></ul> |
 | **Pořadí zobrazení** | `1` |
 | **Aktivní** | ✓ Zaškrtnuto |
 
-### Služba 2: Rekonstrukce rodinných domů
+### Služba 2: Podlahy
 
 | Pole | Hodnota |
 |------|---------|
-| **Název služby** | `Rekonstrukce rodinných domů` |
-| **URL adresa (slug)** | `rekonstrukce-rodinnych-domu` |
-| **Krátký popis** | `Provádíme celkové i částečné rekonstrukce rodinných domů s důrazem na kvalitu a dodržení termínů.` |
-| **Ikona služby** | `Building2` |
+| **Název služby** | `Podlahy` |
+| **URL adresa (slug)** | `podlahy` |
+| **Krátký popis** | `Kompletní pokládka všech typů podlah včetně montáže podlahového topení a přípravy podkladu. Od samonivelačních podlah až po keramiku a dřevo.` |
+| **Detailní popis** | (Rich text) Zajišťujeme profesionální pokládku všech typů podlah s garancí kvality. Specialita: montáž podlahového topení s betonovým potěrem. |
+| **Ikona služby** | `Square` |
+| **Cenové rozmezí** | `Od 500 Kč/m²` |
+| **Klíčové vlastnosti** | <ul><li>Montáž podlahového topení</li><li>Betonový potěr pro podlahové topení</li><li>Samonivelační podlahy</li><li>Laminátová podlaha</li><li>Vinylová podlaha</li><li>Keramická dlažba</li><li>Dřevěná podlaha</li><li>Linoleová podlaha</li></ul> |
 | **Pořadí zobrazení** | `2` |
 | **Aktivní** | ✓ Zaškrtnuto |
 
-### Služba 3: Zateplení a rekonstrukce fasád
+### Služba 3: Stropy
 
 | Pole | Hodnota |
 |------|---------|
-| **Název služby** | `Zateplení a rekonstrukce fasád` |
-| **URL adresa (slug)** | `zatepleni-a-rekonstrukce-fasad` |
-| **Krátký popis** | `Odborné zateplení fasád kontaktním nebo bezkontaktním systémem. Snížení energetické náročnosti budovy.` |
-| **Ikona služby** | `Paintbrush` |
+| **Název služby** | `Stropy` |
+| **URL adresa (slug)** | `stropy` |
+| **Krátký popis** | `Montáž sádrokartonových konstrukcí a různé druhy omítek na stropy. Precizní provedení s důrazem na kvalitu povrchu.` |
+| **Detailní popis** | (Rich text) SDK konstrukce všech typů včetně speciálních řešení pro zvukovou izolaci a podhledy. |
+| **Ikona služby** | `Layers` |
+| **Cenové rozmezí** | `Od 600 Kč/m²` |
+| **Klíčové vlastnosti** | <ul><li>Sádrokartonové konstrukce</li><li>Různé druhy omítek na stropy</li><li>Podhledy</li><li>Zvuková izolace stropů</li></ul> |
 | **Pořadí zobrazení** | `3` |
 | **Aktivní** | ✓ Zaškrtnuto |
 
-### Služba 4: Opravy a rekonstrukce střech
+### Služba 4: Montážní práce
 
 | Pole | Hodnota |
 |------|---------|
-| **Název služby** | `Opravy a rekonstrukce střech` |
-| **Krátký popis** | `Kompletní výměna střešní krytiny, opravy stávající střechy, odvětráv​ání a izolace.` |
-| **Ikona služby** | `Hammer` |
+| **Název služby** | `Montážní práce` |
+| **URL adresa (slug)** | `montazni-prace` |
+| **Krátký popis** | `Komplexní montážní služby - dveře, okna, parapety a elektroinstalace. Zajistíme precizní instalaci s garancí kvality.` |
+| **Detailní popis** | (Rich text) Montáž veškerých stavebních prvků včetně kompletní elektroinstalace. Pracujeme s materiály všech typů. |
+| **Ikona služby** | `Wrench` |
+| **Cenové rozmezí** | `Dle domluvy` |
+| **Klíčové vlastnosti** | <ul><li>Montáž dveří</li><li>Montáž oken</li><li>Montáž parapetů/podvěkoníků (PVC, dřevo, kámen, MDF, hliník)</li><li>Kompletní elektroinstalace</li></ul> |
 | **Pořadí zobrazení** | `4` |
 | **Aktivní** | ✓ Zaškrtnuto |
 
-### Služba 5: Elektroinstalační práce
+### Služba 5: Zemní práce
 
 | Pole | Hodnota |
 |------|---------|
-| **Název služby** | `Elektroinstalační práce` |
-| **Krátký popis** | `Rozvody elektriky, revize, instalace rozvaděčů a osvětlení podle platných norem.` |
-| **Ikona služby** | `Zap` |
+| **Název služby** | `Zemní práce` |
+| **URL adresa (slug)** | `zemni-prace` |
+| **Krátký popis** | `Výkopy pro drenáž, pokládka zámkové dlažby, montáž obrubníků a plotů. Práce ručně i mechanizací.` |
+| **Detailní popis** | (Rich text) Provádíme všechny druhy zemních prací včetně montáže plotů jakékoli složitosti. |
+| **Ikona služby** | `Mountain` |
+| **Cenové rozmezí** | `Od 800 Kč/m²` |
+| **Klíčové vlastnosti** | <ul><li>Výkopy pro drenáž (ručně i mechanizací)</li><li>Montáž obrubníků</li><li>Pokládka zámkové dlažby</li><li>Montáž plotů jakékoli složitosti</li></ul> |
 | **Pořadí zobrazení** | `5` |
 | **Aktivní** | ✓ Zaškrtnuto |
 
-### Služba 6: Stavba a rekonstrukce plotů
+### Služba 6: Fasády a zateplení
 
 | Pole | Hodnota |
 |------|---------|
-| **Název služby** | `Stavba a rekonstrukce plotů` |
-| **Krátký popis** | `Zděné ploty, gabiony, dřevěné ploty i moderní oplocení z profilovaného plechu.` |
-| **Ikona služby** | `Fence` |
+| **Název služby** | `Fasády a zateplení` |
+| **URL adresa (slug)** | `fasady-a-zatepleni` |
+| **Krátký popis** | `Zateplení fasád polystyrenem nebo minerální vatou včetně povrchových úprav a dekorativních omítek.` |
+| **Detailní popis** | (Rich text) Odborné zateplení s použitím certifikovaných materiálů. Dekorativní omítky pro moderní vzhled. |
+| **Ikona služby** | `Home` |
+| **Cenové rozmezí** | `Od 1 200 Kč/m²` |
+| **Klíčové vlastnosti** | <ul><li>Zateplení fasády polystyrenem</li><li>Zateplení fasády minerální vatou</li><li>Povrchové úpravy</li><li>Dekorativní omítky</li></ul> |
 | **Pořadí zobrazení** | `6` |
 | **Aktivní** | ✓ Zaškrtnuto |
 
-### Služba 7: Demontážní a bourací práce
+### Služba 7: Střechy
 
 | Pole | Hodnota |
 |------|---------|
-| **Název služby** | `Demontážní a bourací práce` |
-| **Krátký popis** | `Profesionální bourání, demolice, vyklízení suti a příprava staveniště pro novou výstavbu.` |
-| **Ikona služby** | `Trash2` |
+| **Název služby** | `Střechy` |
+| **URL adresa (slug)** | `strechy` |
+| **Krátký popis** | `Montáž střech z pálené tašky i plechových střech jakékoli složitosti. Kompletní realizace včetně krovu.` |
+| **Detailní popis** | (Rich text) Provádíme kompletní střešní práce od výstavby krovu až po finální krytinu. |
+| **Ikona služby** | `Triangle` |
+| **Cenové rozmezí** | `Dle domluvy` |
+| **Klíčové vlastnosti** | <ul><li>Montáž střech z pálené tašky</li><li>Montáž plechových střech jakékoli složitosti</li><li>Výstavba krovu</li><li>Střešní izolace</li></ul> |
 | **Pořadí zobrazení** | `7` |
 | **Aktivní** | ✓ Zaškrtnuto |
 
-**Poznámka:** Pro každou službu vytvořte samostatný dokument a publikujte.
+### Služba 8: Zahradní úpravy
+
+| Pole | Hodnota |
+|------|---------|
+| **Název služby** | `Zahradní úpravy` |
+| **URL adresa (slug)** | `zahradni-upravy` |
+| **Krátký popis** | `Zakládání trávníků a výsadba okrasných stromů pro kompletní zahradní úpravy.` |
+| **Detailní popis** | (Rich text) Komplexní zahradní úpravy včetně terénních úprav. |
+| **Ikona služby** | `Trees` |
+| **Cenové rozmezí** | `Od 300 Kč/m²` |
+| **Klíčové vlastnosti** | <ul><li>Zakládání trávníků</li><li>Výsadba okrasných stromů</li><li>Terénní úpravy</li></ul> |
+| **Pořadí zobrazení** | `8` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+### Služba 9: Komíny
+
+| Pole | Hodnota |
+|------|---------|
+| **Název služby** | `Komíny` |
+| **URL adresa (slug)** | `kominy` |
+| **Krátký popis** | `Montáž sendvičových i keramických komínových systémů s garancí bezpečnosti a funkčnosti.` |
+| **Detailní popis** | (Rich text) Odborná montáž komínových systémů podle aktuálních norem. |
+| **Ikona služby** | `Flame` |
+| **Cenové rozmezí** | `Dle domluvy` |
+| **Klíčové vlastnosti** | <ul><li>Montáž sendvičových komínových systémů</li><li>Montáž keramických komínových systémů</li></ul> |
+| **Pořadí zobrazení** | `9` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+### Služba 10: Základy
+
+| Pole | Hodnota |
+|------|---------|
+| **Název služby** | `Základy` |
+| **URL adresa (slug)** | `zaklady` |
+| **Krátký popis** | `Obložení základů dekorativním nebo štípaným kamenem pro elegantní a odolný vzhled.` |
+| **Detailní popis** | (Rich text) Ochrana a zútulnění základů budovy kamenným obkladem. |
+| **Ikona služby** | `Box` |
+| **Cenové rozmezí** | `Od 1 500 Kč/m²` |
+| **Klíčové vlastnosti** | <ul><li>Obložení základů dekorativním kamenem</li><li>Obložení základů štípaným kamenem</li></ul> |
+| **Pořadí zobrazení** | `10` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+### Služba 11: Další služby
+
+| Pole | Hodnota |
+|------|---------|
+| **Název služby** | `Další služby` |
+| **URL adresa (slug)** | `dalsi-sluzby` |
+| **Krátký popis** | `Montáž okapů, demolice objektů a profesionální demontáž eternitu s ekologickou likvidací.` |
+| **Detailní popis** | (Rich text) Doplňkové stavební služby včetně specializované demontáže azbestu. |
+| **Ikona služby** | `MoreHorizontal` |
+| **Cenové rozmezí** | `Dle domluvy` |
+| **Klíčové vlastnosti** | <ul><li>Montáž okapů a žlabů</li><li>Demontáž příček</li><li>Kompletní demolice objektů</li><li>Profesionální demontáž eternitu (azbestu)</li><li>Ekologická likvidace eternitu</li></ul> |
+| **Pořadí zobrazení** | `11` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+### Služba 12: Svářečské práce
+
+| Pole | Hodnota |
+|------|---------|
+| **Název služby** | `Svářečské práce` |
+| **URL adresa (slug)** | `svarecske-prace` |
+| **Krátký popis** | `Profesionální svářečské práce MIG/MAG a MMA. Výroba a montáž ocelových konstrukcí, bran, plotů a výztuží.` |
+| **Detailní popis** | (Rich text) Odborné svařování všech typů včetně výroby kovových konstrukcí na zakázku. |
+| **Ikona služby** | `Zap` |
+| **Cenové rozmezí** | `Dle domluvy` |
+| **Klíčové vlastnosti** | <ul><li>MIG/MAG svařování (ocelové konstrukce, brány, ploty, výztuže)</li><li>MMA svařování (silné materiály, konstrukční díly, opravy)</li><li>Výroba kovových konstrukcí</li><li>Montáž kovových konstrukcí</li></ul> |
+| **Pořadí zobrazení** | `12` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+**Poznámka:** Pro každou službu vytvořte samostatný dokument a publikujte. Všechny texty jsou od objednatele a zdůrazňují práci s ekologickými materiály KEIM a dekorativními stěrkami.
 
 ---
 
@@ -282,13 +372,14 @@ Ukázkový článek:
 Po dokončení naplnění obsahu zkontrolujte:
 
 - [ ] **Hlavní stránka** - vyplněna a publikována
-- [ ] **Všechny služby (7)** - vytvořeny a publikovány
+- [ ] **Všechny služby (12)** - vytvořeny a publikovány s texty od objednatele
 - [ ] **Portfolio (5 projektů)** - vytvořeno s fotografiemi před/po
 - [ ] **O nás** - vyplněna včetně USP
 - [ ] **Certifikáty** - nahrány všechny dodané dokumenty
 - [ ] **Kontaktní informace** - vyplněny správné údaje
 - [ ] Všechny obrázky mají **alternativní text**
 - [ ] Všechny dokumenty jsou **publikované** (zelené tlačítko "Publish")
+- [ ] Zdůrazněny **ekologické materiály KEIM** a **dekorativní stěrky**
 
 ---
 
@@ -315,9 +406,9 @@ Po dokončení naplnění obsahu zkontrolujte:
 
 ## Harmonogram implementace
 
-1. **Týden 1:** Hlavní stránka + Služby
+1. **Týden 1:** Hlavní stránka + Služby (všech 12 podle textů od objednatele)
 2. **Týden 2:** Portfolio (5 projektů) - čekání na podklady od Objednatele
 3. **Týden 3:** O nás + Certifikáty - čekání na skeny dokumentů
 4. **Týden 4:** Kontaktní informace + Finální kontrola
 
-**Status:** ✅ Připraveno k zahájení implementace
+**Status:** ✅ Aktualizováno s kompletními texty služeb od objednatele
