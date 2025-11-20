@@ -106,7 +106,7 @@ Tento dokument obsahuje kompletní postup pro naplnění obsahu do Sanity Studio
 | **Pořadí zobrazení** | `5` |
 | **Aktivní** | ✓ Zaškrtnuto |
 
-### Služba 6: FVýkopy pro drenáž, pokládka zámkové dlažby, montáž obrubníků a plotů. Práce ručně i mechanizacíasády a zateplení
+### Služba 6: Fasády a zateplení
 
 | Pole | Hodnota |
 |------|---------|
