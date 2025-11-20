@@ -152,14 +152,14 @@ export default function FAQPage() {
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/kontakt"
-                className="inline-flex items-center gap-2 rounded-lg bg-primary-gold px-6 py-3 font-semibold text-navy-darker transition-all hover:bg-primary-gold/90 hover:scale-105 hover:shadow-lg"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary-gold px-6 py-3 font-semibold text-navy transition-all hover:bg-primary-gold/90 hover:scale-105 hover:shadow-lg"
               >
                 <Mail className="h-5 w-5" />
                 Kontaktní formulář
               </Link>
               <a
                 href="tel:+420774335592"
-                className="inline-flex items-center gap-2 rounded-lg border-2 border-white/20 bg-white/10 px-6 py-3 font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:scale-105"
+                className="inline-flex items-center gap-2 rounded-lg border-2 border-white bg-white/20 px-6 py-3 font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/30 hover:scale-105 hover:shadow-lg"
               >
                 <Phone className="h-5 w-5" />
                 +420 774 335 592
