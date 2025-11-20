@@ -2,17 +2,14 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 import type { Metadata } from "next"
+import { client } from "@/sanity/lib/client"
+import { PRICING_QUERY } from "@/sanity/lib/queries"
 
 export const metadata: Metadata = {
   title: "Ceník stavebních prací | Orientační ceny | ART DUM Třebíč",
   description:
     "Orientační ceník stavebních služeb v Třebíči. Rekonstrukce, zateplení, zednické práce. Férová kalkulace bez skrytých poplatků. ☎ +420 774 335 592",
-  keywords: [
-    "ceník stavební práce Třebíč",
-    "cena rekonstrukce bytu",
-    "cena zateplení domu",
-    "stavební práce ceny",
-  ],
+  keywords: ["ceník stavební práce Třebíč", "cena rekonstrukce bytu", "cena zateplení domu", "stavební práce ceny"],
   openGraph: {
     title: "Ceník stavebních prací | ART DUM",
     description: "Transparentní ceník našich služeb. Férová kalkulace bez skrytých poplatků.",
@@ -21,6 +18,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://artdum.cz/cenik",
   },
+}
+
+// Type pro cenové údaje z Sanity
+type PricingItem = {
+  service: string
+  price: string
+  note?: string
+  unit?: string
+}
+
+type PricingCategory = {
+  _id: string
+  category: string
+  slug: { current: string }
+  description: string
+  items: PricingItem[]
+  order: number
 }
 
 const pricingCategories = [
@@ -87,7 +101,18 @@ const pricingCategories = [
   },
 ]
 
-export default function PricingPage() {
+export default async function PricingPage() {
+  let categories: PricingCategory[] | typeof pricingCategories = pricingCategories
+
+  try {
+    const sanityData = await client.fetch<PricingCategory[]>(PRICING_QUERY)
+    if (sanityData && sanityData.length > 0) {
+      categories = sanityData
+    }
+  } catch (error) {
+    console.error("Error fetching pricing data from Sanity:", error)
+  }
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "PriceSpecification",
@@ -103,10 +128,7 @@ export default function PricingPage() {
 
   return (
     <main className="flex-1">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden">
@@ -115,7 +137,12 @@ export default function PricingPage() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-gold/10 text-gold px-4 py-2 rounded-full text-sm font-semibold mb-6">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
               <span>Férová cena bez skrytých poplatků</span>
             </div>
@@ -132,8 +159,8 @@ export default function PricingPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-lg text-foreground">
-              <strong className="text-gold">Důležité:</strong> Uvedené ceny jsou orientační a slouží pro základní představu. 
-              Přesnou cenovou nabídku vždy zpracujeme po osobní konzultaci a prohlídce místa realizace.
+              <strong className="text-gold">Důležité:</strong> Uvedené ceny jsou orientační a slouží pro základní
+              představu. Přesnou cenovou nabídku vždy zpracujeme po osobní konzultaci a prohlídce místa realizace.
             </p>
           </div>
         </div>
@@ -143,8 +170,11 @@ export default function PricingPage() {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="space-y-12">
-            {pricingCategories.map((category, index) => (
-              <Card key={index} className="overflow-hidden border-2 border-border hover:border-accent/30 transition-colors">
+            {categories.map((category, index) => (
+              <Card
+                key={index}
+                className="overflow-hidden border-2 border-border hover:border-accent/30 transition-colors"
+              >
                 <CardHeader className="bg-muted/50">
                   <CardTitle className="text-2xl md:text-3xl text-navy dark:text-white">{category.category}</CardTitle>
                   <CardDescription className="text-base">{category.description}</CardDescription>
@@ -158,7 +188,7 @@ export default function PricingPage() {
                       >
                         <div className="flex-1">
                           <p className="font-semibold text-foreground">{item.service}</p>
-                          <p className="text-sm text-muted-foreground">{item.note}</p>
+                          {item.note && <p className="text-sm text-muted-foreground">{item.note}</p>}
                         </div>
                         <div className="text-lg font-bold text-accent whitespace-nowrap">{item.price}</div>
                       </div>
@@ -182,7 +212,12 @@ export default function PricingPage() {
               <Card className="border-2 border-border">
                 <CardHeader>
                   <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6 text-accent-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg
+                      className="w-6 h-6 text-accent-foreground"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
@@ -217,8 +252,18 @@ export default function PricingPage() {
               <Card className="border-2 border-border">
                 <CardHeader>
                   <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    <svg
+                      className="w-6 h-6 text-muted-foreground"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                      />
                     </svg>
                   </div>
                   <CardTitle className="text-xl">Nad rámec ceníku</CardTitle>
@@ -263,17 +308,39 @@ export default function PricingPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/kontakt">
-              <Button size="lg" className="group bg-gold text-navy hover:bg-gold/90 font-bold text-lg px-8 py-6 h-auto shadow-2xl shadow-gold/20 hover:scale-105 transition-all">
+              <Button
+                size="lg"
+                className="group bg-gold text-navy hover:bg-gold/90 font-bold text-lg px-8 py-6 h-auto shadow-2xl shadow-gold/20 hover:scale-105 transition-all"
+              >
                 <span>Nezávazná poptávka</span>
-                <svg className="w-5 h-5 ml-2 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                <svg
+                  className="w-5 h-5 ml-2 group-hover:rotate-12 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                  />
                 </svg>
               </Button>
             </Link>
             <a href="tel:+420774335592">
-              <Button size="lg" variant="outline" className="border-2 border-white/20 text-white hover:bg-white hover:text-navy bg-white/5 backdrop-blur-sm font-semibold text-lg px-8 py-6 h-auto hover:scale-105 transition-all">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-2 border-white/20 text-white hover:bg-white hover:text-navy bg-white/5 backdrop-blur-sm font-semibold text-lg px-8 py-6 h-auto hover:scale-105 transition-all"
+              >
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
                 </svg>
                 +420 774 335 592
               </Button>

@@ -154,3 +154,13 @@ export const REVIEWS_QUERY = groq`*[_type == "review" && isPublished == true] | 
   date,
   source
 }`
+
+// Pricing
+export const PRICING_QUERY = groq`*[_type == "pricing" && (!defined(isActive) || isActive == true)] | order(order asc) {
+  _id,
+  category,
+  slug,
+  description,
+  items,
+  order
+}`

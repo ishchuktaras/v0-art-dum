@@ -367,6 +367,226 @@ Ukázkový článek:
 
 ---
 
+## 8. Ceník (Pricing)
+
+**Navigace v CMS:** Ceník → Vytvořit nový dokument (pro každou kategorii)
+
+### Popis
+Orientační ceník stavebních prací s kategoriemi a jednotlivými položkami. Umožňuje snadnou aktualizaci cen bez zásahu do kódu.
+
+### Struktura položky
+- **Kategorie služeb**: Název kategorie (např. "Rekonstrukce bytů", "Zednické práce")
+- **URL adresa (slug)**: Automaticky z názvu kategorie
+- **Popis kategorie**: Stručný popis kategorie služeb (max 200 znaků)
+- **Položky ceníku**: Array objektů s:
+  - Název služby (povinné)
+  - Cena (povinné) - např. "od 300 000 Kč" nebo "450 Kč/m²"
+  - Poznámka (volitelné) - např. "včetně materiálu", "práce + lepidlo"
+  - Jednotka (volitelné) - např. "m²", "m", "kus"
+- **Pořadí zobrazení**: Číslo pro řazení kategorií
+- **Aktivní**: Zobrazit na webu?
+
+### Kategorie 1: Rekonstrukce bytů
+
+| Pole | Hodnota |
+|------|---------|
+| **Kategorie služeb** | `Rekonstrukce bytů` |
+| **URL adresa (slug)** | `rekonstrukce-bytu` |
+| **Popis kategorie** | `Orientační ceny za kompletní rekonstrukci bytů` |
+| **Pořadí zobrazení** | `1` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+**Položky ceníku:**
+
+1. Rekonstrukce 1+kk (30-40 m²)
+   - Cena: `od 300 000 Kč`
+   - Poznámka: `včetně materiálu`
+   
+2. Rekonstrukce 2+kk (50-60 m²)
+   - Cena: `od 450 000 Kč`
+   - Poznámka: `včetně materiálu`
+   
+3. Rekonstrukce 3+1 (70-80 m²)
+   - Cena: `od 600 000 Kč`
+   - Poznámka: `včetně materiálu`
+   
+4. Částečná rekonstrukce
+   - Cena: `dle rozsahu`
+   - Poznámka: `ocenění na míru`
+
+### Kategorie 2: Zednické práce
+
+| Pole | Hodnota |
+|------|---------|
+| **Kategorie služeb** | `Zednické práce` |
+| **URL adresa (slug)** | `zednicke-prace` |
+| **Popis kategorie** | `Ceny základních zednických prací` |
+| **Pořadí zobrazení** | `2` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+**Položky ceníku:**
+
+1. Vnitřní omítka stěn
+   - Cena: `od 250 Kč/m²`
+   - Poznámka: `včetně materiálu`
+   - Jednotka: `m²`
+   
+2. Vnější omítka fasády
+   - Cena: `od 350 Kč/m²`
+   - Poznámka: `včetně materiálu`
+   - Jednotka: `m²`
+   
+3. Zdění z cihel POROTHERM
+   - Cena: `od 800 Kč/m²`
+   - Poznámka: `včetně materiálu`
+   - Jednotka: `m²`
+   
+4. Betonáž základové desky
+   - Cena: `od 1 200 Kč/m²`
+   - Poznámka: `včetně výztuže`
+   - Jednotka: `m²`
+   
+5. Bourání příček
+   - Cena: `od 150 Kč/m²`
+   - Poznámka: `včetně odvoz`
+   - Jednotka: `m²`
+
+### Kategorie 3: Zateplení fasád
+
+| Pole | Hodnota |
+|------|---------|
+| **Kategorie služeb** | `Zateplení fasád` |
+| **URL adresa (slug)** | `zatepleni-fasad` |
+| **Popis kategorie** | `Kompletní zateplovací systémy ETICS` |
+| **Pořadí zobrazení** | `3` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+**Položky ceníku:**
+
+1. Zateplení polystyrenem 15 cm
+   - Cena: `od 1 200 Kč/m²`
+   - Poznámka: `komplet s omítkou`
+   - Jednotka: `m²`
+   
+2. Zateplení minerální vatou 16 cm
+   - Cena: `od 1 400 Kč/m²`
+   - Poznámka: `komplet s omítkou`
+   - Jednotka: `m²`
+   
+3. Zateplení soklu XPS
+   - Cena: `od 800 Kč/m²`
+   - Poznámka: `včetně izolace`
+   - Jednotka: `m²`
+   
+4. Lešení
+   - Cena: `od 80 Kč/m²/měsíc`
+   - Poznámka: `pronájem`
+   - Jednotka: `m²`
+
+### Kategorie 4: Obklady a dlažby
+
+| Pole | Hodnota |
+|------|---------|
+| **Kategorie služeb** | `Obklady a dlažby` |
+| **URL adresa (slug)** | `obklady-a-dlazby` |
+| **Popis kategorie** | `Pokládka obkladů a dlažeb` |
+| **Pořadí zobrazení** | `4` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+**Položky ceníku:**
+
+1. Obklady koupelny
+   - Cena: `od 450 Kč/m²`
+   - Poznámka: `práce + lepidlo`
+   - Jednotka: `m²`
+   
+2. Dlažba do koupelny
+   - Cena: `od 400 Kč/m²`
+   - Poznámka: `práce + lepidlo`
+   - Jednotka: `m²`
+   
+3. Velkoplošná dlažba (60x60 cm+)
+   - Cena: `od 550 Kč/m²`
+   - Poznámka: `práce + lepidlo`
+   - Jednotka: `m²`
+   
+4. Terasa venkovní dlažba
+   - Cena: `od 600 Kč/m²`
+   - Poznámka: `včetně podkladu`
+   - Jednotka: `m²`
+
+### Kategorie 5: Střechy
+
+| Pole | Hodnota |
+|------|---------|
+| **Kategorie služeb** | `Střechy` |
+| **URL adresa (slug)** | `strechy` |
+| **Popis kategorie** | `Střešní konstrukce a krytiny` |
+| **Pořadí zobrazení** | `5` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+**Položky ceníku:**
+
+1. Výstavba krovu
+   - Cena: `od 4 000 Kč/m²`
+   - Poznámka: `včetně materiálu`
+   - Jednotka: `m²`
+   
+2. Pálená taška - krytina
+   - Cena: `od 1 200 Kč/m²`
+   - Poznámka: `včetně pokládky`
+   - Jednotka: `m²`
+   
+3. Pozinkovaný plech - krytina
+   - Cena: `od 800 Kč/m²`
+   - Poznámka: `včetně pokládky`
+   - Jednotka: `m²`
+   
+4. Klempířské práce
+   - Cena: `od 500 Kč/m`
+   - Poznámka: `žlaby, oplechování`
+   - Jednotka: `m`
+
+### Kategorie 6: Ostatní služby
+
+| Pole | Hodnota |
+|------|---------|
+| **Kategorie služeb** | `Ostatní služby` |
+| **URL adresa (slug)** | `ostatni-sluzby` |
+| **Popis kategorie** | `Další stavební práce` |
+| **Pořadí zobrazení** | `6` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+**Položky ceníku:**
+
+1. SDK příčka
+   - Cena: `od 600 Kč/m²`
+   - Poznámka: `včetně izolace`
+   - Jednotka: `m²`
+   
+2. SDK podhled
+   - Cena: `od 550 Kč/m²`
+   - Poznámka: `včetně konstrukce`
+   - Jednotka: `m²`
+   
+3. Malování stěn
+   - Cena: `od 120 Kč/m²`
+   - Poznámka: `2x krytí`
+   - Jednotka: `m²`
+   
+4. Podlahové lišty
+   - Cena: `od 80 Kč/m`
+   - Poznámka: `montáž`
+   - Jednotka: `m`
+
+**Postup vytvoření:**
+1. Pro každou kategorii vytvořte samostatný dokument v CMS
+2. Vyplňte všechny položky ceníku
+3. Nastavte správné pořadí zobrazení
+4. Publikujte všechny dokumenty
+
+---
+
 ## Kontrolní seznam
 
 Po dokončení naplnění obsahu zkontrolujte:
@@ -377,6 +597,7 @@ Po dokončení naplnění obsahu zkontrolujte:
 - [ ] **O nás** - vyplněna včetně USP
 - [ ] **Certifikáty** - nahrány všechny dodané dokumenty
 - [ ] **Kontaktní informace** - vyplněny správné údaje
+- [ ] **Ceník (6 kategorií)** - vytvořeny všechny cenové kategorie
 - [ ] Všechny obrázky mají **alternativní text**
 - [ ] Všechny dokumenty jsou **publikované** (zelené tlačítko "Publish")
 - [ ] Zdůrazněny **ekologické materiály KEIM** a **dekorativní stěrky**
