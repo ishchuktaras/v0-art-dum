@@ -372,218 +372,428 @@ Ukázkový článek:
 **Navigace v CMS:** Ceník → Vytvořit nový dokument (pro každou kategorii)
 
 ### Popis
-Orientační ceník stavebních prací s kategoriemi a jednotlivými položkami. Umožňuje snadnou aktualizaci cen bez zásahu do kódu.
+Orientační ceník stavebních prací podle kompletního seznamu služeb od objednatele. Důraz na práci s ekologickými materiály KEIM a dekorativními stěrkami.
 
 ### Struktura položky
-- **Kategorie služeb**: Název kategorie (např. "Rekonstrukce bytů", "Zednické práce")
+- **Kategorie služeb**: Název kategorie
 - **URL adresa (slug)**: Automaticky z názvu kategorie
-- **Popis kategorie**: Stručný popis kategorie služeb (max 200 znaků)
-- **Položky ceníku**: Array objektů s:
-  - Název služby (povinné)
-  - Cena (povinné) - např. "od 300 000 Kč" nebo "450 Kč/m²"
-  - Poznámka (volitelné) - např. "včetně materiálu", "práce + lepidlo"
-  - Jednotka (volitelné) - např. "m²", "m", "kus"
+- **Popis kategorie**: Stručný popis kategorie služeb
+- **Položky ceníku**: Array objektů s názvem služby, cenou, poznámkou a jednotkou
 - **Pořadí zobrazení**: Číslo pro řazení kategorií
 - **Aktivní**: Zobrazit na webu?
 
-### Kategorie 1: Rekonstrukce bytů
+
+### Kategorie 1: Zednické a stavební práce
 
 | Pole | Hodnota |
 |------|---------|
-| **Kategorie služeb** | `Rekonstrukce bytů` |
-| **URL adresa (slug)** | `rekonstrukce-bytu` |
-| **Popis kategorie** | `Orientační ceny za kompletní rekonstrukci bytů` |
+| **Kategorie služeb** | `Zednické a stavební práce` |
+| **URL adresa (slug)** | `zednicke-a-stavebni-prace` |
+| **Popis kategorie** | `Kompletní zednické služby včetně práce s ekologickými materiály KEIM a dekorativními stěrkami` |
 | **Pořadí zobrazení** | `1` |
 | **Aktivní** | ✓ Zaškrtnuto |
 
 **Položky ceníku:**
 
-1. Rekonstrukce 1+kk (30-40 m²)
-   - Cena: `od 300 000 Kč`
-   - Poznámka: `včetně materiálu`
-   
-2. Rekonstrukce 2+kk (50-60 m²)
-   - Cena: `od 450 000 Kč`
-   - Poznámka: `včetně materiálu`
-   
-3. Rekonstrukce 3+1 (70-80 m²)
-   - Cena: `od 600 000 Kč`
-   - Poznámka: `včetně materiálu`
-   
-4. Částečná rekonstrukce
-   - Cena: `dle rozsahu`
-   - Poznámka: `ocenění na míru`
+1. Oklepání a odstranění staré omítky
+   - Cena: `od 150 Kč/m²`
+   - Poznámka: `ruční práce`
+   - Jednotka: `m²`
 
-### Kategorie 2: Zednické práce
+2. Sádrová omítka
+   - Cena: `od 200 Kč/m²`
+   - Poznámka: `včetně materiálu`
+   - Jednotka: `m²`
+
+3. Jádrová omítka
+   - Cena: `od 250 Kč/m²`
+   - Poznámka: `včetně materiálu`
+   - Jednotka: `m²`
+
+4. Rotband omítka
+   - Cena: `od 220 Kč/m²`
+   - Poznámka: `včetně materiálu`
+   - Jednotka: `m²`
+
+5. Ekologické omítky KEIM
+   - Cena: `od 400 Kč/m²`
+   - Poznámka: `prémiové ekologické materiály`
+   - Jednotka: `m²`
+
+6. Dekorativní stěrky
+   - Cena: `od 350 Kč/m²`
+   - Poznámka: `renomované evropské značky`
+   - Jednotka: `m²`
+
+7. Stěrkování a příprava povrchů
+   - Cena: `od 180 Kč/m²`
+   - Jednotka: `m²`
+
+8. Malování interiérů
+   - Cena: `od 120 Kč/m²`
+   - Poznámka: `2x krytí`
+   - Jednotka: `m²`
+
+9. Malování exteriérů
+   - Cena: `od 150 Kč/m²`
+   - Jednotka: `m²`
+
+10. Montáž elektroinstalace
+    - Cena: `dle rozsahu`
+    - Poznámka: `kompletní elektroinstalace`
+
+11. Montáž sanitárních rozvodů včetně kanalizace
+    - Cena: `dle domluvy`
+    - Poznámka: `včetně kanalizace`
+
+### Kategorie 2: Podlahy
 
 | Pole | Hodnota |
 |------|---------|
-| **Kategorie služeb** | `Zednické práce` |
-| **URL adresa (slug)** | `zednicke-prace` |
-| **Popis kategorie** | `Ceny základních zednických prací` |
+| **Kategorie služeb** | `Podlahy` |
+| **URL adresa (slug)** | `podlahy` |
+| **Popis kategorie** | `Kompletní pokládka všech typů podlah včetně podlahového topení` |
 | **Pořadí zobrazení** | `2` |
 | **Aktivní** | ✓ Zaškrtnuto |
 
 **Položky ceníku:**
 
-1. Vnitřní omítka stěn
-   - Cena: `od 250 Kč/m²`
-   - Poznámka: `včetně materiálu`
-   - Jednotka: `m²`
-   
-2. Vnější omítka fasády
-   - Cena: `od 350 Kč/m²`
-   - Poznámka: `včetně materiálu`
-   - Jednotka: `m²`
-   
-3. Zdění z cihel POROTHERM
+1. Montáž podlahového topení
    - Cena: `od 800 Kč/m²`
    - Poznámka: `včetně materiálu`
    - Jednotka: `m²`
-   
-4. Betonáž základové desky
-   - Cena: `od 1 200 Kč/m²`
-   - Poznámka: `včetně výztuže`
-   - Jednotka: `m²`
-   
-5. Bourání příček
-   - Cena: `od 150 Kč/m²`
-   - Poznámka: `včetně odvoz`
+
+2. Betonový potěr pro podlahové topení
+   - Cena: `od 350 Kč/m²`
    - Jednotka: `m²`
 
-### Kategorie 3: Zateplení fasád
+3. Samonivelační podlahy
+   - Cena: `od 200 Kč/m²`
+   - Jednotka: `m²`
+
+4. Laminátová podlaha
+   - Cena: `od 300 Kč/m²`
+   - Poznámka: `práce + podložka`
+   - Jednotka: `m²`
+
+5. Vinylová podlaha
+   - Cena: `od 350 Kč/m²`
+   - Poznámka: `práce + podložka`
+   - Jednotka: `m²`
+
+6. Keramická dlažba
+   - Cena: `od 450 Kč/m²`
+   - Poznámka: `práce + lepidlo`
+   - Jednotka: `m²`
+
+7. Dřevěná podlaha
+   - Cena: `od 600 Kč/m²`
+   - Poznámka: `masivní dřevo`
+   - Jednotka: `m²`
+
+8. Linoleová podlaha
+   - Cena: `od 280 Kč/m²`
+   - Jednotka: `m²`
+
+### Kategorie 3: Stropy
 
 | Pole | Hodnota |
 |------|---------|
-| **Kategorie služeb** | `Zateplení fasád` |
-| **URL adresa (slug)** | `zatepleni-fasad` |
-| **Popis kategorie** | `Kompletní zateplovací systémy ETICS` |
+| **Kategorie služeb** | `Stropy` |
+| **URL adresa (slug)** | `stropy` |
+| **Popis kategorie** | `Montáž SDK konstrukcí a omítky stropů` |
 | **Pořadí zobrazení** | `3` |
 | **Aktivní** | ✓ Zaškrtnuto |
 
 **Položky ceníku:**
 
-1. Zateplení polystyrenem 15 cm
-   - Cena: `od 1 200 Kč/m²`
-   - Poznámka: `komplet s omítkou`
-   - Jednotka: `m²`
-   
-2. Zateplení minerální vatou 16 cm
-   - Cena: `od 1 400 Kč/m²`
-   - Poznámka: `komplet s omítkou`
-   - Jednotka: `m²`
-   
-3. Zateplení soklu XPS
-   - Cena: `od 800 Kč/m²`
-   - Poznámka: `včetně izolace`
-   - Jednotka: `m²`
-   
-4. Lešení
-   - Cena: `od 80 Kč/m²/měsíc`
-   - Poznámka: `pronájem`
+1. Sádrokartonové konstrukce
+   - Cena: `od 550 Kč/m²`
+   - Poznámka: `včetně konstrukce`
    - Jednotka: `m²`
 
-### Kategorie 4: Obklady a dlažby
+2. Omítka stropu - sádrová
+   - Cena: `od 200 Kč/m²`
+   - Jednotka: `m²`
+
+3. Omítka stropu - jádrová
+   - Cena: `od 250 Kč/m²`
+   - Jednotka: `m²`
+
+4. Dekorativní omítka stropu
+   - Cena: `od 350 Kč/m²`
+   - Jednotka: `m²`
+
+### Kategorie 4: Montážní práce
 
 | Pole | Hodnota |
 |------|---------|
-| **Kategorie služeb** | `Obklady a dlažby` |
-| **URL adresa (slug)** | `obklady-a-dlazby` |
-| **Popis kategorie** | `Pokládka obkladů a dlažeb` |
+| **Kategorie služeb** | `Montážní práce` |
+| **URL adresa (slug)** | `montazni-prace` |
+| **Popis kategorie** | `Komplexní montáž dveří, oken, parapetů a elektroinstalací` |
 | **Pořadí zobrazení** | `4` |
 | **Aktivní** | ✓ Zaškrtnuto |
 
 **Položky ceníku:**
 
-1. Obklady koupelny
-   - Cena: `od 450 Kč/m²`
-   - Poznámka: `práce + lepidlo`
-   - Jednotka: `m²`
-   
-2. Dlažba do koupelny
-   - Cena: `od 400 Kč/m²`
-   - Poznámka: `práce + lepidlo`
-   - Jednotka: `m²`
-   
-3. Velkoplošná dlažba (60x60 cm+)
-   - Cena: `od 550 Kč/m²`
-   - Poznámka: `práce + lepidlo`
-   - Jednotka: `m²`
-   
-4. Terasa venkovní dlažba
-   - Cena: `od 600 Kč/m²`
-   - Poznámka: `včetně podkladu`
-   - Jednotka: `m²`
+1. Montáž dveří
+   - Cena: `od 1 500 Kč/kus`
+   - Poznámka: `včetně zárubně`
+   - Jednotka: `kus`
 
-### Kategorie 5: Střechy
+2. Montáž oken
+   - Cena: `od 1 200 Kč/kus`
+   - Poznámka: `plastová okna`
+   - Jednotka: `kus`
+
+3. Parapety PVC
+   - Cena: `od 400 Kč/m`
+   - Jednotka: `m`
+
+4. Parapety dřevěné
+   - Cena: `od 800 Kč/m`
+   - Jednotka: `m`
+
+5. Parapety kamenné
+   - Cena: `od 1 500 Kč/m`
+   - Jednotka: `m`
+
+6. Parapety MDF
+   - Cena: `od 600 Kč/m`
+   - Jednotka: `m`
+
+7. Parapety hliníkové
+   - Cena: `od 700 Kč/m`
+   - Jednotka: `m`
+
+8. Kompletní elektroinstalace
+   - Cena: `dle rozsahu`
+   - Poznámka: `kalkulace na míru`
+
+### Kategorie 5: Zemní práce
 
 | Pole | Hodnota |
 |------|---------|
-| **Kategorie služeb** | `Střechy` |
-| **URL adresa (slug)** | `strechy` |
-| **Popis kategorie** | `Střešní konstrukce a krytiny` |
+| **Kategorie služeb** | `Zemní práce` |
+| **URL adresa (slug)** | `zemni-prace` |
+| **Popis kategorie** | `Výkopy, pokládka dlažby, montáž obrubníků a plotů` |
 | **Pořadí zobrazení** | `5` |
 | **Aktivní** | ✓ Zaškrtnuto |
 
 **Položky ceníku:**
 
-1. Výstavba krovu
-   - Cena: `od 4 000 Kč/m²`
-   - Poznámka: `včetně materiálu`
-   - Jednotka: `m²`
-   
-2. Pálená taška - krytina
-   - Cena: `od 1 200 Kč/m²`
-   - Poznámka: `včetně pokládky`
-   - Jednotka: `m²`
-   
-3. Pozinkovaný plech - krytina
-   - Cena: `od 800 Kč/m²`
-   - Poznámka: `včetně pokládky`
-   - Jednotka: `m²`
-   
-4. Klempířské práce
-   - Cena: `od 500 Kč/m`
-   - Poznámka: `žlaby, oplechování`
+1. Výkopy pro drenáž - ručně
+   - Cena: `od 800 Kč/m³`
+   - Jednotka: `m³`
+
+2. Výkopy pro drenáž - mechanizací
+   - Cena: `od 500 Kč/m³`
+   - Jednotka: `m³`
+
+3. Montáž obrubníků
+   - Cena: `od 300 Kč/m`
+   - Poznámka: `včetně betonu`
    - Jednotka: `m`
 
-### Kategorie 6: Ostatní služby
+4. Pokládka zámkové dlažby
+   - Cena: `od 450 Kč/m²`
+   - Poznámka: `včetně podkladu`
+   - Jednotka: `m²`
+
+5. Montáž plotů
+   - Cena: `dle složitosti`
+   - Poznámka: `jakákoli složitost`
+
+### Kategorie 6: Fasády a zateplení
 
 | Pole | Hodnota |
 |------|---------|
-| **Kategorie služeb** | `Ostatní služby` |
-| **URL adresa (slug)** | `ostatni-sluzby` |
-| **Popis kategorie** | `Další stavební práce` |
+| **Kategorie služeb** | `Fasády a zateplení` |
+| **URL adresa (slug)** | `fasady-a-zatepleni` |
+| **Popis kategorie** | `Zateplení fasád a dekorativní omítky` |
 | **Pořadí zobrazení** | `6` |
 | **Aktivní** | ✓ Zaškrtnuto |
 
 **Položky ceníku:**
 
-1. SDK příčka
-   - Cena: `od 600 Kč/m²`
-   - Poznámka: `včetně izolace`
+1. Zateplení fasády polystyrenem
+   - Cena: `od 1 200 Kč/m²`
+   - Poznámka: `komplet s omítkou`
    - Jednotka: `m²`
-   
-2. SDK podhled
-   - Cena: `od 550 Kč/m²`
-   - Poznámka: `včetně konstrukce`
+
+2. Zateplení fasády minerální vatou
+   - Cena: `od 1 400 Kč/m²`
+   - Poznámka: `komplet s omítkou`
    - Jednotka: `m²`
-   
-3. Malování stěn
-   - Cena: `od 120 Kč/m²`
-   - Poznámka: `2x krytí`
+
+3. Dekorativní omítka
+   - Cena: `od 350 Kč/m²`
+   - Poznámka: `prémiové značky`
    - Jednotka: `m²`
-   
-4. Podlahové lišty
-   - Cena: `od 80 Kč/m`
-   - Poznámka: `montáž`
+
+4. Povrchové úpravy fasád
+   - Cena: `od 200 Kč/m²`
+   - Jednotka: `m²`
+
+### Kategorie 7: Střechy
+
+| Pole | Hodnota |
+|------|---------|
+| **Kategorie služeb** | `Střechy` |
+| **URL adresa (slug)** | `strechy` |
+| **Popis kategorie** | `Montáž střech z pálené tašky a plechových střech` |
+| **Pořadí zobrazení** | `7` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+**Položky ceníku:**
+
+1. Montáž střech z pálené tašky
+   - Cena: `od 1 200 Kč/m²`
+   - Poznámka: `včetně pokládky`
+   - Jednotka: `m²`
+
+2. Montáž plechových střech
+   - Cena: `dle složitosti`
+   - Poznámka: `jakákoli složitost`
+
+3. Výstavba krovu
+   - Cena: `od 4 000 Kč/m²`
+   - Poznámka: `včetně materiálu`
+   - Jednotka: `m²`
+
+### Kategorie 8: Zahradní úpravy
+
+| Pole | Hodnota |
+|------|---------|
+| **Kategorie služeb** | `Zahradní úpravy` |
+| **URL adresa (slug)** | `zahradni-upravy` |
+| **Popis kategorie** | `Zakládání trávníků a výsadba stromů` |
+| **Pořadí zobrazení** | `8` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+**Položky ceníku:**
+
+1. Zakládání trávníků
+   - Cena: `od 150 Kč/m²`
+   - Poznámka: `včetně osiva`
+   - Jednotka: `m²`
+
+2. Výsadba okrasných stromů
+   - Cena: `dle velikosti`
+   - Poznámka: `včetně výkopu`
+
+### Kategorie 9: Komíny
+
+| Pole | Hodnota |
+|------|---------|
+| **Kategorie služeb** | `Komíny` |
+| **URL adresa (slug)** | `kominy` |
+| **Popis kategorie** | `Montáž sendvičových i keramických komínových systémů` |
+| **Pořadí zobrazení** | `9` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+**Položky ceníku:**
+
+1. Montáž sendvičových komínových systémů
+   - Cena: `dle domluvy`
+   - Poznámka: `včetně materiálu`
+
+2. Montáž keramických komínových systémů
+   - Cena: `dle domluvy`
+   - Poznámka: `včetně materiálu`
+
+### Kategorie 10: Základy
+
+| Pole | Hodnota |
+|------|---------|
+| **Kategorie služeb** | `Základy` |
+| **URL adresa (slug)** | `zaklady` |
+| **Popis kategorie** | `Obložení základů dekorativním nebo štípaným kamenem` |
+| **Pořadí zobrazení** | `10` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+**Položky ceníku:**
+
+1. Obložení základů dekorativním kamenem
+   - Cena: `od 1 500 Kč/m²`
+   - Poznámka: `včetně lepidla`
+   - Jednotka: `m²`
+
+2. Obložení základů štípaným kamenem
+   - Cena: `od 1 800 Kč/m²`
+   - Poznámka: `včetně lepidla`
+   - Jednotka: `m²`
+
+### Kategorie 11: Další služby
+
+| Pole | Hodnota |
+|------|---------|
+| **Kategorie služeb** | `Další služby` |
+| **URL adresa (slug)** | `dalsi-sluzby` |
+| **Popis kategorie** | `Montáž okapů, demolice a demontáž eternitu` |
+| **Pořadí zobrazení** | `11` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+**Položky ceníku:**
+
+1. Montáž okapů a žlabů
+   - Cena: `od 300 Kč/m`
+   - Poznámka: `včetně materiálu`
    - Jednotka: `m`
+
+2. Demontáž příček
+   - Cena: `od 150 Kč/m²`
+   - Poznámka: `včetně odvozu`
+   - Jednotka: `m²`
+
+3. Kompletní demolice objektů
+   - Cena: `dle rozsahu`
+   - Poznámka: `kalkulace na míru`
+
+4. Profesionální demontáž eternitu
+   - Cena: `dle rozsahu`
+   - Poznámka: `azbest - včetně likvidace`
+
+5. Ekologická likvidace eternitu
+   - Cena: `dle množství`
+   - Poznámka: `certifikovaná likvidace`
+
+### Kategorie 12: Svářečské práce
+
+| Pole | Hodnota |
+|------|---------|
+| **Kategorie služeb** | `Svářečské práce` |
+| **URL adresa (slug)** | `svarecske-prace` |
+| **Popis kategorie** | `MIG/MAG a MMA svařování, výroba kovových konstrukcí` |
+| **Pořadí zobrazení** | `12` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+**Položky ceníku:**
+
+1. MIG/MAG svařování - ocelové konstrukce
+   - Cena: `od 800 Kč/hod`
+   - Poznámka: `brány, ploty, výztuže`
+   - Jednotka: `hod`
+
+2. MMA svařování - silné materiály
+   - Cena: `od 900 Kč/hod`
+   - Poznámka: `konstrukční díly, opravy`
+   - Jednotka: `hod`
+
+3. Výroba kovových konstrukcí
+   - Cena: `dle domluvy`
+   - Poznámka: `výroba na zakázku`
+
+4. Montáž kovových konstrukcí
+   - Cena: `dle domluvy`
+   - Poznámka: `montáž na místě`
 
 **Postup vytvoření:**
 1. Pro každou kategorii vytvořte samostatný dokument v CMS
-2. Vyplňte všechny položky ceníku
-3. Nastavte správné pořadí zobrazení
-4. Publikujte všechny dokumenty
+2. Vyplňte všechny položky ceníku podle textů od objednatele
+3. Zdůrazněte práci s ekologickými materiály KEIM a dekorativními stěrkami
+4. Nastavte správné pořadí zobrazení (1-12)
+5. Publikujte všechny dokumenty
 
 ---
 
@@ -597,7 +807,7 @@ Po dokončení naplnění obsahu zkontrolujte:
 - [ ] **O nás** - vyplněna včetně USP
 - [ ] **Certifikáty** - nahrány všechny dodané dokumenty
 - [ ] **Kontaktní informace** - vyplněny správné údaje
-- [ ] **Ceník (6 kategorií)** - vytvořeny všechny cenové kategorie
+- [ ] **Ceník (12 kategorií)** - vytvořeny všechny cenové kategorie
 - [ ] Všechny obrázky mají **alternativní text**
 - [ ] Všechny dokumenty jsou **publikované** (zelené tlačítko "Publish")
 - [ ] Zdůrazněny **ekologické materiály KEIM** a **dekorativní stěrky**
