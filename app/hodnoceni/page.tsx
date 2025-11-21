@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Star, Building2, ExternalLink, Send, Eye } from 'lucide-react'
+import { Star, ExternalLink, Send, Eye } from "lucide-react"
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { REVIEWS_QUERY } from "@/sanity/lib/queries"
 import { Button } from "@/components/ui/button"
@@ -72,10 +72,7 @@ export default async function HodnoceniPage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
@@ -97,9 +94,7 @@ export default async function HodnoceniPage() {
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className={`w-8 h-8 ${
-                        i < Math.round(averageRating) ? "fill-gold text-gold" : "text-white/30"
-                      }`}
+                      className={`w-8 h-8 ${i < Math.round(averageRating) ? "fill-gold text-gold" : "text-white/30"}`}
                     />
                   ))}
                 </div>
@@ -124,22 +119,51 @@ export default async function HodnoceniPage() {
                 zákazníků.
               </p>
 
-              {/* Firmy.cz Widget Placeholder */}
-              <div className="bg-muted/30 border-2 border-dashed border-border rounded-lg p-12 text-center">
-                <Building2 className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-                <p className="text-lg font-semibold mb-2">Widget Firmy.cz se zobrazí zde</p>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Vložte iframe kód widgetu z vašeho profilu na Firmy.cz
-                </p>
-                <a
-                  href="https://www.firmy.cz/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-primary hover:underline"
-                >
-                  Zobrazit náš profil na Firmy.cz
-                  <ExternalLink className="w-4 h-4" />
-                </a>
+              <div className="space-y-6">
+                {/* Hodnotící tlačítko Firmy.cz */}
+                <div className="flex justify-center py-4">
+                  <a
+                    href="https://www.firmy.cz/detail/13918492-oleh-kulish-osvc-art-dum-trebic.html#pridat-hodnoceni"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="inline-block transition-transform hover:scale-105"
+                  >
+                    <img
+                      width="249"
+                      height="60"
+                      src="https://www.firmy.cz/img/widgets/firmy-ohodnotte-nas-tmave.svg"
+                      alt='Oleh Kulish, OSVČ - "ART DUM" na Firmy.cz'
+                      className="h-auto"
+                    />
+                  </a>
+                </div>
+
+                {/* Iframe s hodnoceními Firmy.cz */}
+                <div className="bg-background rounded-lg overflow-hidden border border-border">
+                  <div className="relative w-full" style={{ paddingBottom: "65.625%" }}>
+                    <iframe
+                      src="https://www.firmy.cz/detail/13918492-oleh-kulish-osvc-art-dum-trebic.html?widget&limit=3"
+                      style={{ border: "none" }}
+                      frameBorder="0"
+                      className="absolute top-0 left-0 w-full h-full"
+                      title="Hodnocení z Firmy.cz"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+
+                {/* Odkaz na kompletní profil */}
+                <div className="text-center">
+                  <a
+                    href="https://www.firmy.cz/detail/13918492-oleh-kulish-osvc-art-dum-trebic.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-primary hover:underline font-medium"
+                  >
+                    Zobrazit náš kompletní profil na Firmy.cz
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -196,19 +220,28 @@ export default async function HodnoceniPage() {
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 leading-tight">Staňte se naším dalším spokojeným zákazníkem</h2>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 leading-tight">
+              Staňte se naším dalším spokojeným zákazníkem
+            </h2>
             <p className="text-xl text-white/80 mb-10 leading-relaxed">
               Přidejte se k desítkám spokojených klientů, kteří nám důvěřují se svými stavebními projekty
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/kontakt">
-                <Button size="lg" className="group w-full sm:w-auto bg-gold text-primary-dark hover:bg-gold/90 font-bold text-lg px-8 py-6 h-auto shadow-2xl shadow-gold/20 hover:scale-105 transition-all">
+                <Button
+                  size="lg"
+                  className="group w-full sm:w-auto bg-gold text-primary-dark hover:bg-gold/90 font-bold text-lg px-8 py-6 h-auto shadow-2xl shadow-gold/20 hover:scale-105 transition-all"
+                >
                   <Send className="mr-2 h-5 w-5" />
                   <span>Nezávazná poptávka</span>
                 </Button>
               </Link>
               <Link href="/portfolio">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto border-2 border-white/20 text-white hover:bg-white hover:text-navy bg-white/5 backdrop-blur-sm font-semibold text-lg px-8 py-6 h-auto hover:scale-105 transition-all">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full sm:w-auto border-2 border-white/20 text-white hover:bg-white hover:text-navy bg-white/5 backdrop-blur-sm font-semibold text-lg px-8 py-6 h-auto hover:scale-105 transition-all"
+                >
                   <Eye className="mr-2 h-5 w-5" />
                   <span>Prohlédnout portfolio</span>
                 </Button>

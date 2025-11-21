@@ -132,6 +132,23 @@ export function Footer() {
                 <Facebook className="h-6 w-6" />
               </a>
             </div>
+
+            <div className="mt-6">
+              <a
+                href="https://www.firmy.cz/detail/13918492-oleh-kulish-osvc-art-dum-trebic.html#pridat-hodnoceni"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-block transition-transform hover:scale-105"
+              >
+                <img
+                  width="249"
+                  height="60"
+                  src="https://www.firmy.cz/img/widgets/firmy-ohodnotte-nas-tmave.svg"
+                  alt='Oleh Kulish, OSVČ - "ART DUM" na Firmy.cz'
+                  className="h-auto max-w-[200px]"
+                />
+              </a>
+            </div>
           </div>
         </div>
 
