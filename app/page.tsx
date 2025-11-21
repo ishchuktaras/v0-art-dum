@@ -1,12 +1,13 @@
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { sanityFetch } from "@/sanity/lib/fetch"
-import { HOMEPAGE_QUERY, SERVICES_QUERY } from "@/sanity/lib/queries"
-import { urlFor } from "@/sanity/lib/image"
-import type { Metadata } from "next"
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { sanityFetch } from "@/sanity/lib/fetch";
+import { HOMEPAGE_QUERY, SERVICES_QUERY } from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Oleh Kulish, OSVČ - ART DUM | Stavební firma Třebíč | 23 let zkušeností | Rekonstrukce a stavby na klíč",
+  title:
+    "Oleh Kulish, OSVČ - ART DUM | Stavební firma Třebíč | 23 let zkušeností | Rekonstrukce a stavby na klíč",
   description:
     "Profesionální stavební služby v Třebíči a okolí. Rekonstrukce bytů a domů, stavby na klíč, zateplení, opravy. 23 let zkušeností. Férová cena, kvalita, rychlost. ☎ +420 774 335 592",
   keywords: [
@@ -23,7 +24,8 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Oleh Kulish, OSVČ - ART DUM", url: "https://artdum.cz" }],
   openGraph: {
-    title: "Oleh Kulish, OSVČ - ART DUM | Stavební firma Třebíč | 23 let zkušeností",
+    title:
+      "Oleh Kulish, OSVČ - ART DUM | Stavební firma Třebíč | 23 let zkušeností",
     description:
       "Profesionální stavební služby v Třebíči a okolí. Rekonstrukce, stavby na klíč a opravy. Férová cena a kvalita.",
     url: "https://artdum.cz",
@@ -42,7 +44,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Oleh Kulish, OSVČ - ART DUM | Stavební firma Třebíč",
-    description: "23 let zkušeností ve stavebnictví. Rekonstrukce, stavby na klíč, opravy.",
+    description:
+      "23 let zkušeností ve stavebnictví. Rekonstrukce, stavby na klíč, opravy.",
   },
   alternates: {
     canonical: "https://artdum.cz",
@@ -58,27 +61,28 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-}
+};
 
 export default async function HomePage() {
   // Fetch homepage and services data from Sanity
   const homepage = await sanityFetch<any>({
     query: HOMEPAGE_QUERY,
     tags: ["homepage"],
-  })
+  });
 
   const services = await sanityFetch<any[]>({
     query: SERVICES_QUERY,
     tags: ["service"],
-  })
+  });
 
   // Use fallback data if Sanity data is not available
-  const heroHeading = homepage?.heroHeading || "Profesionální stavební práce v Třebíči a okolí"
+  const heroHeading =
+    homepage?.heroHeading || "Profesionální stavební práce v Třebíči a okolí";
   const heroSubheading =
     homepage?.heroSubheading ||
-    "23 let zkušeností, stovky spokojených klientů. Specializujeme se na rekonstrukce bytů, domů a zateplení fasád."
-  const ctaText = homepage?.ctaButtonText || "Nezávazná poptávka"
-  const yearsExperience = homepage?.statYearsExperience || 23
+    "23 let zkušeností, stovky spokojených klientů. Specializujeme se na rekonstrukce bytů, domů a zateplení fasád.";
+  const ctaText = homepage?.ctaButtonText || "Nezávazná poptávka";
+  const yearsExperience = homepage?.statYearsExperience || 23;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -131,13 +135,14 @@ export default async function HomePage() {
       ratingValue: "5",
       reviewCount: "47",
     },
-  }
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-
-      {/* <Header /> */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       <main className="flex-1">
         {/* Hero Section */}
@@ -146,7 +151,12 @@ export default async function HomePage() {
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto">
               <div className="inline-flex items-center gap-2 bg-gold/10 text-gold px-4 py-2 rounded-full text-sm font-semibold mb-6 animate-fade-in">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -159,7 +169,9 @@ export default async function HomePage() {
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
                 Profesionální stavební práce v Třebíči a okolí
               </h1>
-              <p className="text-lg sm:text-xl md:text-2xl mb-8 text-white/80 leading-relaxed">{heroSubheading}</p>
+              <p className="text-lg sm:text-xl md:text-2xl mb-8 text-white/80 leading-relaxed">
+                {heroSubheading}
+              </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/kontakt">
                   <Button
@@ -200,8 +212,12 @@ export default async function HomePage() {
         <section className="py-16 md:py-24 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">Proč zvolit ART DUM</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Naše hodnoty a přístup k práci</p>
+              <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">
+                Proč zvolit ART DUM
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Naše hodnoty a přístup k práci
+              </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               <div className="group relative bg-card p-8 rounded-2xl border-2 border-border hover:border-accent/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
@@ -279,7 +295,9 @@ export default async function HomePage() {
                   <h3 className="text-2xl font-bold text-foreground mb-4 text-center group-hover:text-accent transition-colors">
                     Kvalita
                   </h3>
-                  <p className="text-muted-foreground text-center leading-relaxed">Precizní práce a dlouhá záruka</p>
+                  <p className="text-muted-foreground text-center leading-relaxed">
+                    Precizní práce a dlouhá záruka
+                  </p>
                 </div>
               </div>
             </div>
@@ -290,7 +308,9 @@ export default async function HomePage() {
         <section className="py-12 md:py-16 bg-muted/50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-8 md:mb-12">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4 text-foreground">Naše služby</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4 text-foreground">
+                Naše služby
+              </h2>
               <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
                 Komplexní stavební služby pro vaše projekty
               </p>
@@ -305,24 +325,45 @@ export default async function HomePage() {
                   >
                     {service.image && (
                       <img
-                        src={urlFor(service.image)?.width(400).height(250).url() || "/placeholder.svg"}
+                        src={
+                          urlFor(service.image)?.width(400).height(250).url() ||
+                          "/placeholder.svg"
+                        }
                         alt={service.image.alt || service.title}
                         className="w-full h-48 object-cover rounded-lg mb-4"
                       />
                     )}
-                    <h3 className="text-xl font-bold mb-3 text-card-foreground">{service.title}</h3>
-                    <p className="text-muted-foreground mb-4">{service.shortDescription}</p>
-                    {service.price && <p className="text-accent font-semibold mb-3">{service.price}</p>}
-                    <Link href="/sluzby" className="text-accent font-semibold hover:underline">
+                    <h3 className="text-xl font-bold mb-3 text-card-foreground">
+                      {service.title}
+                    </h3>
+                    <p className="text-muted-foreground mb-4">
+                      {service.shortDescription}
+                    </p>
+                    {service.price && (
+                      <p className="text-accent font-semibold mb-3">
+                        {service.price}
+                      </p>
+                    )}
+                    <Link
+                      href="/sluzby"
+                      className="text-accent font-semibold hover:underline"
+                    >
                       Zjistit více →
                     </Link>
                   </div>
                 ))
               ) : (
                 <div className="border border-border rounded-lg p-6 hover:shadow-lg transition-shadow bg-card">
-                  <h3 className="text-xl font-bold mb-3 text-card-foreground">Rekonstrukce</h3>
-                  <p className="text-muted-foreground mb-4">Kompletní rekonstrukce bytů, domů a komerčních prostor</p>
-                  <Link href="/sluzby" className="text-accent font-semibold hover:underline">
+                  <h3 className="text-xl font-bold mb-3 text-card-foreground">
+                    Rekonstrukce
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    Kompletní rekonstrukce bytů, domů a komerčních prostor
+                  </p>
+                  <Link
+                    href="/sluzby"
+                    className="text-accent font-semibold hover:underline"
+                  >
                     Zjistit více →
                   </Link>
                 </div>
@@ -331,7 +372,11 @@ export default async function HomePage() {
 
             <div className="text-center mt-6 md:mt-8">
               <Link href="/sluzby">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto bg-transparent">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full sm:w-auto bg-transparent"
+                >
                   Zobrazit všechny služby
                 </Button>
               </Link>
@@ -373,8 +418,6 @@ export default async function HomePage() {
           </div>
         </section>
       </main>
-
-      {/* <Footer /> */}
     </div>
-  )
+  );
 }
