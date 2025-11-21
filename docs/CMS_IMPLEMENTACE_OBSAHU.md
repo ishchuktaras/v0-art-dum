@@ -212,31 +212,111 @@ Tento dokument obsahuje kompletní postup pro naplnění obsahu do Sanity Studio
 
 **Navigace v CMS:** Portfolio → Vytvořit nový dokument
 
-**Důležité:** Dle smlouvy je součástí dodávky nasazení prvních **5 projektů** do portfolia. Fotografie a popisy dodává Objednatel (Oleh Kostyshyn).
+**Důležité:** Portfolio obsahuje faktické fotografie dokončených projektů bez před/po porovnání. Každý projekt má detailní popis stavby, použitých materiálů a splnění požadavků zákazníka.
 
-### Ukázkový projekt:
+---
+
+### Projekt 1: Kompletní rekonstrukce střechy rodinného domu
+
+**Fotografie od objednatele:**
+- `rekonstrukce_strechy_1.jpeg` - Montáž dřevěného krovu
+- `rekonstrukce_strechy_2.jpeg` - Instalace okapového systému
+- `rekonstrukce_strechy_3.jpeg` - Dokončená střecha s plechovou krytinou
+- `rekonstrukce_strechy_4.jpeg` - Odstranění starých azbestových tašek
 
 | Pole | Hodnota |
 |------|---------|
-| **Název projektu** | `Kompletní rekonstrukce bytu 3+1, Třebíč-Borovina` |
-| **URL adresa (slug)** | `rekonstrukce-bytu-3-1-trebic-borovina` |
-| **Kategorie** | `Rekonstrukce bytu` |
+| **Název projektu** | `Kompletní rekonstrukce střechy rodinného domu` |
+| **URL adresa (slug)** | `rekonstrukce-strechy-rodinny-dum` (vygeneruje se automaticky) |
+| **Kategorie** | `Střecha` |
 | **Místo realizace** | `Třebíč` |
 | **Rok realizace** | `2024` |
-| **Krátký popis** | `Pro klienta jsme zajistili kompletní rekonstrukci bytu "před a po". Práce zahrnovaly bourání jádra, nové rozvody, sádrokartony a pokládku podlah. Projekt byl dokončen v termínu a dle rozpočtu.` |
-| **Detailní popis** | (Rich text) Podrobný popis průběhu, použitých materiálů, řešených výzev |
-| **Fotografie "Před"** | Nahrát fotografie stavu před rekonstrukcí (min. 1) |
-| **Fotografie "Po"** | Nahrát fotografie dokončeného stavu (min. 1) |
-| **Provedené služby** | Vybrat související služby (např. "Kompletní rekonstrukce bytů") |
-| **Doba realizace** | `3 měsíce` |
-| **Zvýrazněný projekt** | ☐ (Zaškrtnout pro zobrazení na hlavní stránce) |
+| **Krátký popis** | `Komplexní rekonstrukce střechy včetně bezpečného odstranění azbestových tašek, výstavby nového krovu a montáže moderní plechové krytiny s kompletním okapovým systémem.` |
+| **Detailní popis projektu** | (Rich text) <br><br>Zákazník požadoval kompletní rekonstrukci střechy rodinného domu s důrazem na bezpečnost a dlouhodobou životnost.<br><br>**Průběh prací:**<br>1. Bezpečné odstranění starých azbestových tašek s použitím ochranných prostředků<br>2. Kompletní výměna dřevěného krovu z kvalitního řeziva<br>3. Montáž difuzní fólie pro ochranu před vlhkostí<br>4. Pokládka moderní falcované plechové krytiny<br>5. Instalace kompletního okapového systému včetně svodů<br><br>Projekt byl dokončen v termínu s plným splněním všech požadavků zákazníka na kvalitu a bezpečnost provedení. |
+| **Fotografie projektu** | Nahrát všechny 4 fotografie rekonstrukce střechy |
+| **Požadavky zákazníka** | `Kompletní výměna střechy s důrazem na bezpečné odstranění azbestu, použití kvalitních materiálů s dlouhou životností a moderní vzhled střechy.` |
+| **Použité materiály** | - `Dřevěný krov z kvalitního řeziva`<br>- `Difuzní fólie`<br>- `Falcovaná plechová krytina`<br>- `Okapový systém`<br>- `Ochranné prvky proti sněhu` |
+| **Provedené práce** | - `Bezpečné odstranění azbestových tašek`<br>- `Demontáž starého krovu`<br>- `Výstavba nového dřevěného krovu`<br>- `Montáž difuzní fólie`<br>- `Pokládka plechové krytiny`<br>- `Instalace okapového systému`<br>- `Montáž bezpečnostních prvků` |
+| **Související kategorie služeb** | Vybrat: "Střechy" |
+| **Doba realizace** | `3 týdny` |
+| **Zvýrazněný projekt** | ✓ Zaškrtnout (pro hlavní stránku) |
 | **Pořadí zobrazení** | `1` |
 | **Aktivní** | ✓ Zaškrtnuto |
 
-**Postup pro zbývající 4 projekty:**
-1. Vyžádat si od Objednatele fotografie (před/po) a stručný popis projektu
-2. Vytvořit 4 další portfolio položky podle stejného vzoru
-3. Publikovat všechny dokumenty
+---
+
+### Projekt 2: Zahradní úpravy s kamennou dlažbou a pergolou
+
+**Fotografie od objednatele:**
+- `zahrada_1.jpeg` - Dokončená zahrada s pergolou a kamennou dlažbou
+- `zahrada_2.jpeg` - Detail dokončené kamenné dlažby
+- `zahrada_3.jpeg` - Rozpracovaná kamenná dlažba
+
+| Pole | Hodnota |
+|------|---------|
+| **Název projektu** | `Zahradní úpravy s přírodní kamennou dlažbou a dřevěnou pergolou` |
+| **URL adresa (slug)** | `zahradni-upravy-kamenna-dlazba-pergola` |
+| **Kategorie** | `Zahrada a exteriér` |
+| **Místo realizace** | `Třebíč` |
+| **Rok realizace** | `2024` |
+| **Krátký popis** | `Kompletní zahradní úpravy zahrnující pokládku přírodní kamenné dlažby, výstavbu dřevěné pergoly a úpravu terénu s výsadbou travního porostu.` |
+| **Detailní popis projektu** | (Rich text) <br><br>Zákazník požadoval funkční a estetické řešení zahrady s důrazem na přírodní materiály a trvanlivost.<br><br>**Průběh prací:**<br>1. Příprava terénu a vyrovnání pozemku<br>2. Pokládka přírodní kamenné dlažby z místního kamene<br>3. Výstavba dřevěné pergoly z impregnovaného dřeva<br>4. Úprava okolních ploch a výsadba travního porostu<br>5. Dokončovací práce a ošetření dřevěných prvků<br><br>Výsledkem je funkční zahradní prostor s přirozeným charakterem, který dokonale doplňuje stávající venkovský styl nemovitosti. |
+| **Fotografie projektu** | Nahrát všechny 3 fotografie zahrady |
+| **Požadavky zákazníka** | `Vytvoření příjemného zahradního prostoru s použitím přírodních materiálů, dřevěná pergola pro relaxaci a trvanlivá kamenná dlažba odolná povětrnostním vlivům.` |
+| **Použité materiály** | - `Přírodní kámen místní provenience`<br>- `Cementová malta`<br>- `Impregnované dřevo na pergolu`<br>- `Travní směs`<br>- `Štěrkový podsyp` |
+| **Provedené práce** | - `Výkopové práce a terénní úpravy`<br>- `Pokládka přírodní kamenné dlažby`<br>- `Výstavba dřevěné pergoly`<br>- `Výsadba trávníku`<br>- `Dokončovací zahradnické práce`<br>- `Ošetření dřevěných prvků impregnací` |
+| **Související kategorie služeb** | Vybrat: "Zahradní úpravy a venkovní prostory" |
+| **Doba realizace** | `4 týdny` |
+| **Zvýrazněný projekt** | ✓ Zaškrtnout |
+| **Pořadí zobrazení** | `2` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+---
+
+### Projekt 3: Luxusní interiér s dekorativními prvky
+
+**Fotografie od objednatele:**
+- `podlaha_schody_umely_kamen_1.jpeg` - Pokládka velkoformátové dlažby
+- `podlaha_schody_umely_kamen_2.jpeg` - Interiér se zrcadlovou stěnou
+- `podlaha_schody_umely_kamen_3.jpeg` - Detail zrcadlové stěny v rámu
+
+| Pole | Hodnota |
+|------|---------|
+| **Název projektu** | `Luxusní interiér s dekorativní stěrkou a designovými prvky` |
+| **URL adresa (slug)** | `luxusni-interier-dekorativni-sterka-design` |
+| **Kategorie** | `Interiér` |
+| **Místo realizace** | `Třebíč` |
+| **Rok realizace** | `2024` |
+| **Krátký popis** | `Kompletní interiérové úpravy zahrnující pokládku velkoformátové dlažby, aplikaci dekorativní stěrky a montáž designových prvků včetně zrcadlové stěny.` |
+| **Detailní popis projektu** | (Rich text) <br><br>Zákazník požadoval vytvořit moderní luxusní interiér s důrazem na kvalitní materiály a unikátní designové řešení.<br><br>**Průběh prací:**<br>1. Příprava podkladu a hydroizolace<br>2. Pokládka velkoformátové dlažby v tmavém provedení<br>3. Aplikace dekorativní stěrky s imitací betonu<br>4. Montáž designové zrcadlové stěny v ozdobném rámu<br>5. Dokončovací práce a ochrana povrchů<br><br>Projekt vytvořil elegantní propojení prostorů s moderním vzhledem a vysokou funkcionalitou. Zákazník ocenil zejména kvalitu provedení a pozornost k detailům. |
+| **Fotografie projektu** | Nahrát všechny 3 fotografie interiéru |
+| **Požadavky zákazníka** | `Moderní luxusní interiér s vysokou kvalitou zpracování, použití dekorativních prvků a vytvoření vizuálně zajímavého prostoru s designovými akcenty.` |
+| **Použité materiály** | - `Velkoformátová keramická dlažba`<br>- `Hydroizolační folie`<br>- `Dekorativní stěrka (imitace betonu)`<br>- `Designová zrcadla v ozdobném rámu`<br>- `Flexibilní lepidlo`<br>- `Spárovací hmota` |
+| **Provedené práce** | - `Hydroizolace podlahy`<br>- `Pokládka velkoformátové dlažby`<br>- `Aplikace dekorativní stěrky na stěny`<br>- `Montáž zrcadlových prvků`<br>- `Spárování a finální úpravy`<br>- `Ochrana a ošetření povrchů` |
+| **Související kategorie služeb** | Vybrat: "Podlahy", "Dekorativní stěrky" |
+| **Doba realizace** | `3 týdny` |
+| **Zvýrazněný projekt** | ☐ (Nemusí být na hlavní stránce) |
+| **Pořadí zobrazení** | `3` |
+| **Aktivní** | ✓ Zaškrtnuto |
+
+---
+
+## Instrukce pro nahrávání fotografií do Portfolio
+
+1. **Navigace:** Portfolio → Vytvořit nový dokument → Sekce "Fotografie projektu"
+2. **Klikněte na "Upload"** a vyberte fotografie z počítače
+3. **Pro každou fotografii vyplňte:**
+   - **Alternativní text** (povinné pro SEO):
+     - Příklad: `Rekonstrukce střechy rodinného domu - montáž krovu`
+     - Příklad: `Zahradní úpravy s kamennou dlažbou a pergolou`
+     - Příklad: `Luxusní interiér se zrcadlovou stěnou a dekorativní stěrkou`
+   - **Popisek** (volitelné):
+     - Příklad: `Kvalitní dřevěný krov s difuzní folií`
+     - Příklad: `Přírodní kámen osazený do cementové malty`
+
+4. **Doporučené pořadí fotografií:**
+   - První fotografie = hlavní náhledový obrázek (nejlepší záběr celku)
+   - Další fotografie = detaily, různé úhly pohledu
 
 ---
 
@@ -797,13 +877,10 @@ Orientační ceník stavebních prací podle kompletního seznamu služeb od obj
 
 ---
 
-## Kontrolní seznam
+## Kontrolní seznam před spuštěním webu
 
-Po dokončení naplnění obsahu zkontrolujte:
-
-- [ ] **Hlavní stránka** - vyplněna a publikována
-- [ ] **Všechny služby (12)** - vytvořeny a publikovány s texty od objednatele
-- [ ] **Portfolio (5 projektů)** - vytvořeno s fotografiemi před/po
+- [ ] **Služby (12 kategorií)** - vytvořeny všechny kategorie podle objednatele
+- [ ] **Portfolio (3 projekty)** - vytvořeny s faktickými fotografiemi a detailními popisy
 - [ ] **O nás** - vyplněna včetně USP
 - [ ] **Certifikáty** - nahrány všechny dodané dokumenty
 - [ ] **Kontaktní informace** - vyplněny správné údaje
