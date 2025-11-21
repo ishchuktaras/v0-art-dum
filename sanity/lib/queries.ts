@@ -114,11 +114,27 @@ export const ABOUT_QUERY = groq`*[_type == "about"][0] {
   title,
   heroHeading,
   heroSubheading,
-  heroImage,
+  heroImage{
+    asset->{
+      _id,
+      url
+    },
+    alt
+  },
   story,
   experience,
   qualifications,
-  teamMembers,
+  teamMembers[]{
+    name,
+    position,
+    bio,
+    photo{
+      asset->{
+        _id,
+        url
+      }
+    }
+  },
   usp
 }`
 

@@ -75,6 +75,7 @@ export default async function AboutPage() {
         icon: "Star",
       },
     ],
+    heroImage: null,
   }
 
   const about = aboutData || defaultAbout
@@ -107,18 +108,43 @@ export default async function AboutPage() {
       <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-24 overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-gold/10 text-gold px-4 py-2 rounded-full text-sm font-semibold mb-6 animate-fade-in">
-              <Sparkles className="w-4 h-4" />
-              <span>Profesionální stavební řešení s 23 lety zkušeností</span>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Text Column */}
+              <div>
+                <div className="inline-flex items-center gap-2 bg-gold/10 text-gold px-4 py-2 rounded-full text-sm font-semibold mb-6 animate-fade-in">
+                  <Sparkles className="w-4 h-4" />
+                  <span>Profesionální stavební řešení s 23 lety zkušeností</span>
+                </div>
+                <h1 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent leading-tight">
+                  O firmě Oleh Kulish, OSVČ - ART DUM
+                </h1>
+                <p className="text-xl text-white/80 leading-relaxed">
+                  Jsme specialisté na rekonstrukce bytů, domů a zateplení fasád v Třebíči a okolí (kraj Vysočina). Firma
+                  vedená Oleh Kulishem, OSVČ s mateřskou firmou 23 let na trhu přináší zkušenosti, kvalitu a
+                  spolehlivost.
+                </p>
+              </div>
+
+              {/* Image Column */}
+              {about.heroImage && (
+                <div className="relative">
+                  <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl shadow-black/40 border-4 border-gold/20">
+                    <Image
+                      src={urlFor(about.heroImage)?.width(800).height(800).url() || "/placeholder.svg"}
+                      alt={about.heroImage.alt || "O firmě ART DUM"}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
+                  </div>
+                  {/* Decorative elements */}
+                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-gold/20 rounded-full blur-3xl" />
+                  <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gold/10 rounded-full blur-3xl" />
+                </div>
+              )}
             </div>
-            <h1 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent leading-tight">
-              O firmě Oleh Kulish, OSVČ - ART DUM
-            </h1>
-            <p className="text-xl text-white/80 leading-relaxed mb-8">
-              Jsme specialisté na rekonstrukce bytů, domů a zateplení fasád v Třebíči a okolí (kraj Vysočina). Firma
-              vedená Oleh Kulishem, OSVČ s mateřskou firmou 23 let na trhu přináší zkušenosti, kvalitu a spolehlivost.
-            </p>
           </div>
         </div>
       </section>
