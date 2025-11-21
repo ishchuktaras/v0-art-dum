@@ -1,5 +1,3 @@
-import { Header } from "@/components/ui/header"
-import { Footer } from "@/components/ui/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Link from "next/link"
@@ -93,8 +91,6 @@ export default async function PortfolioPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-
-      <Header />
 
       <main className="flex-1">
         {/* Hero Section */}
@@ -248,8 +244,6 @@ export default async function PortfolioPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   )
 }
