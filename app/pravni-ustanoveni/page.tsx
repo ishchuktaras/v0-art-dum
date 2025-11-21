@@ -3,30 +3,54 @@ export default function PravniUstanoveniPage() {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-12 md:py-16 max-w-4xl">
         <h1 className="text-3xl md:text-4xl font-bold mb-8">Právní ustanovení</h1>
-        
+
         <div className="prose prose-lg max-w-none space-y-6">
           <section>
             <h2 className="text-2xl font-bold mb-4">1. Autorská práva</h2>
-            <p>Veškerý obsah těchto webových stránek, včetně textů, fotografií, grafiky a loga, je chráněn autorským právem a je majetkem společnosti Oleh Kulish nebo třetích stran, které poskytly souhlas k použití.</p>
-            <p className="mt-4">Jakékoli užití obsahu, včetně jeho kopírování, šíření, přepracování nebo veřejného sdělování, je bez předchozího písemného souhlasu zakázáno.</p>
+            <p>
+              Veškerý obsah těchto webových stránek, včetně textů, fotografií, grafiky a loga, je chráněn autorským
+              právem a je majetkem společnosti <strong>Oleh Kulish, OSVČ - ART DUM</strong> nebo třetích stran, které
+              poskytly souhlas k použití.
+            </p>
+            <p className="mt-4">
+              Jakékoli užití obsahu, včetně jeho kopírování, šíření, přepracování nebo veřejného sdělování, je bez
+              předchozího písemného souhlasu zakázáno.
+            </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-bold mb-4">2. Odpovědnost za obsah webu</h2>
-            <p>Provozovatel webu se snaží, aby informace zveřejněné na těchto stránkách byly aktuální, úplné a přesné. Provozovatel však nepřebírá odpovědnost za případné nepřesnosti nebo chyby.</p>
-            <p className="mt-4">Provozovatel si vyhrazuje právo kdykoli změnit nebo aktualizovat informace na těchto stránkách bez předchozího upozornění.</p>
+            <p>
+              Provozovatel webu se snaží, aby informace zveřejněné na těchto stránkách byly aktuální, úplné a přesné.
+              Provozovatel však nepřebírá odpovědnost za případné nepřesnosti nebo chyby.
+            </p>
+            <p className="mt-4">
+              Provozovatel si vyhrazuje právo kdykoli změnit nebo aktualizovat informace na těchto stránkách bez
+              předchozího upozornění.
+            </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-bold mb-4">3. Externí odkazy</h2>
-            <p>Tyto webové stránky mohou obsahovat odkazy na externí webové stránky třetích stran. Za obsah těchto externích stránek nepřebírá provozovatel žádnou odpovědnost.</p>
-            <p className="mt-4">Odkazy jsou poskytovány pouze pro informační účely a neznamená to, že provozovatel schvaluje obsah externích stránek.</p>
+            <p>
+              Tyto webové stránky mohou obsahovat odkazy na externí webové stránky třetích stran. Za obsah těchto
+              externích stránek nepřebírá provozovatel žádnou odpovědnost.
+            </p>
+            <p className="mt-4">
+              Odkazy jsou poskytovány pouze pro informační účely a neznamená to, že provozovatel schvaluje obsah
+              externích stránek.
+            </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-bold mb-4">4. Cookies</h2>
-            <p>Tyto webové stránky používají cookies pro zajištění správné funkčnosti webu a pro analýzu návštěvnosti.</p>
-            <p className="mt-4">Používáním těchto stránek souhlasíte s používáním cookies v souladu s našimi Zásadami ochrany osobních údajů.</p>
+            <p>
+              Tyto webové stránky používají cookies pro zajištění správné funkčnosti webu a pro analýzu návštěvnosti.
+            </p>
+            <p className="mt-4">
+              Používáním těchto stránek souhlasíte s používáním cookies v souladu s našimi Zásadami ochrany osobních
+              údajů.
+            </p>
           </section>
 
           <section>
@@ -42,7 +66,10 @@ export default function PravniUstanoveniPage() {
 
           <section>
             <h2 className="text-2xl font-bold mb-4">6. Ochranné známky</h2>
-            <p>Všechny ochranné známky, loga a obchodní názvy zobrazené na těchto stránkách jsou majetkem jejich příslušných vlastníků.</p>
+            <p>
+              Všechny ochranné známky, loga a obchodní názvy zobrazené na těchto stránkách jsou majetkem jejich
+              příslušných vlastníků.
+            </p>
           </section>
 
           <section>
@@ -62,7 +89,7 @@ export default function PravniUstanoveniPage() {
             <h2 className="text-2xl font-bold mb-4">8. Kontakt</h2>
             <p>V případě jakýchkoliv dotazů týkajících se těchto právních ustanovení nás prosím kontaktujte:</p>
             <div className="mt-4 p-4 bg-muted rounded-lg">
-              <p className="font-semibold">Oleh Kulish</p>
+              <p className="font-semibold">Oleh Kulish, OSVČ - ART DUM</p>
               <p>IČO: 22401261</p>
               <p>Karlovo nám 44/33, 674 01 Třebíč</p>
               <p>Email: firma@artdum.cz</p>

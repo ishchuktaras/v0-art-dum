@@ -24,18 +24,18 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "ART DUM - Stavební firma | Třebíč a okolí",
+  title: "Oleh Kulish, OSVČ - ART DUM | Stavební firma Třebíč a okolí",
   description:
     "23 let zkušeností ve stavebnictví. Rekonstrukce, stavby na klíč, opravy. Kvalitní stavební práce v regionu Třebíč a kraj Vysočina.",
-  keywords: ["stavební firma", "Třebíč", "rekonstrukce", "stavba na klíč", "Vysočina"],
-  authors: [{ name: "ART DUM" }],
+  keywords: ["stavební firma", "Třebíč", "rekonstrukce", "stavba na klíč", "Vysočina", "Oleh Kulish", "ART DUM"],
+  authors: [{ name: "Oleh Kulish, OSVČ - ART DUM" }],
   openGraph: {
-    title: "ART DUM - Stavební firma",
+    title: "Oleh Kulish, OSVČ - ART DUM | Stavební firma",
     description: "23 let zkušeností ve stavebnictví",
     locale: "cs_CZ",
     type: "website",
   },
-  generator: 'v0.app'
+  generator: "v0.app",
 }
 
 export const viewport: Viewport = {
@@ -52,12 +52,7 @@ export default function RootLayout({
   return (
     <html lang="cs" className={inter.variable} suppressHydrationWarning>
       <body className="font-sans antialiased">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <ConditionalLayout>{children}</ConditionalLayout>
           <CookieConsent />
           <Toaster />

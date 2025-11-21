@@ -138,7 +138,7 @@ export function Footer() {
         {/* Spodní řádek */}
         <div className="mt-8 border-t border-white/10 dark:border-border pt-8 text-center text-sm text-white/60 dark:text-muted-foreground">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <p>© 2025 ART DUM. Všechna práva vyhrazena.</p>
+            <p>© 2025 Oleh Kulish, OSVČ - ART DUM. Všechna práva vyhrazena.</p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/ochrana-osobnich-udaju" className="hover:text-accent transition-colors">
                 Ochrana osobních údajů

@@ -1,6 +1,6 @@
 # Implementace obsahu do Sanity CMS
 
-Tento dokument obsahuje kompletní postup pro naplnění obsahu do Sanity Studio podle dodané specifikace a textů od objednatele.
+Tento dokument obsahuje kompletní postup pro naplnění obsahu do Sanity Studio podle dodané specifikace a textů od objednatele **Oleh Kulish, OSVČ - ART DUM**.
 
 ## Přístup do Sanity Studia
 
@@ -23,7 +23,7 @@ Tento dokument obsahuje kompletní postup pro naplnění obsahu do Sanity Studio
 | **Alternativní text obrázku** | `ART DUM stavební firma - rekonstrukce domu` |
 | **Text tlačítka (CTA)** | `Nezávazná poptávka` |
 | **Nadpis sekce O nás** | `Spolehlivý partner pro vaši rekonstrukci` |
-| **Text sekce O nás** | `Jsme stavební firma ART DUM z Třebíče, kterou vede Oleh Kostyshyn. Naší filozofií je dodávat práci ve třech pilířích: **Kvalita, Rychlost a Cena**. S 23 lety zkušeností a odbornou nostrifikací jsme spolehlivým partnerem pro vaši rekonstrukci.` |
+| **Text sekce O nás** | `Jsme stavební firma Oleh Kulish, OSVČ - ART DUM z Třebíče, kterou vede Oleh Kulish. Naší filozofií je dodávat práci ve třech pilířích: **Kvalita, Rychlost a Cena**. S 23 lety zkušeností a odbornou nostrifikací jsme spolehlivým partnerem pro vaši rekonstrukci.` |
 | **Počet dokončených projektů** | `150` |
 | **Roky zkušeností** | `23` |
 | **Spokojení klienti** | `200` |
@@ -259,7 +259,7 @@ Tento dokument obsahuje kompletní postup pro naplnění obsahu do Sanity Studio
 | **Kategorie** | `Zahrada a exteriér` |
 | **Místo realizace** | `Třebíč` |
 | **Rok realizace** | `2024` |
-| **Krátký popis** | `Kompletní zahradní úpravy zahrnující pokládku přírodní kamenné dlažby, výstavbu dřevěné pergoly a úpravu terénu s výsadbou travního porostu.` |
+| **Krátký popis** | `Kompletní zahradní úpravy zahrnující pokládka přírodní kamenné dlažby, výstavbu dřevěné pergoly a úpravu terénu s výsadbou travního porostu.` |
 | **Detailní popis projektu** | (Rich text) <br><br>Zákazník požadoval funkční a estetické řešení zahrady s důrazem na přírodní materiály a trvanlivost.<br><br>**Průběh prací:**<br>1. Příprava terénu a vyrovnání pozemku<br>2. Pokládka přírodní kamenné dlažby z místního kamene<br>3. Výstavba dřevěné pergoly z impregnovaného dřeva<br>4. Úprava okolních ploch a výsadba travního porostu<br>5. Dokončovací práce a ošetření dřevěných prvků<br><br>Výsledkem je funkční zahradní prostor s přirozeným charakterem, který dokonale doplňuje stávající venkovský styl nemovitosti. |
 | **Fotografie projektu** | Nahrát všechny 3 fotografie zahrady |
 | **Požadavky zákazníka** | `Vytvoření příjemného zahradního prostoru s použitím přírodních materiálů, dřevěná pergola pro relaxaci a trvanlivá kamenná dlažba odolná povětrnostním vlivům.` |
@@ -327,16 +327,16 @@ Tento dokument obsahuje kompletní postup pro naplnění obsahu do Sanity Studio
 | Pole | Hodnota |
 |------|---------|
 | **Název stránky** | `O nás` |
-| **Hlavní nadpis** | `O firmě ART DUM` |
+| **Hlavní nadpis** | `O firmě Oleh Kulish, OSVČ - ART DUM` |
 | **Podnadpis** | `Spolehlivá stavební firma s 23 lety zkušeností` |
-| **Hlavní obrázek** | Nahrát firemní fotografii nebo fotografii Oleha Kostyshyna |
-| **Alternativní text** | `Oleh Kostyshyn - majitel ART DUM` |
+| **Hlavní obrázek** | Nahrát firemní fotografii nebo fotografii Oleha Kulishyna |
+| **Alternativní text** | `Oleh Kulish - majitel ART DUM` |
 
 ### Náš příběh (Rich text):
 
 \`\`\`
-Jsme spolehlivá stavební firma ART DUM působící v Třebíči a okolí (kraj Vysočina). 
-Firmu vede Oleh Kostyshyn a naší hlavní misí je budování důvěry prostřednictvím 
+Jsme spolehlivá stavební firma Oleh Kulish, OSVČ - ART DUM působící v Třebíči a okolí (kraj Vysočina). 
+Firmu vede Oleh Kulish a naší hlavní misí je budování důvěry prostřednictvím 
 poctivě odvedené práce.
 
 Stavíme na 23 letech zkušeností a odborné kvalifikaci, včetně nostrifikace vzdělání 

@@ -3,12 +3,16 @@ export default function ObchodniPodminkyPage() {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-12 md:py-16 max-w-4xl">
         <h1 className="text-3xl md:text-4xl font-bold mb-8">Obchodní podmínky</h1>
-        
+
         <div className="prose prose-lg max-w-none space-y-6">
           <section>
             <h2 className="text-2xl font-bold mb-4">1. Úvodní ustanovení</h2>
-            <p>Tyto obchodní podmínky upravují vztahy mezi objednatelem a zhotovitelem při realizaci stavebních prací a služeb poskytovaných společností:</p>
-            <p className="font-semibold">Oleh Kulish, IČO: 22401261</p>
+            <p>
+              Tyto obchodní podmínky upravují vztahy mezi objednatelem a zhotovitelem při realizaci stavebních prací a
+              služeb poskytovaných společností:
+            </p>
+            <p className="font-semibold">Oleh Kulish, OSVČ - ART DUM</p>
+            <p className="font-semibold">IČO: 22401261</p>
             <p>se sídlem: Karlovo nám 44/33, 674 01 Třebíč</p>
             <p>Email: firma@artdum.cz, Telefon: +420 774 335 592</p>
             <p className="mt-4">(dále jen „zhotovitel")</p>
@@ -35,7 +39,10 @@ export default function ObchodniPodminkyPage() {
               <li>Podpisem písemné Smlouvy o dílo mezi objednatelem a zhotovitelem</li>
               <li>Akceptací cenové nabídky objednatelem v písemné nebo elektronické formě</li>
             </ol>
-            <p className="mt-4">Před podpisem smlouvy je vždy provedena nezávazná prohlídka a konzultace na místě realizace, na jejímž základě je zpracována cenová nabídka.</p>
+            <p className="mt-4">
+              Před podpisem smlouvy je vždy provedena nezávazná prohlídka a konzultace na místě realizace, na jejímž
+              základě je zpracována cenová nabídka.
+            </p>
           </section>
 
           <section>
@@ -82,8 +89,12 @@ export default function ObchodniPodminkyPage() {
             </ul>
             <p className="mt-4">Standardní platební podmínky:</p>
             <ul className="list-disc pl-6 space-y-2">
-              <li><strong>Záloha 50%</strong> - splatná před zahájením prací</li>
-              <li><strong>Doplatek 50%</strong> - splatný po dokončení a předání díla</li>
+              <li>
+                <strong>Záloha 50%</strong> - splatná před zahájením prací
+              </li>
+              <li>
+                <strong>Doplatek 50%</strong> - splatný po dokončení a předání díla
+              </li>
             </ul>
             <p className="mt-4">Platba je možná:</p>
             <ul className="list-disc pl-6 space-y-2">
@@ -136,10 +147,18 @@ export default function ObchodniPodminkyPage() {
             <h2 className="text-2xl font-bold mb-4">10. Záruka za jakost a reklamace</h2>
             <p>Zhotovitel poskytuje záruku na provedené práce:</p>
             <ul className="list-disc pl-6 space-y-2">
-              <li><strong>Stavební práce:</strong> 60 měsíců (5 let)</li>
-              <li><strong>Instalatérské práce:</strong> 36 měsíců (3 roky)</li>
-              <li><strong>Elektroinstalace:</strong> 36 měsíců (3 roky)</li>
-              <li><strong>Malířské práce:</strong> 24 měsíců (2 roky)</li>
+              <li>
+                <strong>Stavební práce:</strong> 60 měsíců (5 let)
+              </li>
+              <li>
+                <strong>Instalatérské práce:</strong> 36 měsíců (3 roky)
+              </li>
+              <li>
+                <strong>Elektroinstalace:</strong> 36 měsíců (3 roky)
+              </li>
+              <li>
+                <strong>Malířské práce:</strong> 24 měsíců (2 roky)
+              </li>
             </ul>
             <p className="mt-4">Záruka se nevztahuje na:</p>
             <ul className="list-disc pl-6 space-y-2">
@@ -186,20 +205,32 @@ export default function ObchodniPodminkyPage() {
 
           <section>
             <h2 className="text-2xl font-bold mb-4">13. Ochrana osobních údajů</h2>
-            <p>Zpracování osobních údajů se řídí samostatným dokumentem "Zásady ochrany osobních údajů (GDPR)", který je dostupný na webových stránkách www.artdum.cz/gdpr</p>
+            <p>
+              Zpracování osobních údajů se řídí samostatným dokumentem "Zásady ochrany osobních údajů (GDPR)", který je
+              dostupný na webových stránkách www.artdum.cz/gdpr
+            </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-bold mb-4">14. Závěrečná ustanovení</h2>
             <p>Tyto obchodní podmínky jsou platné a účinné od 1. 1. 2025.</p>
-            <p className="mt-4">Zhotovitel si vyhrazuje právo změnit tyto obchodní podmínky. Změna nabývá účinnosti dnem zveřejnění na webových stránkách.</p>
-            <p className="mt-4">Vztahy výslovně neupravené těmito obchodními podmínkami se řídí příslušnými ustanoveními občanského zákoníku č. 89/2012 Sb.</p>
-            <p className="mt-4">Veškeré spory vzniklé z těchto obchodních podmínek nebo v souvislosti s nimi budou řešeny obecnými soudy České republiky.</p>
+            <p className="mt-4">
+              Zhotovitel si vyhrazuje právo změnit tyto obchodní podmínky. Změna nabývá účinnosti dnem zveřejnění na
+              webových stránkách.
+            </p>
+            <p className="mt-4">
+              Vztahy výslovně neupravené těmito obchodními podmínkami se řídí příslušnými ustanoveními občanského
+              zákoníku č. 89/2012 Sb.
+            </p>
+            <p className="mt-4">
+              Veškeré spory vzniklé z těchto obchodních podmínek nebo v souvislosti s nimi budou řešeny obecnými soudy
+              České republiky.
+            </p>
           </section>
 
           <section className="pt-8 border-t">
             <p className="text-sm text-muted-foreground">V Třebíči, dne 1. 1. 2025</p>
-            <p className="text-sm text-muted-foreground mt-2">Oleh Kulish, zhotovitel</p>
+            <p className="text-sm text-muted-foreground mt-2">Oleh Kulish, OSVČ - ART DUM, zhotovitel</p>
           </section>
         </div>
       </div>

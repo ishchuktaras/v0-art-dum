@@ -1,7 +1,21 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { Award, Users, Target, CheckCircle2, Sparkles, TrendingUp, Shield, DollarSign, Zap, Star, Clock, BadgeCheck, Hammer, Wrench } from 'lucide-react'
+import {
+  Award,
+  Users,
+  Target,
+  Sparkles,
+  TrendingUp,
+  Shield,
+  DollarSign,
+  Zap,
+  Star,
+  Clock,
+  BadgeCheck,
+  Hammer,
+  Wrench,
+} from "lucide-react"
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { ABOUT_QUERY, CERTIFICATES_QUERY } from "@/sanity/lib/queries"
 import { urlFor } from "@/sanity/lib/image"
@@ -9,9 +23,9 @@ import { Button } from "@/components/ui/button"
 import { PortableText } from "next-sanity"
 
 export const metadata: Metadata = {
-  title: "O nás | 23 let zkušeností ve stavebnictví | ART DUM Třebíč",
+  title: "O nás | 23 let zkušeností ve stavebnictví | Oleh Kulish, OSVČ - ART DUM | Třebíč",
   description:
-    "Stavební firma ART DUM s 23 lety zkušeností v Třebíči a okolí. Specialisté na rekonstrukce bytů, domů a zateplení fasád. Kvalifikovaní odborníci s nostrifikací vzdělání a certifikáty.",
+    "Stavební firma Oleh Kulish, OSVČ - ART DUM s 23 lety zkušeností v Třebíči a okolí. Specialisté na rekonstrukce bytů, domů a zateplení fasád. Kvalifikovaní odborníci s nostrifikací vzdělání a certifikáty.",
   keywords: [
     "o firmě ART DUM",
     "tým stavební firmy",
@@ -19,9 +33,10 @@ export const metadata: Metadata = {
     "certifikáty stavební",
     "kvalifikace",
     "Třebíč stavební firma",
+    "Oleh Kulish",
   ],
   openGraph: {
-    title: "O nás | ART DUM Třebíč",
+    title: "O nás | Oleh Kulish, OSVČ - ART DUM | Třebíč",
     description: "23 let zkušeností ve stavebnictví. Poznejte náš tým a naše hodnoty.",
     url: "https://artdum.cz/o-nas",
   },
@@ -69,7 +84,7 @@ export default async function AboutPage() {
     "@type": "AboutPage",
     mainEntity: {
       "@type": "GeneralContractor",
-      name: "ART DUM",
+      name: "Oleh Kulish, OSVČ - ART DUM",
       foundingDate: "2001",
       description: "Profesionální stavební firma s 23 lety zkušeností v regionu Třebíč",
       address: {
@@ -86,10 +101,7 @@ export default async function AboutPage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-24 overflow-hidden">
@@ -101,11 +113,11 @@ export default async function AboutPage() {
               <span>Profesionální stavební řešení s 23 lety zkušeností</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent leading-tight">
-              O firmě ART DUM
+              O firmě Oleh Kulish, OSVČ - ART DUM
             </h1>
             <p className="text-xl text-white/80 leading-relaxed mb-8">
-              Jsme specialisté na rekonstrukce bytů, domů a zateplení fasád v Třebíči a okolí (kraj Vysočina). 
-              Firma vedená Olenem Kulishem s mateřskou firmou 23 let na trhu přináší zkušenosti, kvalitu a spolehlivost.
+              Jsme specialisté na rekonstrukce bytů, domů a zateplení fasád v Třebíči a okolí (kraj Vysočina). Firma
+              vedená Oleh Kulishem, OSVČ s mateřskou firmou 23 let na trhu přináší zkušenosti, kvalitu a spolehlivost.
             </p>
           </div>
         </div>
@@ -139,7 +151,7 @@ export default async function AboutPage() {
                 <div className="p-2 bg-gold/10 rounded-lg">
                   <Target className="w-8 h-8 text-gold" />
                 </div>
-                <h2 className="text-4xl font-black text-foreground">Proč zvolit ART DUM</h2>
+                <h2 className="text-4xl font-black text-foreground">Proč zvolit Oleh Kulish, OSVČ - ART DUM</h2>
               </div>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-medium">
                 Naše hodnoty a přístup k práci
@@ -159,10 +171,10 @@ export default async function AboutPage() {
                   Hammer: Hammer,
                   Wrench: Wrench,
                 }
-                
-                const iconName = item.icon || ['DollarSign', 'Zap', 'Star'][index % 3]
+
+                const iconName = item.icon || ["DollarSign", "Zap", "Star"][index % 3]
                 const IconComponent = iconMap[iconName] || Shield
-                
+
                 return (
                   <div
                     key={index}
@@ -176,9 +188,7 @@ export default async function AboutPage() {
                       <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-gold transition-colors">
                         {item.title}
                       </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {item.description}
-                      </p>
+                      <p className="text-muted-foreground leading-relaxed">{item.description}</p>
                     </div>
                   </div>
                 )
@@ -242,18 +252,20 @@ export default async function AboutPage() {
               </div>
               <div className="prose prose-lg max-w-none text-foreground bg-card p-10 rounded-2xl border-2 border-border shadow-xl leading-relaxed">
                 <p className="text-lg leading-relaxed">
-                  <strong className="text-foreground">Oleh Kulish</strong>, majitel a jednatel firmy ART DUM, disponuje nostrifikovaným vzděláním 
-                  z oboru <strong className="text-foreground">kvalifikovaný pracovník stavebních prací</strong> (č. AK: 21981987, vydané Střední 
-                  odborné technické učiliště č. 12, město Mižhirja, Ukrajina, 2003).
+                  <strong className="text-foreground">Oleh Kulish</strong>, majitel a jednatel firmy Oleh Kulish, OSVČ -
+                  ART DUM, disponuje nostrifikovaným vzděláním z oboru{" "}
+                  <strong className="text-foreground">kvalifikovaný pracovník stavebních prací</strong> (č. AK:
+                  21981987, vydané Střední odborné technické učiliště č. 12, město Mižhirja, Ukrajina, 2003).
                 </p>
                 <p className="text-lg leading-relaxed mt-4">
-                  Vzdělání bylo <strong className="text-foreground">nostrifikováno Krajským úřadem kraje Vysočina</strong> dne 15. 10. 2024 
-                  s platností v České republice. Nostrifikace potvrzuje rovnocennost zahraničního vzdělání 
-                  s českým systémem a umožňuje výkon kvalifikované stavební činnosti v souladu s českými předpisy.
+                  Vzdělání bylo{" "}
+                  <strong className="text-foreground">nostrifikováno Krajským úřadem kraje Vysočina</strong> dne 15. 10.
+                  2024 s platností v České republice. Nostrifikace potvrzuje rovnocennost zahraničního vzdělání s českým
+                  systémem a umožňuje výkon kvalifikované stavební činnosti v souladu s českými předpisy.
                 </p>
                 <p className="text-lg leading-relaxed mt-4">
-                  Kombinace <strong className="text-foreground">23 let praktických zkušeností</strong> s oficiálně uznanou kvalifikací 
-                  je zárukou profesionality a odbornosti našich služeb.
+                  Kombinace <strong className="text-foreground">23 let praktických zkušeností</strong> s oficiálně
+                  uznanou kvalifikací je zárukou profesionality a odbornosti našich služeb.
                 </p>
                 <PortableText value={about.qualifications} />
               </div>
@@ -276,7 +288,7 @@ export default async function AboutPage() {
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8 font-medium">
                 Osvědčení o kvalifikaci a odbornosti
               </p>
-              
+
               <div className="max-w-3xl mx-auto bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-900/30 dark:to-amber-950/20 border-2 border-amber-300 dark:border-amber-600/50 rounded-2xl p-8 mb-8 shadow-lg">
                 <div className="flex items-start gap-5">
                   <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 dark:from-amber-600 dark:to-amber-700 rounded-xl flex items-center justify-center shadow-lg">
@@ -287,10 +299,14 @@ export default async function AboutPage() {
                       Upozornění k citlivým údajům
                     </h3>
                     <p className="text-base text-gray-800 dark:text-gray-200 leading-relaxed mb-4">
-                      Z důvodu ochrany osobních a citlivých údajů v souladu s legislativou zde zobrazujeme pouze ukázkové verze dokumentů s popisem.
+                      Z důvodu ochrany osobních a citlivých údajů v souladu s legislativou zde zobrazujeme pouze
+                      ukázkové verze dokumentů s popisem.
                     </p>
                     <p className="text-base text-gray-800 dark:text-gray-200 leading-relaxed">
-                      <strong className="text-gray-900 dark:text-gray-100 font-bold">Originální dokumenty včetně nostrifikací a certifikátů rádi předložíme při osobním jednání</strong> s našimi zákazníky a obchodními partnery. Pro více informací nás neváhejte kontaktovat.
+                      <strong className="text-gray-900 dark:text-gray-100 font-bold">
+                        Originální dokumenty včetně nostrifikací a certifikátů rádi předložíme při osobním jednání
+                      </strong>{" "}
+                      s našimi zákazníky a obchodními partnery. Pro více informací nás neváhejte kontaktovat.
                     </p>
                   </div>
                 </div>
@@ -307,16 +323,18 @@ export default async function AboutPage() {
                   </div>
                   {cert.image && (
                     <div className="relative h-80 w-full bg-card p-6 border-b-2 border-border">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-gray-300 dark:text-gray-700 text-6xl font-black opacity-10 rotate-[-25deg] select-none pointer-events-none">
-                          UKÁZKOVÝ<br/>OBRÁZEK
+                      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                        <div className="text-gray-300 dark:text-gray-700 text-6xl font-black opacity-20 rotate-[-25deg] select-none">
+                          UKÁZKOVÝ
+                          <br />
+                          OBRÁZEK
                         </div>
                       </div>
                       <Image
                         src={urlFor(cert.image)?.width(600).height(600).url() || "/placeholder.svg"}
                         alt={cert.image.alt || cert.title}
                         fill
-                        className="object-contain p-4 group-hover:scale-105 transition-transform duration-500 opacity-40"
+                        className="object-contain p-4 group-hover:scale-105 transition-transform duration-500 opacity-30 blur-sm"
                       />
                     </div>
                   )}
@@ -360,13 +378,11 @@ export default async function AboutPage() {
             <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight">
               Kontaktujte nás pro nezávaznou konzultaci a cenovou nabídku
             </h2>
-            <p className="text-xl text-white/80 mb-10 leading-relaxed">
-              Máte projekt? Pojďme ho zrealizovat společně
-            </p>
+            <p className="text-xl text-white/80 mb-10 leading-relaxed">Máte projekt? Pojďme ho zrealizovat společně</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                asChild 
+              <Button
+                size="lg"
+                asChild
                 className="group bg-gold hover:bg-gold/90 text-navy font-bold text-lg px-8 py-6 h-auto shadow-2xl shadow-gold/20 hover:scale-105 transition-all"
               >
                 <Link href="/kontakt" className="flex items-center gap-2">
