@@ -3,16 +3,16 @@
 import type React from "react"
 import { Suspense } from "react"
 import { useEffect } from "react"
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { Building2 } from 'lucide-react'
+import { Building2 } from "lucide-react"
 
 function LoginForm() {
   const [email, setEmail] = useState("")
@@ -25,7 +25,7 @@ function LoginForm() {
   const searchParams = useSearchParams()
 
   useEffect(() => {
-    const errorFromUrl = searchParams.get('error')
+    const errorFromUrl = searchParams.get("error")
     if (errorFromUrl) {
       setError(errorFromUrl)
     }
@@ -39,16 +39,16 @@ function LoginForm() {
 
     try {
       const supabase = createClient()
-      
+
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       })
-      
+
       if (error) {
         throw error
       }
-      
+
       router.push("/admin")
       router.refresh()
     } catch (error: unknown) {
@@ -66,19 +66,20 @@ function LoginForm() {
 
     try {
       const supabase = createClient()
-      
+
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          emailRedirectTo: process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || `${window.location.origin}/auth/callback`,
+          emailRedirectTo:
+            process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || `${window.location.origin}/auth/callback`,
         },
       })
-      
+
       if (error) {
         throw error
       }
-      
+
       setSuccess("✓ Registrace úspěšná! Zkontrolujte email pro potvrzení účtu.")
       setIsSignUp(false)
       setEmail("")
@@ -102,9 +103,7 @@ function LoginForm() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl font-black">
-              {isSignUp ? "Registrace" : "Přihlášení"}
-            </CardTitle>
+            <CardTitle className="text-2xl font-black">{isSignUp ? "Registrace" : "Přihlášení"}</CardTitle>
             <CardDescription>
               {isSignUp
                 ? "Vytvořte si účet pro přístup do administrace"
@@ -115,16 +114,14 @@ function LoginForm() {
             <form onSubmit={isSignUp ? handleSignUp : handleLogin}>
               <div className="flex flex-col gap-6">
                 {error && (
-                  <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600 border border-red-200">
-                    {error}
-                  </div>
+                  <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600 border border-red-200">{error}</div>
                 )}
                 {success && (
                   <div className="rounded-lg bg-green-50 p-3 text-sm text-green-600 border border-green-200">
                     {success}
                   </div>
                 )}
-                
+
                 <div className="grid gap-2">
                   <Label htmlFor="email">Email</Label>
                   <Input
@@ -146,21 +143,27 @@ function LoginForm() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  {isSignUp && (
-                    <p className="text-xs text-muted-foreground">Heslo musí mít minimálně 6 znaků</p>
-                  )}
+                  {isSignUp && <p className="text-xs text-muted-foreground">Heslo musí mít minimálně 6 znaků</p>}
                 </div>
-                
+
                 <Button
                   type="submit"
-                  className="w-full font-bold"
+                  className="w-full font-bold text-base"
                   disabled={isLoading}
                   style={{
                     backgroundColor: "var(--accent)",
                     color: "var(--primary)",
                   }}
                 >
-                  {isLoading ? (isSignUp ? "Registruji..." : "Přihlašuji...") : isSignUp ? "Registrovat se" : "Přihlásit se"}
+                  <span className="block">
+                    {isLoading
+                      ? isSignUp
+                        ? "Registruji..."
+                        : "Přihlašuji..."
+                      : isSignUp
+                        ? "Registrovat se"
+                        : "Přihlásit se"}
+                  </span>
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">
@@ -195,11 +198,7 @@ export default function LoginPage() {
       className="flex min-h-screen w-full items-center justify-center p-6"
       style={{ backgroundColor: "var(--primary)" }}
     >
-      <Suspense fallback={
-        <div className="w-full max-w-sm text-center text-white">
-          Načítání...
-        </div>
-      }>
+      <Suspense fallback={<div className="w-full max-w-sm text-center text-white">Načítání...</div>}>
         <LoginForm />
       </Suspense>
     </div>
