@@ -1,7 +1,7 @@
-import type { Metadata } from "next"
-import PricingPageClient from "./PricingPageClient"
 import { client } from "@/sanity/lib/client"
 import { PRICING_QUERY } from "@/sanity/lib/queries"
+import PricingPageClient from "./page"
+import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Ceník stavebních prací | Orientační ceny | ART DUM Třebíč",
@@ -11,18 +11,38 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Ceník stavebních prací | ART DUM",
     description: "Transparentní ceník našich služeb. Férová kalkulace bez skrytých poplatků.",
-    url: "https://artdum.cz/Ceník",
+    url: "https://artdum.cz/cenik",
   },
   alternates: {
-    canonical: "https://artdum.cz/Ceník",
+    canonical: "https://artdum.cz/cenik",
   },
 }
 
+type PricingItem = {
+  service: string
+  price: string
+  note?: string
+  unit?: string
+}
+
+type PricingCategory = {
+  _id: string
+  category: string
+  slug: { current: string }
+  description: string
+  items: PricingItem[]
+  order: number
+}
+
+const pricingCategories = [
+  // ... existing fallback data ...
+]
+
 export default async function PricingPage() {
-  let categories = []
+  let categories: PricingCategory[] | typeof pricingCategories = pricingCategories
 
   try {
-    const sanityData = await client.fetch<any[]>(PRICING_QUERY)
+    const sanityData = await client.fetch<PricingCategory[]>(PRICING_QUERY)
     if (sanityData && sanityData.length > 0) {
       categories = sanityData
     }
