@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import Image from "next/image"
 import { ChevronDown, MessageCircle, Phone, Mail } from "lucide-react"
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { FEATURED_PORTFOLIO_QUERY } from "@/sanity/lib/queries"
@@ -107,14 +106,10 @@ export default async function FAQPage() {
       <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2545] to-[#0b192f] py-20">
         {heroBackgroundImage && (
           <div className="absolute inset-0">
-            <Image
+            <img
               src={heroBackgroundImage || "/placeholder.svg"}
               alt="FAQ ART DUM"
-              fill
-              priority
-              quality={85}
-              sizes="100vw"
-              className="object-cover scale-110"
+              className="w-full h-full object-cover scale-110"
             />
             {/* Multi-layer gradient overlay for text readability */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2545]/90 to-[#0b192f]/95" />

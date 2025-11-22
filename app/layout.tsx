@@ -2,34 +2,25 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 
 import "./globals.css"
+import { CookieConsent } from "@/components/cookie-consent"
 import { ConditionalLayout } from "@/components/conditional-layout"
 import { Toaster } from "@/components/ui/sonner"
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import { ThemeProvider } from "@/components/theme-provider"
-import { ClientLayoutWrapper } from "@/components/client-layout-wrapper"
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+import { WhatsAppButton } from '@/components/whatsapp-button'
+import { ThemeProvider } from '@/components/theme-provider'
 
-import { Inter, Source_Serif_4 } from "next/font/google"
-
-import { Inter, Source_Serif_4, Inter as V0_Font_Inter, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
+import { Inter, Inter as V0_Font_Inter, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
 
 // Initialize fonts
 const _inter = V0_Font_Inter({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
 const _geistMono = V0_Font_Geist_Mono({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
 const _sourceSerif_4 = V0_Font_Source_Serif_4({ subsets: ['latin'], weight: ["200","300","400","500","600","700","800","900"] })
 
-const _inter = Inter({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   display: "swap",
-  preload: true,
-})
-
-const _sourceSerif_4 = Source_Serif_4({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
-  display: "swap",
-  preload: true,
+  variable: "--font-inter",
 })
 
 export const metadata: Metadata = {
@@ -59,14 +50,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="cs" className={_inter.className} suppressHydrationWarning>
+    <html lang="cs" className={inter.variable} suppressHydrationWarning>
       <body className="font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <ConditionalLayout>{children}</ConditionalLayout>
-          <ClientLayoutWrapper />
+          <CookieConsent />
           <Toaster />
           <Analytics />
           <SpeedInsights />
+          <WhatsAppButton />
         </ThemeProvider>
       </body>
     </html>

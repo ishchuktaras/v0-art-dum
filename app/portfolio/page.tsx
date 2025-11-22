@@ -112,14 +112,10 @@ export default async function PortfolioPage() {
         <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-16 md:py-24 overflow-hidden">
           {heroBackgroundImage && (
             <div className="absolute inset-0">
-              <Image
+              <img
                 src={heroBackgroundImage || "/placeholder.svg"}
                 alt="Portfolio ART DUM"
-                fill
-                priority
-                quality={85}
-                sizes="100vw"
-                className="object-cover scale-110"
+                className="w-full h-full object-cover scale-110"
               />
               {/* Multi-layer gradient overlay for text readability */}
               <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
@@ -194,7 +190,6 @@ export default async function PortfolioPage() {
                             alt={project.mainImage?.alt || project.title}
                             fill
                             className="object-cover group-hover:scale-110 transition-transform duration-500"
-                            loading="lazy"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                           <div className="absolute top-4 right-4">

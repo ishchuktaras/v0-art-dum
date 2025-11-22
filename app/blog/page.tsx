@@ -90,14 +90,10 @@ export default async function BlogPage() {
         {/* Background image with overlay */}
         {heroBackgroundImage && (
           <div className="absolute inset-0">
-            <Image
+            <img
               src={heroBackgroundImage || "/placeholder.svg"}
               alt="Blog ART DUM"
-              fill
-              priority
-              quality={85}
-              sizes="100vw"
-              className="object-cover scale-110"
+              className="w-full h-full object-cover scale-110"
             />
             {/* Multi-layer gradient overlay for text readability */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
@@ -136,7 +132,6 @@ export default async function BlogPage() {
                           alt={post.featuredImage.alt || post.title}
                           fill
                           className="object-cover"
-                          loading="lazy"
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
