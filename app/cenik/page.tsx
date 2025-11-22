@@ -182,6 +182,20 @@ export default async function PricingPage() {
     console.error("Error fetching pricing data from Sanity:", error)
   }
 
+  const featuredPortfolio = await client.fetch<any[]>(
+    `*[_type == "portfolio" && isFeatured == true] | order(order asc) [0...6] {
+      _id,
+      "mainImage": images[0]{
+        asset->{
+          _id,
+          url
+        }
+      }
+    }`,
+  )
+
+  const heroBackgroundImage = featuredPortfolio?.[2]?.mainImage?.asset?.url
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "PriceSpecification",
@@ -201,6 +215,19 @@ export default async function PricingPage() {
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden">
+        {/* Background image with overlay */}
+        {heroBackgroundImage && (
+          <div className="absolute inset-0">
+            <img
+              src={heroBackgroundImage || "/placeholder.svg"}
+              alt="Ceník stavebních prací ART DUM"
+              className="w-full h-full object-cover scale-110"
+            />
+            {/* Multi-layer gradient overlay for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0b192f]/90 via-transparent to-[#0b192f]/50" />
+          </div>
+        )}
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
@@ -224,42 +251,90 @@ export default async function PricingPage() {
       </section>
 
       {/* Info Box */}
-      <section className="py-8 bg-gold/10 border-y border-gold/20">
+      <section className="py-10 bg-gradient-to-r from-gold/5 via-gold/10 to-gold/5 border-y-2 border-gold/30">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <p className="text-lg text-foreground">
-              <strong className="text-gold">Důležité:</strong> Uvedené ceny jsou orientační a slouží pro základní
-              představu. Přesnou cenovou nabídku vždy zpracujeme po osobní konzultaci a prohlídce místa realizace.
-            </p>
+          <div className="max-w-5xl mx-auto">
+            <div className="bg-white dark:bg-navy/95 backdrop-blur-sm rounded-2xl p-8 shadow-lg border-2 border-gold/20">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+                    <svg className="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2.5}
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-navy dark:text-white mb-2">Důležité informace o ceníku</h3>
+                  <p className="text-base text-navy/90 dark:text-white/95 leading-relaxed font-medium">
+                    Uvedené ceny jsou <strong className="text-gold">orientační</strong> a slouží pro základní představu.
+                    Přesnou cenovou nabídku vždy zpracujeme po osobní konzultaci a prohlídce místa realizace.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Pricing Categories */}
-      <section className="py-20 bg-background">
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
-          <div className="space-y-12">
+          <div className="max-w-6xl mx-auto space-y-10">
             {categories.map((category, index) => (
               <Card
                 key={index}
-                className="overflow-hidden border-2 border-border hover:border-accent/30 transition-colors"
+                className="group overflow-hidden border-2 border-border hover:border-gold/40 hover:shadow-2xl hover:shadow-gold/10 transition-all duration-300"
               >
-                <CardHeader className="bg-muted/50">
-                  <CardTitle className="text-2xl md:text-3xl text-navy dark:text-white">{category.category}</CardTitle>
-                  <CardDescription className="text-base">{category.description}</CardDescription>
+                <CardHeader className="bg-gradient-to-r from-navy/5 via-navy/3 to-transparent dark:from-white/5 dark:via-white/3 pb-6">
+                  <CardTitle className="text-2xl md:text-3xl font-black text-navy dark:text-white flex items-center gap-3">
+                    <span className="w-2 h-8 bg-gold rounded-full group-hover:h-10 transition-all" />
+                    {category.category}
+                  </CardTitle>
+                  <CardDescription className="text-base md:text-lg text-muted-foreground mt-2 ml-5">
+                    {category.description}
+                  </CardDescription>
                 </CardHeader>
-                <CardContent className="p-6">
-                  <div className="space-y-4">
+                <CardContent className="p-0">
+                  <div className="divide-y divide-border">
                     {category.items.map((item, idx) => (
                       <div
                         key={idx}
-                        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-4 border-b border-border last:border-0 last:pb-0"
+                        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-6 hover:bg-gold/5 transition-colors"
                       >
-                        <div className="flex-1">
-                          <p className="font-semibold text-foreground">{item.service}</p>
-                          {item.note && <p className="text-sm text-muted-foreground">{item.note}</p>}
+                        <div className="flex-1 min-w-0">
+                          <p className="font-bold text-base md:text-lg text-foreground mb-1.5">{item.service}</p>
+                          {item.note && (
+                            <div className="flex items-center gap-2">
+                              <span className="w-1.5 h-1.5 bg-gold/80 rounded-full" />
+                              <p className="text-sm text-navy/80 dark:text-white/80 font-medium">{item.note}</p>
+                            </div>
+                          )}
                         </div>
-                        <div className="text-lg font-bold text-accent whitespace-nowrap">{item.price}</div>
+                        <div className="flex-shrink-0 sm:text-right">
+                          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-gold/15 to-gold/10 px-5 py-2.5 rounded-full border-2 border-gold/30 shadow-sm">
+                            <svg
+                              className="w-4 h-4 text-gold flex-shrink-0"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                            <span className="text-base md:text-lg font-black text-gold whitespace-nowrap drop-shadow-sm">
+                              {item.price}
+                            </span>
+                          </div>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -271,58 +346,92 @@ export default async function PricingPage() {
       </section>
 
       {/* What's Included */}
-      <section className="py-16 bg-muted/50">
+      <section className="py-24 bg-gradient-to-b from-muted/30 to-background">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
-              Co je zahrnuto v našich cenách?
-            </h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              <Card className="border-2 border-border">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 bg-gold/10 text-gold px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <span>Transparentní kalkulace</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
+                Co je zahrnuto v našich cenách?
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Přesně víte, za co platíte. Žádné skryté poplatky ani překvapení.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              <Card className="border-2 border-gold/30 bg-gradient-to-br from-gold/5 to-transparent hover:shadow-xl hover:shadow-gold/10 transition-all">
                 <CardHeader>
-                  <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
-                    <svg
-                      className="w-6 h-6 text-accent-foreground"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  <div className="w-16 h-16 bg-gradient-to-br from-gold to-gold/80 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-gold/30">
+                    <svg className="w-8 h-8 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <CardTitle className="text-xl">Zahrnuto v ceně</CardTitle>
+                  <CardTitle className="text-2xl font-black text-navy dark:text-white">Zahrnuto v ceně</CardTitle>
+                  <CardDescription className="text-base">
+                    Tyto položky jsou standardně součástí kalkulace
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li className="flex items-start">
-                      <span className="text-accent mr-2">•</span>
-                      Odborná práce kvalifikovaných řemeslníků
+                  <ul className="space-y-4">
+                    <li className="flex items-start gap-3 group">
+                      <div className="flex-shrink-0 w-6 h-6 bg-gold/20 rounded-full flex items-center justify-center mt-0.5">
+                        <span className="text-gold text-sm font-bold">✓</span>
+                      </div>
+                      <span className="text-foreground group-hover:text-gold transition-colors">
+                        Odborná práce kvalifikovaných řemeslníků
+                      </span>
                     </li>
-                    <li className="flex items-start">
-                      <span className="text-accent mr-2">•</span>
-                      Standardní materiál (tam kde je uvedeno)
+                    <li className="flex items-start gap-3 group">
+                      <div className="flex-shrink-0 w-6 h-6 bg-gold/20 rounded-full flex items-center justify-center mt-0.5">
+                        <span className="text-gold text-sm font-bold">✓</span>
+                      </div>
+                      <span className="text-foreground group-hover:text-gold transition-colors">
+                        Standardní materiál (tam kde je uvedeno)
+                      </span>
                     </li>
-                    <li className="flex items-start">
-                      <span className="text-accent mr-2">•</span>
-                      Doprava a dovoz materiálu
+                    <li className="flex items-start gap-3 group">
+                      <div className="flex-shrink-0 w-6 h-6 bg-gold/20 rounded-full flex items-center justify-center mt-0.5">
+                        <span className="text-gold text-sm font-bold">✓</span>
+                      </div>
+                      <span className="text-foreground group-hover:text-gold transition-colors">
+                        Doprava a dovoz materiálu
+                      </span>
                     </li>
-                    <li className="flex items-start">
-                      <span className="text-accent mr-2">•</span>
-                      Čištění staveniště
+                    <li className="flex items-start gap-3 group">
+                      <div className="flex-shrink-0 w-6 h-6 bg-gold/20 rounded-full flex items-center justify-center mt-0.5">
+                        <span className="text-gold text-sm font-bold">✓</span>
+                      </div>
+                      <span className="text-foreground group-hover:text-gold transition-colors">
+                        Čištění staveniště
+                      </span>
                     </li>
-                    <li className="flex items-start">
-                      <span className="text-accent mr-2">•</span>
-                      Záruka na provedené práce
+                    <li className="flex items-start gap-3 group">
+                      <div className="flex-shrink-0 w-6 h-6 bg-gold/20 rounded-full flex items-center justify-center mt-0.5">
+                        <span className="text-gold text-sm font-bold">✓</span>
+                      </div>
+                      <span className="text-foreground group-hover:text-gold transition-colors">
+                        Záruka na provedené práce
+                      </span>
                     </li>
                   </ul>
                 </CardContent>
               </Card>
 
-              <Card className="border-2 border-border">
+              <Card className="border-2 border-border hover:shadow-xl transition-all">
                 <CardHeader>
-                  <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center mb-4">
+                  <div className="w-16 h-16 bg-muted rounded-2xl flex items-center justify-center mb-6 border-2 border-border">
                     <svg
-                      className="w-6 h-6 text-muted-foreground"
+                      className="w-8 h-8 text-muted-foreground"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -335,29 +444,50 @@ export default async function PricingPage() {
                       />
                     </svg>
                   </div>
-                  <CardTitle className="text-xl">Nad rámec ceníku</CardTitle>
+                  <CardTitle className="text-2xl font-black text-navy dark:text-white">Nad rámec ceníku</CardTitle>
+                  <CardDescription className="text-base">Tyto služby se účtují samostatně dle domluvy</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li className="flex items-start">
-                      <span className="text-muted-foreground mr-2">•</span>
-                      Projektová dokumentace
+                  <ul className="space-y-4">
+                    <li className="flex items-start gap-3 group">
+                      <div className="flex-shrink-0 w-6 h-6 bg-muted rounded-full flex items-center justify-center mt-0.5">
+                        <span className="text-muted-foreground text-xs">+</span>
+                      </div>
+                      <span className="text-muted-foreground group-hover:text-foreground transition-colors">
+                        Projektová dokumentace
+                      </span>
                     </li>
-                    <li className="flex items-start">
-                      <span className="text-muted-foreground mr-2">•</span>
-                      Stavební povolení a kolaudace
+                    <li className="flex items-start gap-3 group">
+                      <div className="flex-shrink-0 w-6 h-6 bg-muted rounded-full flex items-center justify-center mt-0.5">
+                        <span className="text-muted-foreground text-xs">+</span>
+                      </div>
+                      <span className="text-muted-foreground group-hover:text-foreground transition-colors">
+                        Stavební povolení a kolaudace
+                      </span>
                     </li>
-                    <li className="flex items-start">
-                      <span className="text-muted-foreground mr-2">•</span>
-                      Premium materiály (na přání)
+                    <li className="flex items-start gap-3 group">
+                      <div className="flex-shrink-0 w-6 h-6 bg-muted rounded-full flex items-center justify-center mt-0.5">
+                        <span className="text-muted-foreground text-xs">+</span>
+                      </div>
+                      <span className="text-muted-foreground group-hover:text-foreground transition-colors">
+                        Premium materiály (na přání)
+                      </span>
                     </li>
-                    <li className="flex items-start">
-                      <span className="text-muted-foreground mr-2">•</span>
-                      Likvidace stavebního odpadu
+                    <li className="flex items-start gap-3 group">
+                      <div className="flex-shrink-0 w-6 h-6 bg-muted rounded-full flex items-center justify-center mt-0.5">
+                        <span className="text-muted-foreground text-xs">+</span>
+                      </div>
+                      <span className="text-muted-foreground group-hover:text-foreground transition-colors">
+                        Likvidace stavebního odpadu
+                      </span>
                     </li>
-                    <li className="flex items-start">
-                      <span className="text-muted-foreground mr-2">•</span>
-                      Mimořádné práce mimo pracovní dobu
+                    <li className="flex items-start gap-3 group">
+                      <div className="flex-shrink-0 w-6 h-6 bg-muted rounded-full flex items-center justify-center mt-0.5">
+                        <span className="text-muted-foreground text-xs">+</span>
+                      </div>
+                      <span className="text-muted-foreground group-hover:text-foreground transition-colors">
+                        Mimořádné práce mimo pracovní dobu
+                      </span>
                     </li>
                   </ul>
                 </CardContent>

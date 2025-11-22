@@ -1,4 +1,4 @@
-import { Calendar, Tag, User } from 'lucide-react'
+import { Calendar, Tag, User } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { sanityFetch } from "@/sanity/lib/fetch"
@@ -52,6 +52,20 @@ export default async function BlogPage() {
     query: BLOG_POSTS_QUERY,
   })
 
+  const featuredPortfolio = await sanityFetch<any[]>({
+    query: `*[_type == "portfolio" && isFeatured == true] | order(order asc) [0...6] {
+      _id,
+      "mainImage": images[0]{
+        asset->{
+          _id,
+          url
+        }
+      }
+    }`,
+  })
+
+  const heroBackgroundImage = featuredPortfolio?.[3]?.mainImage?.asset?.url
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",
@@ -70,12 +84,22 @@ export default async function BlogPage() {
 
   return (
     <main className="min-h-screen">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden">
+        {/* Background image with overlay */}
+        {heroBackgroundImage && (
+          <div className="absolute inset-0">
+            <img
+              src={heroBackgroundImage || "/placeholder.svg"}
+              alt="Blog ART DUM"
+              className="w-full h-full object-cover scale-110"
+            />
+            {/* Multi-layer gradient overlay for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0b192f]/90 via-transparent to-[#0b192f]/50" />
+          </div>
+        )}
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
@@ -173,12 +197,27 @@ export default async function BlogPage() {
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6">Máte dotaz nebo chcete konzultaci?</h2>
-          <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">Rádi vám poradíme s vaším projektem</p>
+          <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Rádi vám poradíme s vaším projektem
+          </p>
           <Link href="/kontakt">
-            <Button size="lg" className="group bg-gold text-primary-dark hover:bg-gold/90 font-bold text-lg px-8 py-6 h-auto shadow-2xl shadow-gold/20 hover:scale-105 transition-all">
+            <Button
+              size="lg"
+              className="group bg-gold text-primary-dark hover:bg-gold/90 font-bold text-lg px-8 py-6 h-auto shadow-2xl shadow-gold/20 hover:scale-105 transition-all"
+            >
               <span>Kontaktujte nás</span>
-              <svg className="w-5 h-5 ml-2 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              <svg
+                className="w-5 h-5 ml-2 group-hover:rotate-12 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                />
               </svg>
             </Button>
           </Link>

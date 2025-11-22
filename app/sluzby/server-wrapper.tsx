@@ -1,0 +1,83 @@
+import { sanityFetch } from "@/sanity/lib/fetch"
+import { SERVICES_QUERY, FEATURED_PORTFOLIO_QUERY } from "@/sanity/lib/queries"
+import ServicesPageClient from "./page"
+
+const fallbackServices = [
+  {
+    title: "Zednické a stavební práce",
+    shortDescription:
+      "Kompletní zednické služby od oklepání staré omítky až po finální úpravy. Pracujeme s ekologickými materiály KEIM a dekorativními stěrkami renomovaných evropských značek.",
+    features: [
+      "Oklepání a odstranění staré omítky",
+      "Ruční omítky (sádrová, jádrová, Rotband)",
+      "Ekologické omítky KEIM",
+      "Dekorativní stěrky",
+      "Stěrkování a příprava povrchů",
+      "Malování interiérů a exteriérů",
+      "Montáž elektroinstalace",
+      "Montáž sanitárních rozvodů včetně kanalizace",
+    ],
+    price: "Dle domluvy",
+    icon: "hammer",
+  },
+  {
+    title: "Podlahy",
+    shortDescription:
+      "Kompletní pokládka všech typů podlah včetně montáže podlahového topení a přípravy podkladu. Od samonivelačních podlah až po keramiku a dřevo.",
+    features: [
+      "Montáž podlahového topení",
+      "Betonový potěr pro podlahové topení",
+      "Samonivelační podlahy",
+      "Laminátová podlaha",
+      "Vinylová podlaha",
+      "Keramická dlažba",
+      "Dřevěná podlaha",
+      "Linoleová podlaha",
+    ],
+    price: "Od 500 Kč/m²",
+    icon: "square",
+  },
+  // ... existing fallback services ...
+]
+
+export default async function ServicesPageWrapper() {
+  const sanityServices = await sanityFetch<any[]>({
+    query: SERVICES_QUERY,
+    tags: ["service"],
+  })
+
+  const featuredPortfolio = await sanityFetch<any[]>({
+    query: FEATURED_PORTFOLIO_QUERY,
+    tags: ["portfolio"],
+  })
+
+  const services = sanityServices && sanityServices.length > 0 ? sanityServices : fallbackServices
+
+  const heroBackgroundImage = featuredPortfolio?.[1]?.mainImage?.asset?.url
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: services.map((service: any, index: number) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Service",
+        name: service.title,
+        description: service.shortDescription,
+        provider: {
+          "@type": "GeneralContractor",
+          name: "ART DUM",
+          telephone: "+420774335592",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Třebíč",
+            addressCountry: "CZ",
+          },
+        },
+      },
+    })),
+  }
+
+  return <ServicesPageClient services={services} heroBackgroundImage={heroBackgroundImage} jsonLd={jsonLd} />
+}

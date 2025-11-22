@@ -27,15 +27,18 @@ export function CookieConsent() {
   if (!showBanner) return null
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 bg-white dark:bg-gray-900 border-t-2 border-gold shadow-lg animate-in slide-in-from-bottom-5">
+    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 bg-[#0b192f] dark:bg-[#0b192f] border-t-2 border-gold shadow-2xl animate-in slide-in-from-bottom-5">
       <div className="container mx-auto max-w-6xl">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex-1">
-            <h3 className="text-lg font-bold text-foreground mb-2">Soubory cookies</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <h3 className="text-lg font-bold text-white mb-2">Soubory cookies</h3>
+            <p className="text-sm text-white/90 leading-relaxed">
               Tyto webové stránky používají soubory cookies pro zajištění správné funkčnosti webu a pro analýzu
               návštěvnosti. Používáním těchto stránek souhlasíte s používáním cookies.{" "}
-              <Link href="/gdpr" className="text-gold hover:text-gold/80 underline underline-offset-2 font-semibold transition-colors">
+              <Link
+                href="/gdpr"
+                className="text-gold hover:text-gold/80 underline underline-offset-2 font-semibold transition-colors"
+              >
                 Více informací
               </Link>
             </p>
@@ -44,13 +47,13 @@ export function CookieConsent() {
             <Button
               onClick={declineCookies}
               variant="outline"
-              className="w-full sm:w-auto border-border hover:bg-muted transition-colors"
+              className="w-full sm:w-auto border-2 border-white/30 text-white hover:bg-white hover:text-[#0b192f] bg-white/5 backdrop-blur-sm transition-colors"
             >
               Odmítnout
             </Button>
-            <Button 
-              onClick={acceptCookies} 
-              className="w-full sm:w-auto bg-gold text-navy dark:text-navy hover:bg-gold/90 font-bold transition-all shadow-md hover:shadow-lg"
+            <Button
+              onClick={acceptCookies}
+              className="w-full sm:w-auto bg-gold text-[#0b192f] hover:bg-gold/90 font-bold transition-all shadow-lg hover:shadow-xl"
             >
               Přijmout vše
             </Button>
