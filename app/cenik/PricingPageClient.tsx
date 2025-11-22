@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import Link from "next/link"
 import { useState } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import { Info } from "lucide-react"
 
 // Type pro cenové údaje z Sanity
 type PricingItem = {
@@ -254,30 +255,22 @@ export default function PricingPageClient({
       </section>
 
       {/* Info Box */}
-      <section className="py-10 bg-gradient-to-r from-gold/5 via-gold/10 to-gold/5 border-y-2 border-gold/30 animate-fade-in">
+      <section className="py-10 bg-navy/5 dark:bg-navy/40 animate-fade-in">
         <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <div className="bg-white dark:bg-navy/95 backdrop-blur-sm rounded-2xl p-8 shadow-lg border-2 border-gold/20">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
-                    <svg className="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2.5}
-                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-navy dark:text-white mb-2">Důležité informace o ceníku</h3>
-                  <p className="text-base text-navy/90 dark:text-white/95 leading-relaxed font-medium">
-                    Uvedené ceny jsou <strong className="text-gold">orientační</strong> a slouží pro základní představu.
-                    Přesnou cenovou nabídku vždy zpracujeme po osobní konzultaci a prohlídce místa realizace.
-                  </p>
-                </div>
+          <div className="max-w-3xl mx-auto bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-900/30 dark:to-amber-950/20 border-2 border-amber-300 dark:border-amber-600/50 rounded-2xl p-8 shadow-lg">
+            <div className="flex items-start gap-5">
+              <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 dark:from-amber-600 dark:to-amber-700 rounded-xl flex items-center justify-center shadow-lg">
+                <Info className="w-6 h-6 text-white" strokeWidth={2.5} />
+              </div>
+              <div className="text-left flex-1">
+                <h3 className="font-black text-xl text-gray-900 dark:text-gray-100 mb-3 leading-tight">
+                  Důležité informace o ceníku
+                </h3>
+                <p className="text-base text-gray-800 dark:text-gray-200 leading-relaxed">
+                  Uvedené ceny jsou <strong className="text-gray-900 dark:text-gray-100 font-bold">orientační</strong> a
+                  slouží pro základní představu. Přesnou cenovou nabídku vždy zpracujeme po osobní konzultaci a
+                  prohlídce místa realizace.
+                </p>
               </div>
             </div>
           </div>

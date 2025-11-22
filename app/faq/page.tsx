@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { ChevronDown, MessageCircle, Phone, Mail } from "lucide-react"
+import { sanityFetch } from "@/sanity/lib/fetch"
+import { FEATURED_PORTFOLIO_QUERY } from "@/sanity/lib/queries"
 
 export const metadata: Metadata = {
   title: "Často kladené otázky (FAQ) | ART DUM",
@@ -90,11 +92,30 @@ const faqs = [
   },
 ]
 
-export default function FAQPage() {
+export default async function FAQPage() {
+  const featuredPortfolio = await sanityFetch<any[]>({
+    query: FEATURED_PORTFOLIO_QUERY,
+    tags: ["portfolio"],
+  })
+
+  const heroBackgroundImage = featuredPortfolio?.[6]?.mainImage?.asset?.url
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero sekce */}
       <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2545] to-[#0b192f] py-20">
+        {heroBackgroundImage && (
+          <div className="absolute inset-0">
+            <img
+              src={heroBackgroundImage || "/placeholder.svg"}
+              alt="FAQ ART DUM"
+              className="w-full h-full object-cover scale-110"
+            />
+            {/* Multi-layer gradient overlay for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2545]/90 to-[#0b192f]/95" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0b192f]/90 via-transparent to-[#0b192f]/50" />
+          </div>
+        )}
         <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
         <div className="container relative mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">

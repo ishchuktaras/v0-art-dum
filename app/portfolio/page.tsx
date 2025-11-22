@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import Link from "next/link"
 import Image from "next/image"
 import { sanityFetch } from "@/sanity/lib/fetch"
-import { PORTFOLIO_QUERY } from "@/sanity/lib/queries"
+import { PORTFOLIO_QUERY, FEATURED_PORTFOLIO_QUERY } from "@/sanity/lib/queries"
 import type { Metadata } from "next"
 
 interface PortfolioProject {
@@ -59,6 +59,19 @@ async function getPortfolioProjects(): Promise<PortfolioProject[]> {
   }
 }
 
+async function getFeaturedPortfolio() {
+  try {
+    const featured = await sanityFetch<any[]>({
+      query: FEATURED_PORTFOLIO_QUERY,
+      tags: ["portfolio"],
+    })
+    return featured || []
+  } catch (error) {
+    console.error("Error fetching featured portfolio:", error)
+    return []
+  }
+}
+
 const categoryLabels: Record<string, string> = {
   "rekonstrukce-bytu": "Rekonstrukce bytu",
   "rekonstrukce-domu": "Rekonstrukce domu",
@@ -72,6 +85,8 @@ const categoryLabels: Record<string, string> = {
 
 export default async function PortfolioPage() {
   const projects = await getPortfolioProjects()
+  const featuredPortfolio = await getFeaturedPortfolio()
+  const heroBackgroundImage = featuredPortfolio?.[5]?.mainImage?.asset?.url
 
   const uniqueCategories = Array.from(new Set(projects.map((p) => p.category).filter(Boolean)))
   const categories = ["Všechny projekty", ...uniqueCategories.map((cat) => categoryLabels[cat] || cat)]
@@ -95,6 +110,18 @@ export default async function PortfolioPage() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-16 md:py-24 overflow-hidden">
+          {heroBackgroundImage && (
+            <div className="absolute inset-0">
+              <img
+                src={heroBackgroundImage || "/placeholder.svg"}
+                alt="Portfolio ART DUM"
+                className="w-full h-full object-cover scale-110"
+              />
+              {/* Multi-layer gradient overlay for text readability */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0b192f]/90 via-transparent to-[#0b192f]/50" />
+            </div>
+          )}
           <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">

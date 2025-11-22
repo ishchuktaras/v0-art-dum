@@ -17,7 +17,7 @@ import {
   Wrench,
 } from "lucide-react"
 import { sanityFetch } from "@/sanity/lib/fetch"
-import { ABOUT_QUERY, CERTIFICATES_QUERY } from "@/sanity/lib/queries"
+import { ABOUT_QUERY, FEATURED_PORTFOLIO_QUERY } from "@/sanity/lib/queries"
 import { urlFor } from "@/sanity/lib/image"
 import { Button } from "@/components/ui/button"
 import { PortableText } from "next-sanity"
@@ -46,12 +46,18 @@ export const metadata: Metadata = {
 }
 
 export default async function AboutPage() {
-  const [aboutData, certificates] = await Promise.all([
-    sanityFetch<any>({ query: ABOUT_QUERY }),
-    sanityFetch<any[]>({ query: CERTIFICATES_QUERY }),
-  ])
+  const about = await sanityFetch<any>({
+    query: ABOUT_QUERY,
+    tags: ["about"],
+  })
 
-  // Fallback data pokud v Sanity nejsou data
+  const featuredPortfolio = await sanityFetch<any[]>({
+    query: FEATURED_PORTFOLIO_QUERY,
+    tags: ["portfolio"],
+  })
+
+  const heroBackgroundImage = featuredPortfolio?.[4]?.mainImage?.asset?.url
+
   const defaultAbout = {
     heroHeading: "O firmě ART DUM",
     heroSubheading: "Profesionální stavební služby s 23 lety zkušeností",
@@ -77,8 +83,6 @@ export default async function AboutPage() {
     ],
     heroImage: null,
   }
-
-  const about = aboutData || defaultAbout
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -106,6 +110,17 @@ export default async function AboutPage() {
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-24 overflow-hidden">
+        {heroBackgroundImage && (
+          <div className="absolute inset-0">
+            <img
+              src={heroBackgroundImage || "/placeholder.svg"}
+              alt="ART DUM stavební práce"
+              className="w-full h-full object-cover scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0b192f]/90 via-transparent to-[#0b192f]/50" />
+          </div>
+        )}
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-6xl mx-auto">
@@ -134,6 +149,8 @@ export default async function AboutPage() {
                       src={
                         about.heroImage.asset.url ||
                         urlFor(about.heroImage)?.width(800).height(800).url() ||
+                        "/placeholder.svg" ||
+                        "/placeholder.svg" ||
                         "/placeholder.svg"
                       }
                       alt={about.heroImage.alt || "O firmě ART DUM"}
@@ -252,6 +269,7 @@ export default async function AboutPage() {
                         src={
                           member.photo?.asset?.url ||
                           urlFor(member.photo)?.width(400).height(400).url() ||
+                          "/placeholder.svg" ||
                           "/placeholder.svg"
                         }
                         alt={member.name}
@@ -309,7 +327,7 @@ export default async function AboutPage() {
       )}
 
       {/* Certificates Section */}
-      {certificates && certificates.length > 0 && (
+      {about.certificates && about.certificates.length > 0 && (
         <section className="py-20 bg-muted/50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
@@ -347,7 +365,7 @@ export default async function AboutPage() {
               </div>
             </div>
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              {certificates.map((cert: any) => (
+              {about.certificates.map((cert: any) => (
                 <div
                   key={cert._id}
                   className="group bg-card rounded-2xl overflow-hidden border-2 border-border hover:border-gold/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 relative"
@@ -368,6 +386,8 @@ export default async function AboutPage() {
                         src={
                           cert.image?.asset?.url ||
                           urlFor(cert.image)?.width(600).height(600).url() ||
+                          "/placeholder.svg" ||
+                          "/placeholder.svg" ||
                           "/placeholder.svg"
                         }
                         alt={cert.image.alt || cert.title}
