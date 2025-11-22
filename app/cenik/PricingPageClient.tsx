@@ -1,7 +1,8 @@
 "use client"
 
 import type React from "react"
-
+import { useRef, useEffect } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
@@ -159,32 +160,48 @@ const pricingCategories = [
   },
 ]
 
+const slideVariants = {
+  enter: (direction: number) => {
+    return {
+      x: direction > 0 ? window.innerWidth : -window.innerWidth,
+      opacity: 0,
+    }
+  },
+  center: {
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction: number) => {
+    return {
+      x: direction > 0 ? -window.innerWidth : window.innerWidth,
+      opacity: 0,
+    }
+  },
+}
+
 export default function PricingPageClient({
   categories,
-  heroBackgroundImage,
-  jsonLd,
 }: {
-  categories: PricingCategory[] | typeof pricingCategories
-  heroBackgroundImage?: string
-  jsonLd: any
+  categories: PricingCategory[]
 }) {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [direction, setDirection] = useState(0)
   const [touchStart, setTouchStart] = useState(0)
   const [touchEnd, setTouchEnd] = useState(0)
-  const [isAnimating, setIsAnimating] = useState(false)
+  const [showTopIndicator, setShowTopIndicator] = useState(false)
+  const [showBottomIndicator, setShowBottomIndicator] = useState(false)
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   const handleNext = () => {
-    if (isAnimating) return
-    setIsAnimating(true)
-    setCurrentIndex((prev) => (prev + 1) % categories.length)
-    setTimeout(() => setIsAnimating(false), 500)
+    if (currentIndex === categories.length - 1) return
+    setDirection(1)
+    setCurrentIndex((prev) => prev + 1)
   }
 
   const handlePrev = () => {
-    if (isAnimating) return
-    setIsAnimating(true)
-    setCurrentIndex((prev) => (prev - 1 + categories.length) % categories.length)
-    setTimeout(() => setIsAnimating(false), 500)
+    if (currentIndex === 0) return
+    setDirection(-1)
+    setCurrentIndex((prev) => prev - 1)
   }
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -209,27 +226,41 @@ export default function PricingPageClient({
     setTouchEnd(0)
   }
 
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const target = e.currentTarget
+    const isAtTop = target.scrollTop === 0
+    const isAtBottom = target.scrollHeight - target.scrollTop === target.clientHeight
+
+    setShowTopIndicator(!isAtTop)
+    setShowBottomIndicator(!isAtBottom)
+  }
+
+  useEffect(() => {
+    const container = scrollContainerRef.current
+    if (container) {
+      const isAtBottom = container.scrollHeight - container.scrollTop === container.clientHeight
+      setShowTopIndicator(false)
+      setShowBottomIndicator(!isAtBottom && container.scrollHeight > container.clientHeight)
+    }
+  }, [currentIndex])
+
   const currentCategory = categories[currentIndex]
 
   return (
     <main className="flex-1">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden animate-fade-in">
         {/* Background image with overlay */}
-        {heroBackgroundImage && (
-          <div className="absolute inset-0">
-            <img
-              src={heroBackgroundImage || "/placeholder.svg"}
-              alt="Ceník stavebních prací ART DUM"
-              className="w-full h-full object-cover scale-110 transition-transform duration-700"
-            />
-            {/* Multi-layer gradient overlay for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0b192f]/90 via-transparent to-[#0b192f]/50" />
-          </div>
-        )}
+        <div className="absolute inset-0">
+          <img
+            src="/placeholder.svg"
+            alt="Ceník stavebních prací ART DUM"
+            className="w-full h-full object-cover scale-110 transition-transform duration-700"
+          />
+          {/* Multi-layer gradient overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0b192f]/90 via-transparent to-[#0b192f]/50" />
+        </div>
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
@@ -285,7 +316,6 @@ export default function PricingPageClient({
             {/* Navigation Arrows */}
             <button
               onClick={handlePrev}
-              disabled={isAnimating}
               className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10 bg-accent/90 hover:bg-accent text-accent-foreground rounded-full p-3 md:p-4 shadow-xl transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed group"
               aria-label="Předchozí kategorie"
             >
@@ -294,7 +324,6 @@ export default function PricingPageClient({
 
             <button
               onClick={handleNext}
-              disabled={isAnimating}
               className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-10 bg-accent/90 hover:bg-accent text-accent-foreground rounded-full p-3 md:p-4 shadow-xl transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed group"
               aria-label="Další kategorie"
             >
@@ -308,71 +337,140 @@ export default function PricingPageClient({
               onTouchEnd={handleTouchEnd}
               className="touch-pan-y"
             >
-              <Card
-                key={currentCategory._id || currentIndex}
-                className="group relative overflow-hidden border-2 border-accent/20 bg-card text-card-foreground shadow-2xl min-h-[600px] md:min-h-[700px] animate-fade-in"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-accent/10 opacity-100" />
-
-                <CardHeader className="relative space-y-6 p-6 md:p-8">
-                  <div className="flex items-start gap-4">
-                    <div className="w-20 h-20 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center shadow-lg shadow-accent/30 shrink-0">
-                      <svg
-                        className="w-10 h-10 text-accent-foreground"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2.5}
-                          d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-                        />
-                      </svg>
-                    </div>
-                    <div className="flex-1">
-                      <CardTitle className="text-3xl md:text-4xl mb-3 text-accent">
-                        {currentCategory.category}
-                      </CardTitle>
-                    </div>
-                  </div>
-
-                  <CardDescription className="text-lg leading-relaxed text-muted-foreground">
-                    {currentCategory.description}
-                  </CardDescription>
-                </CardHeader>
-
-                <CardContent className="relative p-6 md:p-8 pt-0">
-                  <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-                    {currentCategory.items.map((item: PricingItem, idx: number) => (
-                      <div
-                        key={idx}
-                        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-xl bg-background/50 hover:bg-accent/10 border border-border/50 hover:border-accent/30 transition-all group/item"
-                      >
-                        <div className="flex-1 min-w-0">
-                          <p className="font-bold text-base md:text-lg text-foreground mb-1">{item.service}</p>
-                          {item.note && (
-                            <div className="flex items-center gap-2">
-                              <span className="w-1.5 h-1.5 bg-accent/80 rounded-full" />
-                              <p className="text-sm text-muted-foreground group-hover/item:text-foreground transition-colors">
-                                {item.note}
-                              </p>
-                            </div>
-                          )}
-                        </div>
-                        <div className="flex-shrink-0">
-                          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-accent/15 to-accent/10 px-4 py-2 rounded-full border-2 border-accent/30 shadow-sm">
-                            <span className="text-base md:text-lg font-black text-accent whitespace-nowrap">
-                              {item.price}
-                            </span>
+              <AnimatePresence initial={false} custom={direction} mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  custom={direction}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{
+                    x: { type: "spring", stiffness: 300, damping: 30 },
+                    opacity: { duration: 0.2 },
+                  }}
+                  className="w-full"
+                >
+                  <div className="container mx-auto px-4 max-w-5xl">
+                    <Card className="overflow-hidden backdrop-blur-sm bg-background/95 border-accent/20 shadow-2xl">
+                      <CardHeader className="relative space-y-6 p-6 md:p-8">
+                        <div className="flex items-start gap-4">
+                          <div className="w-20 h-20 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center shadow-lg shadow-accent/30 shrink-0">
+                            <svg
+                              className="w-10 h-10 text-accent-foreground"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2.5}
+                                d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                              />
+                            </svg>
+                          </div>
+                          <div className="flex-1">
+                            <CardTitle className="text-3xl md:text-4xl mb-3 text-accent">
+                              {currentCategory.category}
+                            </CardTitle>
                           </div>
                         </div>
-                      </div>
-                    ))}
+
+                        <CardDescription className="text-lg leading-relaxed text-muted-foreground">
+                          {currentCategory.description}
+                        </CardDescription>
+                      </CardHeader>
+
+                      <CardContent className="p-6 md:p-10">
+                        <div className="relative">
+                          {showTopIndicator && (
+                            <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-background via-background/80 to-transparent pointer-events-none z-10" />
+                          )}
+
+                          {showTopIndicator && (
+                            <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
+                              <div className="flex flex-col items-center gap-1 animate-bounce">
+                                <svg
+                                  className="w-6 h-6 text-accent"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M5 15l7-7 7 7"
+                                  />
+                                </svg>
+                                <span className="text-xs font-medium text-accent">Scroll nahoru</span>
+                              </div>
+                            </div>
+                          )}
+
+                          <div
+                            ref={scrollContainerRef}
+                            onScroll={handleScroll}
+                            className="space-y-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar"
+                          >
+                            {currentCategory.items.map((item: PricingItem, idx: number) => (
+                              <div
+                                key={idx}
+                                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-xl bg-background/50 hover:bg-accent/10 border border-border/50 hover:border-accent/30 transition-all group/item"
+                              >
+                                <div className="flex-1 min-w-0">
+                                  <p className="font-bold text-base md:text-lg text-foreground mb-1">{item.service}</p>
+                                  {item.note && (
+                                    <div className="flex items-center gap-2">
+                                      <span className="w-1.5 h-1.5 bg-accent/80 rounded-full" />
+                                      <p className="text-sm text-muted-foreground group-hover/item:text-foreground transition-colors">
+                                        {item.note}
+                                      </p>
+                                    </div>
+                                  )}
+                                </div>
+                                <div className="flex-shrink-0">
+                                  <div className="inline-flex items-center gap-2 bg-gradient-to-r from-accent/15 to-accent/10 px-4 py-2 rounded-full border-2 border-accent/30 shadow-sm">
+                                    <span className="text-base md:text-lg font-black text-accent whitespace-nowrap">
+                                      {item.price}
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+
+                          {showBottomIndicator && (
+                            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
+                              <div className="flex flex-col items-center gap-1 animate-bounce">
+                                <span className="text-xs font-medium text-accent">Scroll dolů</span>
+                                <svg
+                                  className="w-6 h-6 text-accent"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M19 9l-7 7-7-7"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
+                          )}
+
+                          {showBottomIndicator && (
+                            <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-10" />
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
                   </div>
-                </CardContent>
-              </Card>
+                </motion.div>
+              </AnimatePresence>
             </div>
 
             {/* Progress Dots */}
@@ -381,10 +479,9 @@ export default function PricingPageClient({
                 <button
                   key={idx}
                   onClick={() => {
-                    if (!isAnimating) {
-                      setIsAnimating(true)
+                    if (idx !== currentIndex) {
+                      setDirection(idx > currentIndex ? 1 : -1)
                       setCurrentIndex(idx)
-                      setTimeout(() => setIsAnimating(false), 500)
                     }
                   }}
                   className={`transition-all duration-300 rounded-full ${

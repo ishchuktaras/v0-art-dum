@@ -131,10 +131,9 @@ export default async function AboutPage() {
                   <Sparkles className="w-4 h-4" />
                   <span>Profesionální stavební řešení s 23 lety zkušeností</span>
                 </div>
-                <h1 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent leading-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight">
                   O firmě Oleh Kulish, OSVČ - ART DUM
                 </h1>
-                
               </div>
 
               {/* Image Column */}
@@ -145,6 +144,7 @@ export default async function AboutPage() {
                       src={
                         about.heroImage.asset.url ||
                         urlFor(about.heroImage)?.width(800).height(800).url() ||
+                        "/placeholder.svg" ||
                         "/placeholder.svg" ||
                         "/placeholder.svg" ||
                         "/placeholder.svg"
@@ -266,6 +266,7 @@ export default async function AboutPage() {
                           member.photo?.asset?.url ||
                           urlFor(member.photo)?.width(400).height(400).url() ||
                           "/placeholder.svg" ||
+                          "/placeholder.svg" ||
                           "/placeholder.svg"
                         }
                         alt={member.name}
@@ -382,6 +383,7 @@ export default async function AboutPage() {
                         src={
                           cert.image?.asset?.url ||
                           urlFor(cert.image)?.width(600).height(600).url() ||
+                          "/placeholder.svg" ||
                           "/placeholder.svg" ||
                           "/placeholder.svg" ||
                           "/placeholder.svg"

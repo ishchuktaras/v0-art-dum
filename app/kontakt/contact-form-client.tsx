@@ -181,26 +181,7 @@ ${formData.additionalInfo}
       const result = await submitInquiry(submissionData)
 
       if (result.success) {
-        setMessage({
-          type: "success",
-          text: "Děkujeme! Vaše poptávka byla úspěšně odeslána. Ozveme se vám do 24 hodin.",
-        })
-        setStep(1)
-        setFormData({
-          name: "",
-          phone: "",
-          email: "",
-          projectType: "",
-          services: [],
-          serviceDetails: {},
-          propertyType: "",
-          propertySize: "",
-          location: "",
-          timeline: "",
-          budget: "",
-          additionalInfo: "",
-          gdpr: false,
-        })
+        window.location.href = "/kontakt/dekujeme"
       } else {
         setMessage({
           type: "error",
