@@ -134,11 +134,7 @@ export default async function AboutPage() {
                 <h1 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent leading-tight">
                   O firmě Oleh Kulish, OSVČ - ART DUM
                 </h1>
-                <p className="text-xl text-white/80 leading-relaxed">
-                  Jsme specialisté na rekonstrukce bytů, domů a zateplení fasád v Třebíči a okolí (kraj Vysočina). Firma
-                  vedená Oleh Kulishem, OSVČ s mateřskou firmou 23 let na trhu přináší zkušenosti, kvalitu a
-                  spolehlivost.
-                </p>
+                
               </div>
 
               {/* Image Column */}
