@@ -1,14 +1,14 @@
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
-import { ArrowLeft, Mail, Phone, Calendar, User, MessageSquare, FileText } from 'lucide-react'
+import { ArrowLeft, Mail, Phone, Calendar, User, MessageSquare, FileText } from "lucide-react"
 import { CreateProjectDialog } from "@/components/create-project-dialog"
+import { GenerateOfferDialog } from "@/components/generate-offer-dialog"
 
 interface InquiryDetailPageProps {
   params: Promise<{ id: string }>
@@ -250,20 +250,27 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
                 <CardTitle>Rychlé akce</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <Button asChild variant="outline" className="w-full justify-start">
+                <Button asChild variant="outline" className="w-full justify-start bg-transparent">
                   <a href={`mailto:${inquiry.email}`}>
                     <Mail className="h-4 w-4 mr-2" />
                     Odpovědět emailem
                   </a>
                 </Button>
                 {inquiry.phone && (
-                  <Button asChild variant="outline" className="w-full justify-start">
+                  <Button asChild variant="outline" className="w-full justify-start bg-transparent">
                     <a href={`tel:${inquiry.phone}`}>
                       <Phone className="h-4 w-4 mr-2" />
                       Zavolat
                     </a>
                   </Button>
                 )}
+                <GenerateOfferDialog
+                  inquiryId={inquiry.id}
+                  clientName={inquiry.name}
+                  clientEmail={inquiry.email}
+                  clientPhone={inquiry.phone}
+                />
+                {/* </CHANGE> */}
                 <CreateProjectDialog
                   inquiryId={inquiry.id}
                   clientName={inquiry.name}

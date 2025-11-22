@@ -1,11 +1,13 @@
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
-import { ArrowLeft, Mail, Phone, Calendar, DollarSign, User, FileText, Edit } from 'lucide-react'
+import { ArrowLeft, Mail, Phone, Calendar, DollarSign, User, FileText } from "lucide-react"
 import { EditProjectDialog } from "@/components/edit-project-dialog"
+import { GenerateDocumentsDialog } from "@/components/generate-documents-dialog"
+import type { ProjectDocumentData } from "@/lib/document-generator"
 
 export default async function ProjectDetailPage({
   params,
@@ -22,11 +24,7 @@ export default async function ProjectDetailPage({
     redirect("/auth/login")
   }
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("id", user.id)
-    .single()
+  const { data: profile } = await supabase.from("profiles").select("*").eq("id", user.id).single()
 
   if (!profile || !["admin", "owner"].includes(profile.role)) {
     redirect("/403")
@@ -62,6 +60,20 @@ export default async function ProjectDetailPage({
     cancelled: "Zrušeno",
   }
 
+  const projectDocumentData: ProjectDocumentData = {
+    projectId: project.id,
+    projectTitle: project.title,
+    clientName: project.client_name,
+    clientEmail: project.client_email || "",
+    clientPhone: project.client_phone,
+    startDate: project.start_date,
+    endDate: project.end_date,
+    budgetEstimate: project.budget_estimate ? Number(project.budget_estimate) : undefined,
+    actualCost: project.actual_cost ? Number(project.actual_cost) : undefined,
+    description: project.description,
+    services: [], // TODO: Přidat služby z projektu
+  }
+
   return (
     <div className="min-h-screen bg-muted">
       <header className="border-b bg-background sticky top-0 z-10">
@@ -81,9 +93,7 @@ export default async function ProjectDetailPage({
                     {statusLabels[project.status as keyof typeof statusLabels]}
                   </Badge>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  Detail projektu
-                </p>
+                <p className="text-sm text-muted-foreground">Detail projektu</p>
               </div>
             </div>
             <EditProjectDialog project={project} />
@@ -107,9 +117,7 @@ export default async function ProjectDetailPage({
                 {project.description && (
                   <div>
                     <h3 className="font-semibold mb-2">Popis</h3>
-                    <p className="text-muted-foreground whitespace-pre-wrap">
-                      {project.description}
-                    </p>
+                    <p className="text-muted-foreground whitespace-pre-wrap">{project.description}</p>
                   </div>
                 )}
 
@@ -132,9 +140,7 @@ export default async function ProjectDetailPage({
                         <Calendar className="h-4 w-4" />
                         Datum ukončení
                       </h3>
-                      <p className="text-muted-foreground">
-                        {new Date(project.end_date).toLocaleDateString("cs-CZ")}
-                      </p>
+                      <p className="text-muted-foreground">{new Date(project.end_date).toLocaleDateString("cs-CZ")}</p>
                     </div>
                   )}
 
@@ -156,9 +162,7 @@ export default async function ProjectDetailPage({
                         <DollarSign className="h-4 w-4" />
                         Skutečná cena
                       </h3>
-                      <p className="text-muted-foreground">
-                        {Number(project.actual_cost).toLocaleString("cs-CZ")} Kč
-                      </p>
+                      <p className="text-muted-foreground">{Number(project.actual_cost).toLocaleString("cs-CZ")} Kč</p>
                     </div>
                   )}
                 </div>
@@ -166,9 +170,7 @@ export default async function ProjectDetailPage({
                 {project.notes && (
                   <div>
                     <h3 className="font-semibold mb-2">Interní poznámky</h3>
-                    <p className="text-muted-foreground whitespace-pre-wrap bg-muted p-3 rounded-md">
-                      {project.notes}
-                    </p>
+                    <p className="text-muted-foreground whitespace-pre-wrap bg-muted p-3 rounded-md">{project.notes}</p>
                   </div>
                 )}
               </CardContent>
@@ -199,16 +201,12 @@ export default async function ProjectDetailPage({
                   {project.inquiry.message && (
                     <div>
                       <h3 className="font-semibold mb-1">Zpráva</h3>
-                      <p className="text-muted-foreground whitespace-pre-wrap">
-                        {project.inquiry.message}
-                      </p>
+                      <p className="text-muted-foreground whitespace-pre-wrap">{project.inquiry.message}</p>
                     </div>
                   )}
 
                   <Button asChild variant="outline" size="sm">
-                    <Link href={`/admin/inquiries/${project.inquiry.id}`}>
-                      Zobrazit poptávku
-                    </Link>
+                    <Link href={`/admin/inquiries/${project.inquiry.id}`}>Zobrazit poptávku</Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -225,66 +223,22 @@ export default async function ProjectDetailPage({
                   Kontakt na klienta
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <h3 className="font-semibold mb-1">Jméno</h3>
-                  <p className="text-muted-foreground">{project.client_name}</p>
-                </div>
-
-                {project.client_email && (
-                  <div>
-                    <h3 className="font-semibold mb-1 flex items-center gap-2">
-                      <Mail className="h-4 w-4" />
-                      Email
-                    </h3>
-                    <a
-                      href={`mailto:${project.client_email}`}
-                      className="text-blue-600 hover:underline"
-                    >
-                      {project.client_email}
-                    </a>
-                  </div>
-                )}
-
+              <CardContent className="space-y-2">
+                <Button asChild variant="outline" className="w-full justify-start bg-transparent">
+                  <a href={`mailto:${project.client_email}`}>
+                    <Mail className="h-4 w-4 mr-2" />
+                    Odpovědět emailem
+                  </a>
+                </Button>
                 {project.client_phone && (
-                  <div>
-                    <h3 className="font-semibold mb-1 flex items-center gap-2">
-                      <Phone className="h-4 w-4" />
-                      Telefon
-                    </h3>
-                    <a
-                      href={`tel:${project.client_phone}`}
-                      className="text-blue-600 hover:underline"
-                    >
-                      {project.client_phone}
-                    </a>
-                  </div>
-                )}
-
-                <div className="flex gap-2 pt-2">
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="sm"
-                    className="flex-1"
-                  >
-                    <a href={`mailto:${project.client_email}`}>
-                      <Mail className="h-4 w-4 mr-2" />
-                      Email
-                    </a>
-                  </Button>
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="sm"
-                    className="flex-1"
-                  >
+                  <Button asChild variant="outline" className="w-full justify-start bg-transparent">
                     <a href={`tel:${project.client_phone}`}>
                       <Phone className="h-4 w-4 mr-2" />
                       Zavolat
                     </a>
                   </Button>
-                </div>
+                )}
+                <GenerateDocumentsDialog projectData={projectDocumentData} />
               </CardContent>
             </Card>
 
@@ -301,9 +255,7 @@ export default async function ProjectDetailPage({
                   <p className="font-semibold">
                     {project.assigned_to_profile.full_name || project.assigned_to_profile.email}
                   </p>
-                  <p className="text-sm text-muted-foreground">
-                    {project.assigned_to_profile.email}
-                  </p>
+                  <p className="text-sm text-muted-foreground">{project.assigned_to_profile.email}</p>
                 </CardContent>
               </Card>
             )}
@@ -317,16 +269,12 @@ export default async function ProjectDetailPage({
                 <div>
                   <span className="text-muted-foreground">Vytvořeno:</span>
                   <br />
-                  <span className="font-medium">
-                    {new Date(project.created_at).toLocaleString("cs-CZ")}
-                  </span>
+                  <span className="font-medium">{new Date(project.created_at).toLocaleString("cs-CZ")}</span>
                 </div>
                 <div>
                   <span className="text-muted-foreground">Aktualizováno:</span>
                   <br />
-                  <span className="font-medium">
-                    {new Date(project.updated_at).toLocaleString("cs-CZ")}
-                  </span>
+                  <span className="font-medium">{new Date(project.updated_at).toLocaleString("cs-CZ")}</span>
                 </div>
               </CardContent>
             </Card>
