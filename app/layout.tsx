@@ -1,6 +1,5 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import dynamic from "next/dynamic"
 
 import "./globals.css"
 import { ConditionalLayout } from "@/components/conditional-layout"
@@ -8,6 +7,9 @@ import { Toaster } from "@/components/ui/sonner"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { ThemeProvider } from "@/components/theme-provider"
+import { ClientLayoutWrapper } from "@/components/client-layout-wrapper"
+
+import { Inter, Source_Serif_4 } from "next/font/google"
 
 import { Inter, Source_Serif_4, Inter as V0_Font_Inter, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
 
@@ -51,15 +53,6 @@ export const viewport: Viewport = {
   initialScale: 1,
 }
 
-const CookieConsent = dynamic(
-  () => import("@/components/cookie-consent").then((mod) => ({ default: mod.CookieConsent })),
-  { ssr: false },
-)
-const WhatsAppButton = dynamic(
-  () => import("@/components/whatsapp-button").then((mod) => ({ default: mod.WhatsAppButton })),
-  { ssr: false },
-)
-
 export default function RootLayout({
   children,
 }: {
@@ -70,11 +63,10 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <ConditionalLayout>{children}</ConditionalLayout>
-          <CookieConsent />
+          <ClientLayoutWrapper />
           <Toaster />
           <Analytics />
           <SpeedInsights />
-          <WhatsAppButton />
         </ThemeProvider>
       </body>
     </html>

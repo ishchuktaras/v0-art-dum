@@ -112,10 +112,14 @@ export default async function AboutPage() {
       <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-24 overflow-hidden">
         {heroBackgroundImage && (
           <div className="absolute inset-0">
-            <img
+            <Image
               src={heroBackgroundImage || "/placeholder.svg"}
-              alt="ART DUM stavební práce"
-              className="w-full h-full object-cover scale-110"
+              alt="O firmě ART DUM"
+              fill
+              priority
+              quality={85}
+              sizes="100vw"
+              className="object-cover scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0b192f]/90 via-transparent to-[#0b192f]/50" />
@@ -144,6 +148,7 @@ export default async function AboutPage() {
                       src={
                         about.heroImage.asset.url ||
                         urlFor(about.heroImage)?.width(800).height(800).url() ||
+                        "/placeholder.svg" ||
                         "/placeholder.svg" ||
                         "/placeholder.svg" ||
                         "/placeholder.svg" ||
@@ -267,6 +272,7 @@ export default async function AboutPage() {
                           urlFor(member.photo)?.width(400).height(400).url() ||
                           "/placeholder.svg" ||
                           "/placeholder.svg" ||
+                          "/placeholder.svg" ||
                           "/placeholder.svg"
                         }
                         alt={member.name}
@@ -383,6 +389,7 @@ export default async function AboutPage() {
                         src={
                           cert.image?.asset?.url ||
                           urlFor(cert.image)?.width(600).height(600).url() ||
+                          "/placeholder.svg" ||
                           "/placeholder.svg" ||
                           "/placeholder.svg" ||
                           "/placeholder.svg" ||
