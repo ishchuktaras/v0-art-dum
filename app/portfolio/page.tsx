@@ -164,7 +164,7 @@ export default async function PortfolioPage() {
                             fill
                             className="object-cover group-hover:scale-110 transition-transform duration-500"
                           />
-                          <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                           <div className="absolute top-4 right-4">
                             <span className="bg-gold text-primary-dark text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
                               {categoryLabels[project.category] || project.category}

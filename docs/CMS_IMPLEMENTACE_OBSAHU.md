@@ -329,7 +329,7 @@ Tento dokument obsahuje kompletní postup pro naplnění obsahu do Sanity Studio
 | **Název stránky** | `O nás` |
 | **Hlavní nadpis** | `O firmě Oleh Kulish, OSVČ - ART DUM` |
 | **Podnadpis** | `Spolehlivá stavební firma s 23 lety zkušeností` |
-| **Hlavní obrázek** | Nahrát firemní fotografii nebo fotografii Oleha Kulishyna |
+| **Hlavní obrázek** | Nahrát firemní fotografii nebo fotografii Oleha Kulish |
 | **Alternativní text** | `Oleh Kulish - majitel ART DUM` |
 
 ### Náš příběh (Rich text):

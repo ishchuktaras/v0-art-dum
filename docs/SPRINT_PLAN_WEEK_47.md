@@ -66,7 +66,7 @@
 
 ### Priorita 1: Obsah a CMS (KRITICKÉ)
 **Důležitost:** ⚡️ URGENTNÍ  
-**Odpovědnost:** Objednatel (Oleh Kostyshyn) + Developer
+**Odpovědnost:** Objednatel (Oleh Kulish) + Developer
 
 #### Úkol 1.1: Naplnit Sanity CMS základním obsahem
 **Stav:** 🟡 Čeká na podklady  
