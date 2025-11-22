@@ -1,26 +1,33 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
+import dynamic from "next/dynamic"
 
 import "./globals.css"
-import { CookieConsent } from "@/components/cookie-consent"
 import { ConditionalLayout } from "@/components/conditional-layout"
 import { Toaster } from "@/components/ui/sonner"
-import { Analytics } from '@vercel/analytics/react'
-import { SpeedInsights } from '@vercel/speed-insights/next'
-import { WhatsAppButton } from '@/components/whatsapp-button'
-import { ThemeProvider } from '@/components/theme-provider'
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { ThemeProvider } from "@/components/theme-provider"
 
-import { Inter, Inter as V0_Font_Inter, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
+import { Inter, Source_Serif_4, Inter as V0_Font_Inter, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
 
 // Initialize fonts
 const _inter = V0_Font_Inter({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
 const _geistMono = V0_Font_Geist_Mono({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
 const _sourceSerif_4 = V0_Font_Source_Serif_4({ subsets: ['latin'], weight: ["200","300","400","500","600","700","800","900"] })
 
-const inter = Inter({
+const _inter = Inter({
   subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   display: "swap",
-  variable: "--font-inter",
+  preload: true,
+})
+
+const _sourceSerif_4 = Source_Serif_4({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+  preload: true,
 })
 
 export const metadata: Metadata = {
@@ -44,13 +51,22 @@ export const viewport: Viewport = {
   initialScale: 1,
 }
 
+const CookieConsent = dynamic(
+  () => import("@/components/cookie-consent").then((mod) => ({ default: mod.CookieConsent })),
+  { ssr: false },
+)
+const WhatsAppButton = dynamic(
+  () => import("@/components/whatsapp-button").then((mod) => ({ default: mod.WhatsAppButton })),
+  { ssr: false },
+)
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="cs" className={inter.variable} suppressHydrationWarning>
+    <html lang="cs" className={_inter.className} suppressHydrationWarning>
       <body className="font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <ConditionalLayout>{children}</ConditionalLayout>
