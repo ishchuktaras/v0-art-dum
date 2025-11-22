@@ -149,7 +149,22 @@ export const ABOUT_QUERY = groq`*[_type == "about"][0] {
       }
     }
   },
-  usp
+  usp,
+  "certificates": *[_type == "certificate" && (!defined(isActive) || isActive == true)] | order(order asc) {
+    _id,
+    title,
+    issuer,
+    issueDate,
+    description,
+    image{
+      asset->{
+        _id,
+        url
+      },
+      alt
+    },
+    category
+  }
 }`
 
 // Certificates
