@@ -105,12 +105,17 @@ export default async function PortfolioDetailPage({
 
   const heroImage = project.imagesAfter?.[0]?.asset?.url || project.imagesBefore?.[0]?.asset?.url
 
+  console.log("[v0] Portfolio project:", project.title)
+  console.log("[v0] Hero image URL:", heroImage)
+  console.log("[v0] ImagesAfter count:", project.imagesAfter?.length || 0)
+  console.log("[v0] ImagesBefore count:", project.imagesBefore?.length || 0)
+
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative text-white py-20 md:py-32 overflow-hidden min-h-[70vh] flex items-center">
-          {heroImage && (
+          {heroImage ? (
             <div className="absolute inset-0 z-0">
               <Image
                 src={heroImage || "/placeholder.svg"}
@@ -124,9 +129,7 @@ export default async function PortfolioDetailPage({
               <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
               <div className="absolute inset-0 bg-gradient-to-r from-[#0b192f]/90 via-[#0b192f]/50 to-transparent" />
             </div>
-          )}
-
-          {!heroImage && (
+          ) : (
             <>
               <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f]" />
               <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />

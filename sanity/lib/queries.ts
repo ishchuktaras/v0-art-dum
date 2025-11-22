@@ -74,7 +74,22 @@ export const PORTFOLIO_BY_SLUG_QUERY = groq`*[_type == "portfolio" && slug.curre
   year,
   shortDescription,
   "fullDescription": pt::text(fullDescription),
-  images,
+  "imagesAfter": images[]{
+    asset->{
+      _id,
+      url
+    },
+    alt,
+    caption
+  },
+  "imagesBefore": imagesBefore[]{
+    asset->{
+      _id,
+      url
+    },
+    alt,
+    caption
+  },
   services[]-> {
     _id,
     title,
