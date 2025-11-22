@@ -1,13 +1,10 @@
-import { Header } from "@/components/ui/header"
-import { Footer } from "@/components/ui/footer"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import Image from "next/image"
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { PORTFOLIO_BY_SLUG_QUERY, PORTFOLIO_QUERY } from "@/sanity/lib/queries"
-import { urlFor } from "@/sanity/lib/image"
 import type { Metadata } from "next"
-import { notFound } from 'next/navigation'
+import { notFound } from "next/navigation"
 
 interface PortfolioImage {
   asset?: {
@@ -85,9 +82,7 @@ export async function generateMetadata({
     openGraph: {
       title: project.title,
       description: project.shortDescription,
-      images: project.imagesAfter?.[0]?.asset?.url
-        ? [{ url: project.imagesAfter[0].asset.url }]
-        : [],
+      images: project.imagesAfter?.[0]?.asset?.url ? [{ url: project.imagesAfter[0].asset.url }] : [],
     },
   }
 }
@@ -108,48 +103,60 @@ export default async function PortfolioDetailPage({
     notFound()
   }
 
+  const heroImage = project.imagesAfter?.[0]?.asset?.url || project.imagesBefore?.[0]?.asset?.url
+
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden">
-          <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
+        <section className="relative text-white py-20 md:py-32 overflow-hidden min-h-[70vh] flex items-center">
+          {heroImage && (
+            <div className="absolute inset-0 z-0">
+              <Image
+                src={heroImage || "/placeholder.svg"}
+                alt={project.title}
+                fill
+                className="object-cover scale-110 transition-transform duration-700 ease-out"
+                priority
+                quality={90}
+              />
+              {/* Multi-layer gradient overlay for text readability */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0b192f]/90 via-[#0b192f]/50 to-transparent" />
+            </div>
+          )}
+
+          {!heroImage && (
+            <>
+              <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f]" />
+              <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
+            </>
+          )}
+
+          <div className="absolute top-20 right-10 w-72 h-72 bg-gold/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-10 left-20 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse delay-1000" />
+
           <div className="container mx-auto px-4 relative z-10">
             <Link
               href="/portfolio"
-              className="inline-flex items-center text-gold hover:text-gold/80 transition-colors mb-6"
+              className="inline-flex items-center text-gold hover:text-gold/80 transition-colors mb-6 backdrop-blur-sm bg-black/20 px-4 py-2 rounded-full"
             >
-              <svg
-                className="w-5 h-5 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
               Zpět na portfolio
             </Link>
             <div className="max-w-4xl">
-              <div className="inline-flex items-center gap-2 bg-gold/10 text-gold px-4 py-2 rounded-full text-sm font-semibold mb-6">
+              <div className="inline-flex items-center gap-2 bg-gold/20 backdrop-blur-md text-gold px-4 py-2 rounded-full text-sm font-semibold mb-6 border border-gold/30 shadow-lg shadow-gold/20">
                 {categoryLabels[project.category] || project.category}
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight drop-shadow-2xl">
                 {project.title}
               </h1>
-              <div className="flex flex-wrap gap-6 text-lg">
+              <div className="flex flex-wrap gap-6 text-lg backdrop-blur-sm bg-black/20 p-4 rounded-2xl inline-flex">
                 {project.location && (
                   <span className="flex items-center">
-                    <svg
-                      className="w-5 h-5 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -168,12 +175,7 @@ export default async function PortfolioDetailPage({
                 )}
                 {project.year && (
                   <span className="flex items-center">
-                    <svg
-                      className="w-5 h-5 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -186,12 +188,7 @@ export default async function PortfolioDetailPage({
                 )}
                 {project.projectDuration && (
                   <span className="flex items-center">
-                    <svg
-                      className="w-5 h-5 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -225,15 +222,10 @@ export default async function PortfolioDetailPage({
         {project.imagesBefore && project.imagesBefore.length > 0 && (
           <section className="py-16">
             <div className="container mx-auto px-4">
-              <h2 className="text-3xl font-black mb-8 text-center">
-                Stav před rekonstrukcí
-              </h2>
+              <h2 className="text-3xl font-black mb-8 text-center">Stav před rekonstrukcí</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {project.imagesBefore.map((image, index) => (
-                  <div
-                    key={index}
-                    className="relative aspect-video overflow-hidden rounded-lg shadow-lg"
-                  >
+                  <div key={index} className="relative aspect-video overflow-hidden rounded-lg shadow-lg">
                     <Image
                       src={image.asset?.url || "/placeholder.svg"}
                       alt={image.alt || `${project.title} - před ${index + 1}`}
@@ -256,15 +248,10 @@ export default async function PortfolioDetailPage({
         {project.imagesAfter && project.imagesAfter.length > 0 && (
           <section className="py-16 bg-muted">
             <div className="container mx-auto px-4">
-              <h2 className="text-3xl font-black mb-8 text-center">
-                Stav po rekonstrukci
-              </h2>
+              <h2 className="text-3xl font-black mb-8 text-center">Stav po rekonstrukci</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {project.imagesAfter.map((image, index) => (
-                  <div
-                    key={index}
-                    className="relative aspect-video overflow-hidden rounded-lg shadow-lg"
-                  >
+                  <div key={index} className="relative aspect-video overflow-hidden rounded-lg shadow-lg">
                     <Image
                       src={image.asset?.url || "/placeholder.svg"}
                       alt={image.alt || `${project.title} - po ${index + 1}`}
@@ -296,18 +283,8 @@ export default async function PortfolioDetailPage({
                       href={`/sluzby/${service.slug.current}`}
                       className="flex items-center p-4 bg-muted rounded-lg hover:bg-gold/10 hover:border-gold border border-transparent transition-all"
                     >
-                      <svg
-                        className="w-6 h-6 mr-3 text-gold"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
+                      <svg className="w-6 h-6 mr-3 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                       <span className="font-semibold">{service.title}</span>
                     </Link>
@@ -322,9 +299,7 @@ export default async function PortfolioDetailPage({
         <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 overflow-hidden">
           <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
           <div className="container mx-auto px-4 text-center relative z-10">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6">
-              Líbí se vám tento projekt?
-            </h2>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6">Líbí se vám tento projekt?</h2>
             <p className="text-xl mb-10 text-white/80 max-w-2xl mx-auto leading-relaxed">
               Kontaktujte nás a společně vytvoříme podobné řešení i pro vás
             </p>
@@ -340,12 +315,7 @@ export default async function PortfolioDetailPage({
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 7l5 5m0 0l-5 5m5-5H6"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </Button>
             </Link>

@@ -36,7 +36,7 @@ export const PORTFOLIO_QUERY = groq`*[_type == "portfolio"] | order(year desc) {
   location,
   year,
   shortDescription,
-  "mainImage": imagesAfter[0]{
+  "mainImage": images[0]{
     asset->{
       _id,
       url
@@ -55,7 +55,7 @@ export const FEATURED_PORTFOLIO_QUERY = groq`*[_type == "portfolio" && isFeature
   location,
   year,
   shortDescription,
-  "mainImage": imagesAfter[0]{
+  "mainImage": images[0]{
     asset->{
       _id,
       url
@@ -74,8 +74,7 @@ export const PORTFOLIO_BY_SLUG_QUERY = groq`*[_type == "portfolio" && slug.curre
   year,
   shortDescription,
   "fullDescription": pt::text(fullDescription),
-  imagesBefore,
-  imagesAfter,
+  images,
   services[]-> {
     _id,
     title,
