@@ -4,8 +4,8 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { useState, useEffect } from "react"
-import { usePathname } from 'next/navigation'
-import { Home, Building2, Wrench, DollarSign, Briefcase, Star, BookOpen, Phone, Menu, X } from 'lucide-react'
+import { usePathname } from "next/navigation"
+import { Home, Building2, Wrench, DollarSign, Briefcase, Star, BookOpen, Phone, Menu, X } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export function Header() {
@@ -62,7 +62,7 @@ export function Header() {
                 href={link.href}
                 className={`text-sm xl:text-base font-bold px-3 xl:px-4 py-2 rounded-lg transition-all duration-200 ${
                   pathname === link.href
-                    ? "bg-accent text-accent-foreground shadow-sm" 
+                    ? "bg-accent text-accent-foreground shadow-sm"
                     : "text-foreground/80 hover:text-foreground hover:bg-accent/10"
                 }`}
               >
@@ -100,10 +100,7 @@ export function Header() {
 
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-90 lg:hidden">
-          <div 
-            className="absolute inset-0 bg-navy dark:bg-background"
-            onClick={() => setMobileMenuOpen(false)}
-          />
+          <div className="absolute inset-0 bg-navy dark:bg-background" onClick={() => setMobileMenuOpen(false)} />
 
           <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-accent/5 pointer-events-none" />
 
@@ -124,12 +121,14 @@ export function Header() {
                     }`}
                     style={{
                       animationDelay: `${index * 50}ms`,
-                      animationFillMode: "both"
+                      animationFillMode: "both",
                     }}
                   >
                     <div
                       className={`p-2.5 rounded-lg transition-all duration-300 ${
-                        isActive ? "bg-accent/30" : "bg-white/10 dark:bg-accent/10 group-hover:bg-white/20 dark:group-hover:bg-accent/20"
+                        isActive
+                          ? "bg-accent/30"
+                          : "bg-white/10 dark:bg-accent/10 group-hover:bg-white/20 dark:group-hover:bg-accent/20"
                       }`}
                     >
                       <Icon
@@ -148,7 +147,10 @@ export function Header() {
               })}
             </div>
 
-            <div className="max-w-sm mx-auto w-full space-y-4 animate-in slide-in-from-bottom duration-500" style={{ animationDelay: "350ms", animationFillMode: "both" }}>
+            <div
+              className="max-w-sm mx-auto w-full space-y-4 animate-in slide-in-from-bottom duration-500"
+              style={{ animationDelay: "350ms", animationFillMode: "both" }}
+            >
               <Link href="/kontakt" onClick={() => setMobileMenuOpen(false)}>
                 <Button
                   size="lg"
@@ -159,7 +161,7 @@ export function Header() {
                 </Button>
               </Link>
 
-              <div className="bg-white/5 dark:bg-card/50 backdrop-blur-sm rounded-xl p-5 border border-white/10 dark:border-border">
+              <div className="bg-white/5 dark:bg-card/50 backdrop-blur-sm rounded-xl p-5 border border-white/10 dark:border-border mt-6">
                 <p className="text-white/60 dark:text-muted-foreground text-xs font-medium mb-3 uppercase tracking-wider">
                   Máte dotaz? Kontaktujte nás
                 </p>

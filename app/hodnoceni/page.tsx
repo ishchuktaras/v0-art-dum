@@ -133,13 +133,20 @@ export default async function HodnoceniPage() {
                       height="60"
                       src="https://www.firmy.cz/img/widgets/firmy-ohodnotte-nas-tmave.svg"
                       alt='Oleh Kulish, OSVČ - "ART DUM" na Firmy.cz'
-                      className="h-auto"
+                      className="h-auto dark:hidden"
+                    />
+                    <img
+                      width="249"
+                      height="60"
+                      src="https://www.firmy.cz/img/widgets/firmy-ohodnotte-nas-svetle.svg"
+                      alt='Oleh Kulish, OSVČ - "ART DUM" na Firmy.cz'
+                      className="h-auto hidden dark:block"
                     />
                   </a>
                 </div>
 
                 {/* Iframe s hodnoceními Firmy.cz */}
-                <div className="bg-background rounded-lg overflow-hidden border border-border">
+                <div className="bg-white dark:bg-gray-900 rounded-lg overflow-hidden border border-border shadow-lg">
                   <div className="relative w-full" style={{ paddingBottom: "65.625%" }}>
                     <iframe
                       src="https://www.firmy.cz/detail/13918492-oleh-kulish-osvc-art-dum-trebic.html?widget&limit=3"

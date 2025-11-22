@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Facebook } from "lucide-react"
 
 export function Footer() {
   // Hardcodované kontaktní údaje - později mohou být načteny z CMS přes API route
@@ -121,19 +120,8 @@ export function Footer() {
           {/* Sociální sítě */}
           <div>
             <h3 className="mb-4 text-lg font-semibold">Sledujte nás</h3>
-            <div className="flex gap-4">
-              <a
-                href="https://facebook.com/artdum"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/80 dark:text-muted-foreground hover:text-accent transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook className="h-6 w-6" />
-              </a>
-            </div>
 
-            <div className="mt-6">
+            <div className="mt-0">
               <a
                 href="https://www.firmy.cz/detail/13918492-oleh-kulish-osvc-art-dum-trebic.html#pridat-hodnoceni"
                 target="_blank"

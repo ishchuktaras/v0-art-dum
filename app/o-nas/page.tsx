@@ -127,11 +127,15 @@ export default async function AboutPage() {
               </div>
 
               {/* Image Column */}
-              {about.heroImage && (
+              {about.heroImage?.asset && (
                 <div className="relative">
                   <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl shadow-black/40 border-4 border-gold/20">
                     <Image
-                      src={urlFor(about.heroImage)?.width(800).height(800).url() || "/placeholder.svg"}
+                      src={
+                        about.heroImage.asset.url ||
+                        urlFor(about.heroImage)?.width(800).height(800).url() ||
+                        "/placeholder.svg"
+                      }
                       alt={about.heroImage.alt || "O firmě ART DUM"}
                       fill
                       className="object-cover"
@@ -245,7 +249,11 @@ export default async function AboutPage() {
                   {member.photo && (
                     <div className="relative h-64 w-full overflow-hidden">
                       <Image
-                        src={urlFor(member.photo)?.width(400).height(400).url() || "/placeholder.svg"}
+                        src={
+                          member.photo?.asset?.url ||
+                          urlFor(member.photo)?.width(400).height(400).url() ||
+                          "/placeholder.svg"
+                        }
                         alt={member.name}
                         fill
                         className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -357,7 +365,11 @@ export default async function AboutPage() {
                         </div>
                       </div>
                       <Image
-                        src={urlFor(cert.image)?.width(600).height(600).url() || "/placeholder.svg"}
+                        src={
+                          cert.image?.asset?.url ||
+                          urlFor(cert.image)?.width(600).height(600).url() ||
+                          "/placeholder.svg"
+                        }
                         alt={cert.image.alt || cert.title}
                         fill
                         className="object-contain p-4 group-hover:scale-105 transition-transform duration-500 opacity-30 blur-sm"
