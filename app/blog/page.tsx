@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { BLOG_POSTS_QUERY } from "@/sanity/lib/queries"
-import { urlFor, urlForHeroImage } from "@/sanity/lib/image"
+import { urlForHeroImage, urlFor } from "@/sanity/lib/image"
 import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 
@@ -94,9 +94,10 @@ export default async function BlogPage() {
               src={heroBackgroundImage || "/placeholder.svg"}
               alt="Blog ART DUM"
               fill
-              className="object-cover scale-110"
+              className="object-cover"
               priority
-              quality={85}
+              quality={75}
+              sizes="100vw"
             />
             {/* Multi-layer gradient overlay for text readability */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
@@ -131,7 +132,7 @@ export default async function BlogPage() {
                     <div className="relative h-48 w-full bg-muted">
                       {post.featuredImage ? (
                         <Image
-                          src={urlFor(post.featuredImage)?.width(600).height(400).url() || "/placeholder.svg"}
+                          src={urlFor(post.featuredImage).width(600).height(400).url() || "/placeholder.svg"}
                           alt={post.featuredImage.alt || post.title}
                           fill
                           className="object-cover"

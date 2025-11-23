@@ -117,9 +117,10 @@ export default async function PortfolioPage() {
                 src={heroBackgroundImage || "/placeholder.svg"}
                 alt="Portfolio ART DUM"
                 fill
-                className="object-cover scale-110"
+                className="object-cover"
                 priority
-                quality={85}
+                quality={75}
+                sizes="100vw"
               />
               {/* Multi-layer gradient overlay for text readability */}
               <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
