@@ -17,11 +17,46 @@ export const urlForImage = (source: Image | undefined) => {
 }
 
 export const urlForHeroImage = (source: Image | undefined) => {
+  // Handle case where source is undefined or null
+  if (!source) {
+    return undefined
+  }
+
+  // Handle case where we have asset._ref (normal Sanity reference)
+  if (source?.asset?._ref) {
+    return imageBuilder.image(source).width(1920).height(1080).quality(75).format("webp").fit("crop").url()
+  }
+
+  // Handle case where we have asset.url (already resolved)
+  if (source?.asset?.url) {
+    return source.asset.url
+  }
+
+  return undefined
+}
+
+// export const urlForHeroImageMobile = (source: Image | undefined) => {
+//   if (!source?.asset?._ref) {
+//     return undefined
+//   }
+
+//   return imageBuilder.image(source).width(768).height(600).quality(80).format("webp").fit("crop").url()
+// }
+
+// export const urlForHeroImageTablet = (source: Image | undefined) => {
+//   if (!source?.asset?._ref) {
+//     return undefined
+//   }
+
+//   return imageBuilder.image(source).width(1280).height(800).quality(80).format("webp").fit("crop").url()
+// }
+
+export const urlForBlurPlaceholder = (source: Image | undefined) => {
   if (!source?.asset?._ref) {
     return undefined
   }
 
-  return imageBuilder.image(source).width(1920).height(1080).quality(85).format("webp").fit("crop").auto("format").url()
+  return imageBuilder.image(source).width(40).height(30).quality(10).format("webp").blur(50).url()
 }
 
 export const urlFor = urlForImage

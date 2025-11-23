@@ -254,19 +254,21 @@ export default function PricingPageClient({
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden animate-fade-in">
         {/* Background image with overlay */}
-        <div className="absolute inset-0">
-          <Image
-            src={heroBackgroundImage || "/placeholder.svg"}
-            alt="Ceník stavebních prací ART DUM"
-            fill
-            className="object-cover scale-110 transition-transform duration-700"
-            priority
-            quality={85}
-          />
-          {/* Multi-layer gradient overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0b192f]/90 via-transparent to-[#0b192f]/50" />
-        </div>
+        {heroBackgroundImage && (
+          <div className="absolute inset-0">
+            <Image
+              src={heroBackgroundImage || "/placeholder.svg"}
+              alt="Ceník stavebních prací ART DUM"
+              fill
+              className="object-cover scale-110 transition-transform duration-700"
+              priority
+              quality={75}
+            />
+            {/* Multi-layer gradient overlay for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0b192f]/90 via-transparent to-[#0b192f]/50" />
+          </div>
+        )}
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
@@ -276,7 +278,7 @@ export default function PricingPageClient({
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
               <span>Férová cena bez skrytých poplatků</span>

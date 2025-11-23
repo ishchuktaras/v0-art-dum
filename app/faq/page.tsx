@@ -112,9 +112,10 @@ export default async function FAQPage() {
               src={heroBackgroundImage || "/placeholder.svg"}
               alt="FAQ ART DUM"
               fill
-              className="object-cover scale-110"
+              className="object-cover"
               priority
-              quality={85}
+              quality={75}
+              sizes="100vw"
             />
             {/* Multi-layer gradient overlay for text readability */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2545]/90 to-[#0b192f]/95" />

@@ -263,7 +263,7 @@ export default function ServicesPageClient({ services, heroBackgroundImage, json
               fill
               className="object-cover scale-110 transition-transform duration-700"
               priority
-              quality={85}
+              quality={75}
             />
             <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0b192f]/90 via-transparent to-[#0b192f]/50" />
