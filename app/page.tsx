@@ -3,7 +3,13 @@ import Link from "next/link"
 import Image from "next/image"
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { HOMEPAGE_QUERY, SERVICES_QUERY, FEATURED_PORTFOLIO_QUERY } from "@/sanity/lib/queries"
-import { urlFor, urlForHeroImage } from "@/sanity/lib/image"
+import {
+  urlFor,
+  urlForHeroImage,
+  urlForHeroImageMobile,
+  urlForHeroImageTablet,
+  urlForBlurPlaceholder,
+} from "@/sanity/lib/image"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -87,6 +93,15 @@ export default async function HomePage() {
   const yearsExperience = homepage?.statYearsExperience || 23
 
   const heroBackgroundImage = featuredPortfolio?.[0]?.mainImage ? urlForHeroImage(featuredPortfolio[0].mainImage) : null
+  const heroBackgroundImageMobile = featuredPortfolio?.[0]?.mainImage
+    ? urlForHeroImageMobile(featuredPortfolio[0].mainImage)
+    : null
+  const heroBackgroundImageTablet = featuredPortfolio?.[0]?.mainImage
+    ? urlForHeroImageTablet(featuredPortfolio[0].mainImage)
+    : null
+  const heroBlurPlaceholder = featuredPortfolio?.[0]?.mainImage
+    ? urlForBlurPlaceholder(featuredPortfolio[0].mainImage)
+    : null
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -143,6 +158,18 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      {heroBackgroundImage && (
+        <>
+          <link
+            rel="preload"
+            as="image"
+            href={heroBackgroundImage}
+            imageSrcSet={`${heroBackgroundImageMobile} 768w, ${heroBackgroundImageTablet} 1280w, ${heroBackgroundImage} 1920w`}
+            imageSizes="100vw"
+          />
+        </>
+      )}
+
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <main className="flex-1">
@@ -157,7 +184,11 @@ export default async function HomePage() {
                 fill
                 className="object-cover scale-110"
                 priority
-                quality={85}
+                quality={80}
+                sizes="100vw"
+                srcSet={`${heroBackgroundImageMobile} 768w, ${heroBackgroundImageTablet} 1280w, ${heroBackgroundImage} 1920w`}
+                placeholder="blur"
+                blurDataURL={heroBlurPlaceholder || undefined}
               />
               {/* Multi-layer gradient overlay for text readability */}
               <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
@@ -329,6 +360,7 @@ export default async function HomePage() {
                       <img
                         src={
                           urlFor(service.image)?.width(400).height(250).url() ||
+                          "/placeholder.svg" ||
                           "/placeholder.svg" ||
                           "/placeholder.svg" ||
                           "/placeholder.svg"

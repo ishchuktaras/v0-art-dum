@@ -21,7 +21,31 @@ export const urlForHeroImage = (source: Image | undefined) => {
     return undefined
   }
 
-  return imageBuilder.image(source).width(1920).height(1080).quality(85).format("webp").fit("crop").auto("format").url()
+  return imageBuilder.image(source).width(1920).height(1080).quality(80).format("webp").fit("crop").url()
+}
+
+export const urlForHeroImageMobile = (source: Image | undefined) => {
+  if (!source?.asset?._ref) {
+    return undefined
+  }
+
+  return imageBuilder.image(source).width(768).height(600).quality(80).format("webp").fit("crop").url()
+}
+
+export const urlForHeroImageTablet = (source: Image | undefined) => {
+  if (!source?.asset?._ref) {
+    return undefined
+  }
+
+  return imageBuilder.image(source).width(1280).height(800).quality(80).format("webp").fit("crop").url()
+}
+
+export const urlForBlurPlaceholder = (source: Image | undefined) => {
+  if (!source?.asset?._ref) {
+    return undefined
+  }
+
+  return imageBuilder.image(source).width(40).height(30).quality(10).format("webp").blur(50).url()
 }
 
 export const urlFor = urlForImage
