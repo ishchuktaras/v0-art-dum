@@ -88,6 +88,8 @@ export default async function HomePage() {
 
   const heroBackgroundImage = featuredPortfolio?.[0]?.mainImage ? urlForHeroImage(featuredPortfolio[0].mainImage) : null
 
+  console.log("[v0] heroBackgroundImage:", heroBackgroundImage)
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "GeneralContractor",
