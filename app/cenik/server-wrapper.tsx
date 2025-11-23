@@ -2,6 +2,7 @@ import { client } from "@/sanity/lib/client"
 import { PRICING_QUERY } from "@/sanity/lib/queries"
 import PricingPageClient from "./page"
 import type { Metadata } from "next"
+import { urlForHeroImage } from "@/sanity/lib/image"
 
 export const metadata: Metadata = {
   title: "Ceník stavebních prací | Orientační ceny | ART DUM Třebíč",
@@ -62,7 +63,7 @@ export default async function PricingPage() {
     }`,
   )
 
-  const heroBackgroundImage = featuredPortfolio?.[2]?.mainImage?.asset?.url
+  const heroBackgroundImage = featuredPortfolio?.[2]?.mainImage ? urlForHeroImage(featuredPortfolio[2].mainImage) : null
 
   const jsonLd = {
     "@context": "https://schema.org",

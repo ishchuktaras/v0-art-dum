@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
@@ -257,10 +257,13 @@ export default function ServicesPageClient({ services, heroBackgroundImage, json
       <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden animate-fade-in">
         {heroBackgroundImage && (
           <div className="absolute inset-0">
-            <img
+            <Image
               src={heroBackgroundImage || "/placeholder.svg"}
               alt="Stavební služby ART DUM"
-              className="w-full h-full object-cover scale-110 transition-transform duration-700"
+              fill
+              className="object-cover scale-110 transition-transform duration-700"
+              priority
+              quality={85}
             />
             <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0b192f]/90 via-transparent to-[#0b192f]/50" />

@@ -9,6 +9,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Info } from "lucide-react"
+import Image from "next/image"
 
 // Type pro cenové údaje z Sanity
 type PricingItem = {
@@ -181,8 +182,10 @@ const slideVariants = {
 
 export default function PricingPageClient({
   categories,
+  heroBackgroundImage,
 }: {
   categories: PricingCategory[]
+  heroBackgroundImage?: string
 }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [direction, setDirection] = useState(0)
@@ -252,10 +255,13 @@ export default function PricingPageClient({
       <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden animate-fade-in">
         {/* Background image with overlay */}
         <div className="absolute inset-0">
-          <img
-            src="/placeholder.svg"
+          <Image
+            src={heroBackgroundImage || "/placeholder.svg"}
             alt="Ceník stavebních prací ART DUM"
-            className="w-full h-full object-cover scale-110 transition-transform duration-700"
+            fill
+            className="object-cover scale-110 transition-transform duration-700"
+            priority
+            quality={85}
           />
           {/* Multi-layer gradient overlay for text readability */}
           <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />

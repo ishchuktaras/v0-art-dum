@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { BLOG_POSTS_QUERY } from "@/sanity/lib/queries"
-import { urlFor } from "@/sanity/lib/image"
+import { urlFor, urlForHeroImage } from "@/sanity/lib/image"
 import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 
@@ -64,7 +64,7 @@ export default async function BlogPage() {
     }`,
   })
 
-  const heroBackgroundImage = featuredPortfolio?.[3]?.mainImage?.asset?.url
+  const heroBackgroundImage = featuredPortfolio?.[3]?.mainImage ? urlForHeroImage(featuredPortfolio[3].mainImage) : null
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -90,10 +90,13 @@ export default async function BlogPage() {
         {/* Background image with overlay */}
         {heroBackgroundImage && (
           <div className="absolute inset-0">
-            <img
+            <Image
               src={heroBackgroundImage || "/placeholder.svg"}
               alt="Blog ART DUM"
-              className="w-full h-full object-cover scale-110"
+              fill
+              className="object-cover scale-110"
+              priority
+              quality={85}
             />
             {/* Multi-layer gradient overlay for text readability */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />

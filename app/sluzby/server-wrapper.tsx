@@ -1,6 +1,7 @@
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { SERVICES_QUERY, FEATURED_PORTFOLIO_QUERY } from "@/sanity/lib/queries"
 import ServicesPageClient from "./page"
+import { urlForHeroImage } from "@/sanity/lib/image"
 
 const fallbackServices = [
   {
@@ -53,7 +54,7 @@ export default async function ServicesPageWrapper() {
 
   const services = sanityServices && sanityServices.length > 0 ? sanityServices : fallbackServices
 
-  const heroBackgroundImage = featuredPortfolio?.[1]?.mainImage?.asset?.url
+  const heroBackgroundImage = featuredPortfolio?.[1]?.mainImage ? urlForHeroImage(featuredPortfolio[1].mainImage) : null
 
   const jsonLd = {
     "@context": "https://schema.org",

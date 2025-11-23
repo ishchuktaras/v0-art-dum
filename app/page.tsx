@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import Image from "next/image"
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { HOMEPAGE_QUERY, SERVICES_QUERY, FEATURED_PORTFOLIO_QUERY } from "@/sanity/lib/queries"
-import { urlFor } from "@/sanity/lib/image"
+import { urlFor, urlForHeroImage } from "@/sanity/lib/image"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -85,7 +86,7 @@ export default async function HomePage() {
   const ctaText = homepage?.ctaButtonText || "Nezávazná poptávka"
   const yearsExperience = homepage?.statYearsExperience || 23
 
-  const heroBackgroundImage = featuredPortfolio?.[0]?.mainImage?.asset?.url
+  const heroBackgroundImage = featuredPortfolio?.[0]?.mainImage ? urlForHeroImage(featuredPortfolio[0].mainImage) : null
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -150,10 +151,13 @@ export default async function HomePage() {
           {/* Background image with overlay */}
           {heroBackgroundImage && (
             <div className="absolute inset-0">
-              <img
+              <Image
                 src={heroBackgroundImage || "/placeholder.svg"}
                 alt="ART DUM stavební práce"
-                className="w-full h-full object-cover scale-110"
+                fill
+                className="object-cover scale-110"
+                priority
+                quality={85}
               />
               {/* Multi-layer gradient overlay for text readability */}
               <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
@@ -325,6 +329,7 @@ export default async function HomePage() {
                       <img
                         src={
                           urlFor(service.image)?.width(400).height(250).url() ||
+                          "/placeholder.svg" ||
                           "/placeholder.svg" ||
                           "/placeholder.svg"
                         }

@@ -18,7 +18,7 @@ import {
 } from "lucide-react"
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { ABOUT_QUERY, FEATURED_PORTFOLIO_QUERY } from "@/sanity/lib/queries"
-import { urlFor } from "@/sanity/lib/image"
+import { urlFor, urlForHeroImage } from "@/sanity/lib/image"
 import { Button } from "@/components/ui/button"
 import { PortableText } from "next-sanity"
 
@@ -56,7 +56,7 @@ export default async function AboutPage() {
     tags: ["portfolio"],
   })
 
-  const heroBackgroundImage = featuredPortfolio?.[4]?.mainImage?.asset?.url
+  const heroBackgroundImage = featuredPortfolio?.[4]?.mainImage ? urlForHeroImage(featuredPortfolio[4].mainImage) : null
 
   const defaultAbout = {
     heroHeading: "O firmě ART DUM",
@@ -112,10 +112,13 @@ export default async function AboutPage() {
       <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-24 overflow-hidden">
         {heroBackgroundImage && (
           <div className="absolute inset-0">
-            <img
+            <Image
               src={heroBackgroundImage || "/placeholder.svg"}
               alt="ART DUM stavební práce"
-              className="w-full h-full object-cover scale-110"
+              fill
+              className="object-cover scale-110"
+              priority
+              quality={85}
             />
             <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0b192f]/90 via-transparent to-[#0b192f]/50" />
@@ -144,6 +147,7 @@ export default async function AboutPage() {
                       src={
                         about.heroImage.asset.url ||
                         urlFor(about.heroImage)?.width(800).height(800).url() ||
+                        "/placeholder.svg" ||
                         "/placeholder.svg" ||
                         "/placeholder.svg" ||
                         "/placeholder.svg" ||
@@ -267,6 +271,7 @@ export default async function AboutPage() {
                           urlFor(member.photo)?.width(400).height(400).url() ||
                           "/placeholder.svg" ||
                           "/placeholder.svg" ||
+                          "/placeholder.svg" ||
                           "/placeholder.svg"
                         }
                         alt={member.name}
@@ -383,6 +388,7 @@ export default async function AboutPage() {
                         src={
                           cert.image?.asset?.url ||
                           urlFor(cert.image)?.width(600).height(600).url() ||
+                          "/placeholder.svg" ||
                           "/placeholder.svg" ||
                           "/placeholder.svg" ||
                           "/placeholder.svg" ||

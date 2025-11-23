@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { PORTFOLIO_QUERY, FEATURED_PORTFOLIO_QUERY } from "@/sanity/lib/queries"
+import { urlForHeroImage } from "@/sanity/lib/image"
 import type { Metadata } from "next"
 
 interface PortfolioProject {
@@ -86,7 +87,7 @@ const categoryLabels: Record<string, string> = {
 export default async function PortfolioPage() {
   const projects = await getPortfolioProjects()
   const featuredPortfolio = await getFeaturedPortfolio()
-  const heroBackgroundImage = featuredPortfolio?.[5]?.mainImage?.asset?.url
+  const heroBackgroundImage = featuredPortfolio?.[5]?.mainImage ? urlForHeroImage(featuredPortfolio[5].mainImage) : null
 
   const uniqueCategories = Array.from(new Set(projects.map((p) => p.category).filter(Boolean)))
   const categories = ["Všechny projekty", ...uniqueCategories.map((cat) => categoryLabels[cat] || cat)]
@@ -112,10 +113,13 @@ export default async function PortfolioPage() {
         <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-16 md:py-24 overflow-hidden">
           {heroBackgroundImage && (
             <div className="absolute inset-0">
-              <img
+              <Image
                 src={heroBackgroundImage || "/placeholder.svg"}
                 alt="Portfolio ART DUM"
-                className="w-full h-full object-cover scale-110"
+                fill
+                className="object-cover scale-110"
+                priority
+                quality={85}
               />
               {/* Multi-layer gradient overlay for text readability */}
               <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
