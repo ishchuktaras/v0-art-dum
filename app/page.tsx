@@ -88,8 +88,6 @@ export default async function HomePage() {
 
   const heroBackgroundImage = featuredPortfolio?.[0]?.mainImage ? urlForHeroImage(featuredPortfolio[0].mainImage) : null
 
-  console.log("[v0] heroBackgroundImage:", heroBackgroundImage)
-
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "GeneralContractor",
@@ -332,6 +330,7 @@ export default async function HomePage() {
                       <img
                         src={
                           urlFor(service.image)?.width(400).height(250).url() ||
+                          "/placeholder.svg" ||
                           "/placeholder.svg" ||
                           "/placeholder.svg"
                         }

@@ -55,14 +55,7 @@ export const FEATURED_PORTFOLIO_QUERY = groq`*[_type == "portfolio" && isFeature
   location,
   year,
   shortDescription,
-  "mainImage": images[0]{
-    asset->{
-      _id,
-      url
-    },
-    alt,
-    caption
-  }
+  "mainImage": images[0]
 }`
 
 export const PORTFOLIO_BY_SLUG_QUERY = groq`*[_type == "portfolio" && slug.current == $slug][0] {
