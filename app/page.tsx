@@ -3,7 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { sanityFetch } from "@/sanity/lib/fetch"
 import { HOMEPAGE_QUERY, SERVICES_QUERY, FEATURED_PORTFOLIO_QUERY } from "@/sanity/lib/queries"
-import { urlFor, urlForHeroImage } from "@/sanity/lib/image"
+import { urlFor, urlForImage } from "@/sanity/lib/image"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -87,7 +87,7 @@ export default async function HomePage() {
   const ctaText = homepage?.ctaButtonText || "Nezávazná poptávka"
   const yearsExperience = homepage?.statYearsExperience || 23
 
-  const heroBackgroundImage = featuredPortfolio?.[0]?.mainImage ? urlForHeroImage(featuredPortfolio[0].mainImage) : null
+  const heroBackgroundImage = featuredPortfolio?.[0]?.mainImage ? urlForImage(featuredPortfolio[0].mainImage) : null
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -153,7 +153,7 @@ export default async function HomePage() {
           {heroBackgroundImage && (
             <div className="absolute inset-0">
               <Image
-                src={heroBackgroundImage || "/placeholder.svg"}
+                src={heroBackgroundImage.url()}
                 alt="ART DUM stavební práce"
                 fill
                 className="object-cover"
