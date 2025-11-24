@@ -76,13 +76,35 @@ export async function generateMetadata({
     }
   }
 
+  const ogImageUrl =
+    project.imagesAfter?.[0]?.asset?.url ||
+    project.imagesBefore?.[0]?.asset?.url ||
+    "https://artdum.cz/og-image-main.jpg"
+
   return {
     title: `${project.title} | Portfolio | ART DUM`,
     description: project.shortDescription,
     openGraph: {
-      title: project.title,
+      title: `${project.title} | Oleh Kulish, OSVČ - ART DUM`,
       description: project.shortDescription,
-      images: project.imagesAfter?.[0]?.asset?.url ? [{ url: project.imagesAfter[0].asset.url }] : [],
+      url: `https://artdum.cz/portfolio/${slug}`,
+      siteName: "Oleh Kulish, OSVČ - ART DUM",
+      locale: "cs_CZ",
+      type: "article",
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: `${project.title} - ${categoryLabels[project.category] || project.category}`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} | Oleh Kulish, OSVČ - ART DUM`,
+      description: project.shortDescription,
+      images: [ogImageUrl],
     },
   }
 }

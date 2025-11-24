@@ -41,6 +41,23 @@ export const metadata: Metadata = {
     title: "Portfolio realizovaných projektů | ART DUM",
     description: "Prohlédněte si naše dokončené stavební projekty v Třebíči a okolí.",
     url: "https://artdum.cz/portfolio",
+    siteName: "Oleh Kulish, OSVČ - ART DUM",
+    locale: "cs_CZ",
+    type: "website",
+    images: [
+      {
+        url: "https://artdum.cz/og-image-main.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Portfolio realizovaných projektů - Oleh Kulish, OSVČ - ART DUM | Třebíč",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Portfolio realizovaných projektů | ART DUM",
+    description: "Prohlédněte si naše dokončené stavební projekty v Třebíči a okolí.",
+    images: ["https://artdum.cz/og-image-main.jpg"],
   },
   alternates: {
     canonical: "https://artdum.cz/portfolio",

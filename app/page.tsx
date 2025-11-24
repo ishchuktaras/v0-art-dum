@@ -33,10 +33,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://artdum.cz/og-image.jpg",
+        url: "https://artdum.cz/og-image-main.jpg",
         width: 1200,
         height: 630,
-        alt: "Oleh Kulish, OSVČ - ART DUM | Stavební firma Třebíč",
+        alt: "Oleh Kulish, OSVČ - ART DUM | Stavební firma Třebíč - Rekonstrukce bytů, domů a zateplení",
       },
     ],
   },
@@ -44,6 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Oleh Kulish, OSVČ - ART DUM | Stavební firma Třebíč",
     description: "23 let zkušeností ve stavebnictví. Rekonstrukce, stavby na klíč, opravy.",
+    images: ["https://artdum.cz/og-image-main.jpg"],
   },
   alternates: {
     canonical: "https://artdum.cz",
@@ -330,6 +331,7 @@ export default async function HomePage() {
                       <img
                         src={
                           urlFor(service.image)?.width(400).height(250).url() ||
+                          "/placeholder.svg" ||
                           "/placeholder.svg" ||
                           "/placeholder.svg" ||
                           "/placeholder.svg"

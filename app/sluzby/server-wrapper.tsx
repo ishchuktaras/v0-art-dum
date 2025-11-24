@@ -2,6 +2,35 @@ import { sanityFetch } from "@/sanity/lib/fetch"
 import { SERVICES_QUERY, FEATURED_PORTFOLIO_QUERY } from "@/sanity/lib/queries"
 import ServicesPageClient from "./page"
 import { urlForHeroImage } from "@/sanity/lib/image"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Služby | Rekonstrukce, stavby na klíč, opravy | Oleh Kulish, OSVČ - ART DUM | Třebíč",
+  description:
+    "Komplexní stavební služby v Třebíči a okolí: rekonstrukce bytů a domů, stavby na klíč, zateplení fasád, malování, elektroinstalace. Profesionální realizace s 23 lety zkušeností.",
+  openGraph: {
+    title: "Služby | Oleh Kulish, OSVČ - ART DUM",
+    description: "Komplexní stavební služby v Třebíči a okolí.",
+    url: "https://artdum.cz/sluzby",
+    siteName: "Oleh Kulish, OSVČ - ART DUM",
+    locale: "cs_CZ",
+    type: "website",
+    images: [
+      {
+        url: "https://artdum.cz/og-image-main.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Stavební služby - Oleh Kulish, OSVČ - ART DUM | Třebíč",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Služby | Oleh Kulish, OSVČ - ART DUM",
+    description: "Komplexní stavební služby v Třebíči a okolí.",
+    images: ["https://artdum.cz/og-image-main.jpg"],
+  },
+}
 
 const fallbackServices = [
   {

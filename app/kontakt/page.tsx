@@ -15,17 +15,28 @@ export const metadata: Metadata = {
   title: "Kontakt | Nezávazná poptávka | ART DUM Třebíč | ☎ +420 774 335 592",
   description:
     "Kontaktujte stavební firmu ART DUM pro nezávaznou cenovou nabídku. Telefon: +420 774 335 592, Email: firma@artdum.cz, Adresa: Karlovo nám 44/33, Třebíč. Odpovíme do 24 hodin.",
-  keywords: [
-    "kontakt ART DUM",
-    "poptávka stavba",
-    "cenová nabídka",
-    "telefon stavební firma",
-    "Třebíč kontakt",
-  ],
+  keywords: ["kontakt ART DUM", "poptávka stavba", "cenová nabídka", "telefon stavební firma", "Třebíč kontakt"],
   openGraph: {
     title: "Kontakt | ART DUM Třebíč",
     description: "Kontaktujte nás pro nezávaznou cenovou nabídku. Odpovíme do 24 hodin.",
     url: "https://artdum.cz/kontakt",
+    siteName: "Oleh Kulish, OSVČ - ART DUM",
+    locale: "cs_CZ",
+    type: "website",
+    images: [
+      {
+        url: "https://artdum.cz/og-image-main.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Kontakt - Oleh Kulish, OSVČ - ART DUM | Stavební firma Třebíč",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kontakt | ART DUM Třebíč",
+    description: "Kontaktujte nás pro nezávaznou cenovou nabídku. Odpovíme do 24 hodin.",
+    images: ["https://artdum.cz/og-image-main.jpg"],
   },
   alternates: {
     canonical: "https://artdum.cz/kontakt",
@@ -54,11 +65,11 @@ export default async function ContactPage() {
     mainEntity: {
       "@type": "GeneralContractor",
       name: "ART DUM",
-      telephone: phone.replace(/\s/g, ''),
+      telephone: phone.replace(/\s/g, ""),
       email: email,
       address: {
         "@type": "PostalAddress",
-        streetAddress: address.split(',')[0] || "Karlovo nám 44/33",
+        streetAddress: address.split(",")[0] || "Karlovo nám 44/33",
         addressLocality: "Třebíč",
         postalCode: "674 01",
         addressCountry: "CZ",
@@ -69,12 +80,7 @@ export default async function ContactPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      
-      
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ContactFormClient />
     </div>
   )

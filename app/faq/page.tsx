@@ -9,6 +9,28 @@ import Image from "next/image"
 export const metadata: Metadata = {
   title: "Často kladené otázky (FAQ) | ART DUM",
   description: "Odpovědi na nejčastější otázky ohledně stavebních služeb, rekonstrukcí a spolupráce s firmou ART DUM.",
+  openGraph: {
+    title: "Často kladené otázky (FAQ) | ART DUM",
+    description: "Odpovědi na nejčastější otázky ohledně stavebních služeb, rekonstrukcí a spolupráce.",
+    url: "https://artdum.cz/faq",
+    siteName: "Oleh Kulish, OSVČ - ART DUM",
+    locale: "cs_CZ",
+    type: "website",
+    images: [
+      {
+        url: "https://artdum.cz/og-image-main.jpg",
+        width: 1200,
+        height: 630,
+        alt: "FAQ - Oleh Kulish, OSVČ - ART DUM | Odpovědi na vaše dotazy",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Často kladené otázky (FAQ) | ART DUM",
+    description: "Odpovědi na nejčastější otázky ohledně stavebních služeb, rekonstrukcí a spolupráce.",
+    images: ["https://artdum.cz/og-image-main.jpg"],
+  },
 }
 
 const faqs = [

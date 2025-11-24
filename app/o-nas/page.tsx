@@ -40,6 +40,23 @@ export const metadata: Metadata = {
     title: "O nás | Oleh Kulish, OSVČ - ART DUM | Třebíč",
     description: "23 let zkušeností ve stavebnictví. Poznejte náš tým a naše hodnoty.",
     url: "https://artdum.cz/o-nas",
+    siteName: "Oleh Kulish, OSVČ - ART DUM",
+    locale: "cs_CZ",
+    type: "website",
+    images: [
+      {
+        url: "https://artdum.cz/og-image-main.jpg",
+        width: 1200,
+        height: 630,
+        alt: "O firmě Oleh Kulish, OSVČ - ART DUM | 23 let zkušeností ve stavebnictví",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "O nás | Oleh Kulish, OSVČ - ART DUM",
+    description: "23 let zkušeností ve stavebnictví. Poznejte náš tým a naše hodnoty.",
+    images: ["https://artdum.cz/og-image-main.jpg"],
   },
   alternates: {
     canonical: "https://artdum.cz/o-nas",

@@ -41,6 +41,23 @@ export const metadata: Metadata = {
     title: "Blog & Aktuality | ART DUM",
     description: "Tipy, rady a novinky ze světa stavebnictví a rekonstrukcí",
     url: "https://artdum.cz/blog",
+    siteName: "Oleh Kulish, OSVČ - ART DUM",
+    locale: "cs_CZ",
+    type: "website",
+    images: [
+      {
+        url: "https://artdum.cz/og-image-main.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Blog & Aktuality - Oleh Kulish, OSVČ - ART DUM | Stavební tipy a novinky",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog & Aktuality | ART DUM",
+    description: "Tipy, rady a novinky ze světa stavebnictví a rekonstrukcí",
+    images: ["https://artdum.cz/og-image-main.jpg"],
   },
   alternates: {
     canonical: "https://artdum.cz/blog",

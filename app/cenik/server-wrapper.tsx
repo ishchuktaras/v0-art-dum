@@ -13,6 +13,23 @@ export const metadata: Metadata = {
     title: "Ceník stavebních prací | ART DUM",
     description: "Transparentní ceník našich služeb. Férová kalkulace bez skrytých poplatků.",
     url: "https://artdum.cz/cenik",
+    siteName: "Oleh Kulish, OSVČ - ART DUM",
+    locale: "cs_CZ",
+    type: "website",
+    images: [
+      {
+        url: "https://artdum.cz/og-image-main.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Ceník stavebních prací - Oleh Kulish, OSVČ - ART DUM | Třebíč",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ceník stavebních prací | ART DUM",
+    description: "Transparentní ceník našich služeb. Férová kalkulace bez skrytých poplatků.",
+    images: ["https://artdum.cz/og-image-main.jpg"],
   },
   alternates: {
     canonical: "https://artdum.cz/cenik",
