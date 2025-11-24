@@ -52,13 +52,19 @@ interface Review {
   location?: string
   date: string
   source?: string
+  isPublished?: boolean
 }
 
 export default async function HodnoceniPage() {
   const reviews = await sanityFetch<Review[]>({ query: REVIEWS_QUERY })
 
+  const publishedReviews = reviews.filter((review) => review.isPublished !== false)
+  const firmyCzReviews = publishedReviews.filter((review) => review.source === "firmy-cz")
+
   const averageRating =
-    reviews.length > 0 ? reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length : 5
+    publishedReviews.length > 0
+      ? publishedReviews.reduce((acc, review) => acc + review.rating, 0) / publishedReviews.length
+      : 5
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -67,12 +73,12 @@ export default async function HodnoceniPage() {
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: averageRating.toFixed(1),
-      reviewCount: reviews.length || 1,
+      reviewCount: publishedReviews.length || 1,
       bestRating: "5",
       worstRating: "1",
     },
-    ...(reviews.length > 0 && {
-      review: reviews.slice(0, 10).map((review) => ({
+    ...(publishedReviews.length > 0 && {
+      review: publishedReviews.slice(0, 10).map((review) => ({
         "@type": "Review",
         author: {
           "@type": "Person",
@@ -122,7 +128,9 @@ export default async function HodnoceniPage() {
                 ))}
               </div>
               <p className="text-3xl font-black text-gold">{averageRating.toFixed(1)}</p>
-              <p className="text-white/70">({reviews.length > 0 ? reviews.length : "Nová"} hodnocení)</p>
+              <p className="text-white/70">
+                ({publishedReviews.length > 0 ? publishedReviews.length : "Nová"} hodnocení)
+              </p>
             </div>
           </div>
         </div>
@@ -169,7 +177,7 @@ export default async function HodnoceniPage() {
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  z {reviews.length > 0 ? reviews.length : "prvních"} recenzí
+                  z {publishedReviews.length > 0 ? publishedReviews.length : "prvních"} recenzí
                 </p>
               </div>
 
@@ -192,7 +200,7 @@ export default async function HodnoceniPage() {
         </div>
       </section>
 
-      {reviews.length > 0 && (
+      {publishedReviews.length > 0 && (
         <section className="py-16 bg-background">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
@@ -204,7 +212,7 @@ export default async function HodnoceniPage() {
                   Přečtěte si skutečné recenze od klientů, kteří si vybrali ART DUM pro své stavební projekty
                 </p>
               </div>
-              <ReviewsCarousel reviews={reviews} />
+              <ReviewsCarousel reviews={publishedReviews} />
             </div>
           </div>
         </section>
@@ -252,6 +260,18 @@ export default async function HodnoceniPage() {
 
                 {/* Iframe s hodnoceními Firmy.cz */}
                 <div className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden border-2 border-border shadow-lg">
+                  {firmyCzReviews.length > 0 && (
+                    <div className="bg-green-50 dark:bg-green-900/20 border-b-2 border-green-200 dark:border-green-800 p-4">
+                      <div className="flex items-center gap-2 text-green-700 dark:text-green-400">
+                        <CheckCircle2 className="w-5 h-5" />
+                        <p className="font-medium">
+                          Zobrazujeme {firmyCzReviews.length}{" "}
+                          {firmyCzReviews.length === 1 ? "recenzi" : firmyCzReviews.length < 5 ? "recenze" : "recenzí"}{" "}
+                          z Firmy.cz také výše v sekci recenzí
+                        </p>
+                      </div>
+                    </div>
+                  )}
                   <div className="relative w-full" style={{ paddingBottom: "65.625%" }}>
                     <iframe
                       src="https://www.firmy.cz/detail/13918492-oleh-kulish-osvc-art-dum-trebic.html?widget&limit=3"

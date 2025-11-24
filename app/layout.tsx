@@ -9,6 +9,7 @@ import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { ThemeProvider } from "@/components/theme-provider"
+
 import { Inter, Inter as V0_Font_Inter, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
 
 // Initialize fonts
