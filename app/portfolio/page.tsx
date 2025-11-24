@@ -1,298 +1,342 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import Link from "next/link"
-import Image from "next/image"
-import { sanityFetch } from "@/sanity/lib/fetch"
-import { PORTFOLIO_QUERY, FEATURED_PORTFOLIO_QUERY } from "@/sanity/lib/queries"
-import { urlForHeroImage } from "@/sanity/lib/image"
 import type { Metadata } from "next"
-
-interface PortfolioProject {
-  _id: string
-  title: string
-  slug: {
-    current: string
-  }
-  shortDescription: string
-  category: string
-  location?: string
-  year?: number
-  mainImage?: {
-    asset?: {
-      _id: string
-      url: string
-    }
-    alt?: string
-  }
-}
+import Link from "next/link"
+import { Star, ExternalLink, Send, Eye, Shield, CheckCircle2, Award, TrendingUp } from "lucide-react"
+import { sanityFetch } from "@/sanity/lib/fetch"
+import { REVIEWS_QUERY } from "@/sanity/lib/queries"
+import { Button } from "@/components/ui/button"
+import { ReviewsCarousel } from "@/components/reviews-carousel"
 
 export const metadata: Metadata = {
-  title: "Portfolio | Realizované projekty | ART DUM Třebíč",
+  title: "Hodnocení a recenze | Reference spokojených zákazníků | ART DUM",
   description:
-    "Fotografie našich dokončených projektů v Třebíči a okolí. Rekonstrukce bytů a domů, zateplení fasád, stavby na klíč. 23 let zkušeností.",
+    "Přečtěte si hodnocení a recenze spokojených klientů stavební firmy ART DUM z Třebíče. Reference z Firmy.cz, Google. 5★ průměrné hodnocení. 100% spokojených zákazníků.",
   keywords: [
-    "portfolio stavby Třebíč",
-    "fotografie rekonstrukcí",
-    "reference ART DUM",
-    "realizované projekty",
-    "před a po rekonstrukci",
+    "hodnocení ART DUM",
+    "recenze stavební firma",
+    "reference Třebíče",
+    "Firmy.cz hodnocení",
+    "spokojení zákazníci",
   ],
   openGraph: {
-    title: "Portfolio realizovaných projektů | ART DUM",
-    description: "Prohlédněte si naše dokončené stavební projekty v Třebíči a okolí.",
-    url: "https://artdum.cz/portfolio",
-    siteName: "Oleh Kulish, OSVČ - ART DUM",
-    locale: "cs_CZ",
-    type: "website",
+    title: "Hodnocení a recenze | ART DUM",
+    description: "5★ průměrné hodnocení od našich spokojených klientů z Třebíče a okolí.",
+    url: "https://artdum.cz/hodnoceni",
     images: [
       {
         url: "https://artdum.cz/og-image-main.jpg",
         width: 1200,
         height: 630,
-        alt: "Portfolio realizovaných projektů - Oleh Kulish, OSVČ - ART DUM | Třebíč",
+        alt: "ART DUM - Hodnocení a recenze",
       },
     ],
+    siteName: "ART DUM",
+    locale: "cs_CZ",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Portfolio realizovaných projektů | ART DUM",
-    description: "Prohlédněte si naše dokončené stavební projekty v Třebíči a okolí.",
+    title: "Hodnocení a recenze | ART DUM",
+    description: "5★ průměrné hodnocení od našich spokojených klientů z Třebíče a okolí.",
     images: ["https://artdum.cz/og-image-main.jpg"],
   },
   alternates: {
-    canonical: "https://artdum.cz/portfolio",
+    canonical: "https://artdum.cz/hodnoceni",
   },
 }
 
-async function getPortfolioProjects(): Promise<PortfolioProject[]> {
-  try {
-    const projects = await sanityFetch<PortfolioProject[]>({
-      query: PORTFOLIO_QUERY,
-      tags: ["portfolio"],
-    })
-    return projects || []
-  } catch (error) {
-    console.error("Error fetching portfolio:", error)
-    return []
-  }
+interface Review {
+  _id: string
+  customerName: string
+  rating: number
+  reviewText: string
+  location?: string
+  date: string
+  source?: string
+  isPublished?: boolean
 }
 
-async function getFeaturedPortfolio() {
-  try {
-    const featured = await sanityFetch<any[]>({
-      query: FEATURED_PORTFOLIO_QUERY,
-      tags: ["portfolio"],
-    })
-    return featured || []
-  } catch (error) {
-    console.error("Error fetching featured portfolio:", error)
-    return []
-  }
-}
+export default async function HodnoceniPage() {
+  const reviews = await sanityFetch<Review[]>({ query: REVIEWS_QUERY })
 
-const categoryLabels: Record<string, string> = {
-  "rekonstrukce-bytu": "Rekonstrukce bytu",
-  "rekonstrukce-domu": "Rekonstrukce domu",
-  koupelna: "Koupelna",
-  kuchyn: "Kuchyň",
-  novostavba: "Novostavba",
-  zatepleni: "Zateplení",
-  strecha: "Střecha",
-  ostatni: "Ostatní",
-}
+  const publishedReviews = reviews.filter((review) => review.isPublished !== false)
+  const firmyCzReviews = publishedReviews.filter((review) => review.source === "firmy-cz")
 
-export default async function PortfolioPage() {
-  const projects = await getPortfolioProjects()
-  const featuredPortfolio = await getFeaturedPortfolio()
-  const heroBackgroundImage = featuredPortfolio?.[5]?.mainImage ? urlForHeroImage(featuredPortfolio[5].mainImage) : null
-
-  const uniqueCategories = Array.from(new Set(projects.map((p) => p.category).filter(Boolean)))
-  const categories = ["Všechny projekty", ...uniqueCategories.map((cat) => categoryLabels[cat] || cat)]
+  const averageRating =
+    publishedReviews.length > 0
+      ? publishedReviews.reduce((acc, review) => acc + review.rating, 0) / publishedReviews.length
+      : 5
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "ImageGallery",
-    name: "Portfolio stavebních prací ART DUM",
-    description: "Realizované stavební projekty v Třebíči a okolí",
-    provider: {
-      "@type": "GeneralContractor",
-      name: "ART DUM",
-      url: "https://artdum.cz",
+    "@type": "LocalBusiness",
+    name: "ART DUM",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: averageRating.toFixed(1),
+      reviewCount: publishedReviews.length || 1,
+      bestRating: "5",
+      worstRating: "1",
     },
+    ...(publishedReviews.length > 0 && {
+      review: publishedReviews.slice(0, 10).map((review) => ({
+        "@type": "Review",
+        author: {
+          "@type": "Person",
+          name: review.customerName,
+        },
+        datePublished: review.date,
+        reviewBody: review.reviewText,
+        reviewRating: {
+          "@type": "Rating",
+          ratingValue: review.rating,
+          bestRating: "5",
+          worstRating: "1",
+        },
+      })),
+    }),
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-16 md:py-24 overflow-hidden">
-          {heroBackgroundImage && (
-            <div className="absolute inset-0">
-              <Image
-                src={heroBackgroundImage || "/placeholder.svg"}
-                alt="Portfolio ART DUM"
-                fill
-                className="object-cover"
-                priority
-                quality={75}
-                sizes="100vw"
-              />
-              {/* Multi-layer gradient overlay for text readability */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#0b192f]/95 via-[#0f2342]/90 to-[#0b192f]/95" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0b192f]/90 via-transparent to-[#0b192f]/50" />
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 bg-gold/10 text-gold px-4 py-2 rounded-full text-sm font-semibold mb-6 animate-pulse">
+              <Star className="w-4 h-4 fill-gold" />
+              <span>100% spokojených zákazníků</span>
             </div>
-          )}
-          <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 bg-gold/10 text-gold px-4 py-2 rounded-full text-sm font-semibold mb-6">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
+              Co říkají naši <span className="text-gold">zákazníci</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-white/80 mb-8 leading-relaxed">
+              Přečtěte si, jak hodnotí naše služby klienti z celého kraje Vysočina
+            </p>
+
+            <div className="flex items-center justify-center gap-6 text-xl flex-wrap">
+              <div className="flex gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`w-8 h-8 transition-all duration-300 hover:scale-110 ${
+                      i < Math.round(averageRating) ? "fill-gold text-gold animate-pulse" : "text-white/30"
+                    }`}
                   />
-                </svg>
-                <span>23 let zkušeností</span>
+                ))}
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">Naše realizace</h1>
-              <p className="text-xl md:text-2xl text-white/80 leading-relaxed">
-                Jsme hrdí na každý dokončený projekt. Každá stavba je pro nás výzvou a reference našeho řemeslného umu.
+              <p className="text-3xl font-black text-gold">{averageRating.toFixed(1)}</p>
+              <p className="text-white/70">
+                ({publishedReviews.length > 0 ? publishedReviews.length : "Nová"} hodnocení)
               </p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Filter Section */}
-        <section className="py-8 border-b bg-muted">
+      <section className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-6 mb-12">
+              {/* Verifikace Firmy.cz */}
+              <div className="bg-gradient-to-br from-gold/10 to-gold/5 border-2 border-gold/20 rounded-2xl p-6 hover:scale-105 transition-transform duration-300 shadow-xl">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="bg-gold/20 p-3 rounded-xl">
+                    <Shield className="w-6 h-6 text-gold" />
+                  </div>
+                  <h3 className="text-xl font-bold">Ověřená firma</h3>
+                </div>
+                <p className="text-muted-foreground mb-4">Jsme oficiálně ověřeni na platformě Firmy.cz</p>
+                <div className="flex items-center gap-2 text-sm text-gold font-semibold">
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>Firmy.cz Verified</span>
+                </div>
+              </div>
+
+              {/* Průměrné hodnocení */}
+              <div className="bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/20 rounded-2xl p-6 hover:scale-105 transition-transform duration-300 shadow-xl">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="bg-primary/20 p-3 rounded-xl">
+                    <Award className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-bold">Výborné hodnocení</h3>
+                </div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-4xl font-black text-primary">{averageRating.toFixed(1)}</span>
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-5 h-5 ${
+                          i < Math.round(averageRating) ? "fill-primary text-primary" : "text-muted-foreground/30"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  z {publishedReviews.length > 0 ? publishedReviews.length : "prvních"} recenzí
+                </p>
+              </div>
+
+              {/* Spokojenost zákazníků */}
+              <div className="bg-gradient-to-br from-green-500/10 to-green-500/5 border-2 border-green-500/20 rounded-2xl p-6 hover:scale-105 transition-transform duration-300 shadow-xl">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="bg-green-500/20 p-3 rounded-xl">
+                    <TrendingUp className="w-6 h-6 text-green-600 dark:text-green-400" />
+                  </div>
+                  <h3 className="text-xl font-bold">100% spokojenost</h3>
+                </div>
+                <p className="text-muted-foreground mb-2">Všichni naši klienti jsou spokojeni s našimi službami</p>
+                <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-semibold">
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>100% Doporučení</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {publishedReviews.length > 0 && (
+        <section className="py-16 bg-background">
           <div className="container mx-auto px-4">
-            <div className="flex flex-wrap gap-3 justify-center">
-              {categories.map((category) => (
-                <Button
-                  key={category}
-                  variant={category === "Všechny projekty" ? "default" : "outline"}
-                  className={
-                    category === "Všechny projekty"
-                      ? "bg-gold text-primary-dark hover:bg-gold/90 shadow-md shadow-gold/20"
-                      : "hover:border-gold/50"
-                  }
-                >
-                  {category}
-                </Button>
-              ))}
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  Co říkají naši <span className="text-primary">zákazníci</span>
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Přečtěte si skutečné recenze od klientů, kteří si vybrali ART DUM pro své stavební projekty
+                </p>
+              </div>
+              <ReviewsCarousel reviews={publishedReviews} />
             </div>
           </div>
         </section>
+      )}
 
-        {/* Projects Grid */}
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-4">
-            {projects.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-xl text-muted-foreground mb-4">Projekty budou brzy přidány do portfolia.</p>
-                <Link href="/kontakt">
-                  <Button className="bg-gold text-primary-dark hover:bg-gold/90 shadow-lg shadow-gold/20">
-                    Kontaktujte nás
-                  </Button>
-                </Link>
+      <section className="py-16 bg-muted/50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-card border-2 border-border rounded-2xl p-8 shadow-2xl hover:shadow-3xl transition-shadow duration-300">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="bg-primary/10 p-3 rounded-xl">
+                  <ExternalLink className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold">Naše hodnocení na Firmy.cz</h2>
+                  <p className="text-sm text-muted-foreground">Nezávislá platforma s ověřenými recenzemi</p>
+                </div>
               </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {projects.map((project) => {
-                  const imageUrl = project.mainImage?.asset?.url || "/placeholder.svg?height=600&width=800"
 
-                  return (
-                    <Link key={project._id} href={`/portfolio/${project.slug?.current}`}>
-                      <Card className="overflow-hidden hover:shadow-2xl hover:shadow-gold/10 transition-all duration-300 group cursor-pointer border-2 border-gray-100 hover:border-gold/30">
-                        <div className="relative h-64 overflow-hidden">
-                          <Image
-                            src={imageUrl || "/placeholder.svg"}
-                            alt={project.mainImage?.alt || project.title}
-                            fill
-                            className="object-cover group-hover:scale-110 transition-transform duration-500"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                          <div className="absolute top-4 right-4">
-                            <span className="bg-gold text-primary-dark text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
-                              {categoryLabels[project.category] || project.category}
-                            </span>
-                          </div>
-                        </div>
-                        <CardContent className="p-6">
-                          <h3 className="text-xl font-bold mb-2 group-hover:text-gold transition-colors">
-                            {project.title}
-                          </h3>
-                          <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{project.shortDescription}</p>
-                          <div className="flex items-center justify-between text-sm">
-                            {project.location && (
-                              <span className="flex items-center text-muted-foreground">
-                                <svg
-                                  className="w-4 h-4 mr-1"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth={2}
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                                  />
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                                  />
-                                </svg>
-                                {project.location}
-                              </span>
-                            )}
-                            {project.year && <span className="font-semibold text-gold">{project.year}</span>}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  )
-                })}
+              <div className="space-y-6">
+                {/* Hodnotící tlačítko Firmy.cz */}
+                <div className="flex justify-center py-4">
+                  <a
+                    href="https://www.firmy.cz/detail/13918492-oleh-kulish-osvc-art-dum-trebic.html#pridat-hodnoceni"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="inline-block transition-transform hover:scale-110 duration-300"
+                  >
+                    <img
+                      width="249"
+                      height="60"
+                      src="https://www.firmy.cz/img/widgets/firmy-ohodnotte-nas-tmave.svg"
+                      alt='Oleh Kulish, OSVČ - "ART DUM" na Firmy.cz'
+                      className="h-auto dark:hidden"
+                    />
+                    <img
+                      width="249"
+                      height="60"
+                      src="https://www.firmy.cz/img/widgets/firmy-ohodnotte-nas-svetle.svg"
+                      alt='Oleh Kulish, OSVČ - "ART DUM" na Firmy.cz'
+                      className="h-auto hidden dark:block"
+                    />
+                  </a>
+                </div>
+
+                {/* Iframe s hodnoceními Firmy.cz */}
+                <div className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden border-2 border-border shadow-lg">
+                  {firmyCzReviews.length > 0 && (
+                    <div className="bg-green-50 dark:bg-green-900/20 border-b-2 border-green-200 dark:border-green-800 p-4">
+                      <div className="flex items-center gap-2 text-green-700 dark:text-green-400">
+                        <CheckCircle2 className="w-5 h-5" />
+                        <p className="font-medium">
+                          Zobrazujeme {firmyCzReviews.length}{" "}
+                          {firmyCzReviews.length === 1 ? "recenzi" : firmyCzReviews.length < 5 ? "recenze" : "recenzí"}{" "}
+                          z Firmy.cz také výše v sekci recenzí
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                  <div className="relative w-full" style={{ paddingBottom: "65.625%" }}>
+                    <iframe
+                      src="https://www.firmy.cz/detail/13918492-oleh-kulish-osvc-art-dum-trebic.html?widget&limit=3"
+                      style={{ border: "none" }}
+                      frameBorder="0"
+                      className="absolute top-0 left-0 w-full h-full"
+                      title="Hodnocení z Firmy.cz"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+
+                {/* Odkaz na kompletní profil */}
+                <div className="text-center">
+                  <a
+                    href="https://www.firmy.cz/detail/13918492-oleh-kulish-osvc-art-dum-trebic.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-primary hover:underline font-medium transition-all hover:gap-3"
+                  >
+                    Zobrazit náš kompletní profil na Firmy.cz
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
               </div>
-            )}
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* CTA Section */}
-        <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-16 overflow-hidden">
-          <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
-          <div className="container mx-auto px-4 text-center relative z-10">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6">Chcete podobný projekt?</h2>
-            <p className="text-xl mb-10 text-white/80 max-w-2xl mx-auto leading-relaxed">
-              Kontaktujte nás a společně naplánujeme váš stavební projekt
+      {/* CTA Section */}
+      <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 leading-tight">
+              Staňte se naším dalším spokojeným zákazníkem
+            </h2>
+            <p className="text-xl text-white/80 mb-10 leading-relaxed">
+              Přidejte se k desítkám spokojených klientů, kteří nám důvěřují se svými stavebními projekty
             </p>
-            <Link href="/kontakt">
-              <Button
-                size="lg"
-                className="group bg-gold text-primary-dark hover:bg-gold/90 font-bold text-lg px-8 py-6 h-auto shadow-2xl shadow-gold/20 hover:scale-105 transition-all"
-              >
-                <span>Nezávazná poptávka</span>
-                <svg
-                  className="w-5 h-5 ml-2 group-hover:rotate-12 transition-transform"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2.5}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/kontakt">
+                <Button
+                  size="lg"
+                  className="group w-full sm:w-auto bg-gold text-primary-dark hover:bg-gold/90 font-bold text-lg px-8 py-6 h-auto shadow-2xl shadow-gold/20 hover:scale-105 transition-all"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-                  />
-                </svg>
-              </Button>
-            </Link>
+                  <Send className="mr-2 h-5 w-5" />
+                  <span>Nezávazná poptávka</span>
+                </Button>
+              </Link>
+              <Link href="/portfolio">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full sm:w-auto border-2 border-white/20 text-white hover:bg-white hover:text-navy bg-white/5 backdrop-blur-sm font-semibold text-lg px-8 py-6 h-auto hover:scale-105 transition-all"
+                >
+                  <Eye className="mr-2 h-5 w-5" />
+                  <span>Prohlédnout portfolio</span>
+                </Button>
+              </Link>
+            </div>
           </div>
-        </section>
-      </main>
-    </div>
+        </div>
+      </section>
+    </>
   )
 }
