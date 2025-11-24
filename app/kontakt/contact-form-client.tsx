@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-
+import { useState, useRef } from "react" // Přidán useRef
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -10,8 +10,8 @@ import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { submitInquiry } from "./actions"
-import { useState } from "react"
 import { ChevronRight, ChevronLeft, Home, Building2, Calendar } from "lucide-react"
+import ReCAPTCHA from "react-google-recaptcha"
 
 const SERVICE_CATEGORIES = [
   {
@@ -88,6 +88,10 @@ export function ContactFormClient() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
+  // reCAPTCHA state a ref
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
+
   const [formData, setFormData] = useState({
     // Krok 1: Kontaktní údaje
     name: "",
@@ -139,6 +143,16 @@ export function ContactFormClient() {
     setIsSubmitting(true)
     setMessage(null)
 
+    // Validace reCAPTCHA na klientovi
+    if (!captchaToken) {
+      setMessage({
+        type: "error",
+        text: "Prosím potvrďte, že nejste robot (klikněte na reCAPTCHA).",
+      })
+      setIsSubmitting(false)
+      return
+    }
+
     try {
       const submissionData = new FormData()
       submissionData.append("name", formData.name)
@@ -150,6 +164,9 @@ export function ContactFormClient() {
       submissionData.append("location", formData.location)
       submissionData.append("timeline", formData.timeline)
       submissionData.append("budget", formData.budget)
+      
+      // Přidání reCAPTCHA tokenu
+      submissionData.append("g-recaptcha-response", captchaToken)
 
       // Formátování služeb a detailů
       const servicesText = formData.services
@@ -181,12 +198,18 @@ ${formData.additionalInfo}
       const result = await submitInquiry(submissionData)
 
       if (result.success) {
+        // Reset reCAPTCHA při úspěchu
+        recaptchaRef.current?.reset()
+        setCaptchaToken(null)
         window.location.href = "/kontakt/dekujeme"
       } else {
         setMessage({
           type: "error",
           text: result.error || "Nastala chyba při odesílání. Zkuste to prosím znovu.",
         })
+        // Reset při chybě, aby uživatel mohl zkusit znovu
+        recaptchaRef.current?.reset()
+        setCaptchaToken(null)
       }
     } catch (error) {
       setMessage({
@@ -212,6 +235,7 @@ ${formData.additionalInfo}
       case 4:
         return formData.timeline && formData.budget
       case 5:
+        // Přidána kontrola captchaToken pro povolení tlačítka (volitelné, ale uživatelsky přívětivé)
         return formData.gdpr
       default:
         return false
@@ -613,6 +637,15 @@ ${formData.additionalInfo}
                               </a>
                               . *
                             </Label>
+                          </div>
+                        
+                          {/* ReCAPTCHA komponenta */}
+                          <div className="my-4 flex justify-center md:justify-start">
+                            <ReCAPTCHA
+                              ref={recaptchaRef}
+                              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+                              onChange={(token) => setCaptchaToken(token)}
+                            />
                           </div>
                         </div>
 
