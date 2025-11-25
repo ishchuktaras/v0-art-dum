@@ -29,7 +29,7 @@ export async function GET(request: Request) {
           await supabase.from('profiles').insert({
             id: user.id,
             email: user.email,
-            role: 'user', // Default role, admin can change later
+            role: 'user',
             full_name: user.user_metadata?.full_name || null
           })
         }

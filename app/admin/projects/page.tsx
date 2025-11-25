@@ -63,7 +63,7 @@ export default async function ProjectsPage() {
                 <p className="text-sm text-muted-foreground">Správa rekonstrukčních projektů</p>
               </div>
             </div>
-            <Button asChild className="bg-gold text-primary hover:bg-gold/90">
+            <Button asChild className="bg-gold text-navy hover:bg-gold/90">
               <Link href="/admin/projects/new">
                 <Plus className="h-4 w-4 mr-2" />
                 Nový projekt

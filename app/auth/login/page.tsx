@@ -67,7 +67,7 @@ function LoginForm() {
     try {
       const supabase = createClient()
 
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -103,8 +103,8 @@ function LoginForm() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl font-black">{isSignUp ? "Registrace" : "Přihlášení"}</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-2xl font-black text-foreground">{isSignUp ? "Registrace" : "Přihlášení"}</CardTitle>
+            <CardDescription className="text-muted-foreground">
               {isSignUp
                 ? "Vytvořte si účet pro přístup do administrace"
                 : "Zadejte email a heslo pro přístup do administrace"}
@@ -148,22 +148,15 @@ function LoginForm() {
 
                 <Button
                   type="submit"
-                  className="w-full font-bold text-base"
-                  disabled={isLoading}
-                  style={{
-                    backgroundColor: "var(--accent)",
-                    color: "var(--primary)",
-                  }}
+                  className="w-full font-bold text-base bg-gold text-navy hover:bg-gold/90"
                 >
-                  <span className="block">
-                    {isLoading
-                      ? isSignUp
-                        ? "Registruji..."
-                        : "Přihlašuji..."
-                      : isSignUp
-                        ? "Registrovat se"
-                        : "Přihlásit se"}
-                  </span>
+                  {isLoading
+                    ? isSignUp
+                      ? "Registruji..."
+                      : "Přihlašuji..."
+                    : isSignUp
+                      ? "Registrovat se"
+                      : "Přihlásit se"}
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">
@@ -174,13 +167,13 @@ function LoginForm() {
                     setError(null)
                     setSuccess(null)
                   }}
-                  className="underline underline-offset-4 hover:text-primary"
+                  className="text-muted-foreground hover:text-foreground underline underline-offset-4"
                 >
                   {isSignUp ? "Již máte účet? Přihlaste se" : "Nemáte účet? Zaregistrujte se"}
                 </button>
               </div>
               <div className="mt-2 text-center text-sm">
-                <Link href="/" className="underline underline-offset-4">
+                <Link href="/" className="text-muted-foreground hover:text-foreground underline underline-offset-4">
                   Zpět na hlavní stránku
                 </Link>
               </div>
@@ -195,8 +188,7 @@ function LoginForm() {
 export default function LoginPage() {
   return (
     <div
-      className="flex min-h-screen w-full items-center justify-center p-6"
-      style={{ backgroundColor: "var(--primary)" }}
+      className="flex min-h-screen w-full items-center justify-center p-6 bg-primary"
     >
       <Suspense fallback={<div className="w-full max-w-sm text-center text-white">Načítání...</div>}>
         <LoginForm />

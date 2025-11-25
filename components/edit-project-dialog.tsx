@@ -87,7 +87,7 @@ export function EditProjectDialog({ project }: EditProjectDialogProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm" className="bg-gold text-primary hover:bg-gold/90">
+        <Button size="sm" className="bg-gold text-navy hover:bg-gold/90">
           <Edit className="h-4 w-4 mr-2" />
           Upravit projekt
         </Button>

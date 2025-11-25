@@ -6,9 +6,11 @@ import { Badge } from "@/components/ui/badge"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
-import { ArrowLeft, Mail, Phone, Calendar, User, MessageSquare, FileText } from "lucide-react"
+import { ArrowLeft, Mail, Phone, Calendar, User, MessageSquare, FileText, Settings, Archive, Trash2 } from "lucide-react"
 import { CreateProjectDialog } from "@/components/create-project-dialog"
 import { GenerateOfferDialog } from "@/components/generate-offer-dialog"
+import { EditInquiryDialog } from "@/components/edit-inquiry-dialog"
+import { deleteInquiry, archiveInquiry } from "./actions"
 
 interface InquiryDetailPageProps {
   params: Promise<{ id: string }>
@@ -219,28 +221,6 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
                     </div>
                   </div>
                 )}
-
-                {inquiry.source && (
-                  <div>
-                    <Label>Zdroj</Label>
-                    <p className="text-sm mt-1 capitalize">{inquiry.source}</p>
-                  </div>
-                )}
-
-                {inquiry.updated_at && inquiry.updated_at !== inquiry.created_at && (
-                  <div>
-                    <Label>Poslední aktualizace</Label>
-                    <p className="text-sm mt-1">
-                      {new Date(inquiry.updated_at).toLocaleDateString("cs-CZ", {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </p>
-                  </div>
-                )}
               </CardContent>
             </Card>
 
@@ -270,12 +250,38 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
                   clientEmail={inquiry.email}
                   clientPhone={inquiry.phone}
                 />
-                {/* </CHANGE> */}
                 <CreateProjectDialog
                   inquiryId={inquiry.id}
                   clientName={inquiry.name}
                   inquiryMessage={inquiry.message}
                 />
+              </CardContent>
+            </Card>
+
+            {/* Record Management (NOVÉ) */}
+            <Card className="border-t-4 border-t-muted">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                    <Settings className="h-5 w-5" />
+                    Správa záznamu
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <EditInquiryDialog inquiry={inquiry} />
+                
+                <form action={archiveInquiry.bind(null, inquiry.id)}>
+                    <Button variant="outline" className="w-full justify-start text-orange-600 hover:text-orange-700 hover:bg-orange-50">
+                        <Archive className="h-4 w-4 mr-2" />
+                        Archivovat poptávku
+                    </Button>
+                </form>
+
+                <form action={deleteInquiry.bind(null, inquiry.id)}>
+                    <Button variant="outline" className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50">
+                        <Trash2 className="h-4 w-4 mr-2" />
+                        Smazat poptávku
+                    </Button>
+                </form>
               </CardContent>
             </Card>
           </div>
