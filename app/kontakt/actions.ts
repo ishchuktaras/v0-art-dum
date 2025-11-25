@@ -1,12 +1,11 @@
 "use server"
 
-import { createClient } from "@/lib/supabase/server"
+import { createClient } from "@supabase/supabase-js"
 import { revalidatePath } from "next/cache"
 
 export async function submitInquiry(formData: FormData) {
-
   try {
-    // 1. Ověření reCAPTCHA (Přidáno)
+    // 1. Ověření reCAPTCHA (Zůstává stejné)
     const token = formData.get("g-recaptcha-response") as string
     const secretKey = process.env.RECAPTCHA_SECRET_KEY
 
@@ -14,7 +13,6 @@ export async function submitInquiry(formData: FormData) {
       return { success: false, error: "Chybí ověření reCAPTCHA. Prosím potvrďte, že nejste robot." }
     }
 
-    // Ověření u Google API
     const verifyRes = await fetch("https://www.google.com/recaptcha/api/siteverify", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -23,12 +21,20 @@ export async function submitInquiry(formData: FormData) {
     const verifyJson = await verifyRes.json()
 
     if (!verifyJson.success) {
-      console.error("ReCAPTCHA verification failed:", verifyJson)
       return { success: false, error: "Ověření reCAPTCHA selhalo. Zkuste to prosím znovu." }
     }
 
-    // 2. Pokud je captcha OK, pokračujeme s uložením do DB
-    const supabase = await createClient()
+    // 2. VYTVOŘENÍ ADMIN KLIENTA (Service Role) - Toto je ta změna
+    // Tento klient obchází RLS pravidla (BYPASS RLS)
+    const supabaseAdmin = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!, 
+      {
+        auth: {
+          persistSession: false, // Neukládáme session, je to jen jednorázový zápis
+        }
+      }
+    )
 
     const inquiry = {
       name: formData.get("name") as string,
@@ -41,17 +47,18 @@ export async function submitInquiry(formData: FormData) {
       source: "website",
     }
 
-
-    const { data, error } = await supabase.from("inquiries").insert(inquiry).select()
+    // Vložení pomocí admin klienta
+    const { data, error } = await supabaseAdmin.from("inquiries").insert(inquiry).select()
 
     if (error) {
-      return { success: false, error: error.message }
+      console.error("Supabase Error:", error) // Pro lepší debugování
+      return { success: false, error: "Chyba databáze: " + error.message }
     }
-
 
     revalidatePath("/admin/inquiries")
     return { success: true, data }
   } catch (error) {
+    console.error("Server Error:", error)
     return { success: false, error: "Neočekávaná chyba při odesílání formuláře" }
   }
 }
