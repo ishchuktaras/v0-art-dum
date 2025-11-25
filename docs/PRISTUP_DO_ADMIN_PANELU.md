@@ -29,7 +29,7 @@
 
 2. Otevřete v prohlížeči: http://localhost:3000/auth/login
 
-3. Zaregistrujte se s vaším emailem (např. `info@artdum.cz`)
+3. Zaregistrujte se s vaším emailem (např. `firma@artdum.cz`)
 
 ### B) Nastavit roli "owner" v Supabase
 
@@ -39,17 +39,17 @@
 
 \`\`\`sql
 -- Najděte ID vašeho uživatele
-SELECT id, email FROM auth.users WHERE email = 'info@artdum.cz';
+SELECT id, email FROM auth.users WHERE email = 'firma@artdum.cz';
 
 -- Nastavte roli na 'owner'
 UPDATE profiles 
 SET role = 'owner', full_name = 'ART DUM Admin'
-WHERE email = 'info@artdum.cz';
+WHERE email = 'firma@artdum.cz';
 \`\`\`
 
 4. Ověřte změnu:
 \`\`\`sql
-SELECT * FROM profiles WHERE email = 'info@artdum.cz';
+SELECT * FROM profiles WHERE email = 'firma@artdum.cz';
 \`\`\`
 
 Měli byste vidět `role: owner`

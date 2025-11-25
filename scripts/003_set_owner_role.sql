@@ -1,21 +1,19 @@
--- Set owner role for info@webnamiru.site
--- Run this script in Supabase SQL Editor
+-- Skript pro nastavení ADMIN/OWNER práv
+-- Spustit v Supabase SQL Editoru
 
--- First, check if profile exists and create it if not
+-- 1. Nastavit práva pro Vývojáře (Vás)
 INSERT INTO profiles (id, email, full_name, role)
-SELECT 
-  id,
-  email,
-  COALESCE(raw_user_meta_data->>'full_name', email) as full_name,
-  'owner' as role
+SELECT id, email, COALESCE(raw_user_meta_data->>'full_name', email), 'owner'
 FROM auth.users
 WHERE email = 'info@webnamiru.site'
-ON CONFLICT (id) 
-DO UPDATE SET 
-  role = 'owner',
-  updated_at = now();
+ON CONFLICT (id) DO UPDATE SET role = 'owner';
 
--- Verify the update
-SELECT id, email, full_name, role, created_at 
-FROM profiles 
-WHERE email = 'info@webnamiru.site';
+-- 2. Nastavit práva pro Majitele (Klienta)
+INSERT INTO profiles (id, email, full_name, role)
+SELECT id, email, COALESCE(raw_user_meta_data->>'full_name', email), 'owner'
+FROM auth.users
+WHERE email = 'firma@artdum.cz'
+ON CONFLICT (id) DO UPDATE SET role = 'owner';
+
+-- Kontrola
+SELECT email, role FROM profiles WHERE role = 'owner';

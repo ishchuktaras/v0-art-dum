@@ -34,10 +34,10 @@ export async function generateCommercialOffer(data: CommercialOfferData): Promis
     KOMERČNÍ NABÍDKA
     
     Společnost: Oleh Kulish, OSVČ - ART DUM
-    IČO: 23874694
-    Adresa: Rantířovská 123/36, 586 01 Jihlava
-    Email: info@webnamiru.site
-    Telefon: +420 777 596 216
+    IČO: 22401261
+    Adresa: Karlovo nám 44/33, 674 01 Třebíč
+    Email: firma@artdum.cz
+    Telefon: +420 774 335 592
     
     ---
     
@@ -86,10 +86,10 @@ export async function generateInvoiceDocument(data: ProjectDocumentData): Promis
     
     Dodavatel:
     Oleh Kulish, OSVČ - ART DUM
-    IČO: 23874694
-    Adresa: Rantířovská 123/36, 586 01 Jihlava
-    Email: info@webnamiru.site
-    Telefon: +420 777 596 216
+    IČO: 22401261
+    Adresa: Karlovo nám 44/33, 674 01 Třebíč
+    Email: firma@artdum.cz
+    Telefon: +420 774 335 592
     
     ---
     
@@ -195,11 +195,10 @@ export async function generateLegalDocument(data: ProjectDocumentData): Promise<
     
     Zhotovitel:
     Oleh Kulish, OSVČ - ART DUM
-    IČO: 23874694
-    Sídlo: Rantířovská 123/36, 586 01 Jihlava
-    Email: info@webnamiru.site
-    Telefon: +420 777 596 216
-    
+    IČO: 22401261
+    Sídlo: Karlovo nám 44/33, 674 01 Třebíč
+    Email: firma@artdum.cz
+    Telefon: +420 774 335 592
     ---
     
     II. PŘEDMĚT SMLOUVY

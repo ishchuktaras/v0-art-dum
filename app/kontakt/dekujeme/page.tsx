@@ -3,6 +3,7 @@ import Link from "next/link"
 import { CheckCircle2, Home, Mail, Phone, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { SITE_CONFIG } from "@/lib/constants" 
 
 export const metadata: Metadata = {
   title: "Děkujeme za poptávku | ART DUM",
@@ -90,7 +91,7 @@ export default function ThankYouPage() {
                 </Card>
               </div>
 
-              {/* Kontaktní informace */}
+              {/* Kontaktní informace - OPRAVENO */}
               <Card className="border-2 border-gold/30 bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-950/20 dark:to-amber-900/20">
                 <CardContent className="p-8">
                   <h3 className="text-2xl font-bold text-center mb-6 text-navy dark:text-gold">
@@ -98,7 +99,7 @@ export default function ThankYouPage() {
                   </h3>
                   <div className="flex flex-col md:flex-row items-center justify-center gap-6">
                     <a
-                      href="tel:+420777596216"
+                      href="tel:+420774335592"
                       className="flex items-center gap-3 text-navy dark:text-white hover:text-gold dark:hover:text-gold transition-colors"
                     >
                       <div className="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center">
@@ -106,14 +107,14 @@ export default function ThankYouPage() {
                       </div>
                       <div>
                         <div className="text-sm text-muted-foreground">Telefon</div>
-                        <div className="font-bold text-lg">+420 777 596 216</div>
+                        <div className="font-bold text-lg">+420 774 335 592</div>
                       </div>
                     </a>
 
                     <div className="hidden md:block w-px h-12 bg-gold/30" />
 
                     <a
-                      href="mailto:info@webnamiru.site"
+                      href="mailto:firma@artdum.cz"
                       className="flex items-center gap-3 text-navy dark:text-white hover:text-gold dark:hover:text-gold transition-colors"
                     >
                       <div className="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center">
@@ -121,7 +122,7 @@ export default function ThankYouPage() {
                       </div>
                       <div>
                         <div className="text-sm text-muted-foreground">Email</div>
-                        <div className="font-bold text-lg">info@webnamiru.site</div>
+                        <div className="font-bold text-lg">firma@artdum.cz</div>
                       </div>
                     </a>
                   </div>

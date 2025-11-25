@@ -573,8 +573,8 @@ Připravte si:
 ## 📞 Potřebujete pomoc?
 
 V případě problémů nebo dotazů:
-- Email: info@webnamiru.site
-- Telefon: +420 777 596 216
+- Email: firma@artdum.cz
+- Telefon: +420 774 335 592
 
 ---
 
