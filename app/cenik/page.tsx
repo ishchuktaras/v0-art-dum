@@ -57,5 +57,5 @@ export default async function PricingPage() {
     },
   }
 
-  return <PricingPageClient categories={categories} heroBackgroundImage={heroBackgroundImage} jsonLd={jsonLd} />
+  return <PricingPageClient categories={categories} heroBackgroundImage={heroBackgroundImage} />
 }

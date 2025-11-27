@@ -62,7 +62,7 @@ export default async function NewProjectPage() {
             <CardDescription>Vyplňte základní informace o novém projektu</CardDescription>
           </CardHeader>
           <CardContent>
-            <form action={createProject} className="space-y-6">
+            <form action={async (formData) => { await createProject(formData) }} className="space-y-6">
               {/* Link to inquiry */}
               {inquiries && inquiries.length > 0 && (
                 <div className="space-y-2">

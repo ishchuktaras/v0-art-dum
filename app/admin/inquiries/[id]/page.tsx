@@ -6,11 +6,22 @@ import { Badge } from "@/components/ui/badge"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
-import { ArrowLeft, Mail, Phone, Calendar, User, MessageSquare, FileText, Settings, Archive, Trash2 } from "lucide-react"
+import { 
+  ArrowLeft, 
+  Mail, 
+  Phone, 
+  Calendar, 
+  User, 
+  MessageSquare, 
+  FileText, 
+  Settings 
+  // Archive - už nepotřebujeme importovat ikonu zde, je v komponentě
+} from "lucide-react"
 import { CreateProjectDialog } from "@/components/create-project-dialog"
 import { GenerateOfferDialog } from "@/components/generate-offer-dialog"
 import { EditInquiryDialog } from "@/components/edit-inquiry-dialog"
-import { deleteInquiry, archiveInquiry } from "./actions"
+import { DeleteInquiryButton } from "@/components/delete-inquiry-button"
+import { ArchiveInquiryButton } from "@/components/archive-inquiry-button" // NOVÉ: Import tlačítka
 
 interface InquiryDetailPageProps {
   params: Promise<{ id: string }>
@@ -39,11 +50,13 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
     redirect("/404")
   }
 
+  // Barvy statusů (přidal jsem 'archived' pro jistotu)
   const statusColors = {
     new: "bg-gold text-primary",
     in_progress: "bg-blue-100 text-blue-700",
     completed: "bg-green-100 text-green-700",
     rejected: "bg-red-100 text-red-700",
+    archived: "bg-gray-100 text-gray-700", // Barva pro archivováno
   }
 
   const statusLabels = {
@@ -51,6 +64,7 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
     in_progress: "Zpracovává se",
     completed: "Dokončeno",
     rejected: "Odmítnuto",
+    archived: "Archivováno",
   }
 
   const priorityColors = {
@@ -90,7 +104,7 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
         <div className="grid gap-6 lg:grid-cols-3">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Contact Information */}
+            
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -157,7 +171,6 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
               </CardContent>
             </Card>
 
-            {/* Message */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -170,7 +183,6 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
               </CardContent>
             </Card>
 
-            {/* Notes */}
             <Card>
               <CardHeader>
                 <CardTitle>Interní poznámky</CardTitle>
@@ -193,7 +205,7 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
 
           {/* Sidebar */}
           <div className="space-y-6">
-            {/* Status & Priority */}
+            
             <Card>
               <CardHeader>
                 <CardTitle>Stav a priorita</CardTitle>
@@ -202,8 +214,8 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
                 <div>
                   <Label htmlFor="status">Stav</Label>
                   <div className="mt-2">
-                    <Badge className={statusColors[inquiry.status as keyof typeof statusColors]}>
-                      {statusLabels[inquiry.status as keyof typeof statusLabels]}
+                    <Badge className={statusColors[inquiry.status as keyof typeof statusColors] || "bg-gray-100"}>
+                      {statusLabels[inquiry.status as keyof typeof statusLabels] || inquiry.status}
                     </Badge>
                   </div>
                 </div>
@@ -224,7 +236,6 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
               </CardContent>
             </Card>
 
-            {/* Quick Actions */}
             <Card>
               <CardHeader>
                 <CardTitle>Rychlé akce</CardTitle>
@@ -258,7 +269,6 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
               </CardContent>
             </Card>
 
-            {/* Record Management (NOVÉ) */}
             <Card className="border-t-4 border-t-muted">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -269,19 +279,12 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
               <CardContent className="space-y-2">
                 <EditInquiryDialog inquiry={inquiry} />
                 
-                <form action={archiveInquiry.bind(null, inquiry.id)}>
-                    <Button variant="outline" className="w-full justify-start text-orange-600 hover:text-orange-700 hover:bg-orange-50">
-                        <Archive className="h-4 w-4 mr-2" />
-                        Archivovat poptávku
-                    </Button>
-                </form>
+                {/* NOVÉ: Komponenta pro archivaci */}
+                <ArchiveInquiryButton id={inquiry.id} />
 
-                <form action={deleteInquiry.bind(null, inquiry.id)}>
-                    <Button variant="outline" className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50">
-                        <Trash2 className="h-4 w-4 mr-2" />
-                        Smazat poptávku
-                    </Button>
-                </form>
+                {/* Komponenta pro smazání (již implementováno) */}
+                <DeleteInquiryButton id={inquiry.id} />
+                
               </CardContent>
             </Card>
           </div>
