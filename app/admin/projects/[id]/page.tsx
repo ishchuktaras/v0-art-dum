@@ -15,8 +15,12 @@ import {
   Mail,
   CheckCircle2,
   Clock,
-  AlertCircle
+  Settings // Import ikony
 } from "lucide-react"
+// Import nových komponent
+import { DeleteProjectButton } from "@/components/delete-project-button"
+import { ArchiveProjectButton } from "@/components/archive-project-button"
+import { EditProjectDialog } from "@/components/edit-project-dialog"
 
 interface ProjectDetailPageProps {
   params: Promise<{ id: string }>
@@ -26,36 +30,20 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
   const { id } = await params
   const supabase = await createClient()
 
-  // 1. Kontrola přihlášení
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-  if (!user) {
-    redirect("/auth/login")
-  }
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) redirect("/auth/login")
 
-  // 2. Kontrola role
   const { data: profile } = await supabase.from("profiles").select("*").eq("id", user.id).single()
+  if (!profile || !["admin", "owner"].includes(profile.role)) redirect("/403")
 
-  if (!profile || !["admin", "owner"].includes(profile.role)) {
-    redirect("/403")
-  }
-
-  // 3. Načtení projektu
   const { data: project } = await supabase
     .from("projects")
-    .select(`
-      *,
-      assigned_to_profile:profiles!projects_assigned_to_fkey(full_name, email)
-    `)
+    .select(`*, assigned_to_profile:profiles!projects_assigned_to_fkey(full_name, email)`)
     .eq("id", id)
     .single()
 
-  if (!project) {
-    redirect("/404")
-  }
+  if (!project) redirect("/404")
 
-  // Mapování barev statusů
   const statusColors = {
     planning: "bg-yellow-100 text-yellow-700",
     in_progress: "bg-blue-100 text-blue-700",
@@ -93,10 +81,9 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
 
       <main className="container mx-auto px-4 py-8">
         <div className="grid gap-6 lg:grid-cols-3">
-          {/* HLAVNÍ OBSAH (Levý sloupec) */}
+          
+          {/* LEVÝ SLOUPEC - Data */}
           <div className="lg:col-span-2 space-y-6">
-            
-            {/* Základní informace */}
             <Card>
               <CardHeader>
                 <div className="flex justify-between items-start">
@@ -121,7 +108,6 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               </CardContent>
             </Card>
 
-            {/* Klient */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -140,9 +126,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                     <a href={`mailto:${project.client_email}`} className="text-gold hover:underline flex items-center gap-2">
                       <Mail className="h-4 w-4" /> {project.client_email}
                     </a>
-                  ) : (
-                    <span className="text-muted-foreground">-</span>
-                  )}
+                  ) : "-"}
                 </div>
                 <div>
                   <Label className="text-muted-foreground mb-1 block">Telefon</Label>
@@ -150,14 +134,11 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                     <a href={`tel:${project.client_phone}`} className="text-gold hover:underline flex items-center gap-2">
                       <Phone className="h-4 w-4" /> {project.client_phone}
                     </a>
-                  ) : (
-                    <span className="text-muted-foreground">-</span>
-                  )}
+                  ) : "-"}
                 </div>
               </CardContent>
             </Card>
 
-            {/* Poznámky */}
             <Card>
               <CardHeader>
                 <CardTitle>Interní poznámky</CardTitle>
@@ -170,10 +151,9 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             </Card>
           </div>
 
-          {/* SIDEBAR (Pravý sloupec) */}
+          {/* PRAVÝ SLOUPEC - Sidebar */}
           <div className="space-y-6">
             
-            {/* Termíny */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -201,7 +181,6 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               </CardContent>
             </Card>
 
-            {/* Finance */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -229,21 +208,25 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               </CardContent>
             </Card>
 
-            {/* Tým */}
-            <Card>
+            {/* NOVÁ SEKCE: Správa záznamu */}
+            <Card className="border-t-4 border-t-muted">
               <CardHeader>
-                <CardTitle>Realizační tým</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                    <Settings className="h-5 w-5" />
+                    Správa záznamu
+                </CardTitle>
               </CardHeader>
-              <CardContent>
-                <Label className="text-muted-foreground mb-1 block">Zodpovědná osoba</Label>
-                <div className="flex items-center gap-2">
-                   <div className="h-8 w-8 rounded-full bg-navy/10 flex items-center justify-center text-navy font-bold text-xs">
-                      {project.assigned_to_profile?.full_name?.charAt(0) || project.assigned_to_profile?.email?.charAt(0) || "?"}
-                   </div>
-                   <span>
-                      {project.assigned_to_profile?.full_name || project.assigned_to_profile?.email || "Nepřiřazeno"}
-                   </span>
-                </div>
+              <CardContent className="space-y-2">
+                
+                {/* 1. Editace */}
+                <EditProjectDialog project={project} />
+                
+                {/* 2. Archivace */}
+                <ArchiveProjectButton id={project.id} />
+
+                {/* 3. Smazání */}
+                <DeleteProjectButton id={project.id} />
+                
               </CardContent>
             </Card>
 

@@ -1,3 +1,5 @@
+// app/admin/projects/[id]/loading.tsx
+
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 
 export default function ProjectDetailLoading() {

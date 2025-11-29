@@ -1,3 +1,5 @@
+// app/admin/projects/page.tsx
+
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import { Card, CardContent } from "@/components/ui/card"

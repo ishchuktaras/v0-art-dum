@@ -125,3 +125,84 @@ export async function deleteInquiry(id: string, force: boolean = false) {
     return { success: false, error: error.message }
   }
 }
+
+/**
+ * 4. EDITACE PROJEKTU
+ */
+export async function updateProject(formData: FormData) {
+  const id = formData.get("id") as string
+  
+  const updateData: any = {}
+  // Mapování polí formuláře na databázi
+  if (formData.has("title")) updateData.title = formData.get("title")
+  if (formData.has("client_name")) updateData.client_name = formData.get("client_name")
+  if (formData.has("client_email")) updateData.client_email = formData.get("client_email")
+  if (formData.has("client_phone")) updateData.client_phone = formData.get("client_phone")
+  if (formData.has("status")) updateData.status = formData.get("status")
+  if (formData.has("budget_estimate")) updateData.budget_estimate = formData.get("budget_estimate") ? Number(formData.get("budget_estimate")) : null
+  if (formData.has("actual_cost")) updateData.actual_cost = formData.get("actual_cost") ? Number(formData.get("actual_cost")) : null
+  if (formData.has("start_date")) updateData.start_date = formData.get("start_date") || null
+  if (formData.has("end_date")) updateData.end_date = formData.get("end_date") || null
+  if (formData.has("description")) updateData.description = formData.get("description")
+  if (formData.has("notes")) updateData.notes = formData.get("notes")
+
+  // Automaticky update času
+  updateData.updated_at = new Date().toISOString()
+
+  try {
+    const { error } = await supabaseAdmin
+      .from("projects")
+      .update(updateData)
+      .eq("id", id)
+
+    if (error) throw new Error(error.message)
+
+    revalidatePath(`/admin/projects/${id}`)
+    revalidatePath("/admin/projects")
+    return { success: true, message: "Projekt byl úspěšně aktualizován." }
+  } catch (error: any) {
+    return { success: false, error: error.message }
+  }
+}
+
+/**
+ * 5. ARCHIVACE PROJEKTU (Zrušení/Pozastavení)
+ */
+export async function archiveProject(id: string) {
+  try {
+    const { error } = await supabaseAdmin
+      .from("projects")
+      .update({ status: "cancelled" }) // Nebo 'completed' pokud archivujete hotové
+      .eq("id", id)
+
+    if (error) throw new Error(error.message)
+
+    revalidatePath(`/admin/projects/${id}`)
+    revalidatePath("/admin/projects")
+    return { success: true, message: "Projekt byl přesunut do stavu Zrušeno." }
+  } catch (error: any) {
+    return { success: false, error: error.message }
+  }
+}
+
+/**
+ * 6. SMAZÁNÍ PROJEKTU
+ */
+export async function deleteProject(id: string) {
+  try {
+    // Volitelné: Zde bychom mohli kontrolovat, zda projekt nemá nějaké faktury/úkoly, 
+    // ale zatím mažeme rovnou.
+    
+    const { error } = await supabaseAdmin
+      .from("projects")
+      .delete()
+      .eq("id", id)
+
+    if (error) throw new Error(error.message)
+
+    revalidatePath("/admin/projects")
+    return { success: true, message: "Projekt byl trvale odstraněn." }
+  } catch (error: any) {
+    return { success: false, error: error.message }
+  }
+}
