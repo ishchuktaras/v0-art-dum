@@ -1,3 +1,5 @@
+// app/admin/inquiries/loading.tsx
+
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 

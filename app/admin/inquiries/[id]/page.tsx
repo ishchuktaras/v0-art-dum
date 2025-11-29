@@ -1,53 +1,64 @@
-import { redirect } from "next/navigation"
-import { createClient } from "@/lib/supabase/server"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import Link from "next/link"
-import { 
-  ArrowLeft, 
-  Mail, 
-  Phone, 
-  Calendar, 
-  User, 
-  MessageSquare, 
-  FileText, 
-  Settings 
-  // Archive - už nepotřebujeme importovat ikonu zde, je v komponentě
-} from "lucide-react"
-import { CreateProjectDialog } from "@/components/create-project-dialog"
-import { GenerateOfferDialog } from "@/components/generate-offer-dialog"
-import { EditInquiryDialog } from "@/components/edit-inquiry-dialog"
-import { DeleteInquiryButton } from "@/components/delete-inquiry-button"
-import { ArchiveInquiryButton } from "@/components/archive-inquiry-button" // NOVÉ: Import tlačítka
+// app/admin/inquiries/[id]/page.tsx
+
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import Link from "next/link";
+import {
+  ArrowLeft,
+  Mail,
+  Phone,
+  Calendar,
+  User,
+  MessageSquare,
+  FileText,
+  Settings,
+} from "lucide-react";
+import { CreateProjectDialog } from "@/components/create-project-dialog";
+import { GenerateOfferDialog } from "@/components/generate-offer-dialog";
+import { EditInquiryDialog } from "@/components/edit-inquiry-dialog";
+import { DeleteInquiryButton } from "@/components/delete-inquiry-button";
+import { ArchiveInquiryButton } from "@/components/archive-inquiry-button"; // NOVÉ: Import tlačítka
 
 interface InquiryDetailPageProps {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
 }
 
-export default async function InquiryDetailPage({ params }: InquiryDetailPageProps) {
-  const { id } = await params
-  const supabase = await createClient()
+export default async function InquiryDetailPage({
+  params,
+}: InquiryDetailPageProps) {
+  const { id } = await params;
+  const supabase = await createClient();
 
   const {
     data: { user },
-  } = await supabase.auth.getUser()
+  } = await supabase.auth.getUser();
   if (!user) {
-    redirect("/auth/login")
+    redirect("/auth/login");
   }
 
-  const { data: profile } = await supabase.from("profiles").select("*").eq("id", user.id).single()
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", user.id)
+    .single();
 
   if (!profile || !["admin", "owner"].includes(profile.role)) {
-    redirect("/403")
+    redirect("/403");
   }
 
-  const { data: inquiry } = await supabase.from("inquiries").select("*").eq("id", id).single()
+  const { data: inquiry } = await supabase
+    .from("inquiries")
+    .select("*")
+    .eq("id", id)
+    .single();
 
   if (!inquiry) {
-    redirect("/404")
+    redirect("/404");
   }
 
   // Barvy statusů (přidal jsem 'archived' pro jistotu)
@@ -57,7 +68,7 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
     completed: "bg-green-100 text-green-700",
     rejected: "bg-red-100 text-red-700",
     archived: "bg-gray-100 text-gray-700", // Barva pro archivováno
-  }
+  };
 
   const statusLabels = {
     new: "Nová",
@@ -65,21 +76,21 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
     completed: "Dokončeno",
     rejected: "Odmítnuto",
     archived: "Archivováno",
-  }
+  };
 
   const priorityColors = {
     low: "bg-gray-100 text-gray-700",
     normal: "bg-blue-100 text-blue-700",
     high: "bg-orange-100 text-orange-700",
     urgent: "bg-red-100 text-red-700",
-  }
+  };
 
   const priorityLabels = {
     low: "Nízká",
     normal: "Normální",
     high: "Vysoká",
     urgent: "Urgentní",
-  }
+  };
 
   return (
     <div className="min-h-screen bg-muted">
@@ -94,7 +105,9 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
             </Button>
             <div>
               <h1 className="text-2xl font-black">Detail poptávky</h1>
-              <p className="text-sm text-muted-foreground">Úplné informace o poptávce</p>
+              <p className="text-sm text-muted-foreground">
+                Úplné informace o poptávce
+              </p>
             </div>
           </div>
         </div>
@@ -104,7 +117,6 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
         <div className="grid gap-6 lg:grid-cols-3">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
-            
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -126,7 +138,10 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
                     <Mail className="h-4 w-4" />
                     <Label>Email</Label>
                   </div>
-                  <a href={`mailto:${inquiry.email}`} className="font-medium text-lg text-gold hover:underline">
+                  <a
+                    href={`mailto:${inquiry.email}`}
+                    className="font-medium text-lg text-gold hover:underline"
+                  >
                     {inquiry.email}
                   </a>
                 </div>
@@ -137,7 +152,10 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
                       <Phone className="h-4 w-4" />
                       <Label>Telefon</Label>
                     </div>
-                    <a href={`tel:${inquiry.phone}`} className="font-medium text-lg text-gold hover:underline">
+                    <a
+                      href={`tel:${inquiry.phone}`}
+                      className="font-medium text-lg text-gold hover:underline"
+                    >
                       {inquiry.phone}
                     </a>
                   </div>
@@ -149,7 +167,9 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
                       <FileText className="h-4 w-4" />
                       <Label>Typ služby</Label>
                     </div>
-                    <p className="font-medium text-lg capitalize">{inquiry.service_type}</p>
+                    <p className="font-medium text-lg capitalize">
+                      {inquiry.service_type}
+                    </p>
                   </div>
                 )}
 
@@ -179,7 +199,9 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm leading-relaxed whitespace-pre-wrap">{inquiry.message}</p>
+                <p className="text-sm leading-relaxed whitespace-pre-wrap">
+                  {inquiry.message}
+                </p>
               </CardContent>
             </Card>
 
@@ -205,7 +227,6 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
 
           {/* Sidebar */}
           <div className="space-y-6">
-            
             <Card>
               <CardHeader>
                 <CardTitle>Stav a priorita</CardTitle>
@@ -214,8 +235,16 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
                 <div>
                   <Label htmlFor="status">Stav</Label>
                   <div className="mt-2">
-                    <Badge className={statusColors[inquiry.status as keyof typeof statusColors] || "bg-gray-100"}>
-                      {statusLabels[inquiry.status as keyof typeof statusLabels] || inquiry.status}
+                    <Badge
+                      className={
+                        statusColors[
+                          inquiry.status as keyof typeof statusColors
+                        ] || "bg-gray-100"
+                      }
+                    >
+                      {statusLabels[
+                        inquiry.status as keyof typeof statusLabels
+                      ] || inquiry.status}
                     </Badge>
                   </div>
                 </div>
@@ -226,9 +255,17 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
                     <div className="mt-2">
                       <Badge
                         variant="outline"
-                        className={priorityColors[inquiry.priority as keyof typeof priorityColors]}
+                        className={
+                          priorityColors[
+                            inquiry.priority as keyof typeof priorityColors
+                          ]
+                        }
                       >
-                        {priorityLabels[inquiry.priority as keyof typeof priorityLabels]}
+                        {
+                          priorityLabels[
+                            inquiry.priority as keyof typeof priorityLabels
+                          ]
+                        }
                       </Badge>
                     </div>
                   </div>
@@ -241,14 +278,22 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
                 <CardTitle>Rychlé akce</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <Button asChild variant="outline" className="w-full justify-start bg-transparent">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-full justify-start bg-transparent"
+                >
                   <a href={`mailto:${inquiry.email}`}>
                     <Mail className="h-4 w-4 mr-2" />
                     Odpovědět emailem
                   </a>
                 </Button>
                 {inquiry.phone && (
-                  <Button asChild variant="outline" className="w-full justify-start bg-transparent">
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="w-full justify-start bg-transparent"
+                  >
                     <a href={`tel:${inquiry.phone}`}>
                       <Phone className="h-4 w-4 mr-2" />
                       Zavolat
@@ -272,24 +317,23 @@ export default async function InquiryDetailPage({ params }: InquiryDetailPagePro
             <Card className="border-t-4 border-t-muted">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                    <Settings className="h-5 w-5" />
-                    Správa záznamu
+                  <Settings className="h-5 w-5" />
+                  Správa záznamu
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
                 <EditInquiryDialog inquiry={inquiry} />
-                
+
                 {/* NOVÉ: Komponenta pro archivaci */}
                 <ArchiveInquiryButton id={inquiry.id} />
 
                 {/* Komponenta pro smazání (již implementováno) */}
                 <DeleteInquiryButton id={inquiry.id} />
-                
               </CardContent>
             </Card>
           </div>
         </div>
       </main>
     </div>
-  )
+  );
 }
