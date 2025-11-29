@@ -3,8 +3,10 @@
 import { useState, useTransition } from "react"
 import { useRouter } from "next/navigation"
 import { Trash2, AlertTriangle } from "lucide-react"
+// Importujeme serverovou akci
 import { deleteInquiry } from "@/app/admin/actions"
 import { Button } from "@/components/ui/button"
+// Ujistěte se, že importujete z alert-dialog, ne z dialog
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,30 +25,37 @@ export function DeleteInquiryButton({ id }: { id: string }) {
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
 
-  // 1. Otevření okna
+  // 1. První kliknutí - otevře okno
   const handleInitialClick = () => {
     setWarningData(null)
     setOpen(true)
   }
 
-  // 2. Potvrzení (Logika chytrého mazání)
+  // 2. Potvrzení smazání
   const handleConfirm = async () => {
-    // Pokud už máme varování (warningData), znamená to, že uživatel kliká podruhé = Force Delete
+    // Pokud už máme varování, znamená to, že uživatel kliká podruhé (Vynutit smazání)
     const isForceDelete = !!warningData 
 
     startTransition(async () => {
-      const result = await deleteInquiry(id, isForceDelete)
+      try {
+        const result = await deleteInquiry(id, isForceDelete)
 
-      if (result.success) {
-        toast.success(result.message)
-        setOpen(false)
-        router.push("/admin/inquiries") // Přesměrování na seznam
-        router.refresh()
-      } else if (result.requiresConfirmation) {
-        // Backend hlásí závislost -> Zobrazíme varování v okně
-        setWarningData({ message: result.message! })
-      } else {
-        toast.error("Chyba: " + result.error)
+        if (result.success) {
+          toast.success(result.message)
+          setOpen(false)
+          router.push("/admin/inquiries") 
+          router.refresh()
+        } else if (result.requiresConfirmation) {
+          // Backend hlásí závislost na projektu -> Zobrazíme varování
+          setWarningData({ message: result.message! })
+          // Okno nezavíráme, jen změníme text
+        } else {
+          toast.error("Chyba: " + result.error)
+          setOpen(false)
+        }
+      } catch (error) {
+        console.error("Chyba při mazání:", error)
+        toast.error("Neočekávaná chyba při komunikaci se serverem.")
         setOpen(false)
       }
     })
@@ -65,14 +74,13 @@ export function DeleteInquiryButton({ id }: { id: string }) {
       </Button>
 
       <AlertDialog open={open} onOpenChange={setOpen}>
-        {/* Stylování okna do tmavě modré (Navy) dle designu */}
         <AlertDialogContent className="bg-[#0B192F] text-white border-[#D4AF37]/30">
           <AlertDialogHeader>
             <AlertDialogTitle className="flex items-center gap-2 text-white">
               {warningData ? (
                 <>
                   <AlertTriangle className="h-6 w-6 text-orange-500" />
-                  Nalezeny související položky
+                  Nalezeny související projekty
                 </>
               ) : (
                 "Smazat poptávku?"
@@ -83,9 +91,9 @@ export function DeleteInquiryButton({ id }: { id: string }) {
               {warningData ? (
                 <>
                   <p className="mb-2">{warningData.message}</p>
-                  <p className="text-sm bg-orange-500/10 p-3 rounded border border-orange-500/20 text-orange-200">
-                    Pokud budete pokračovat, systém automaticky <strong>zruší propojení</strong> s těmito projekty (projekty nebudou smazány) a poté poptávku odstraní.
-                  </p>
+                  <div className="text-sm bg-orange-500/10 p-3 rounded border border-orange-500/20 text-orange-200">
+                    Pokud budete pokračovat, systém automaticky <strong>zruší propojení</strong> s těmito projekty (projekty nebudou smazány) a poté tuto poptávku odstraní.
+                  </div>
                 </>
               ) : (
                 "Opravdu chcete tuto poptávku trvale odstranit? Tato akce je nevratná."
