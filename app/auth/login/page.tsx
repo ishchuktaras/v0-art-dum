@@ -1,198 +1,94 @@
-"use client"
-
-import type React from "react"
-import { Suspense } from "react"
-import { useEffect } from "react"
-import { useSearchParams } from "next/navigation"
-import { createClient } from "@/lib/supabase/client"
+import { login } from "./actions"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { Building2 } from "lucide-react"
 
-function LoginForm() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const [isSignUp, setIsSignUp] = useState(false)
-  const router = useRouter()
-  const searchParams = useSearchParams()
-
-  useEffect(() => {
-    const errorFromUrl = searchParams.get("error")
-    if (errorFromUrl) {
-      setError(errorFromUrl)
-    }
-  }, [searchParams])
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError(null)
-    setSuccess(null)
-
-    try {
-      const supabase = createClient()
-
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      })
-
-      if (error) {
-        throw error
-      }
-
-      router.push("/admin")
-      router.refresh()
-    } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "Nastala chyba při přihlášení")
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const handleSignUp = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError(null)
-    setSuccess(null)
-
-    try {
-      const supabase = createClient()
-
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo:
-            process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || `${window.location.origin}/auth/callback`,
-        },
-      })
-
-      if (error) {
-        throw error
-      }
-
-      setSuccess("✓ Registrace úspěšná! Zkontrolujte email pro potvrzení účtu.")
-      setIsSignUp(false)
-      setEmail("")
-      setPassword("")
-    } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "Nastala chyba při registraci")
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
+export default function LoginPage({
+  searchParams,
+}: {
+  searchParams: { message?: string; error?: string }
+}) {
   return (
-    <div className="w-full max-w-sm">
-      <div className="flex flex-col gap-6">
-        <div className="flex justify-center">
-          <div className="flex items-center gap-2">
-            <Building2 className="h-8 w-8" style={{ color: "var(--accent)" }} />
-            <span className="text-2xl font-black text-white">ART DUM</span>
+    // Tmavě modré pozadí dle designu (#0B192F)
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#0B192F] px-4">
+      
+      {/* Logo / Název */}
+      <Link href="/" className="mb-8 flex flex-col items-center group">
+        <h1 className="text-3xl font-black text-white tracking-tight group-hover:text-[#D4AF37] transition-colors">
+          ART DUM
+        </h1>
+        <span className="text-[#D4AF37] text-sm tracking-widest uppercase font-semibold">
+          Administrace
+        </span>
+      </Link>
+
+      <Card className="w-full max-w-md bg-white/5 border-[#D4AF37]/20 backdrop-blur-sm shadow-2xl">
+        <CardHeader className="space-y-1 text-center">
+          <CardTitle className="text-2xl font-bold text-white">
+            Vítejte zpět
+          </CardTitle>
+          <CardDescription className="text-gray-400">
+            Přihlaste se do správy webu
+          </CardDescription>
+        </CardHeader>
+        
+        <CardContent>
+          <form action={login} className="space-y-4">
+            
+            {/* Chybová hláška */}
+            {searchParams?.error && (
+              <div className="p-3 text-sm text-red-500 bg-red-500/10 border border-red-500/20 rounded-md text-center">
+                Nesprávný email nebo heslo.
+              </div>
+            )}
+
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-gray-200">Email</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="admin@artdum.cz"
+                required
+                className="bg-black/20 border-gray-600 text-white placeholder:text-gray-500 focus:border-[#D4AF37] focus:ring-[#D4AF37]"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="password" className="text-gray-200">Heslo</Label>
+              </div>
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                required
+                className="bg-black/20 border-gray-600 text-white focus:border-[#D4AF37] focus:ring-[#D4AF37]"
+              />
+            </div>
+
+            <Button
+              type="submit"
+              className="w-full bg-[#D4AF37] text-[#0B192F] hover:bg-[#D4AF37]/90 font-bold text-base py-6 shadow-lg shadow-[#D4AF37]/10 transition-all hover:scale-[1.02]"
+            >
+              Přihlásit se
+            </Button>
+          </form>
+
+          <div className="mt-6 text-center text-sm">
+            <Link href="/" className="text-gray-400 hover:text-white transition-colors flex items-center justify-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+              Zpět na web
+            </Link>
           </div>
-        </div>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl font-black text-foreground">{isSignUp ? "Registrace" : "Přihlášení"}</CardTitle>
-            <CardDescription className="text-muted-foreground">
-              {isSignUp
-                ? "Vytvořte si účet pro přístup do administrace"
-                : "Zadejte email a heslo pro přístup do administrace"}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={isSignUp ? handleSignUp : handleLogin}>
-              <div className="flex flex-col gap-6">
-                {error && (
-                  <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600 border border-red-200">{error}</div>
-                )}
-                {success && (
-                  <div className="rounded-lg bg-green-50 p-3 text-sm text-green-600 border border-green-200">
-                    {success}
-                  </div>
-                )}
-
-                <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="admin@artdum.cz"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="password">Heslo</Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    required
-                    minLength={6}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                  {isSignUp && <p className="text-xs text-muted-foreground">Heslo musí mít minimálně 6 znaků</p>}
-                </div>
-
-                <Button
-                  type="submit"
-                  className="w-full font-bold text-base bg-gold text-navy hover:bg-gold/90"
-                >
-                  {isLoading
-                    ? isSignUp
-                      ? "Registruji..."
-                      : "Přihlašuji..."
-                    : isSignUp
-                      ? "Registrovat se"
-                      : "Přihlásit se"}
-                </Button>
-              </div>
-              <div className="mt-4 text-center text-sm">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsSignUp(!isSignUp)
-                    setError(null)
-                    setSuccess(null)
-                  }}
-                  className="text-muted-foreground hover:text-foreground underline underline-offset-4"
-                >
-                  {isSignUp ? "Již máte účet? Přihlaste se" : "Nemáte účet? Zaregistrujte se"}
-                </button>
-              </div>
-              <div className="mt-2 text-center text-sm">
-                <Link href="/" className="text-muted-foreground hover:text-foreground underline underline-offset-4">
-                  Zpět na hlavní stránku
-                </Link>
-              </div>
-            </form>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  )
-}
-
-export default function LoginPage() {
-  return (
-    <div
-      className="flex min-h-screen w-full items-center justify-center p-6 bg-primary"
-    >
-      <Suspense fallback={<div className="w-full max-w-sm text-center text-white">Načítání...</div>}>
-        <LoginForm />
-      </Suspense>
+        </CardContent>
+      </Card>
+      
+      <p className="mt-8 text-center text-xs text-gray-500">
+        Přístup povolen pouze autorizovaným osobám.
+      </p>
     </div>
   )
 }
