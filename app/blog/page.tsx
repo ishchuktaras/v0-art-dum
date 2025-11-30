@@ -1,21 +1,21 @@
-import { Calendar, Tag, User } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { sanityFetch } from "@/sanity/lib/fetch"
-import { BLOG_POSTS_QUERY } from "@/sanity/lib/queries"
-import { urlForHeroImage, urlFor } from "@/sanity/lib/image"
-import type { Metadata } from "next"
-import { Button } from "@/components/ui/button"
+import { Calendar, Tag, User } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { sanityFetch } from "@/sanity/lib/fetch";
+import { BLOG_POSTS_QUERY } from "@/sanity/lib/queries";
+import { urlForHeroImage, urlFor } from "@/sanity/lib/image";
+import type { Metadata } from "next";
+import { Button } from "@/components/ui/button";
 
 interface BlogPost {
-  _id: string
-  title: string
-  slug: { current: string }
-  excerpt: string
-  featuredImage: any
-  category?: string
-  author?: string
-  publishedAt: string
+  _id: string;
+  title: string;
+  slug: { current: string };
+  excerpt: string;
+  featuredImage: any;
+  category?: string;
+  author?: string;
+  publishedAt: string;
 }
 
 const categoryLabels: Record<string, string> = {
@@ -23,7 +23,7 @@ const categoryLabels: Record<string, string> = {
   "tipy-a-rady": "Tipy a rady",
   realizace: "Realizace",
   materialy: "Materiály",
-}
+};
 
 export const metadata: Metadata = {
   title: "Blog & Aktuality ze stavebnictví | Tipy a rady | ART DUM Třebíč",
@@ -62,12 +62,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://artdum.cz/blog",
   },
-}
+};
 
 export default async function BlogPage() {
   const posts = await sanityFetch<BlogPost[]>({
     query: BLOG_POSTS_QUERY,
-  })
+  });
 
   const featuredPortfolio = await sanityFetch<any[]>({
     query: `*[_type == "portfolio" && isFeatured == true] | order(order asc) [0...6] {
@@ -79,9 +79,11 @@ export default async function BlogPage() {
         }
       }
     }`,
-  })
+  });
 
-  const heroBackgroundImage = featuredPortfolio?.[3]?.mainImage ? urlForHeroImage(featuredPortfolio[3].mainImage) : null
+  const heroBackgroundImage = featuredPortfolio?.[3]?.mainImage
+    ? urlForHeroImage(featuredPortfolio[3].mainImage)
+    : null;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -97,11 +99,14 @@ export default async function BlogPage() {
         url: "https://artdum.cz/logo.png",
       },
     },
-  }
+  };
 
   return (
     <main className="min-h-screen">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 md:py-32 overflow-hidden">
         {/* Background image with overlay */}
@@ -128,7 +133,9 @@ export default async function BlogPage() {
               <Tag className="w-4 h-4" />
               <span>Tipy, rady a novinky</span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">Blog & Aktuality</h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
+              Blog & Aktuality
+            </h1>
             <p className="text-xl md:text-2xl text-white/80 leading-relaxed">
               Novinky, tipy a rady ze světa stavebnictví a rekonstrukcí
             </p>
@@ -149,14 +156,19 @@ export default async function BlogPage() {
                     <div className="relative h-48 w-full bg-muted">
                       {post.featuredImage ? (
                         <Image
-                          src={urlFor(post.featuredImage).width(600).height(400).url() || "/placeholder.svg"}
+                          src={
+                            urlFor(post.featuredImage, 600, 400) ||
+                            "/placeholder.svg"
+                          }
                           alt={post.featuredImage.alt || post.title}
                           fill
                           className="object-cover"
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                          <span className="text-white text-6xl font-black opacity-20">ART DUM</span>
+                          <span className="text-white text-6xl font-black opacity-20">
+                            ART DUM
+                          </span>
                         </div>
                       )}
                     </div>
@@ -178,7 +190,9 @@ export default async function BlogPage() {
                       </h2>
                     </Link>
 
-                    <p className="text-muted-foreground mb-4 line-clamp-3">{post.excerpt}</p>
+                    <p className="text-muted-foreground mb-4 line-clamp-3">
+                      {post.excerpt}
+                    </p>
 
                     <div className="flex items-center justify-between text-sm text-muted-foreground pt-4 border-t border-border">
                       <div className="flex items-center gap-1">
@@ -188,11 +202,14 @@ export default async function BlogPage() {
                       <div className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
                         <time dateTime={post.publishedAt}>
-                          {new Date(post.publishedAt).toLocaleDateString("cs-CZ", {
-                            day: "numeric",
-                            month: "long",
-                            year: "numeric",
-                          })}
+                          {new Date(post.publishedAt).toLocaleDateString(
+                            "cs-CZ",
+                            {
+                              day: "numeric",
+                              month: "long",
+                              year: "numeric",
+                            }
+                          )}
                         </time>
                       </div>
                     </div>
@@ -205,9 +222,12 @@ export default async function BlogPage() {
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent/10 mb-4">
                 <Tag className="w-8 h-8 text-accent" />
               </div>
-              <h2 className="text-2xl font-bold text-foreground mb-2">Zatím zde nejsou žádné články</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-2">
+                Zatím zde nejsou žádné články
+              </h2>
               <p className="text-muted-foreground max-w-md mx-auto">
-                Brzy zde najdete zajímavé články, tipy a aktuality ze světa stavebnictví.
+                Brzy zde najdete zajímavé články, tipy a aktuality ze světa
+                stavebnictví.
               </p>
             </div>
           )}
@@ -217,7 +237,9 @@ export default async function BlogPage() {
       <section className="relative bg-gradient-to-br from-[#0b192f] via-[#0f2342] to-[#0b192f] text-white py-20 overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
         <div className="container mx-auto px-4 text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6">Máte dotaz nebo chcete konzultaci?</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6">
+            Máte dotaz nebo chcete konzultaci?
+          </h2>
           <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">
             Rádi vám poradíme s vaším projektem
           </p>
@@ -245,5 +267,5 @@ export default async function BlogPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }
