@@ -20,6 +20,7 @@ interface BlogPost {
   category?: string;
   author?: string;
   publishedAt: string;
+  mainImage: any
 }
 
 const categoryLabels: Record<string, string> = {
@@ -51,9 +52,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>; // params je Promise v Next.js 16
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params; // await params
+  const { slug } = await params;
   
   try {
     const post = await sanityFetchStatic<BlogPost>({
@@ -82,9 +83,9 @@ export async function generateMetadata({
 export default async function BlogPostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>; // params je Promise v Next.js 16
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params; // await params
+  const { slug } = await params;
   
   try {
     const post = await sanityFetch<BlogPost>({
@@ -102,13 +103,12 @@ export default async function BlogPostPage({
         <div className="relative h-[400px] w-full bg-primary">
           {post.featuredImage ? (
             <Image
-              src={
-                urlFor(post.featuredImage)?.width(1920).height(800).url() ||
-                "/placeholder.svg"
-               || "/placeholder.svg"}
+              // OPRAVA 1: Použití nového formátu urlFor(image, width, height)
+              src={urlFor(post.featuredImage, 1920, 800) || "/placeholder.svg"}
               alt={post.featuredImage.alt || post.title}
               fill
               className="object-cover opacity-30"
+              priority
             />
           ) : null}
 
@@ -176,10 +176,8 @@ export default async function BlogPostPage({
                     image: ({ value }) => (
                       <figure className="my-8">
                         <Image
-                          src={
-                            urlFor(value)?.width(1200).height(800).url() ||
-                            "/placeholder.svg"
-                           || "/placeholder.svg"}
+                          // OPRAVA 2: Zde používáme 'value' (aktuální obrázek z textu), ne 'post.mainImage'
+                          src={urlFor(value, 1200, 800) || "/placeholder.svg"}
                           alt={value.alt || "Obrázek článku"}
                           width={1200}
                           height={800}
